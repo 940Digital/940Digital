@@ -248,7 +248,7 @@ p { max-width: 62ch; }
   align-items: baseline;
   column-gap: 0.4em;
   row-gap: 0.1em;
-  font-size: clamp(3.25rem, 8vw, 5.5rem);
+  font-size: clamp(2rem, 8vw, 5.5rem);
 }
 .cycle-word {
   display: inline-block;
@@ -257,7 +257,7 @@ p { max-width: 62ch; }
   -webkit-text-stroke: 0.5px currentColor;
   letter-spacing: normal;
   line-height: 1;
-  font-size: clamp(3.5rem, 8.5vw, 6rem);
+  font-size: clamp(2.25rem, 8.5vw, 6rem);
   color: var(--blue-accent);
   opacity: 1;
   transform: translateY(0);
