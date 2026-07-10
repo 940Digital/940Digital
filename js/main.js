@@ -22,67 +22,6 @@ document.querySelectorAll('[data-year]').forEach(el => {
   el.textContent = new Date().getFullYear();
 });
 
-/* --- Reduced motion check --- */
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* --- Lenis smooth scroll --- */
-let lenisInstance = null;
-if (!prefersReducedMotion && typeof Lenis !== 'undefined') {
-  lenisInstance = new Lenis({ duration: 1.1 });
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    lenisInstance.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => { lenisInstance.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
-  } else {
-    function raf(t) { lenisInstance.raf(t); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-  }
-}
-
-/* --- Scroll reveals (Intersection Observer) --- */
-if (!prefersReducedMotion) {
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => e.target.classList.toggle('in', e.isIntersecting));
-  }, { rootMargin: '0px 0px -18% 0px', threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-}
-
-/* --- Horizontal scroll (homepage signature) --- */
-if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-
-  const hscroll = document.querySelector('.hscroll');
-  if (hscroll) {
-    const track = hscroll.querySelector('.hscroll-track');
-
-    const scrollTween = gsap.to(track, {
-      x: () => -(track.scrollWidth - window.innerWidth),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: hscroll,
-        pin: true,
-        scrub: 0.6,
-        end: () => '+=' + (track.scrollWidth - window.innerWidth),
-        invalidateOnRefresh: true,
-      }
-    });
-
-    gsap.utils.toArray('.hscroll-panel').forEach((panel, i) => {
-      gsap.from(panel, {
-        opacity: 0,
-        y: 30,
-        duration: 0.4,
-        scrollTrigger: {
-          trigger: panel,
-          containerAnimation: scrollTween,
-          start: 'left 85%',
-          toggleActions: 'play reverse play reverse',
-        }
-      });
-    });
-  }
-}
-
 /* --- Nav: sticky shadow on scroll --- */
 const nav = document.querySelector('.nav');
 if (nav) {
