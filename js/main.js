@@ -35,8 +35,8 @@ if (cycleWordEl) {
         cycleIndex = (cycleIndex + 1) % CYCLE_WORDS.length;
         cycleWordEl.textContent = CYCLE_WORDS[cycleIndex];
         cycleWordEl.classList.remove('switching');
-      }, 300);
-    }, 2200);
+      }, 400);
+    }, 3200);
   }
 }
 

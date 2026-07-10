@@ -105,7 +105,8 @@ p { max-width: 62ch; }
 }
 .wm-script {
   font-family: var(--font-script);
-  font-weight: 700;
+  font-weight: 400;
+  -webkit-text-stroke: 0.5px currentColor;
   font-size: 1.85rem;
   color: var(--blue-accent);
   position: relative;
@@ -251,14 +252,15 @@ p { max-width: 62ch; }
 .cycle-word {
   display: inline-block;
   font-family: var(--font-script);
-  font-weight: 700;
+  font-weight: 400;
+  -webkit-text-stroke: 0.5px currentColor;
   letter-spacing: normal;
   line-height: 1;
   font-size: clamp(2.75rem, 6.5vw, 4.75rem);
   color: var(--blue-accent);
   opacity: 1;
   transform: translateY(0);
-  transition: opacity .3s ease, transform .3s ease;
+  transition: opacity .4s ease, transform .4s ease;
 }
 .cycle-word.switching {
   opacity: 0;
