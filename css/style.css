@@ -227,7 +227,7 @@ p { max-width: 62ch; }
   align-items: center;
 }
 .hero-inner {
-  max-width: 780px;
+  max-width: 950px;
 }
 .hero-eyebrow {
   font-family: var(--font-display);
