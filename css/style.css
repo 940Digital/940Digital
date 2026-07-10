@@ -15,7 +15,7 @@
   --charcoal-text: #2B2E33;
   --brown-muted: #8A8272;
 
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-script: 'Pinyon Script', cursive;
 
@@ -239,6 +239,32 @@ p { max-width: 62ch; }
 .hero h1 {
   color: var(--white);
   margin-bottom: 1.25rem;
+}
+.cycle-word {
+  display: block;
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.3;
+  font-size: clamp(2.75rem, 6.5vw, 4.75rem);
+  margin-top: 0.1em;
+  color: var(--blue-accent);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .3s ease, transform .3s ease;
+}
+.cycle-word.switching {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 .hero-sub {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);

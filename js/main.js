@@ -22,6 +22,24 @@ document.querySelectorAll('[data-year]').forEach(el => {
   el.textContent = new Date().getFullYear();
 });
 
+/* --- Hero word cycle --- */
+const cycleWordEl = document.getElementById('cycleWord');
+if (cycleWordEl) {
+  const CYCLE_WORDS = ['Presence', 'Momentum', 'Authority', 'Impact', 'Movement', 'Exposure', 'Leverage', 'Futures'];
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion && CYCLE_WORDS.length > 1) {
+    let cycleIndex = 0;
+    setInterval(() => {
+      cycleWordEl.classList.add('switching');
+      setTimeout(() => {
+        cycleIndex = (cycleIndex + 1) % CYCLE_WORDS.length;
+        cycleWordEl.textContent = CYCLE_WORDS[cycleIndex];
+        cycleWordEl.classList.remove('switching');
+      }, 300);
+    }, 2200);
+  }
+}
+
 /* --- Nav: sticky shadow on scroll --- */
 const nav = document.querySelector('.nav');
 if (nav) {
