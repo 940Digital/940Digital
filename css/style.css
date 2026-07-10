@@ -417,7 +417,7 @@ p { max-width: 62ch; }
 }
 .hscroll-track {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(1.25rem, 3vw, 2rem);
   padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(4rem, 8vh, 6rem);
   max-width: 1200px;
@@ -959,6 +959,7 @@ select:focus-visible {
 
 @media (max-width: 768px) {
   .services-grid { grid-template-columns: 1fr; }
+  .hscroll-track { grid-template-columns: 1fr; }
   .nav-toggle { display: flex; }
   .nav-menu {
     position: fixed;
