@@ -961,6 +961,10 @@ select:focus-visible {
 @media (max-width: 768px) {
   .services-grid { grid-template-columns: 1fr; }
   .hscroll-track { grid-template-columns: 1fr; }
+  .cycle-word {
+    flex-basis: 100%;
+    font-size: clamp(2.5rem, 15vw, 4.25rem);
+  }
   .nav-toggle { display: flex; }
   .nav-menu {
     position: fixed;
