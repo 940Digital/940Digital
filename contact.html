@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | 940Digital — Book a Free Consult</title>
+  <meta name="description" content="Get in touch with 940Digital. Book a free consult to discuss your website or SEO needs. Serving DFW, Texas and surrounding areas.">
+  <meta property="og:title" content="Contact | 940Digital">
+  <meta property="og:description" content="Book a free consult. No pitch deck, no pressure — just a conversation about what your business needs.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Pinyon+Script&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner container">
+      <a href="index.html" class="wordmark">
+        <span class="wm-num">940</span><span class="wm-script">Digital</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn btn-primary nav-cta">Get a quote</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="hero-eyebrow">Contact</p>
+        <h1>Let's talk about your&nbsp;business</h1>
+        <p>No pitch deck, no pressure. Tell us what you need and we'll figure out the right next step&nbsp;together.</p>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--sand)">
+      <div class="container">
+        <div class="contact-grid">
+
+          <div class="contact-info reveal">
+            <h2>Get in touch</h2>
+            <p>Whether you need a new site, want to improve an existing one, or just want to talk through what's possible — we're here. Reach out however works best for&nbsp;you.</p>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--brown-muted); font-weight:500; margin-bottom:0.1rem">Email</div>
+                <a href="#" data-email>loading...</a>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--brown-muted); font-weight:500; margin-bottom:0.1rem">Service area</div>
+                <span data-area>loading...</span>
+              </div>
+            </div>
+
+            <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(0,0,0,.08)">
+              <h3 style="font-size:1rem; margin-bottom:0.5rem; color:var(--charcoal-text)">What happens next?</h3>
+              <p style="font-size:0.9rem; color:var(--brown-muted)">We'll reply within one business day. If there's a fit, we'll schedule a quick call to understand your business and scope the project. No&nbsp;obligation.</p>
+            </div>
+          </div>
+
+          <form class="contact-form reveal reveal-delay-1" id="contactForm">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="business">Business name</label>
+              <input type="text" id="business" name="business" autocomplete="organization">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="service">What are you interested in?</label>
+              <select id="service" name="service">
+                <option value="">Select one</option>
+                <option value="website">New website</option>
+                <option value="redesign">Website redesign</option>
+                <option value="seo">SEO</option>
+                <option value="maintenance">Hosting &amp; maintenance</option>
+                <option value="full">Full package</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us about your project</label>
+              <textarea id="message" name="message" placeholder="What does your business do? What's your biggest challenge with your current site or online presence?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+          </form>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <a href="index.html" class="wordmark" style="margin-bottom:.25rem">
+            <span class="wm-num" style="font-size:1.3rem">940</span><span class="wm-script" style="font-size:1.5rem">Digital</span>
+          </a>
+          <span class="footer-copy">&copy; <span data-year></span> 940Digital. All rights reserved.</span>
+          <span class="footer-area">Currently serving <span data-area></span></span>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
