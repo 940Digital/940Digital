@@ -40,11 +40,12 @@ if (cycleWordEl) {
   }
 }
 
-/* --- Scroll stage: short pinned single slide (Services -> The Difference) ---
-   A blank spacer panel slides out as the pinned viewport's own top card of
-   "The Difference" slides in from the side; whatever doesn't fit that one
-   pinned screen continues as normal-flow content right after (see the
-   difference-section-fit block below). */
+/* --- Scroll stage: short pinned slide-in (Services -> The Difference) ---
+   "The Difference" panel slides in from off-screen right over the sand
+   backdrop (which reads as Services' own continuation) — both are visible
+   simultaneously from the first moment of the pin, no separate blank stop.
+   Whatever cards don't fit this one pinned screen continue as normal-flow
+   content right after (see the difference-section-fit block below). */
 (function() {
   const scrollStage = document.getElementById('scrollStage');
   const scrollTrack = document.getElementById('scrollTrack');
@@ -69,7 +70,7 @@ if (cycleWordEl) {
       progress = -rect.top / runway;
       progress = Math.min(1, Math.max(0, progress));
     }
-    scrollTrack.style.transform = `translateX(-${progress * 50}%)`;
+    scrollTrack.style.transform = `translateX(${(1 - progress) * 100}%)`;
   }
 
   let stageTicking = false;
