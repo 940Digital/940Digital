@@ -400,6 +400,54 @@ p { max-width: 62ch; }
   margin-top: 0.75rem;
 }
 
+/* Portfolio cards */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.portfolio-card {
+  display: block;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s, box-shadow .25s;
+  text-decoration: none;
+  color: inherit;
+}
+.portfolio-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.portfolio-card-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--blue-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.75rem;
+}
+.portfolio-card h3 {
+  color: var(--charcoal-text);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.portfolio-card p {
+  color: var(--brown-muted);
+  font-size: 0.925rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+.portfolio-card-link {
+  font-weight: 600;
+  color: var(--charcoal-text);
+}
+.portfolio-card:hover .portfolio-card-link {
+  color: var(--blue-accent);
+}
+
 /* ============================================
    HORIZONTAL SCROLL (signature)
    ============================================ */
@@ -773,41 +821,6 @@ p { max-width: 62ch; }
 }
 
 /* ============================================
-   WORK / PORTFOLIO
-   ============================================ */
-.work-empty {
-  text-align: center;
-  max-width: 540px;
-  margin: 0 auto;
-}
-.work-empty-icon {
-  width: 80px;
-  height: 80px;
-  background: var(--charcoal-dark);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  color: var(--blue-accent);
-}
-.work-empty-icon svg {
-  width: 36px;
-  height: 36px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.5;
-}
-.work-empty h2 {
-  color: var(--charcoal-text);
-  margin-bottom: 0.75rem;
-}
-.work-empty p {
-  color: var(--brown-muted);
-  margin: 0 auto 2rem;
-}
-
-/* ============================================
    ABOUT
    ============================================ */
 .about-block {
@@ -1031,6 +1044,7 @@ select:focus-visible {
 @media (max-width: 768px) {
   .services-grid { grid-template-columns: 1fr; }
   .hscroll-track { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr; }
   .cycle-word {
     flex-basis: 100%;
     font-size: clamp(2.5rem, 15vw, 4.25rem);
