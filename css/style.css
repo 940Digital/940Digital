@@ -970,17 +970,30 @@ p { max-width: 62ch; }
    ============================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .6s cubic-bezier(.16,1,.3,1),
-              transform .6s cubic-bezier(.16,1,.3,1);
+  transform: translateY(28px);
+  transition: opacity .9s cubic-bezier(.16,1,.3,1),
+              transform .9s cubic-bezier(.16,1,.3,1);
 }
 .reveal.in {
   opacity: 1;
   transform: none;
 }
-.reveal-delay-1 { transition-delay: .08s; }
-.reveal-delay-2 { transition-delay: .16s; }
-.reveal-delay-3 { transition-delay: .24s; }
+.reveal-delay-1 { transition-delay: .12s; }
+.reveal-delay-2 { transition-delay: .24s; }
+.reveal-delay-3 { transition-delay: .36s; }
+
+/* Variant: gentle scale-in, for card/grid layouts */
+.reveal-scale {
+  transform: scale(.92);
+}
+
+/* Variant: slide in from a side, for two-column content blocks */
+.reveal-side-left {
+  transform: translateX(-40px);
+}
+.reveal-side-right {
+  transform: translateX(40px);
+}
 
 /* ============================================
    FOCUS
