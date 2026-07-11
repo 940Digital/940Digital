@@ -47,12 +47,13 @@ if (scrollStage && scrollTrack) {
   const stagePrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!stagePrefersReducedMotion) {
     const stickyEl = scrollStage.querySelector('.scroll-stage-sticky');
+    const stickyTopOffset = parseFloat(getComputedStyle(stickyEl).top) || 0;
     let stageTicking = false;
 
     function updateStage() {
       const rect = scrollStage.getBoundingClientRect();
       const pinnedHeight = stickyEl.offsetHeight;
-      const runway = scrollStage.offsetHeight - pinnedHeight;
+      const runway = scrollStage.offsetHeight - pinnedHeight - stickyTopOffset;
       let progress = 0;
       if (runway > 0) {
         progress = -rect.top / runway;
