@@ -332,11 +332,14 @@ p { max-width: 62ch; }
   height: 100%;
   flex-shrink: 0;
   display: flex;
-  align-items: center;
-  overflow: hidden;
+  align-items: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .scroll-panel .container {
   width: 100%;
+  padding-top: clamp(2rem, 6vh, 4rem);
+  padding-bottom: clamp(2rem, 6vh, 4rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -552,61 +555,6 @@ p { max-width: 62ch; }
   color: var(--grey-light);
   font-size: 0.95rem;
   line-height: 1.6;
-}
-
-/* Compact sizing so each pinned panel fits within one viewport height */
-.scroll-panel .section-header {
-  margin-bottom: clamp(1rem, 2.5vh, 1.75rem);
-}
-.scroll-panel .section-header p {
-  display: none;
-}
-.scroll-panel .services-grid {
-  gap: 1rem;
-}
-.scroll-panel .card {
-  padding: 1.1rem;
-}
-.scroll-panel .card-icon {
-  width: 34px;
-  height: 34px;
-  margin-bottom: 0.6rem;
-}
-.scroll-panel .card-icon svg {
-  width: 17px;
-  height: 17px;
-}
-.scroll-panel .card h3 {
-  font-size: 0.95rem;
-  margin-bottom: 0.3rem;
-  line-height: 1.25;
-}
-.scroll-panel .card p {
-  font-size: 0.8rem;
-  line-height: 1.4;
-}
-.scroll-panel .hscroll-label {
-  padding: 0;
-  margin-bottom: 0.75rem;
-}
-.scroll-panel .hscroll-track {
-  padding: 0;
-  gap: 0.9rem;
-}
-.scroll-panel .hscroll-panel {
-  padding: 1.1rem;
-}
-.scroll-panel .hscroll-num {
-  font-size: 1.5rem;
-  margin-bottom: 0.35rem;
-}
-.scroll-panel .hscroll-panel h3 {
-  font-size: 0.95rem;
-  margin-bottom: 0.3rem;
-}
-.scroll-panel .hscroll-panel p {
-  font-size: 0.8rem;
-  line-height: 1.4;
 }
 
 /* ============================================
@@ -1120,42 +1068,6 @@ select:focus-visible {
 @media (max-width: 768px) {
   .services-grid { grid-template-columns: 1fr; }
   .hscroll-track { grid-template-columns: 1fr; }
-  .scroll-panel {
-    align-items: flex-start;
-  }
-  .scroll-panel .container {
-    padding-top: 1.5rem;
-  }
-  /* Structural only — kept single-column so JS pagination measures cards
-     at the same width/wrapping they'll render at inside .mobile-page */
-  .scroll-panel .services-grid,
-  .scroll-panel .hscroll-track {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  /* JS-built pages: however many cards fit the actual screen height,
-     shown at full (desktop-equivalent) size since only 2ish fit at once */
-  .mobile-page {
-    width: 100%;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
-    overflow: hidden;
-    box-sizing: border-box;
-  }
-  .mobile-page--sand {
-    background: var(--sand);
-  }
-  .mobile-page--dark {
-    background: var(--charcoal-dark);
-  }
-  .mobile-page .section-header,
-  .mobile-page .hscroll-label {
-    margin-bottom: 0;
-  }
   .cycle-word {
     flex-basis: 100%;
     font-size: clamp(2.5rem, 15vw, 4.25rem);
