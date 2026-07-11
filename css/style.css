@@ -333,13 +333,15 @@ p { max-width: 62ch; }
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
 }
 .scroll-panel .container {
   width: 100%;
   padding-top: clamp(2rem, 6vh, 4rem);
   padding-bottom: clamp(2rem, 6vh, 4rem);
+}
+.scroll-panel--blank {
+  background: var(--sand);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -363,55 +365,12 @@ p { max-width: 62ch; }
     overflow: visible;
     padding: clamp(4rem, 10vh, 8rem) 0;
   }
-  /* Restore full-size content — no height constraint once unpinned */
-  .scroll-panel .section-header p {
-    display: block;
-  }
-  .scroll-panel .services-grid {
-    gap: 1.5rem;
-  }
-  .scroll-panel .card {
-    padding: 2rem;
-  }
-  .scroll-panel .card-icon {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 1.25rem;
-  }
-  .scroll-panel .card-icon svg {
-    width: 22px;
-    height: 22px;
-  }
-  .scroll-panel .card h3 {
-    font-size: 1.15rem;
-    margin-bottom: 0.5rem;
-  }
-  .scroll-panel .card p {
-    font-size: 0.925rem;
-    line-height: 1.6;
+  .scroll-panel--blank {
+    display: none;
   }
   .scroll-panel .hscroll-label {
     padding: 0;
     margin-bottom: 1rem;
-    font-size: 0.8rem;
-  }
-  .scroll-panel .hscroll-track {
-    gap: clamp(1.25rem, 3vw, 2rem);
-  }
-  .scroll-panel .hscroll-panel {
-    padding: clamp(2rem, 3vw, 2.5rem);
-  }
-  .scroll-panel .hscroll-num {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    margin-bottom: 1rem;
-  }
-  .scroll-panel .hscroll-panel h3 {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    margin-bottom: 0.75rem;
-  }
-  .scroll-panel .hscroll-panel p {
-    font-size: 0.95rem;
-    line-height: 1.6;
   }
 }
 
