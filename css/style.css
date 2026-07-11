@@ -313,7 +313,7 @@ p { max-width: 62ch; }
    ============================================ */
 .scroll-stage {
   position: relative;
-  height: 200vh;
+  height: 140vh;
 }
 .scroll-stage-sticky {
   position: sticky;
@@ -334,6 +334,9 @@ p { max-width: 62ch; }
   width: 100%;
   padding-top: clamp(2rem, 6vh, 4rem);
   padding-bottom: clamp(2rem, 6vh, 4rem);
+}
+.scroll-panel--underflow {
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

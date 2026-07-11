@@ -85,9 +85,10 @@ if (cycleWordEl) {
 })();
 
 /* --- Difference section: fit as many cards as possible into the pinned
-   "top" panel; whatever doesn't fit continues as normal-flow content right
-   below, scrolled through like a regular page. Desktop's 2x2 grid already
-   fits all 4, so this only ever splits on mobile (single-column stack). --- */
+   "top" panel — however many actually fit the real screen height, whether
+   that's a 1-column mobile stack or the 2-column desktop grid. Whatever
+   doesn't fit continues as normal-flow content right below, scrolled
+   through like a regular page. */
 (function() {
   const difTopTrack = document.getElementById('difTopTrack');
   const difRemainderSection = document.getElementById('difRemainderSection');
@@ -100,17 +101,17 @@ if (cycleWordEl) {
   const stickyEl = scrollStage.querySelector('.scroll-stage-sticky');
   const label = document.querySelector('.scroll-panel .hscroll-label');
   const container = difTopTrack.closest('.container');
+  const scrollPanel = document.querySelector('.scroll-panel.hscroll');
 
   function reset() {
     Array.from(difRemainderTrack.children).forEach(item => difTopTrack.appendChild(item));
     difRemainderTrack.innerHTML = '';
     difRemainderSection.style.display = 'none';
+    scrollPanel.classList.remove('scroll-panel--underflow');
   }
 
   function splitForFit() {
     reset();
-
-    if (!window.matchMedia('(max-width: 768px)').matches) return; // desktop: all 4 already fit
 
     const availableHeight = stickyEl.getBoundingClientRect().height
       - parseFloat(getComputedStyle(container).paddingTop)
@@ -119,21 +120,36 @@ if (cycleWordEl) {
 
     const items = Array.from(difTopTrack.children);
     const gap = parseFloat(getComputedStyle(difTopTrack).rowGap) || 0;
+    const colCount = getComputedStyle(difTopTrack).gridTemplateColumns.split(' ').length;
 
-    let used = 0;
-    let fitCount = 0;
-    for (let i = 0; i < items.length; i++) {
-      const h = items[i].offsetHeight;
-      const gapNeeded = i > 0 ? gap : 0;
-      if (used + gapNeeded + h > availableHeight && fitCount > 0) break;
-      used += gapNeeded + h;
-      fitCount++;
+    // Group into rows of colCount items each (1 col on mobile, 2 on desktop);
+    // a row's height is its tallest item, since that's how a CSS grid sizes it.
+    const rows = [];
+    for (let i = 0; i < items.length; i += colCount) {
+      rows.push(items.slice(i, i + colCount));
     }
 
-    const overflowItems = items.slice(fitCount);
+    let used = 0;
+    let fitRowCount = 0;
+    for (let r = 0; r < rows.length; r++) {
+      const rowHeight = Math.max(...rows[r].map(item => item.offsetHeight));
+      const gapNeeded = r > 0 ? gap : 0;
+      if (used + gapNeeded + rowHeight > availableHeight && fitRowCount > 0) break;
+      used += gapNeeded + rowHeight;
+      fitRowCount++;
+    }
+
+    const overflowItems = rows.slice(fitRowCount).flat();
     if (overflowItems.length > 0) {
       overflowItems.forEach(item => difRemainderTrack.appendChild(item));
       difRemainderSection.style.display = '';
+    }
+    // Independent of whether extras got moved out: what's left in the pinned
+    // panel might still not fill it (e.g. only one row fits, but that row
+    // is much shorter than the available height) — center in that case
+    // rather than leaving it stuck at the top with a big empty gap below.
+    if (used < availableHeight * 0.9) {
+      scrollPanel.classList.add('scroll-panel--underflow');
     }
   }
 
