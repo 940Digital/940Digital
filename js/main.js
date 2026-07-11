@@ -40,6 +40,19 @@ if (cycleWordEl) {
   }
 }
 
+/* --- Scroll-triggered entrance reveals --- */
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
 /* --- Nav: sticky shadow on scroll --- */
 const nav = document.querySelector('.nav');
 if (nav) {
