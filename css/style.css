@@ -218,7 +218,9 @@ p { max-width: 62ch; }
    HERO
    ============================================ */
 .hero {
-  background: var(--charcoal-dark);
+  background-color: var(--charcoal-dark);
+  background-image: radial-gradient(ellipse 900px 700px at 15% -10%, rgba(49,148,224,.16), transparent 60%);
+  background-repeat: no-repeat;
   color: var(--white);
   padding-top: calc(var(--nav-h) + clamp(4rem, 10vh, 8rem));
   padding-bottom: clamp(4rem, 10vh, 8rem);
@@ -482,6 +484,52 @@ p { max-width: 62ch; }
 .step p {
   color: var(--grey-muted);
   font-size: 0.925rem;
+}
+
+/* ============================================
+   FAQ
+   ============================================ */
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(43,46,51,.12);
+  padding: 1.35rem 0;
+}
+.faq-item summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--charcoal-text);
+  list-style: none;
+  position: relative;
+  padding-right: 2.25rem;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: -0.15rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--blue-accent);
+}
+.faq-item[open] summary::after {
+  content: '\2212';
+}
+.faq-item p {
+  margin-top: 0.75rem;
+  color: var(--brown-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.faq-item a {
+  color: var(--blue-accent);
 }
 
 /* ============================================
