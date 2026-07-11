@@ -40,6 +40,39 @@ if (cycleWordEl) {
   }
 }
 
+/* --- Scroll stage: pinned horizontal transition (Services -> The Difference) --- */
+const scrollStage = document.getElementById('scrollStage');
+const scrollTrack = document.getElementById('scrollTrack');
+if (scrollStage && scrollTrack) {
+  const stagePrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!stagePrefersReducedMotion) {
+    const stickyEl = scrollStage.querySelector('.scroll-stage-sticky');
+    let stageTicking = false;
+
+    function updateStage() {
+      const rect = scrollStage.getBoundingClientRect();
+      const pinnedHeight = stickyEl.offsetHeight;
+      const runway = scrollStage.offsetHeight - pinnedHeight;
+      let progress = 0;
+      if (runway > 0) {
+        progress = -rect.top / runway;
+        progress = Math.min(1, Math.max(0, progress));
+      }
+      scrollTrack.style.transform = `translateX(-${progress * 50}%)`;
+      stageTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!stageTicking) {
+        requestAnimationFrame(updateStage);
+        stageTicking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateStage);
+    updateStage();
+  }
+}
+
 /* --- Nav: sticky shadow on scroll --- */
 const nav = document.querySelector('.nav');
 if (nav) {
