@@ -410,7 +410,7 @@ p { max-width: 62ch; }
   display: block;
   background: var(--white);
   border-radius: var(--radius);
-  padding: 2rem;
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: transform .25s, box-shadow .25s;
   text-decoration: none;
@@ -419,6 +419,15 @@ p { max-width: 62ch; }
 .portfolio-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
+}
+.portfolio-card-img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.portfolio-card-body {
+  padding: 1.75rem 2rem 2rem;
 }
 .portfolio-card-tag {
   display: inline-block;
