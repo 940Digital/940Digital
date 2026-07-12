@@ -100,21 +100,39 @@ document.querySelectorAll('.nav-link').forEach(link => {
   }
 });
 
-/* --- Contact form (front-end only) --- */
+/* --- Contact form (submits to Formspree) --- */
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
     const originalText = btn.textContent;
-    btn.textContent = 'Sent — we\'ll be in touch';
     btn.disabled = true;
-    btn.style.background = '#16A34A';
+    btn.textContent = 'Sending...';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (response.ok) {
+        btn.textContent = 'Sent — we\'ll be in touch';
+        btn.style.background = '#16A34A';
+        contactForm.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.background = '#DC2626';
+    }
+
     setTimeout(() => {
       btn.textContent = originalText;
       btn.disabled = false;
       btn.style.background = '';
-      contactForm.reset();
     }, 3000);
   });
 }
