@@ -5,7 +5,7 @@
     return;
   }
 
-  var COLLECT_URL = "https://vcivhrzdvwkqebevplgs.supabase.co/functions/v1/collect";
+  var COLLECT_URL = "https://www.940digital.com/api/collect";
 
   function getSiteId() {
     var script = document.currentScript;
