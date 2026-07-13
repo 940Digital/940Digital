@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Client Login | 940Digital</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body.dash.login-body { display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+    .login-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 2rem 1.75rem; width: 100%; max-width: 380px; }
+    .login-card h1 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 .3rem; }
+    .login-card p.sub { color: var(--brown-muted); font-size: .85rem; margin: 0 0 1.5rem; }
+    .login-card label { display: block; font-size: .8rem; font-weight: 600; margin: .9rem 0 .3rem; }
+    .login-card input { width: 100%; padding: .6rem .75rem; border: 1px solid #ddd6c9; border-radius: 4px; font-size: .95rem; font-family: var(--font-body); }
+    .login-card button[type="submit"] { width: 100%; margin-top: 1.4rem; }
+    .login-msg { margin-top: 1rem; font-size: .85rem; line-height: 1.4; }
+    .login-msg.err { color: #DC2626; }
+    .login-msg.info { color: var(--brown-muted); }
+    .otp-step { display: none; }
+    .otp-step.active { display: block; }
+    .password-step.hidden { display: none; }
+  </style>
+</head>
+<body class="dash login-body">
+
+  <div class="login-card">
+    <h1>940Digital Dashboard</h1>
+    <p class="sub">Sign in to view your site's performance.</p>
+
+    <form id="passwordStep" class="password-step">
+      <label for="email">Email</label>
+      <input type="email" id="email" required autocomplete="email">
+      <label for="password">Password</label>
+      <input type="password" id="password" required autocomplete="current-password">
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+
+    <form id="otpStep" class="otp-step">
+      <p class="sub" style="margin-top:0">Enter the verification code we just emailed you to finish signing in.</p>
+      <label for="otpCode">Verification code</label>
+      <input type="text" id="otpCode" inputmode="numeric" autocomplete="one-time-code" required>
+      <button type="submit" class="btn btn-primary">Verify &amp; sign in</button>
+    </form>
+
+    <div id="loginMsg" class="login-msg"></div>
+  </div>
+
+  <script type="module" src="login.js"></script>
+</body>
+</html>
