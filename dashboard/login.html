@@ -21,6 +21,8 @@
     .login-msg { margin-top: 1rem; font-size: .85rem; line-height: 1.4; }
     .login-msg.err { color: #DC2626; }
     .login-msg.info { color: var(--brown-muted); }
+    .forgot-link { display: none; margin-top: .6rem; font-size: .82rem; color: var(--blue-accent); text-decoration: none; }
+    .forgot-link.show { display: inline-block; }
     .otp-step { display: none; }
     .otp-step.active { display: block; }
     .password-step.hidden { display: none; }
@@ -49,6 +51,7 @@
       <label for="password">Password</label>
       <input type="password" id="password" required autocomplete="current-password">
       <button type="submit" class="btn btn-primary">Sign in</button>
+      <a href="#" id="forgotLink" class="forgot-link">Forgot your password?</a>
     </form>
 
     <form id="otpStep" class="otp-step">

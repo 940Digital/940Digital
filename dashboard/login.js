@@ -3,6 +3,7 @@ import { supabase, SUPPORT_EMAIL } from "./supabase-client.js";
 const passwordStep = document.getElementById("passwordStep");
 const otpStep = document.getElementById("otpStep");
 const setPasswordStep = document.getElementById("setPasswordStep");
+const forgotLink = document.getElementById("forgotLink");
 const msgEl = document.getElementById("loginMsg");
 
 let pendingEmail = null;
@@ -73,18 +74,40 @@ function setBusy(form, busy, busyLabel) {
 async function noAccountOrGenericError(email) {
   const { data: exists } = await supabase.rpc("account_exists_for_email", { check_email: email });
   if (exists) {
-    setMsg("Incorrect email or password. Please try again.", "err");
+    setMsg("Incorrect password.", "err");
+    forgotLink.dataset.email = email;
+    forgotLink.classList.add("show");
   } else {
     setMsg(
-      `Sorry, there's no account linked to that email. Contact ${SUPPORT_EMAIL} for support, or try a different email.`,
+      `This email is not registered. Please contact ${SUPPORT_EMAIL} for support, or try a different email.`,
       "err"
     );
   }
 }
 
+forgotLink.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const email = forgotLink.dataset.email;
+  if (!email) return;
+
+  forgotLink.classList.remove("show");
+  setMsg("Sending a password reset link...", "info");
+
+  const redirectUrl = new URL("login.html", window.location.href).toString();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: redirectUrl });
+
+  if (error) {
+    setMsg("Could not send a reset link. Please try again.", "err");
+    return;
+  }
+
+  setMsg("Check your email for a link to reset your password. You'll need to verify your email to continue.", "info");
+});
+
 passwordStep.addEventListener("submit", async (e) => {
   e.preventDefault();
   setMsg("");
+  forgotLink.classList.remove("show");
   const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value;
 
@@ -108,7 +131,7 @@ passwordStep.addEventListener("submit", async (e) => {
     await supabase.auth.signOut();
     setBusy(passwordStep, false);
     setMsg(
-      `Sorry, there's no account linked to that email. Contact ${SUPPORT_EMAIL} for support, or try a different email.`,
+      `This email is not registered. Please contact ${SUPPORT_EMAIL} for support, or try a different email.`,
       "err"
     );
     return;
