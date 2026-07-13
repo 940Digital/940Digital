@@ -152,7 +152,10 @@
     true
   );
 
-  function endSession() {
+  var HEARTBEAT_MS = 20000;
+  var heartbeatTimer = null;
+
+  function sendSessionUpdate() {
     var duration = Math.round((Date.now() - state.start) / 1000);
     var isBounce = state.pageCount <= 1 && !state.interacted;
     send({
@@ -164,5 +167,39 @@
     });
   }
 
-  document.addEventListener("pagehide", endSession);
+  function startHeartbeat() {
+    stopHeartbeat();
+    heartbeatTimer = setInterval(sendSessionUpdate, HEARTBEAT_MS);
+  }
+
+  function stopHeartbeat() {
+    if (heartbeatTimer) {
+      clearInterval(heartbeatTimer);
+      heartbeatTimer = null;
+    }
+  }
+
+  // visibilitychange is the reliable cross-platform signal for "the user is
+  // probably leaving" — it fires for tab switches and mobile backgrounding,
+  // which pagehide/unload can miss (especially on mobile). pagehide stays as
+  // a fallback for actual navigation/close, and the heartbeat is a safety
+  // net so a hard crash only loses ~20s of data instead of the whole visit.
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      sendSessionUpdate();
+      stopHeartbeat();
+    } else {
+      startHeartbeat();
+    }
+  });
+
+  window.addEventListener("pageshow", function () {
+    if (document.visibilityState === "visible") startHeartbeat();
+  });
+
+  document.addEventListener("pagehide", sendSessionUpdate);
+
+  if (document.visibilityState === "visible") {
+    startHeartbeat();
+  }
 })();
