@@ -22,35 +22,56 @@ document.querySelectorAll('[data-year]').forEach(el => {
   el.textContent = new Date().getFullYear();
 });
 
-/* --- Hero word cycle --- */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* --- Hero word cycle: per-letter "assemble" in the mono accent face --- */
 const cycleWordEl = document.getElementById('cycleWord');
 if (cycleWordEl) {
   const CYCLE_WORDS = ['Presence', 'Momentum', 'Authority', 'Impact', 'Movement', 'Exposure', 'Leverage', 'Futures'];
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReducedMotion && CYCLE_WORDS.length > 1) {
+
+  function setCycleWord(word) {
+    cycleWordEl.classList.remove('in');
+    cycleWordEl.innerHTML = '';
+    word.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'cw-char';
+      span.textContent = ch;
+      span.style.animationDelay = (i * 0.028) + 's';
+      cycleWordEl.appendChild(span);
+    });
+    void cycleWordEl.offsetWidth; // force reflow so the animation restarts
+    cycleWordEl.classList.add('in');
+  }
+
+  if (prefersReducedMotion) {
+    cycleWordEl.textContent = CYCLE_WORDS[0];
+  } else {
     let cycleIndex = 0;
-    setInterval(() => {
-      cycleWordEl.classList.add('switching');
-      setTimeout(() => {
+    setCycleWord(CYCLE_WORDS[cycleIndex]);
+    if (CYCLE_WORDS.length > 1) {
+      setInterval(() => {
         cycleIndex = (cycleIndex + 1) % CYCLE_WORDS.length;
-        cycleWordEl.textContent = CYCLE_WORDS[cycleIndex];
-        cycleWordEl.classList.remove('switching');
-      }, 400);
-    }, 3200);
+        setCycleWord(CYCLE_WORDS[cycleIndex]);
+      }, 3200);
+    }
   }
 }
 
-/* --- Scroll-triggered entrance reveals --- */
-if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+/* --- Scroll-triggered entrance reveals ---
+   Card grids get a real stagger (nth-child transition-delay in CSS);
+   .reveal-scale / .reveal-side-left / .reveal-side-right / .reveal-mask
+   give the page more than one repeated technique, all driven by this same
+   reliable IntersectionObserver + CSS-transition toggle. */
+if (!prefersReducedMotion) {
   const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in');
         revealObserver.unobserve(entry.target);
       }
     });
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 }
 
 /* --- Nav: sticky shadow on scroll --- */
