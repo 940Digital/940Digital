@@ -163,10 +163,9 @@ passwordStep.addEventListener("submit", async (e) => {
   await supabase.auth.signOut();
   pendingEmail = email;
 
-  const redirectUrl = new URL("/dashboard/index.html", window.location.href).toString();
   const { error: otpError } = await supabase.auth.signInWithOtp({
     email,
-    options: { shouldCreateUser: false, emailRedirectTo: redirectUrl },
+    options: { shouldCreateUser: false },
   });
 
   setBusy(passwordStep, false);
@@ -175,21 +174,55 @@ passwordStep.addEventListener("submit", async (e) => {
     if (otpError.status === 429) {
       setMsg(otpError.message, "err");
     } else {
-      setMsg("Could not send verification email. Please try again.", "err");
+      setMsg("Could not send verification code. Please try again.", "err");
     }
     return;
   }
 
   passwordStep.classList.add("hidden");
   otpStep.classList.add("active");
-  setMsg("Code sent — check your email. You can also just click the sign-in link in that email instead.", "info");
+  setMsg("Code sent — check your email for the 6-digit code.", "info");
+  const firstBox = otpBoxes[0];
+  if (firstBox) firstBox.focus();
+});
+
+const otpBoxes = Array.from(document.querySelectorAll("#otpBoxes input"));
+
+otpBoxes.forEach((box, i) => {
+  box.addEventListener("input", () => {
+    box.value = box.value.replace(/\D/g, "").slice(0, 1);
+    if (box.value && i < otpBoxes.length - 1) {
+      otpBoxes[i + 1].focus();
+    }
+    if (otpBoxes.every((b) => b.value)) {
+      otpStep.requestSubmit();
+    }
+  });
+  box.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace" && !box.value && i > 0) {
+      otpBoxes[i - 1].focus();
+    }
+  });
+  box.addEventListener("paste", (e) => {
+    e.preventDefault();
+    const digits = (e.clipboardData.getData("text") || "").replace(/\D/g, "").slice(0, 6);
+    if (!digits) return;
+    digits.split("").forEach((d, j) => {
+      if (otpBoxes[j]) otpBoxes[j].value = d;
+    });
+    const nextEmpty = otpBoxes.find((b) => !b.value) || otpBoxes[otpBoxes.length - 1];
+    nextEmpty.focus();
+    if (otpBoxes.every((b) => b.value)) otpStep.requestSubmit();
+  });
 });
 
 otpStep.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!pendingEmail) return;
 
-  const token = document.getElementById("otpCode").value.trim();
+  const token = otpBoxes.map((b) => b.value).join("");
+  if (token.length !== 6) return;
+
   setBusy(otpStep, true, "Verifying...");
 
   const { data, error } = await supabase.auth.verifyOtp({
@@ -201,6 +234,8 @@ otpStep.addEventListener("submit", async (e) => {
   if (error || !data.session) {
     setBusy(otpStep, false);
     setMsg("Invalid or expired code. Please try again.", "err");
+    otpBoxes.forEach((b) => (b.value = ""));
+    otpBoxes[0].focus();
     return;
   }
 

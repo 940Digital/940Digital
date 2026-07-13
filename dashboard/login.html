@@ -21,6 +21,9 @@
     .pw-field input { padding-right: 3.2rem; }
     .pw-toggle { position: absolute; right: .5rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--brown-muted); font-size: .78rem; font-weight: 600; cursor: pointer; padding: .3rem .4rem; }
     .pw-toggle:hover { color: var(--blue-accent); }
+    .otp-boxes { display: grid; grid-template-columns: repeat(6, 1fr); gap: .5rem; margin-top: .3rem; }
+    .otp-boxes input { width: 100%; padding: .8rem 0; text-align: center; font-size: 1.4rem; font-weight: 700; font-family: var(--font-display); border: 1px solid #ddd6c9; border-radius: 6px; }
+    .otp-boxes input:focus { outline: none; border-color: var(--blue-accent); box-shadow: 0 0 0 3px rgba(49,148,224,.18); }
     .login-card button[type="submit"] { width: 100%; margin-top: 1.4rem; }
     .login-msg { margin-top: 1rem; font-size: .85rem; line-height: 1.4; }
     .login-msg.err { color: #DC2626; }
@@ -68,9 +71,16 @@
     </form>
 
     <form id="otpStep" class="otp-step">
-      <p class="sub" style="margin-top:0">Enter the verification code we just emailed you to finish signing in.</p>
-      <label for="otpCode">Verification code</label>
-      <input type="text" id="otpCode" inputmode="numeric" autocomplete="one-time-code" required>
+      <p class="sub" style="margin-top:0">Enter the 6-digit code we just emailed you to finish signing in.</p>
+      <label>Verification code</label>
+      <div class="otp-boxes" id="otpBoxes">
+        <input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" pattern="[0-9]">
+        <input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]">
+        <input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]">
+        <input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]">
+        <input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]">
+        <input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]">
+      </div>
       <button type="submit" class="btn btn-primary">Verify &amp; sign in</button>
     </form>
 
