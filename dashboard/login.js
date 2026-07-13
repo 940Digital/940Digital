@@ -2,9 +2,56 @@ import { supabase, SUPPORT_EMAIL } from "./supabase-client.js";
 
 const passwordStep = document.getElementById("passwordStep");
 const otpStep = document.getElementById("otpStep");
+const setPasswordStep = document.getElementById("setPasswordStep");
 const msgEl = document.getElementById("loginMsg");
 
 let pendingEmail = null;
+
+function getHashParams() {
+  return new URLSearchParams(window.location.hash.replace(/^#/, ""));
+}
+
+const authType = getHashParams().get("type");
+if (authType === "invite" || authType === "recovery") {
+  passwordStep.classList.add("hidden");
+  setPasswordStep.classList.add("active");
+}
+
+setPasswordStep.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  setMsg("");
+
+  const newPassword = document.getElementById("newPassword").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if (newPassword !== confirmPassword) {
+    setMsg("Passwords don't match.", "err");
+    return;
+  }
+
+  setBusy(setPasswordStep, true, "Saving...");
+
+  const { data: sessionData } = await supabase.auth.getSession();
+  if (!sessionData.session) {
+    setBusy(setPasswordStep, false);
+    setMsg("This link has expired. Ask 940Digital to send a new one.", "err");
+    return;
+  }
+
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+  setBusy(setPasswordStep, false);
+
+  if (error) {
+    setMsg(error.message, "err");
+    return;
+  }
+
+  await supabase.auth.signOut();
+  history.replaceState(null, "", window.location.pathname);
+  setPasswordStep.classList.remove("active");
+  passwordStep.classList.remove("hidden");
+  setMsg("Password set — sign in below to continue.", "info");
+});
 
 function setMsg(text, kind) {
   msgEl.textContent = text || "";

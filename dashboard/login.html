@@ -24,6 +24,8 @@
     .otp-step { display: none; }
     .otp-step.active { display: block; }
     .password-step.hidden { display: none; }
+    .set-password-step { display: none; }
+    .set-password-step.active { display: block; }
   </style>
 </head>
 <body class="dash login-body">
@@ -31,6 +33,15 @@
   <div class="login-card">
     <h1>940Digital Dashboard</h1>
     <p class="sub">Sign in to view your site's performance.</p>
+
+    <form id="setPasswordStep" class="set-password-step">
+      <p class="sub" style="margin-top:0">Set a password for your account to finish setting up.</p>
+      <label for="newPassword">New password</label>
+      <input type="password" id="newPassword" required autocomplete="new-password" minlength="8">
+      <label for="confirmPassword">Confirm password</label>
+      <input type="password" id="confirmPassword" required autocomplete="new-password" minlength="8">
+      <button type="submit" class="btn btn-primary">Set password</button>
+    </form>
 
     <form id="passwordStep" class="password-step">
       <label for="email">Email</label>
