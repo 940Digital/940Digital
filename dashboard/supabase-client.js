@@ -7,4 +7,9 @@ export const SUPPORT_EMAIL = "0nleiter@gmail.com";
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: { persistSession: true, autoRefreshToken: true },
+  global: {
+    // Force every request (auth + data) to bypass any HTTP cache — dashboard
+    // numbers and session state must never be served stale.
+    fetch: (url, options = {}) => fetch(url, { ...options, cache: "no-store" }),
+  },
 });

@@ -13,8 +13,17 @@ const RANGES = [
 
 let currentRole = null;
 let currentAccountId = null;
+let activePollInterval = null;
+
+function clearActivePoll() {
+  if (activePollInterval) {
+    clearInterval(activePollInterval);
+    activePollInterval = null;
+  }
+}
 
 signOutBtn.addEventListener("click", async () => {
+  clearActivePoll();
   await supabase.auth.signOut();
   window.location.href = "/dashboard/login.html";
 });
@@ -161,6 +170,7 @@ function attachSiteListHandlers(container, sites, onSelect) {
 }
 
 async function renderMasterOverview() {
+  clearActivePoll();
   app.innerHTML = `<div class="dash-header"><div><h1>All Sites</h1><p class="dash-sub">Master overview</p></div></div>
     <div id="masterSiteList"><p class="dash-empty">Loading sites...</p></div>
     <div class="dash-form" id="createAccountForm">
@@ -257,6 +267,7 @@ async function renderMasterOverview() {
 }
 
 async function renderClientEntry(accountId) {
+  clearActivePoll();
   const { data: sites } = await supabase.from("sites").select("id, name, domain").eq("account_id", accountId);
 
   if (!sites || sites.length === 0) {
@@ -276,6 +287,7 @@ async function renderClientEntry(accountId) {
 }
 
 async function renderSiteView(site, { backTo }) {
+  clearActivePoll();
   let currentRangeKey = "month";
   const charts = {};
 
@@ -283,8 +295,11 @@ async function renderSiteView(site, { backTo }) {
     ${backTo ? `<a href="#" class="back-link" id="backLink">&larr; Back to all sites</a>` : ""}
     <div class="dash-header">
       <div><h1>${escapeHtml(site.name)}</h1><p class="dash-sub">${escapeHtml(site.domain)}</p></div>
-      <div class="range-tabs" id="rangeTabs">
-        ${RANGES.map((r) => `<button data-range="${r.key}" class="${r.key === currentRangeKey ? "active" : ""}">${r.label}</button>`).join("")}
+      <div style="display:flex;align-items:center;gap:.6rem">
+        <div class="range-tabs" id="rangeTabs">
+          ${RANGES.map((r) => `<button data-range="${r.key}" class="${r.key === currentRangeKey ? "active" : ""}">${r.label}</button>`).join("")}
+        </div>
+        <button type="button" class="btn-add-site" id="refreshBtn" style="margin:0" title="Refresh now">&#8635;</button>
       </div>
     </div>
     <div class="metric-grid">
@@ -329,6 +344,8 @@ async function renderSiteView(site, { backTo }) {
     document.querySelectorAll("#rangeTabs button").forEach((b) => b.classList.toggle("active", b === btn));
     loadAndRender();
   });
+
+  document.getElementById("refreshBtn").addEventListener("click", () => loadAndRender());
 
   function lineChart(canvasId, buckets, values, color) {
     const ctx = document.getElementById(canvasId).getContext("2d");
@@ -441,6 +458,8 @@ async function renderSiteView(site, { backTo }) {
   }
 
   loadAndRender();
+  clearActivePoll();
+  activePollInterval = setInterval(loadAndRender, 45000);
 }
 
 async function init() {
