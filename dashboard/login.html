@@ -17,6 +17,10 @@
     .login-card p.sub { color: var(--brown-muted); font-size: .85rem; margin: 0 0 1.5rem; }
     .login-card label { display: block; font-size: .8rem; font-weight: 600; margin: .9rem 0 .3rem; }
     .login-card input { width: 100%; padding: .6rem .75rem; border: 1px solid #ddd6c9; border-radius: 4px; font-size: .95rem; font-family: var(--font-body); }
+    .pw-field { position: relative; }
+    .pw-field input { padding-right: 3.2rem; }
+    .pw-toggle { position: absolute; right: .5rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--brown-muted); font-size: .78rem; font-weight: 600; cursor: pointer; padding: .3rem .4rem; }
+    .pw-toggle:hover { color: var(--blue-accent); }
     .login-card button[type="submit"] { width: 100%; margin-top: 1.4rem; }
     .login-msg { margin-top: 1rem; font-size: .85rem; line-height: 1.4; }
     .login-msg.err { color: #DC2626; }
@@ -39,9 +43,15 @@
     <form id="setPasswordStep" class="set-password-step">
       <p class="sub" style="margin-top:0">Set a password for your account to finish setting up.</p>
       <label for="newPassword">New password</label>
-      <input type="password" id="newPassword" required autocomplete="new-password" minlength="8">
+      <div class="pw-field">
+        <input type="password" id="newPassword" required autocomplete="new-password" minlength="8">
+        <button type="button" class="pw-toggle" data-toggle-for="newPassword">Show</button>
+      </div>
       <label for="confirmPassword">Confirm password</label>
-      <input type="password" id="confirmPassword" required autocomplete="new-password" minlength="8">
+      <div class="pw-field">
+        <input type="password" id="confirmPassword" required autocomplete="new-password" minlength="8">
+        <button type="button" class="pw-toggle" data-toggle-for="confirmPassword">Show</button>
+      </div>
       <button type="submit" class="btn btn-primary">Set password</button>
     </form>
 
@@ -49,7 +59,10 @@
       <label for="email">Email</label>
       <input type="email" id="email" required autocomplete="email">
       <label for="password">Password</label>
-      <input type="password" id="password" required autocomplete="current-password">
+      <div class="pw-field">
+        <input type="password" id="password" required autocomplete="current-password">
+        <button type="button" class="pw-toggle" data-toggle-for="password">Show</button>
+      </div>
       <button type="submit" class="btn btn-primary">Sign in</button>
       <a href="#" id="forgotLink" class="forgot-link">Forgot your password?</a>
     </form>

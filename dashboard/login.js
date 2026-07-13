@@ -18,6 +18,15 @@ if (authType === "invite" || authType === "recovery") {
   setPasswordStep.classList.add("active");
 }
 
+document.querySelectorAll(".pw-toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.toggleFor);
+    const showing = input.type === "text";
+    input.type = showing ? "password" : "text";
+    btn.textContent = showing ? "Show" : "Hide";
+  });
+});
+
 setPasswordStep.addEventListener("submit", async (e) => {
   e.preventDefault();
   setMsg("");
