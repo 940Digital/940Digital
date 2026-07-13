@@ -1,4 +1,4 @@
-import { supabase, SUPPORT_EMAIL } from "./supabase-client.js";
+import { supabase, SUPPORT_EMAIL } from "/dashboard/supabase-client.js";
 
 const passwordStep = document.getElementById("passwordStep");
 const otpStep = document.getElementById("otpStep");
@@ -16,6 +16,14 @@ const authType = getHashParams().get("type");
 if (authType === "invite" || authType === "recovery") {
   passwordStep.classList.add("hidden");
   setPasswordStep.classList.add("active");
+}
+
+if (new URLSearchParams(window.location.search).get("expired") === "1") {
+  history.replaceState(null, "", window.location.pathname);
+  setMsg(
+    "That link expired or was already used — this can happen if your email app previews links automatically. Please sign in again to get a fresh one.",
+    "err"
+  );
 }
 
 document.querySelectorAll(".pw-toggle").forEach((btn) => {
@@ -102,7 +110,7 @@ forgotLink.addEventListener("click", async (e) => {
   forgotLink.classList.remove("show");
   setMsg("Sending a password reset link...", "info");
 
-  const redirectUrl = new URL("login.html", window.location.href).toString();
+  const redirectUrl = new URL("/dashboard/login.html", window.location.href).toString();
   const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: redirectUrl });
 
   if (error) {
@@ -147,7 +155,7 @@ passwordStep.addEventListener("submit", async (e) => {
   }
 
   if (account.role === "client") {
-    window.location.href = "index.html";
+    window.location.href = "/dashboard/index.html";
     return;
   }
 
@@ -155,7 +163,7 @@ passwordStep.addEventListener("submit", async (e) => {
   await supabase.auth.signOut();
   pendingEmail = email;
 
-  const redirectUrl = new URL("index.html", window.location.href).toString();
+  const redirectUrl = new URL("/dashboard/index.html", window.location.href).toString();
   const { error: otpError } = await supabase.auth.signInWithOtp({
     email,
     options: { shouldCreateUser: false, emailRedirectTo: redirectUrl },
@@ -196,5 +204,5 @@ otpStep.addEventListener("submit", async (e) => {
     return;
   }
 
-  window.location.href = "index.html";
+  window.location.href = "/dashboard/index.html";
 });

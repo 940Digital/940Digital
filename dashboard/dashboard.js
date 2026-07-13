@@ -1,4 +1,4 @@
-import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from "./supabase-client.js";
+import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from "/dashboard/supabase-client.js";
 
 const app = document.getElementById("app");
 const userLabel = document.getElementById("userLabel");
@@ -16,7 +16,7 @@ let currentAccountId = null;
 
 signOutBtn.addEventListener("click", async () => {
   await supabase.auth.signOut();
-  window.location.href = "login.html";
+  window.location.href = "/dashboard/login.html";
 });
 
 function fmtDuration(seconds) {
@@ -57,13 +57,47 @@ function bucketIndexFor(buckets, date) {
   return -1;
 }
 
+function looksLikeAuthCallback() {
+  return window.location.hash.includes("access_token") || window.location.search.includes("code=");
+}
+
 async function requireSession() {
   const { data } = await supabase.auth.getSession();
-  if (!data.session) {
-    window.location.href = "login.html";
+  if (data.session) return data.session;
+
+  if (looksLikeAuthCallback()) {
+    // Landed here straight from an emailed link — supabase-js processes the
+    // token asynchronously, so wait briefly for it instead of bouncing early.
+    const session = await new Promise((resolve) => {
+      let settled = false;
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange((_event, s) => {
+        if (s && !settled) {
+          settled = true;
+          clearTimeout(timer);
+          subscription.unsubscribe();
+          resolve(s);
+        }
+      });
+      const timer = setTimeout(() => {
+        if (!settled) {
+          settled = true;
+          subscription.unsubscribe();
+          resolve(null);
+        }
+      }, 4000);
+    });
+    if (session) {
+      history.replaceState(null, "", window.location.pathname);
+      return session;
+    }
+    window.location.href = "/dashboard/login.html?expired=1";
     return null;
   }
-  return data.session;
+
+  window.location.href = "/dashboard/login.html";
+  return null;
 }
 
 async function loadAccount(userId) {
@@ -72,7 +106,7 @@ async function loadAccount(userId) {
 }
 
 function trackerSnippetFor(siteId) {
-  const src = new URL("../tracker.js", window.location.href).toString();
+  const src = new URL("/tracker.js", window.location.href).toString();
   return `<script>(function(d,s,src,site){var e=d.createElement(s);e.async=true;e.src=src+'?site='+site;d.head.appendChild(e);})(document,'script','${src}','${siteId}');<\/script>`;
 }
 
@@ -412,7 +446,7 @@ async function init() {
   const account = await loadAccount(session.user.id);
   if (!account) {
     await supabase.auth.signOut();
-    window.location.href = "login.html";
+    window.location.href = "/dashboard/login.html";
     return;
   }
 
