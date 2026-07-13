@@ -19,6 +19,10 @@ signOutBtn.addEventListener("click", async () => {
   window.location.href = "/dashboard/login.html";
 });
 
+function escapeHtml(str) {
+  return String(str ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
 function fmtDuration(seconds) {
   if (!seconds || !isFinite(seconds)) return "0:00";
   const m = Math.floor(seconds / 60);
@@ -118,8 +122,8 @@ function siteListMarkup(sites, opts) {
       (s) => `
     <div class="site-card" data-site-id="${s.id}">
       <div>
-        <div class="site-name">${s.name}</div>
-        <div class="site-domain">${s.domain}${s.ownerLabel ? " · " + s.ownerLabel : ""}</div>
+        <div class="site-name">${escapeHtml(s.name)}</div>
+        <div class="site-domain">${escapeHtml(s.domain)}${s.ownerLabel ? " · " + escapeHtml(s.ownerLabel) : ""}</div>
       </div>
       <div style="display:flex;align-items:center;gap:.6rem">
         ${showSnippet ? `<button type="button" class="btn-add-site" data-copy-site-id="${s.id}" style="margin:0">Copy snippet</button>` : ""}
@@ -278,7 +282,7 @@ async function renderSiteView(site, { backTo }) {
   app.innerHTML = `
     ${backTo ? `<a href="#" class="back-link" id="backLink">&larr; Back to all sites</a>` : ""}
     <div class="dash-header">
-      <div><h1>${site.name}</h1><p class="dash-sub">${site.domain}</p></div>
+      <div><h1>${escapeHtml(site.name)}</h1><p class="dash-sub">${escapeHtml(site.domain)}</p></div>
       <div class="range-tabs" id="rangeTabs">
         ${RANGES.map((r) => `<button data-range="${r.key}" class="${r.key === currentRangeKey ? "active" : ""}">${r.label}</button>`).join("")}
       </div>
@@ -427,7 +431,7 @@ async function renderSiteView(site, { backTo }) {
     const socialEl = document.getElementById("socialBreakdown");
     const platforms = Object.keys(socialCounts).sort((a, b) => socialCounts[b] - socialCounts[a]);
     socialEl.innerHTML = platforms.length
-      ? platforms.map((p) => `<div class="social-row"><span>${p}</span><span>${socialCounts[p]}</span></div>`).join("")
+      ? platforms.map((p) => `<div class="social-row"><span>${escapeHtml(p)}</span><span>${socialCounts[p]}</span></div>`).join("")
       : '<p class="dash-empty" style="padding:0.5rem 0">No social clicks yet.</p>';
 
     lineChart("cVisitors", buckets, visitorBuckets, "#3194E0");
