@@ -106,7 +106,7 @@ forgotLink.addEventListener("click", async (e) => {
   const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: redirectUrl });
 
   if (error) {
-    setMsg("Could not send a reset link. Please try again.", "err");
+    setMsg(error.status === 429 ? error.message : "Could not send a reset link. Please try again.", "err");
     return;
   }
 
@@ -164,7 +164,11 @@ passwordStep.addEventListener("submit", async (e) => {
   setBusy(passwordStep, false);
 
   if (otpError) {
-    setMsg("Could not send verification email. Please try again.", "err");
+    if (otpError.status === 429) {
+      setMsg(otpError.message, "err");
+    } else {
+      setMsg("Could not send verification email. Please try again.", "err");
+    }
     return;
   }
 
