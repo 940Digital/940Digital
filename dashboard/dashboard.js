@@ -302,6 +302,8 @@ async function renderSiteView(site, { backTo }) {
         <button type="button" class="btn-add-site" id="refreshBtn" style="margin:0" title="Refresh now">&#8635;</button>
       </div>
     </div>
+    <p class="dash-sub" id="lastUpdated" style="margin:-.5rem 0 1rem"></p>
+    <div id="dashErrorBanner" style="display:none;background:#FEE2E2;color:#991B1B;padding:.6rem 1rem;border-radius:var(--radius);font-size:.85rem;margin-bottom:1rem"></div>
     <div class="metric-grid">
       <div class="metric-card">
         <h3>Visitors</h3>
@@ -378,22 +380,43 @@ async function renderSiteView(site, { backTo }) {
   async function loadAndRender() {
     const buckets = getBuckets(currentRangeKey);
     const since = buckets[0].start.toISOString();
+    const errorBanner = document.getElementById("dashErrorBanner");
+    const lastUpdatedEl = document.getElementById("lastUpdated");
 
-    const [{ data: sessions }, { data: events }] = await Promise.all([
-      supabase
-        .from("sessions")
-        .select("session_start, duration_seconds, is_bounce")
-        .eq("site_id", site.id)
-        .gte("session_start", since),
-      supabase
-        .from("events")
-        .select("event_type, event_target, created_at")
-        .eq("site_id", site.id)
-        .gte("created_at", since),
-    ]);
+    let sessionsResult, eventsResult;
+    try {
+      [sessionsResult, eventsResult] = await Promise.all([
+        supabase
+          .from("sessions")
+          .select("session_start, duration_seconds, is_bounce")
+          .eq("site_id", site.id)
+          .gte("session_start", since),
+        supabase
+          .from("events")
+          .select("event_type, event_target, created_at")
+          .eq("site_id", site.id)
+          .gte("created_at", since),
+      ]);
+    } catch (err) {
+      console.error("Dashboard fetch threw:", err);
+      errorBanner.textContent = `Couldn't refresh: ${err.message || "network error"}. Retrying automatically.`;
+      errorBanner.style.display = "block";
+      return;
+    }
 
-    const sess = sessions || [];
-    const evts = events || [];
+    if (sessionsResult.error || eventsResult.error) {
+      const err = sessionsResult.error || eventsResult.error;
+      console.error("Dashboard query error:", err);
+      errorBanner.textContent = `Couldn't refresh: ${err.message} (${err.code || "no code"}). Retrying automatically.`;
+      errorBanner.style.display = "block";
+      return;
+    }
+
+    errorBanner.style.display = "none";
+    if (lastUpdatedEl) lastUpdatedEl.textContent = "Last updated " + new Date().toLocaleTimeString();
+
+    const sess = sessionsResult.data || [];
+    const evts = eventsResult.data || [];
 
     const visitorBuckets = new Array(buckets.length).fill(0);
     const durationSums = new Array(buckets.length).fill(0);
