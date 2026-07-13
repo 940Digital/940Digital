@@ -1025,18 +1025,6 @@ p { max-width: 62ch; }
   transform: translateX(40px);
 }
 
-/* Variant: clip-path wipe, no translate — for the "difference" panels, kept
-   visually distinct from the card scale-fade so the page reads as more than
-   one repeated animation */
-.reveal-mask {
-  transform: none;
-  clip-path: inset(0 0 100% 0);
-  transition: opacity .8s cubic-bezier(.16,1,.3,1), clip-path .8s cubic-bezier(.16,1,.3,1);
-}
-.reveal-mask.in {
-  clip-path: inset(0 0 0% 0);
-}
-
 /* ============================================
    FOCUS
    ============================================ */
