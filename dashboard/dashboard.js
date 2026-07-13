@@ -1,4 +1,5 @@
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from "/dashboard/supabase-client.js";
+// build marker: caching/live-refresh test push
 
 const app = document.getElementById("app");
 const userLabel = document.getElementById("userLabel");
