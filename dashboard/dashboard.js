@@ -287,10 +287,96 @@ async function renderClientEntry(accountId) {
   attachSiteListHandlers(listEl, sites, (site) => renderSiteView(site, { backTo: () => renderClientEntry(accountId) }));
 }
 
+const STAT_DEFS = {
+  visitors: { label: "Visitors", group: "Traffic", color: "#3194E0", description: "Real visits from actual people. Bots and crawlers are counted separately, not included here.", inDetails: true },
+  bots: { label: "Bots", group: "Traffic", color: "#7B7E85", description: "Automated traffic — search engine crawlers, scanners, scripts. Not real customers.", inDetails: true },
+  avgDuration: { label: "Avg. Time on Site", group: "Engagement", color: "#8A8272", description: "How long the average real visitor stays before leaving.", inDetails: false },
+  bounceRate: { label: "Bounce Rate", group: "Engagement", color: "#DC2626", description: "The share of visits where someone left without clicking anything or looking at a second page.", inDetails: false },
+  leads: { label: "Lead Follow-Through", group: "Leads & Social", color: "#16A34A", description: "Form submissions, phone taps, and email clicks — real interest, not just a page view.", inDetails: true },
+  social: { label: "Social Clicks", group: "Leads & Social", color: "#A855F7", description: "Clicks on your Instagram, Facebook, and other social links.", inDetails: true },
+  botsStopped: { label: "Bots Stopped", group: "Security", color: "#F59E0B", description: "Spam/bot attempts your CAPTCHA blocked on the contact form.", inDetails: true },
+};
+
+function fmtTime(iso) {
+  if (!iso) return "—";
+  return new Date(iso).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+}
+
+function leadLabel(target) {
+  if (target === "phone_click") return "Phone tap";
+  if (target === "email_click") return "Email click";
+  if (!target || target === "form") return "Form submission";
+  return "Form: " + target;
+}
+
+function computeDashboardData(buckets, sess, evts) {
+  const visitors = sess.filter((s) => !s.is_bot);
+  const bots = sess.filter((s) => s.is_bot);
+  const leads = evts.filter((e) => e.event_type === "lead_submit");
+  const social = evts.filter((e) => e.event_type === "social_click");
+  const botsStopped = evts.filter((e) => e.event_type === "bot_blocked");
+
+  function countSeries(items, dateField) {
+    const arr = new Array(buckets.length).fill(0);
+    items.forEach((it) => {
+      const idx = bucketIndexFor(buckets, new Date(it[dateField]));
+      if (idx !== -1) arr[idx] += 1;
+    });
+    return arr;
+  }
+
+  const visitorsSeries = countSeries(visitors, "session_start");
+  const botsSeries = countSeries(bots, "session_start");
+  const leadsSeries = countSeries(leads, "created_at");
+  const socialSeries = countSeries(social, "created_at");
+  const botsStoppedSeries = countSeries(botsStopped, "created_at");
+
+  const durationSums = new Array(buckets.length).fill(0);
+  const durationCounts = new Array(buckets.length).fill(0);
+  const bounceCounts = new Array(buckets.length).fill(0);
+  visitors.forEach((s) => {
+    const idx = bucketIndexFor(buckets, new Date(s.session_start));
+    if (idx === -1) return;
+    if (typeof s.duration_seconds === "number") {
+      durationSums[idx] += s.duration_seconds;
+      durationCounts[idx] += 1;
+    }
+    if (s.is_bounce) bounceCounts[idx] += 1;
+  });
+  const avgDurationSeries = buckets.map((_, i) => (durationCounts[i] ? durationSums[i] / durationCounts[i] : 0));
+  const bounceRateSeries = buckets.map((_, i) => (visitorsSeries[i] ? (bounceCounts[i] / visitorsSeries[i]) * 100 : 0));
+
+  const totalVisitors = visitors.length;
+  const totalDuration = visitors.reduce((sum, s) => sum + (s.duration_seconds || 0), 0);
+  const durationCount = visitors.filter((s) => typeof s.duration_seconds === "number").length;
+  const avgDuration = durationCount ? totalDuration / durationCount : 0;
+  const bounceCount = visitors.filter((s) => s.is_bounce).length;
+  const bounceRate = totalVisitors ? (bounceCount / totalVisitors) * 100 : 0;
+  const leadRate = totalVisitors ? (leads.length / totalVisitors) * 100 : 0;
+
+  const socialCounts = {};
+  social.forEach((e) => {
+    const p = e.event_target || "other";
+    socialCounts[p] = (socialCounts[p] || 0) + 1;
+  });
+
+  return {
+    buckets,
+    raw: { visitors, bots, leads, social, botsStopped },
+    series: { visitors: visitorsSeries, bots: botsSeries, avgDuration: avgDurationSeries, bounceRate: bounceRateSeries, leads: leadsSeries, social: socialSeries, botsStopped: botsStoppedSeries },
+    totals: { visitors: totalVisitors, bots: bots.length, avgDuration, bounceRate, leads: leads.length, leadRate, social: social.length, botsStopped: botsStopped.length, socialCounts },
+  };
+}
+
 async function renderSiteView(site, { backTo }) {
   clearActivePoll();
   let currentRangeKey = "month";
+  let activeView = "summary";
+  let activeDetailStat = "visitors";
+  const checkedStats = new Set(["visitors", "bots"]);
   const charts = {};
+  let graphChart = null;
+  let currentData = null;
 
   app.innerHTML = `
     ${backTo ? `<a href="#" class="back-link" id="backLink">&larr; Back to all sites</a>` : ""}
@@ -305,33 +391,12 @@ async function renderSiteView(site, { backTo }) {
     </div>
     <p class="dash-sub" id="lastUpdated" style="margin:-.5rem 0 1rem"></p>
     <div id="dashErrorBanner" style="display:none;background:#FEE2E2;color:#991B1B;padding:.6rem 1rem;border-radius:var(--radius);font-size:.85rem;margin-bottom:1rem"></div>
-    <div class="metric-grid">
-      <div class="metric-card">
-        <h3>Visitors</h3>
-        <div class="metric-value" id="mVisitors">-</div>
-        <canvas id="cVisitors"></canvas>
-      </div>
-      <div class="metric-card">
-        <h3>Avg. Time on Site</h3>
-        <div class="metric-value" id="mDuration">-</div>
-        <canvas id="cDuration"></canvas>
-      </div>
-      <div class="metric-card">
-        <h3>Bounce Rate</h3>
-        <div class="metric-value" id="mBounce">-</div>
-        <canvas id="cBounce"></canvas>
-      </div>
-      <div class="metric-card">
-        <h3>Lead Follow-Through</h3>
-        <div class="metric-value" id="mLeads">-</div>
-        <canvas id="cLeads"></canvas>
-      </div>
-      <div class="metric-card">
-        <h3>Social Clicks</h3>
-        <div class="metric-value" id="mSocial">-</div>
-        <div class="social-breakdown" id="socialBreakdown"></div>
-      </div>
-    </div>`;
+    <div class="view-tabs" id="viewTabs">
+      <button data-view="summary" class="active">Summary</button>
+      <button data-view="graphs">Graphs</button>
+      <button data-view="details">Details</button>
+    </div>
+    <div id="tabBody"></div>`;
 
   if (backTo) {
     document.getElementById("backLink").addEventListener("click", (e) => {
@@ -350,24 +415,24 @@ async function renderSiteView(site, { backTo }) {
 
   document.getElementById("refreshBtn").addEventListener("click", () => loadAndRender());
 
+  document.getElementById("viewTabs").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-view]");
+    if (!btn) return;
+    activeView = btn.dataset.view;
+    document.querySelectorAll("#viewTabs button").forEach((b) => b.classList.toggle("active", b === btn));
+    renderActiveTab();
+  });
+
   function lineChart(canvasId, buckets, values, color) {
-    const ctx = document.getElementById(canvasId).getContext("2d");
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
     if (charts[canvasId]) charts[canvasId].destroy();
     charts[canvasId] = new Chart(ctx, {
       type: "line",
       data: {
         labels: buckets.map((b) => b.label),
-        datasets: [
-          {
-            data: values,
-            borderColor: color,
-            backgroundColor: color + "22",
-            fill: true,
-            tension: 0.3,
-            pointRadius: 0,
-            borderWidth: 2,
-          },
-        ],
+        datasets: [{ data: values, borderColor: color, backgroundColor: color + "22", fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2 }],
       },
       options: {
         responsive: true,
@@ -376,6 +441,174 @@ async function renderSiteView(site, { backTo }) {
         scales: { x: { display: false }, y: { display: false, beginAtZero: true } },
       },
     });
+  }
+
+  function renderSummaryTab() {
+    const { totals } = currentData;
+    const platforms = Object.keys(totals.socialCounts).sort((a, b) => totals.socialCounts[b] - totals.socialCounts[a]);
+    document.getElementById("tabBody").innerHTML = `
+      <div class="metric-grid">
+        <div class="metric-card"><h3>Visitors</h3><div class="metric-value">${totals.visitors.toLocaleString()}</div><canvas id="cVisitors"></canvas></div>
+        <div class="metric-card"><h3>Bots</h3><div class="metric-value">${totals.bots.toLocaleString()}</div><canvas id="cBots"></canvas></div>
+        <div class="metric-card"><h3>Avg. Time on Site</h3><div class="metric-value">${fmtDuration(totals.avgDuration)}</div><canvas id="cDuration"></canvas></div>
+        <div class="metric-card"><h3>Bounce Rate</h3><div class="metric-value">${totals.bounceRate.toFixed(0)}%</div><canvas id="cBounce"></canvas></div>
+        <div class="metric-card"><h3>Lead Follow-Through</h3><div class="metric-value">${totals.leads} <small>(${totals.leadRate.toFixed(0)}%)</small></div><canvas id="cLeads"></canvas></div>
+        <div class="metric-card">
+          <h3>Social Clicks</h3>
+          <div class="metric-value">${totals.social.toLocaleString()}</div>
+          <div class="social-breakdown">${
+            platforms.length
+              ? platforms.map((p) => `<div class="social-row"><span>${escapeHtml(p)}</span><span>${totals.socialCounts[p]}</span></div>`).join("")
+              : '<p class="dash-empty" style="padding:0.5rem 0">No social clicks yet.</p>'
+          }</div>
+        </div>
+        <div class="metric-card"><h3>Bots Stopped</h3><div class="metric-value">${totals.botsStopped.toLocaleString()}</div><canvas id="cBotsStopped"></canvas></div>
+      </div>`;
+
+    lineChart("cVisitors", currentData.buckets, currentData.series.visitors, STAT_DEFS.visitors.color);
+    lineChart("cBots", currentData.buckets, currentData.series.bots, STAT_DEFS.bots.color);
+    lineChart("cDuration", currentData.buckets, currentData.series.avgDuration, STAT_DEFS.avgDuration.color);
+    lineChart("cBounce", currentData.buckets, currentData.series.bounceRate, STAT_DEFS.bounceRate.color);
+    lineChart("cLeads", currentData.buckets, currentData.series.leads, STAT_DEFS.leads.color);
+    lineChart("cBotsStopped", currentData.buckets, currentData.series.botsStopped, STAT_DEFS.botsStopped.color);
+  }
+
+  function renderGraphChart() {
+    const canvas = document.getElementById("cGraph");
+    const emptyEl = document.getElementById("graphEmpty");
+    if (!canvas) return;
+    const activeKeys = Object.keys(STAT_DEFS).filter((k) => checkedStats.has(k));
+    if (graphChart) {
+      graphChart.destroy();
+      graphChart = null;
+    }
+    if (!activeKeys.length) {
+      canvas.style.display = "none";
+      if (emptyEl) emptyEl.style.display = "block";
+      return;
+    }
+    canvas.style.display = "block";
+    if (emptyEl) emptyEl.style.display = "none";
+    graphChart = new Chart(canvas.getContext("2d"), {
+      type: "line",
+      data: {
+        labels: currentData.buckets.map((b) => b.label),
+        datasets: activeKeys.map((key) => ({
+          label: STAT_DEFS[key].label,
+          data: currentData.series[key],
+          borderColor: STAT_DEFS[key].color,
+          backgroundColor: STAT_DEFS[key].color + "22",
+          fill: false,
+          tension: 0.3,
+          pointRadius: 0,
+          borderWidth: 2,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } } },
+        scales: { x: { display: true, ticks: { font: { size: 10 } } }, y: { display: true, beginAtZero: true } },
+      },
+    });
+  }
+
+  function renderGraphsTab() {
+    const groups = {};
+    Object.entries(STAT_DEFS).forEach(([key, def]) => {
+      (groups[def.group] ||= []).push(key);
+    });
+    const groupsHtml = Object.entries(groups)
+      .map(
+        ([group, keys]) => `
+      <div class="stat-group">
+        <div class="stat-group-label">${escapeHtml(group)}</div>
+        ${keys
+          .map((key) => {
+            const def = STAT_DEFS[key];
+            return `
+          <div class="stat-toggle-item">
+            <div class="stat-toggle-row">
+              <label><input type="checkbox" data-stat="${key}" ${checkedStats.has(key) ? "checked" : ""}><span class="stat-swatch" style="background:${def.color}"></span>${escapeHtml(def.label)}</label>
+              <button type="button" class="stat-info-btn" data-info="${key}" aria-label="What is ${escapeHtml(def.label)}?">i</button>
+            </div>
+            <p class="stat-desc" id="desc-${key}">${escapeHtml(def.description)}</p>
+          </div>`;
+          })
+          .join("")}
+      </div>`
+      )
+      .join("");
+
+    document.getElementById("tabBody").innerHTML = `
+      <div class="graphs-layout">
+        <div>${groupsHtml}</div>
+        <div class="graph-panel">
+          <canvas id="cGraph"></canvas>
+          <p class="graph-empty" id="graphEmpty" style="display:none">Check a stat on the left to see it charted here.</p>
+        </div>
+      </div>`;
+
+    document.querySelectorAll('#tabBody input[type="checkbox"][data-stat]').forEach((cb) => {
+      cb.addEventListener("change", () => {
+        if (cb.checked) checkedStats.add(cb.dataset.stat);
+        else checkedStats.delete(cb.dataset.stat);
+        renderGraphChart();
+      });
+    });
+    document.querySelectorAll("#tabBody .stat-info-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.getElementById("desc-" + btn.dataset.info).classList.toggle("show");
+      });
+    });
+
+    renderGraphChart();
+  }
+
+  const DETAIL_COLUMNS = {
+    visitors: { headers: ["Time", "Duration", "Bounced?", "Referrer"], row: (r) => [fmtTime(r.session_start), fmtDuration(r.duration_seconds), r.is_bounce ? "Yes" : "No", r.referrer || "Direct"] },
+    bots: { headers: ["Time", "Referrer", "User Agent"], row: (r) => [fmtTime(r.session_start), r.referrer || "—", (r.user_agent || "—").slice(0, 60)] },
+    leads: { headers: ["Time", "Type"], row: (r) => [fmtTime(r.created_at), leadLabel(r.event_target)] },
+    social: { headers: ["Time", "Platform"], row: (r) => [fmtTime(r.created_at), r.event_target] },
+    botsStopped: { headers: ["Time"], row: (r) => [fmtTime(r.created_at)] },
+  };
+
+  function renderDetailsTab() {
+    const selectorHtml = Object.entries(STAT_DEFS)
+      .filter(([, def]) => def.inDetails)
+      .map(([key, def]) => `<button type="button" data-detail="${key}" class="${key === activeDetailStat ? "active" : ""}">${escapeHtml(def.label)}</button>`)
+      .join("");
+
+    const col = DETAIL_COLUMNS[activeDetailStat];
+    const dateField = activeDetailStat === "visitors" || activeDetailStat === "bots" ? "session_start" : "created_at";
+    const records = (currentData.raw[activeDetailStat] || [])
+      .slice()
+      .sort((a, b) => new Date(b[dateField]) - new Date(a[dateField]))
+      .slice(0, 20);
+
+    const tableHtml = records.length
+      ? `<div class="detail-table-wrap"><table class="detail-table"><thead><tr>${col.headers
+          .map((h) => `<th>${escapeHtml(h)}</th>`)
+          .join("")}</tr></thead><tbody>${records
+          .map((r) => `<tr>${col.row(r).map((c) => `<td>${escapeHtml(String(c))}</td>`).join("")}</tr>`)
+          .join("")}</tbody></table></div>`
+      : `<p class="dash-empty">No ${escapeHtml(STAT_DEFS[activeDetailStat].label.toLowerCase())} yet in this range.</p>`;
+
+    document.getElementById("tabBody").innerHTML = `<div class="details-selector">${selectorHtml}</div>${tableHtml}`;
+
+    document.querySelectorAll("#tabBody [data-detail]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeDetailStat = btn.dataset.detail;
+        renderDetailsTab();
+      });
+    });
+  }
+
+  function renderActiveTab() {
+    if (!currentData) return;
+    if (activeView === "summary") renderSummaryTab();
+    else if (activeView === "graphs") renderGraphsTab();
+    else renderDetailsTab();
   }
 
   async function loadAndRender() {
@@ -389,7 +622,7 @@ async function renderSiteView(site, { backTo }) {
       [sessionsResult, eventsResult] = await Promise.all([
         supabase
           .from("sessions")
-          .select("session_start, duration_seconds, is_bounce")
+          .select("session_start, duration_seconds, is_bounce, referrer, user_agent, is_bot")
           .eq("site_id", site.id)
           .gte("session_start", since),
         supabase
@@ -416,69 +649,8 @@ async function renderSiteView(site, { backTo }) {
     errorBanner.style.display = "none";
     if (lastUpdatedEl) lastUpdatedEl.textContent = "Last updated " + new Date().toLocaleTimeString();
 
-    const sess = sessionsResult.data || [];
-    const evts = eventsResult.data || [];
-
-    const visitorBuckets = new Array(buckets.length).fill(0);
-    const durationSums = new Array(buckets.length).fill(0);
-    const durationCounts = new Array(buckets.length).fill(0);
-    const bounceCounts = new Array(buckets.length).fill(0);
-
-    sess.forEach((s) => {
-      const idx = bucketIndexFor(buckets, new Date(s.session_start));
-      if (idx === -1) return;
-      visitorBuckets[idx] += 1;
-      if (typeof s.duration_seconds === "number") {
-        durationSums[idx] += s.duration_seconds;
-        durationCounts[idx] += 1;
-      }
-      if (s.is_bounce) bounceCounts[idx] += 1;
-    });
-
-    const avgDurationBuckets = buckets.map((_, i) => (durationCounts[i] ? durationSums[i] / durationCounts[i] : 0));
-    const bounceRateBuckets = buckets.map((_, i) => (visitorBuckets[i] ? (bounceCounts[i] / visitorBuckets[i]) * 100 : 0));
-
-    const leadBuckets = new Array(buckets.length).fill(0);
-    const socialCounts = {};
-    let totalLeads = 0;
-    let totalSocial = 0;
-
-    evts.forEach((e) => {
-      const idx = bucketIndexFor(buckets, new Date(e.created_at));
-      if (e.event_type === "lead_submit") {
-        totalLeads += 1;
-        if (idx !== -1) leadBuckets[idx] += 1;
-      } else if (e.event_type === "social_click") {
-        totalSocial += 1;
-        const platform = e.event_target || "other";
-        socialCounts[platform] = (socialCounts[platform] || 0) + 1;
-      }
-    });
-
-    const totalSessions = sess.length;
-    const totalDuration = sess.reduce((sum, s) => sum + (s.duration_seconds || 0), 0);
-    const durationCount = sess.filter((s) => typeof s.duration_seconds === "number").length;
-    const avgDuration = durationCount ? totalDuration / durationCount : 0;
-    const bounceCount = sess.filter((s) => s.is_bounce).length;
-    const bounceRate = totalSessions ? (bounceCount / totalSessions) * 100 : 0;
-    const leadRate = totalSessions ? (totalLeads / totalSessions) * 100 : 0;
-
-    document.getElementById("mVisitors").textContent = totalSessions.toLocaleString();
-    document.getElementById("mDuration").textContent = fmtDuration(avgDuration);
-    document.getElementById("mBounce").textContent = `${bounceRate.toFixed(0)}%`;
-    document.getElementById("mLeads").innerHTML = `${totalLeads} <small>(${leadRate.toFixed(0)}%)</small>`;
-    document.getElementById("mSocial").textContent = totalSocial.toLocaleString();
-
-    const socialEl = document.getElementById("socialBreakdown");
-    const platforms = Object.keys(socialCounts).sort((a, b) => socialCounts[b] - socialCounts[a]);
-    socialEl.innerHTML = platforms.length
-      ? platforms.map((p) => `<div class="social-row"><span>${escapeHtml(p)}</span><span>${socialCounts[p]}</span></div>`).join("")
-      : '<p class="dash-empty" style="padding:0.5rem 0">No social clicks yet.</p>';
-
-    lineChart("cVisitors", buckets, visitorBuckets, "#3194E0");
-    lineChart("cDuration", buckets, avgDurationBuckets, "#8A8272");
-    lineChart("cBounce", buckets, bounceRateBuckets, "#DC2626");
-    lineChart("cLeads", buckets, leadBuckets, "#16A34A");
+    currentData = computeDashboardData(buckets, sessionsResult.data || [], eventsResult.data || []);
+    renderActiveTab();
   }
 
   loadAndRender();

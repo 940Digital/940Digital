@@ -14,7 +14,7 @@ body.dash {
 }
 
 .dash-nav .wordmark { color: var(--white); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
-.dash-nav .wordmark .wm-script { font-family: var(--font-script); font-size: 1.3rem; color: var(--blue-accent); margin-left: .15rem; }
+.dash-nav .wordmark .wm-script { font-family: var(--font-mono); font-weight: 700; font-size: 1rem; color: var(--blue-accent); margin-left: .15rem; }
 
 .dash-nav-right { display: flex; align-items: center; gap: .9rem; }
 .dash-nav-right span { color: var(--grey-light); font-size: .85rem; }
@@ -65,6 +65,43 @@ body.dash {
 .back-link { display: inline-block; margin-bottom: .9rem; font-size: .85rem; color: var(--blue-accent); text-decoration: none; }
 
 .dash-empty { color: var(--brown-muted); font-size: .9rem; padding: 2rem 0; text-align: center; }
+
+/* View tabs: Summary / Graphs / Details */
+.view-tabs { display: flex; gap: 1.5rem; border-bottom: 1px solid rgba(0,0,0,.1); margin-bottom: 1.25rem; }
+.view-tabs button { background: none; border: none; padding: .6rem 0; font-family: var(--font-display); font-size: .95rem; font-weight: 600; color: var(--brown-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.view-tabs button.active { color: var(--charcoal-text); border-bottom-color: var(--blue-accent); }
+
+/* Graphs tab */
+.graphs-layout { display: grid; grid-template-columns: 260px 1fr; gap: 1.5rem; align-items: start; }
+.stat-group { margin-bottom: 1.25rem; }
+.stat-group-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--brown-muted); font-weight: 600; margin-bottom: .5rem; }
+.stat-toggle-item { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: .6rem .75rem; margin-bottom: .5rem; }
+.stat-toggle-row { display: flex; align-items: center; gap: .55rem; }
+.stat-toggle-row label { display: flex; align-items: center; gap: .55rem; flex: 1; cursor: pointer; font-size: .9rem; font-weight: 600; color: var(--charcoal-text); }
+.stat-toggle-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue-accent); flex-shrink: 0; }
+.stat-swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.stat-info-btn { background: none; border: 1px solid var(--grey-light); color: var(--brown-muted); width: 20px; height: 20px; border-radius: 50%; font-size: .75rem; line-height: 1; cursor: pointer; flex-shrink: 0; }
+.stat-info-btn:hover { border-color: var(--blue-accent); color: var(--blue-accent); }
+.stat-desc { display: none; font-size: .8rem; color: var(--brown-muted); margin-top: .5rem; padding-top: .5rem; border-top: 1px solid rgba(0,0,0,.08); line-height: 1.5; }
+.stat-desc.show { display: block; }
+.graph-panel { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 1rem; height: 420px; }
+.graph-panel canvas { max-height: 100%; }
+.graph-empty { color: var(--brown-muted); font-size: .9rem; text-align: center; padding-top: 8rem; }
+
+@media (max-width: 768px) {
+  .graphs-layout { grid-template-columns: 1fr; }
+  .graph-panel { height: 300px; order: -1; }
+}
+
+/* Details tab */
+.details-selector { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; }
+.details-selector button { background: var(--white); border: 1.5px solid transparent; box-shadow: var(--shadow-sm); padding: .5rem 1rem; border-radius: 20px; font-size: .85rem; font-weight: 600; color: var(--brown-muted); cursor: pointer; }
+.details-selector button.active { border-color: var(--blue-accent); color: var(--blue-accent); }
+.detail-table-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow-x: auto; }
+.detail-table { width: 100%; border-collapse: collapse; font-size: .85rem; white-space: nowrap; }
+.detail-table th { text-align: left; padding: .7rem 1rem; color: var(--brown-muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid rgba(0,0,0,.08); }
+.detail-table td { padding: .65rem 1rem; border-bottom: 1px solid rgba(0,0,0,.05); color: var(--charcoal-text); }
+.detail-table tr:last-child td { border-bottom: none; }
 
 @media (min-width: 640px) {
   .dash-wrap { padding-top: 2rem; }
