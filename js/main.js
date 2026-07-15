@@ -4,7 +4,7 @@
 
 /* --- Config (change these to update site-wide) --- */
 const SITE_CONFIG = {
-  email: '0nleiter@gmail.com',
+  email: '940digital@gmail.com',
   serviceArea: 'DFW, Texas and surrounding areas',
 };
 

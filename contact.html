@@ -18,6 +18,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/altcha.css">
+  <style>
+    altcha-widget {
+      --altcha-color-base: var(--white, #fff);
+      --altcha-color-border: #ddd6c9;
+      --altcha-color-text: var(--charcoal-text, #2B2E33);
+      --altcha-color-border-focus: var(--blue-accent, #3194E0);
+      --altcha-border-radius: var(--radius, 6px);
+      --altcha-max-width: 100%;
+      font-family: var(--font-body, 'Inter', sans-serif);
+      margin: 0.9rem 0;
+    }
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .form-msg { margin-top: .7rem; font-size: .85rem; }
+    .form-msg.err { color: #DC2626; }
+    .form-msg.ok { color: #16A34A; }
+  </style>
 </head>
 <body>
 
@@ -34,7 +57,6 @@
         <a href="services.html" class="nav-link">Services</a>
         <a href="pricing.html" class="nav-link">Pricing</a>
         <a href="work.html" class="nav-link">Work</a>
-        <a href="dashboard/login.html" class="nav-link">Client Login</a>
         <a href="contact.html" class="btn btn-primary nav-cta">Get a quote</a>
       </div>
     </div>
@@ -112,7 +134,16 @@
               <label for="message">Tell us about your project</label>
               <textarea id="message" name="message" placeholder="What does your business do? What's your biggest challenge with your current site or online presence?"></textarea>
             </div>
+
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <altcha-widget challenge="/api/altcha-challenge" name="altcha" hidelogo></altcha-widget>
+
             <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-msg" id="contactFormMsg"></p>
           </form>
 
         </div>
@@ -142,5 +173,70 @@
 
   <script src="js/main.js"></script>
   <script>(function(d,s,src,site){var e=d.createElement(s);e.async=true;e.src=src+'?site='+site;d.head.appendChild(e);})(document,'script','https://www.940digital.com/tracker.js','8b785105-a945-415c-a5f3-86ceeecb3b98');</script>
+  <script async defer src="js/altcha.min.js" type="module"></script>
+  <script>
+    (function () {
+      var SITE_ID = "8b785105-a945-415c-a5f3-86ceeecb3b98";
+      var form = document.getElementById("contactForm");
+      var msg = document.getElementById("contactFormMsg");
+
+      function sessionId() {
+        try {
+          var raw = sessionStorage.getItem("_940t_session");
+          return raw ? JSON.parse(raw).id : null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        msg.className = "form-msg";
+        msg.textContent = "";
+
+        var altchaInput = form.querySelector('input[name="altcha"]');
+        if (!altchaInput || !altchaInput.value) {
+          msg.className = "form-msg err";
+          msg.textContent = "Please wait for the verification to finish, then try again.";
+          return;
+        }
+
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
+        var payload = {
+          name: form.name.value,
+          business: form.business.value,
+          email: form.email.value,
+          service: form.service.value,
+          message: form.message.value,
+          website: form.website.value,
+          altcha: altchaInput.value,
+          site_id: SITE_ID,
+          session_id: sessionId(),
+        };
+
+        fetch("/api/submit-contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("failed");
+            msg.className = "form-msg ok";
+            msg.textContent = "Thanks — we'll be in touch within one business day.";
+            form.reset();
+            if (window.altcha) form.querySelectorAll("altcha-widget").forEach(function (w) { w.reset && w.reset(); });
+          })
+          .catch(function () {
+            msg.className = "form-msg err";
+            msg.textContent = "Something went wrong sending your message. Please try again or email us directly.";
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+          });
+      });
+    })();
+  </script>
 </body>
 </html>

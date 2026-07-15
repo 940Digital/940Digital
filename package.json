@@ -1,0 +1,7 @@
+{
+  "name": "940digital",
+  "private": true,
+  "dependencies": {
+    "altcha-lib": "^2.2.0"
+  }
+}
