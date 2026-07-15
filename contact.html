@@ -56,9 +56,7 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="services.html" class="nav-link">Services</a>
         <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="work.html" class="nav-link">Work</a>
-        <a href="dashboard/login.html" class="nav-link">Client Login</a>
-        <a href="contact.html" class="btn btn-primary nav-cta">Get a quote</a>
+        <a href="work.html" class="nav-link">Work</a>        <a href="contact.html" class="btn btn-primary nav-cta">Get a quote</a>
       </div>
     </div>
   </nav>
@@ -102,7 +100,7 @@
 
             <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(0,0,0,.08)">
               <h3 style="font-size:1rem; margin-bottom:0.5rem; color:var(--charcoal-text)">What happens next?</h3>
-              <p style="font-size:0.9rem; color:var(--brown-muted)">We'll reply within one business day. If there's a fit, we'll schedule a quick call to understand your business and scope the project. No&nbsp;obligation.</p>
+              <p style="font-size:0.9rem; color:var(--brown-muted)">We'll try to get back to you within one business day. If there's a fit, we'll schedule a quick call to understand your business and scope the project. No&nbsp;obligation.</p>
             </div>
           </div>
 
@@ -225,7 +223,7 @@
           .then(function (res) {
             if (!res.ok) throw new Error("failed");
             msg.className = "form-msg ok";
-            msg.textContent = "Thanks — we'll be in touch within one business day.";
+            msg.textContent = "Thanks — we'll try to be in touch within one business day.";
             form.reset();
             if (window.altcha) form.querySelectorAll("altcha-widget").forEach(function (w) { w.reset && w.reset(); });
           })
