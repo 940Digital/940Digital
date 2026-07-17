@@ -1,8 +1,8 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-export const SUPABASE_URL = "https://vcivhrzdvwkqebevplgs.supabase.co";
+export const SUPABASE_URL = "https://yyfeymmjdlewvdxrzggn.supabase.co";
 export const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjaXZocnpkdndrcWViZXZwbGdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5MDAwOTMsImV4cCI6MjA5OTQ3NjA5M30.7o6QE7P7J2eghONnuOduGL9GjD6GbY2Vf7gKOuGkuyw";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5ZmV5bW1qZGxld3ZkeHJ6Z2duIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQwNjgzMTAsImV4cCI6MjA5OTY0NDMxMH0.b8RsQGDemcf0dvpSQyw6nsuR5crkG05lILz1F4BNqHY";
 export const SUPPORT_EMAIL = "940digital@gmail.com";
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
