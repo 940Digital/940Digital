@@ -3,7 +3,7 @@
 // backend domain in a beacon URL is exactly what generic tracker-blocklists
 // are built to catch — this endpoint is indistinguishable from any other
 // first-party API call.
-const UPSTREAM_URL = "https://vcivhrzdvwkqebevplgs.supabase.co/functions/v1/collect";
+const UPSTREAM_URL = "https://yyfeymmjdlewvdxrzggn.supabase.co/functions/v1/collect";
 
 // Server-side UA sniffing — harder to spoof than trusting client JS to
 // self-report, since this reads the header the browser/bot actually sent.
