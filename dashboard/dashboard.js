@@ -294,7 +294,6 @@ const STAT_DEFS = {
   bounceRate: { label: "Bounce Rate", group: "Engagement", color: "#DC2626", description: "The share of visits where someone left without clicking anything or looking at a second page.", inDetails: false },
   leads: { label: "Lead Follow-Through", group: "Leads & Social", color: "#16A34A", description: "Form submissions, phone taps, and email clicks — real interest, not just a page view.", inDetails: true },
   social: { label: "Social Clicks", group: "Leads & Social", color: "#A855F7", description: "Clicks on your Instagram, Facebook, and other social links.", inDetails: true },
-  botsStopped: { label: "Bots Stopped", group: "Security", color: "#F59E0B", description: "Spam/bot attempts your CAPTCHA blocked on the contact form.", inDetails: true },
 };
 
 function fmtTime(iso) {
@@ -314,7 +313,6 @@ function computeDashboardData(buckets, sess, evts) {
   const bots = sess.filter((s) => s.is_bot);
   const leads = evts.filter((e) => e.event_type === "lead_submit");
   const social = evts.filter((e) => e.event_type === "social_click");
-  const botsStopped = evts.filter((e) => e.event_type === "bot_blocked");
 
   function countSeries(items, dateField) {
     const arr = new Array(buckets.length).fill(0);
@@ -329,7 +327,6 @@ function computeDashboardData(buckets, sess, evts) {
   const botsSeries = countSeries(bots, "session_start");
   const leadsSeries = countSeries(leads, "created_at");
   const socialSeries = countSeries(social, "created_at");
-  const botsStoppedSeries = countSeries(botsStopped, "created_at");
 
   const durationSums = new Array(buckets.length).fill(0);
   const durationCounts = new Array(buckets.length).fill(0);
@@ -362,9 +359,9 @@ function computeDashboardData(buckets, sess, evts) {
 
   return {
     buckets,
-    raw: { visitors, bots, leads, social, botsStopped },
-    series: { visitors: visitorsSeries, bots: botsSeries, avgDuration: avgDurationSeries, bounceRate: bounceRateSeries, leads: leadsSeries, social: socialSeries, botsStopped: botsStoppedSeries },
-    totals: { visitors: totalVisitors, bots: bots.length, avgDuration, bounceRate, leads: leads.length, leadRate, social: social.length, botsStopped: botsStopped.length, socialCounts },
+    raw: { visitors, bots, leads, social },
+    series: { visitors: visitorsSeries, bots: botsSeries, avgDuration: avgDurationSeries, bounceRate: bounceRateSeries, leads: leadsSeries, social: socialSeries },
+    totals: { visitors: totalVisitors, bots: bots.length, avgDuration, bounceRate, leads: leads.length, leadRate, social: social.length, socialCounts },
   };
 }
 
@@ -462,7 +459,6 @@ async function renderSiteView(site, { backTo }) {
               : '<p class="dash-empty" style="padding:0.5rem 0">No social clicks yet.</p>'
           }</div>
         </div>
-        <div class="metric-card"><h3>Bots Stopped</h3><div class="metric-value">${totals.botsStopped.toLocaleString()}</div><canvas id="cBotsStopped"></canvas></div>
       </div>`;
 
     lineChart("cVisitors", currentData.buckets, currentData.series.visitors, STAT_DEFS.visitors.color);
@@ -470,7 +466,6 @@ async function renderSiteView(site, { backTo }) {
     lineChart("cDuration", currentData.buckets, currentData.series.avgDuration, STAT_DEFS.avgDuration.color);
     lineChart("cBounce", currentData.buckets, currentData.series.bounceRate, STAT_DEFS.bounceRate.color);
     lineChart("cLeads", currentData.buckets, currentData.series.leads, STAT_DEFS.leads.color);
-    lineChart("cBotsStopped", currentData.buckets, currentData.series.botsStopped, STAT_DEFS.botsStopped.color);
   }
 
   function renderGraphChart() {
@@ -570,7 +565,6 @@ async function renderSiteView(site, { backTo }) {
     bots: { headers: ["Time", "Referrer", "User Agent"], row: (r) => [fmtTime(r.session_start), r.referrer || "—", (r.user_agent || "—").slice(0, 60)] },
     leads: { headers: ["Time", "Type"], row: (r) => [fmtTime(r.created_at), leadLabel(r.event_target)] },
     social: { headers: ["Time", "Platform"], row: (r) => [fmtTime(r.created_at), r.event_target] },
-    botsStopped: { headers: ["Time"], row: (r) => [fmtTime(r.created_at)] },
   };
 
   function renderDetailsTab() {
