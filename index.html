@@ -59,13 +59,25 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <div class="hero-inner">
-          <p class="hero-eyebrow">Built to grow</p>
-          <h1 class="hero-headline"><span>We build</span><span class="cycle-word" id="cycleWord" aria-hidden="true">Presence</span><span class="sr-only">Presence, Momentum, Authority, Impact, Movement, Exposure, Leverage, and Futures for your business.</span></h1>
-          <p class="hero-sub">More leads. More revenue. Less chaos — all without you lifting a finger.</p>
-          <div class="hero-actions">
-            <a href="contact" class="btn btn-primary btn-lg">Book a free consult</a>
-            <a href="work" class="btn btn-ghost btn-lg">See our work</a>
+        <div class="hero-flex">
+          <div class="hero-inner">
+            <p class="hero-eyebrow">Built to grow</p>
+            <h1 class="hero-headline"><span>We build</span><span class="cycle-word" id="cycleWord" aria-hidden="true">Presence</span><span class="sr-only">Presence, Momentum, Authority, Impact, Movement, Exposure, Leverage, and Futures for your business.</span></h1>
+            <p class="hero-sub">More leads. More revenue. Less chaos — all without you lifting a finger.</p>
+            <div class="hero-actions">
+              <a href="contact" class="btn btn-primary btn-lg">Book a free consult</a>
+              <a href="work" class="btn btn-ghost btn-lg">See our work</a>
+            </div>
+          </div>
+          <div class="hero-visual reveal reveal-side-right">
+            <div class="browser-frame">
+              <div class="browser-frame-bar">
+                <span class="browser-frame-dot"></span><span class="browser-frame-dot"></span><span class="browser-frame-dot"></span>
+                <span class="browser-frame-url">jcarpenterlandscaping.com</span>
+              </div>
+              <img src="img/portfolio/jc-landscaping.jpg" alt="JC Landscaping website, built by 940Digital" loading="eager">
+            </div>
+            <div class="hero-visual-badge"><span class="hero-visual-badge-num">2</span> real sites, live right now</div>
           </div>
         </div>
       </div>
@@ -120,38 +132,36 @@
       </div>
     </section>
 
-    <!-- THE DIFFERENCE: normal flow, no pin — scroll through like a regular section -->
-    <section class="hscroll">
-      <p class="hscroll-label">The difference</p>
-      <div class="hscroll-track">
-
-        <div class="hscroll-panel reveal reveal-scale reveal-delay-1">
-          <div class="hscroll-num">01</div>
-          <h3>Not a template</h3>
-          <p>Every site is designed around your business — your services, your service area, your customers. Not a theme with your logo dropped&nbsp;in.</p>
+    <!-- THE DIFFERENCE: comparison layout -->
+    <section class="section compare-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow" style="color:var(--blue-accent)">The difference</p>
+          <h2 style="color:var(--white)">Not your average web&nbsp;agency</h2>
         </div>
-
-        <div class="hscroll-panel reveal reveal-scale reveal-delay-2">
-          <div class="hscroll-num">02</div>
-          <h3>Built to perform</h3>
-          <p>Fast load times, mobile-first design, and SEO foundations baked in from the start. A site that works as hard as you&nbsp;do.</p>
+        <div class="compare-grid reveal reveal-scale">
+          <div class="compare-col compare-col--them">
+            <p class="compare-col-label">Typical agency</p>
+            <ul class="compare-list">
+              <li><span class="compare-icon compare-icon--x">&#10005;</span>Template with your logo dropped&nbsp;in</li>
+              <li><span class="compare-icon compare-icon--x">&#10005;</span>Mockups and slide decks before you commit</li>
+              <li><span class="compare-icon compare-icon--x">&#10005;</span>SEO sold as a pricey add-on&nbsp;later</li>
+              <li><span class="compare-icon compare-icon--x">&#10005;</span>Hands you the site, then disappears</li>
+            </ul>
+          </div>
+          <div class="compare-col compare-col--us">
+            <p class="compare-col-label">940Digital</p>
+            <ul class="compare-list">
+              <li><span class="compare-icon compare-icon--check">&#10003;</span>Designed around your business, from&nbsp;scratch</li>
+              <li><span class="compare-icon compare-icon--check">&#10003;</span>A real, working site before you pay a&nbsp;dollar</li>
+              <li><span class="compare-icon compare-icon--check">&#10003;</span>SEO built in from day one, every&nbsp;plan</li>
+              <li><span class="compare-icon compare-icon--check">&#10003;</span>Stays on, tracks results, keeps optimizing</li>
+            </ul>
+          </div>
         </div>
-
-        <div class="hscroll-panel reveal reveal-scale reveal-delay-3">
-          <div class="hscroll-num">03</div>
-          <h3>See it before you pay</h3>
-          <p>We build a working version of your site before you commit. If it's not what you want, you walk&nbsp;away.</p>
+        <div style="text-align:center; margin-top:clamp(2rem,4vh,3rem)" class="reveal">
+          <a href="work" class="btn btn-ghost">See our work</a>
         </div>
-
-        <div class="hscroll-panel reveal reveal-scale">
-          <div class="hscroll-num">04</div>
-          <h3>A partner, not a vendor</h3>
-          <p>We stay invested after launch — tracking results, optimizing performance, growing alongside your&nbsp;business.</p>
-        </div>
-
-      </div>
-      <div style="text-align:center; padding-bottom:clamp(3rem,6vh,5rem)">
-        <a href="work" class="btn btn-ghost">See our work</a>
       </div>
     </section>
 
@@ -162,19 +172,19 @@
           <p class="eyebrow">Getting started</p>
           <h2>Three steps. No&nbsp;surprises.</h2>
         </div>
-        <div class="steps">
-          <div class="step reveal reveal-delay-1">
-            <div class="step-num">01</div>
+        <div class="timeline">
+          <div class="timeline-step reveal reveal-delay-1">
+            <div class="timeline-dot">01</div>
             <h3>Book a free consult</h3>
             <p>Tell us about your business. We'll listen and figure out what will actually move the needle for you.</p>
           </div>
-          <div class="step reveal reveal-delay-2">
-            <div class="step-num">02</div>
+          <div class="timeline-step reveal reveal-delay-2">
+            <div class="timeline-dot">02</div>
             <h3>See your site built</h3>
             <p>We design and build a working version before you pay. No mockups, no wireframe presentations — a real site you can click through.</p>
           </div>
-          <div class="step reveal reveal-delay-3">
-            <div class="step-num">03</div>
+          <div class="timeline-step reveal reveal-delay-3">
+            <div class="timeline-dot">03</div>
             <h3>Launch and grow</h3>
             <p>Go live with a site that's fast, findable, and built to bring in leads from day one. We stay on to make sure it does.</p>
           </div>
