@@ -91,6 +91,7 @@
       site_id: siteId,
       session_id: state.id,
       referrer: document.referrer || null,
+      webdriver: navigator.webdriver === true,
     });
   }
 
