@@ -7,7 +7,7 @@
 
   var COLLECT_URL = "https://www.940digital.com/api/collect";
 
-  function getSiteId() {
+  function getScriptEl() {
     var script = document.currentScript;
     if (!script) {
       var scripts = document.getElementsByTagName("script");
@@ -18,13 +18,24 @@
         }
       }
     }
-    if (!script || !script.src) return null;
-    var match = script.src.match(/[?&]site=([^&]+)/);
+    return script;
+  }
+
+  var scriptEl = getScriptEl();
+  if (!scriptEl || !scriptEl.src) return;
+
+  function paramFromScript(name) {
+    var match = scriptEl.src.match(new RegExp("[?&]" + name + "=([^&]+)"));
     return match ? decodeURIComponent(match[1]) : null;
   }
 
-  var siteId = getSiteId();
+  var siteId = paramFromScript("site");
   if (!siteId) return;
+
+  // Optional page tag (e.g. ?tag=qr_business_card) — fires a page_view
+  // event so a specific landing page (QR code, campaign link, etc.) can be
+  // identified in the dashboard without changing behavior for untagged pages.
+  var pageTag = paramFromScript("tag");
 
   function send(payload) {
     var body = JSON.stringify(payload);
@@ -99,6 +110,18 @@
       event_target: eventTarget,
     });
     markInteracted();
+  }
+
+  // Page views don't count as "interacted" — a glance-and-leave scan of a
+  // tagged page (e.g. a QR code) should still be able to register as a bounce.
+  if (pageTag) {
+    send({
+      action: "event",
+      site_id: siteId,
+      session_id: state.id,
+      event_type: "page_view",
+      event_target: pageTag,
+    });
   }
 
   var SOCIAL_DOMAINS = {
