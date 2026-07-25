@@ -218,38 +218,15 @@ p { max-width: 62ch; }
    HERO
    ============================================ */
 .hero {
-  position: relative;
   background-color: var(--charcoal-dark);
+  background-image: radial-gradient(ellipse 900px 700px at 15% -10%, rgba(49,148,224,.16), transparent 60%);
+  background-repeat: no-repeat;
   color: var(--white);
   padding-top: calc(var(--nav-h) + clamp(4rem, 10vh, 8rem));
   padding-bottom: clamp(4rem, 10vh, 8rem);
   min-height: 85vh;
   display: flex;
   align-items: center;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('../img/hero/desk-coffee.jpg');
-  background-size: cover;
-  background-position: center;
-  filter: grayscale(100%);
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 900px 700px at 15% -10%, rgba(49,148,224,.16), transparent 60%),
-    linear-gradient(rgba(27,29,33,.82), rgba(27,29,33,.92));
-}
-.hero > .container {
-  position: relative;
-  z-index: 1;
 }
 .hero-inner {
   max-width: 950px;
