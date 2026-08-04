@@ -121,39 +121,8 @@ document.querySelectorAll('.nav-link').forEach(link => {
   }
 });
 
-/* --- Contact form (submits to Formspree) --- */
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = contactForm.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    try {
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: new FormData(contactForm),
-        headers: { 'Accept': 'application/json' },
-      });
-
-      if (response.ok) {
-        btn.textContent = 'Sent — we\'ll be in touch';
-        btn.style.background = '#16A34A';
-        contactForm.reset();
-      } else {
-        throw new Error('Form submission failed');
-      }
-    } catch (err) {
-      btn.textContent = 'Something went wrong — try again';
-      btn.style.background = '#DC2626';
-    }
-
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.disabled = false;
-      btn.style.background = '';
-    }, 3000);
-  });
-}
+/* Contact form submission is handled by the dedicated inline script on
+   contact.html (Altcha verification + /api/submit-contact). A duplicate
+   generic handler used to live here and raced against it on every submit,
+   flashing a false "Something went wrong" on the button before the real
+   handler reported success a moment later. Removed 2026-08-04. */
