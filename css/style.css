@@ -369,7 +369,7 @@ p { max-width: 62ch; }
 /* Abstract wireframe mock — used in the bento feature card in place of a
    real screenshot. Purely decorative shapes, not a fabricated product photo. */
 .mock-page {
-  padding: 1.4rem 1.5rem 1.75rem;
+  padding: 1.9rem 1.6rem 2.3rem;
   background: var(--charcoal-dark);
 }
 .mock-nav {
@@ -396,6 +396,18 @@ p { max-width: 62ch; }
 }
 .mock-hero-line--wide { width: 78%; }
 .mock-hero-line--mid { width: 55%; background: rgba(255,255,255,.08); margin-bottom: 1.4rem; }
+.mock-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+.mock-cards span {
+  height: 52px;
+  border-radius: 5px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.07);
+}
 .mock-btn {
   width: 90px;
   height: 26px;
@@ -426,30 +438,18 @@ p { max-width: 62ch; }
   font-weight: 700;
 }
 
-/* Page hero (inner pages) — a quieter, static echo of the homepage network:
-   a faint dot grid + the same corner glow, so inner pages read as the same
-   system without the cost/motion of the full canvas on every page. */
+/* Page hero (inner pages) — a quieter echo of the homepage network: just
+   the corner glow, no motion/canvas cost on every page. Dropped the dot
+   grid overlay Owen didn't like — glow only now. */
 .page-hero {
   position: relative;
   overflow: hidden;
   background-color: var(--charcoal-dark);
+  background-image: radial-gradient(ellipse 700px 500px at 90% -20%, rgba(49,148,224,.18), transparent 60%);
+  background-repeat: no-repeat;
   color: var(--white);
   padding-top: calc(var(--nav-h) + clamp(3rem, 6vh, 5rem));
   padding-bottom: clamp(3rem, 6vh, 5rem);
-}
-.page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(ellipse 700px 500px at 90% -20%, rgba(49,148,224,.18), transparent 60%),
-    radial-gradient(rgba(255,255,255,.14) 1px, transparent 1.5px);
-  background-size: auto, 28px 28px;
-  background-repeat: no-repeat, repeat;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
 }
 .page-hero .container { position: relative; z-index: 1; }
 .page-hero h1 {
