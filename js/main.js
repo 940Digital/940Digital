@@ -57,6 +57,121 @@ if (cycleWordEl) {
   }
 }
 
+/* --- Hero background: drifting node network on canvas ---
+   No photography — a field of slow-moving dots that link to nearby
+   neighbors with fading lines, in the brand's blue accent. Pauses when
+   the tab is hidden or the hero scrolls out of view; renders one static
+   frame (no rAF loop) under prefers-reduced-motion. */
+const heroCanvas = document.getElementById('heroCanvas');
+if (heroCanvas) {
+  const ctx = heroCanvas.getContext('2d');
+  const heroSection = heroCanvas.closest('.hero');
+  let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let nodes = [];
+  let rafId = null;
+  let running = false;
+
+  function sizeCanvas() {
+    const rect = heroSection.getBoundingClientRect();
+    w = rect.width;
+    h = rect.height;
+    heroCanvas.width = Math.round(w * dpr);
+    heroCanvas.height = Math.round(h * dpr);
+    heroCanvas.style.width = w + 'px';
+    heroCanvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function seedNodes() {
+    const density = 22000; // px^2 per node — fewer nodes on small screens
+    const count = Math.max(18, Math.min(70, Math.round((w * h) / density)));
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 1.2 + 0.6,
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    const maxDist = Math.min(160, w * 0.16);
+
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          const alpha = (1 - dist / maxDist) * 0.32;
+          ctx.strokeStyle = 'rgba(49,148,224,' + alpha + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    for (const n of nodes) {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(184,187,194,.55)';
+      ctx.fill();
+    }
+  }
+
+  function step() {
+    for (const n of nodes) {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    }
+    draw();
+    if (running) rafId = requestAnimationFrame(step);
+  }
+
+  function start() {
+    if (running || prefersReducedMotion) return;
+    running = true;
+    rafId = requestAnimationFrame(step);
+  }
+  function stop() {
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  sizeCanvas();
+  seedNodes();
+  draw();
+
+  if (!prefersReducedMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => (entry.isIntersecting ? start() : stop()));
+    }, { threshold: 0 });
+    io.observe(heroSection);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (heroSection.getBoundingClientRect().bottom > 0) start();
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        sizeCanvas();
+        seedNodes();
+        draw();
+      }, 150);
+    });
+  }
+}
+
 /* --- Scroll-triggered entrance reveals ---
    Card grids get a real stagger (nth-child transition-delay in CSS);
    .reveal-scale / .reveal-side-left / .reveal-side-right / .reveal-mask

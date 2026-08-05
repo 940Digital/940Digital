@@ -218,6 +218,8 @@ p { max-width: 62ch; }
    HERO
    ============================================ */
 .hero {
+  position: relative;
+  overflow: hidden;
   background-color: var(--charcoal-dark);
   background-image: radial-gradient(ellipse 900px 700px at 15% -10%, rgba(49,148,224,.16), transparent 60%);
   background-repeat: no-repeat;
@@ -228,7 +230,28 @@ p { max-width: 62ch; }
   display: flex;
   align-items: center;
 }
+/* Animated network canvas — sits behind the content, above the base color/glow.
+   No photography: a field of slow-drifting nodes with proximity-linked lines,
+   in the brand's mono/blue-accent language. See js/main.js for the draw loop. */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: .8;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(27,29,33,.15) 0%, rgba(27,29,33,.55) 78%, var(--charcoal-dark) 100%);
+}
 .hero-inner {
+  position: relative;
+  z-index: 2;
   max-width: 950px;
 }
 .hero-eyebrow {
@@ -342,6 +365,44 @@ p { max-width: 62ch; }
   width: 100%;
   height: auto;
 }
+
+/* Abstract wireframe mock — used in the bento feature card in place of a
+   real screenshot. Purely decorative shapes, not a fabricated product photo. */
+.mock-page {
+  padding: 1.4rem 1.5rem 1.75rem;
+  background: var(--charcoal-dark);
+}
+.mock-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.mock-nav span {
+  height: 6px;
+  width: 34px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.12);
+}
+.mock-nav span:first-child {
+  width: 22px;
+  background: var(--blue-accent);
+  opacity: .6;
+}
+.mock-hero-line {
+  height: 12px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.16);
+  margin-bottom: 0.6rem;
+}
+.mock-hero-line--wide { width: 78%; }
+.mock-hero-line--mid { width: 55%; background: rgba(255,255,255,.08); margin-bottom: 1.4rem; }
+.mock-btn {
+  width: 90px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--blue-accent);
+  opacity: .85;
+}
 .hero-visual-badge {
   position: absolute;
   bottom: -1.25rem;
@@ -365,13 +426,32 @@ p { max-width: 62ch; }
   font-weight: 700;
 }
 
-/* Page hero (inner pages) */
+/* Page hero (inner pages) — a quieter, static echo of the homepage network:
+   a faint dot grid + the same corner glow, so inner pages read as the same
+   system without the cost/motion of the full canvas on every page. */
 .page-hero {
-  background: var(--charcoal-dark);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--charcoal-dark);
   color: var(--white);
   padding-top: calc(var(--nav-h) + clamp(3rem, 6vh, 5rem));
   padding-bottom: clamp(3rem, 6vh, 5rem);
 }
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 700px 500px at 90% -20%, rgba(49,148,224,.18), transparent 60%),
+    radial-gradient(rgba(255,255,255,.14) 1px, transparent 1.5px);
+  background-size: auto, 28px 28px;
+  background-repeat: no-repeat, repeat;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+}
+.page-hero .container { position: relative; z-index: 1; }
 .page-hero h1 {
   color: var(--white);
   margin-bottom: 0.75rem;
@@ -412,66 +492,105 @@ p { max-width: 62ch; }
   font-size: 1.05rem;
   margin: 0 auto;
 }
-.services-grid {
+/* Bento layout: one large featured service (inverted, dark) + three
+   smaller supporting ones — deliberate asymmetry instead of a uniform
+   4-up card grid, per feedback that identical repeated cards read as
+   templated. */
+.services-bento {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.bento-feature {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-
-/* Cards */
-.card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 2rem;
-  box-shadow: var(--shadow-sm);
-  transition: transform .25s, box-shadow .25s;
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-.card-icon {
-  width: 44px;
-  height: 44px;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
   background: var(--charcoal-dark);
   border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-  color: var(--blue-accent);
+  padding: clamp(2.25rem, 5vw, 3.5rem);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  position: relative;
 }
-.card-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.bento-feature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 600px 400px at 100% 0%, rgba(49,148,224,.18), transparent 65%);
+  pointer-events: none;
 }
-.card h3 {
-  color: var(--charcoal-text);
-  font-size: 1.15rem;
-  margin-bottom: 0.5rem;
-}
-.card p {
-  color: var(--brown-muted);
-  font-size: 0.925rem;
-  line-height: 1.6;
-}
-.card-badge {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  font-weight: 600;
+.bento-feature-copy { position: relative; z-index: 1; }
+.bento-feature-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--blue-accent);
-  background: rgba(49,148,224,.1);
-  padding: 0.2rem 0.6rem;
-  border-radius: 3px;
-  margin-top: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+.bento-feature h3 {
+  color: var(--white);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin-bottom: 0.75rem;
+}
+.bento-feature p {
+  color: var(--grey-light);
+  font-size: 0.98rem;
+  margin-bottom: 1.5rem;
+}
+.bento-feature-visual {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 3;
+  border-radius: calc(var(--radius) + 2px);
+  background: var(--charcoal-mid);
+  border: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.bento-feature-visual .browser-frame {
+  width: 100%;
+  border: none;
+  box-shadow: none;
+}
+.bento-support {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.bento-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.9rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s, box-shadow .25s;
+}
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.bento-card-index {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--blue-accent);
+  opacity: .45;
+  margin-bottom: 1rem;
+  display: block;
+}
+.bento-card h3 {
+  color: var(--charcoal-text);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.bento-card p {
+  color: var(--brown-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 /* Portfolio cards */
@@ -793,13 +912,36 @@ p { max-width: 62ch; }
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
+/* Featured tier is inverted (dark) rather than just outlined — makes it
+   the visual anchor of the row instead of "same card, blue border". */
 .price-card.featured {
-  border-color: var(--blue-accent);
-  box-shadow: var(--shadow-md);
+  background: var(--charcoal-dark);
+  border-color: transparent;
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.035);
+  position: relative;
+  overflow: hidden;
 }
+.price-card.featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 500px 350px at 100% 0%, rgba(49,148,224,.22), transparent 65%);
+  pointer-events: none;
+}
+.price-card.featured:hover {
+  transform: scale(1.035) translateY(-4px);
+}
+.price-card.featured .price-tier,
+.price-card.featured .price-amount .dollar { color: var(--white); }
+.price-card.featured .price-amount .period,
+.price-card.featured .price-setup { color: var(--grey-light); }
+.price-card.featured .price-setup { border-bottom-color: rgba(255,255,255,.14); }
+.price-card.featured .price-features li { color: var(--white); }
 .price-badge {
   position: absolute;
   top: -12px; right: 1.5rem;
+  z-index: 1;
   font-family: var(--font-display);
   font-size: 0.7rem;
   font-weight: 600;
@@ -886,6 +1028,8 @@ p { max-width: 62ch; }
   margin-top: clamp(3rem, 6vh, 5rem);
 }
 .service-visual {
+  position: relative;
+  overflow: hidden;
   background: var(--charcoal-dark);
   border-radius: var(--radius);
   padding: clamp(2rem, 4vw, 3.5rem);
@@ -895,7 +1039,23 @@ p { max-width: 62ch; }
   min-height: 280px;
   box-shadow: var(--shadow-md);
 }
+/* Large faint chapter numeral behind the icon — set per-block via a data
+   attribute so the three sections don't read as identical repeated boxes. */
+.service-visual::before {
+  content: attr(data-chapter);
+  position: absolute;
+  right: 0.5rem;
+  bottom: -0.4rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(6rem, 14vw, 9rem);
+  line-height: 1;
+  color: rgba(255,255,255,.05);
+  pointer-events: none;
+}
 .service-visual-icon {
+  position: relative;
+  z-index: 1;
   width: 64px;
   height: 64px;
   color: var(--blue-accent);
@@ -995,19 +1155,36 @@ p { max-width: 62ch; }
   font-style: italic;
 }
 
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+/* Value ledger: stacked rows with a large mono index instead of a
+   3-up card grid — reads as a considered list, not templated tiles. */
+.value-ledger {
   margin-top: clamp(2rem, 4vh, 3rem);
+  border-top: 1px solid rgba(43,46,51,.12);
 }
-.value-item h3 {
+.value-row {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: start;
+  padding: clamp(1.5rem, 3vh, 2.1rem) 0;
+  border-bottom: 1px solid rgba(43,46,51,.12);
+}
+.value-index {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  color: var(--blue-accent);
+  opacity: .4;
+  line-height: 1;
+}
+.value-row h3 {
   color: var(--charcoal-text);
   margin-bottom: 0.4rem;
 }
-.value-item p {
+.value-row p {
   color: var(--brown-muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  max-width: 62ch;
 }
 
 /* ============================================
@@ -1170,10 +1347,15 @@ select:focus-visible {
   .hero-flex {
     display: block;
   }
+  .bento-feature {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
-  .services-grid { grid-template-columns: 1fr; }
+  .bento-feature { grid-template-columns: 1fr; }
+  .bento-support { grid-template-columns: 1fr; }
+  .value-row { grid-template-columns: 56px 1fr; }
   .compare-grid { grid-template-columns: 1fr; }
   .portfolio-grid { grid-template-columns: 1fr; }
   .timeline {
