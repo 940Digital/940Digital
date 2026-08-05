@@ -6,12 +6,12 @@
   <title>Thanks for Scanning | 940Digital</title>
   <meta name="description" content="You scanned Owen's card. Here's a quick look at what 940Digital builds, and the fastest way to get in touch.">
   <meta property="og:title" content="940Digital">
-  <meta property="og:description" content="Websites and SEO for local trades and contractors in DFW, Texas.">
+  <meta property="og:description" content="Websites and SEO for local trades in DFW, Texas.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.940digital.com/card">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="940Digital">
-  <meta name="twitter:description" content="Websites and SEO for local trades and contractors in DFW, Texas.">
+  <meta name="twitter:description" content="Websites and SEO for local trades in DFW, Texas.">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://www.940digital.com/card">
@@ -46,6 +46,38 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       margin-top: 1.5rem;
+    }
+    /* Unique bullet treatment for the card page's short pitch list — a small
+       rotated-square marker in the brand blue with a soft ring, instead of the
+       plain em-dash bullet used elsewhere on the site. Centered as a block,
+       left-aligned within so short lines still read naturally. */
+    .pitch-list {
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+      display: inline-grid;
+      gap: 0.9rem;
+      text-align: left;
+    }
+    .pitch-list li {
+      position: relative;
+      padding-left: 1.75rem;
+      font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--charcoal-text);
+    }
+    .pitch-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.4em;
+      width: 9px;
+      height: 9px;
+      background: var(--blue-accent);
+      border-radius: 2px;
+      transform: rotate(45deg);
+      box-shadow: 0 0 0 4px rgba(49, 148, 224, 0.14);
     }
   </style>
 </head>
@@ -85,48 +117,21 @@
     </section>
 
     <section class="section" id="card-about" style="background:var(--sand)">
-      <div class="container">
+      <div class="container" style="text-align:center">
         <div class="section-header reveal">
           <p class="eyebrow">Who we are</p>
-          <h2>Websites for contractors, built by someone who&nbsp;stays</h2>
+          <h2>Websites that keep working, long after&nbsp;launch</h2>
         </div>
-        <div class="reveal" style="max-width:68ch; margin-top:1.5rem">
-          <p>I'm Owen — 940Digital is built on a straightforward idea: contractors deserve a digital partner who's invested in their growth, not just hired to check a box. Most agencies hand over a site and disappear. I stay, because your results are my&nbsp;results.</p>
-          <p style="margin-top:1rem">I work with electricians, tree services, HVAC techs, roofers, and the trades that keep DFW running. Every site is a complete package — custom design, SEO, hosting, and maintenance included, flat-rate and no hourly&nbsp;surprises.</p>
-        </div>
+        <p class="reveal" style="max-width:46ch; margin:0 auto; font-size:1.05rem; color:var(--brown-muted)">I'm Owen. 940Digital builds custom websites and SEO for local service businesses across DFW — I design it, build it, and stick around after it&nbsp;launches.</p>
 
-        <div class="value-ledger" style="margin-top:clamp(2.5rem,5vh,3.5rem)">
-          <div class="value-row reveal reveal-delay-1">
-            <span class="value-index">01</span>
-            <div>
-              <h3>Website Design &amp; Development</h3>
-              <p>Custom-built, mobile-first, and structured to turn visitors into calls and&nbsp;quotes.</p>
-            </div>
-          </div>
-          <div class="value-row reveal reveal-delay-2">
-            <span class="value-index">02</span>
-            <div>
-              <h3>Search Engine Optimization</h3>
-              <p>On-page SEO and local keyword targeting built into every site from day&nbsp;one.</p>
-            </div>
-          </div>
-          <div class="value-row reveal reveal-delay-3">
-            <span class="value-index">03</span>
-            <div>
-              <h3>Hosting &amp; Maintenance</h3>
-              <p>Included in every plan — no separate IT bill, no ticket&nbsp;queue.</p>
-            </div>
-          </div>
-          <div class="value-row reveal reveal-delay-3">
-            <span class="value-index">04</span>
-            <div>
-              <h3>Google Business Profile</h3>
-              <p>Set up, corrected, and kept current as your business&nbsp;changes.</p>
-            </div>
-          </div>
-        </div>
+        <ul class="pitch-list reveal" style="margin:2.25rem auto 0">
+          <li>Custom-built, never a template</li>
+          <li>SEO built in from day one</li>
+          <li>Hosting &amp; maintenance included</li>
+          <li>Google Business Profile, managed</li>
+        </ul>
 
-        <div class="quick-actions reveal" style="margin-top:2rem">
+        <div class="quick-actions reveal" style="margin-top:2.25rem; justify-content:center">
           <a href="pricing" class="btn btn-primary">See pricing</a>
           <a href="#card-form" class="btn btn-ghost">Contact us</a>
         </div>
