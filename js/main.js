@@ -189,6 +189,25 @@ if (!prefersReducedMotion) {
   document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 }
 
+/* --- "How it works" timeline: bar loads in blue, dots light up as it
+   reaches them. Separate from .reveal since it's a fill/activate effect,
+   not a fade — see the .timeline::after / .timeline-dot rules in CSS.
+   Under reduced motion, CSS shows the completed state directly (no JS). */
+if (!prefersReducedMotion) {
+  const timelineEl = document.querySelector('.timeline');
+  if (timelineEl) {
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          timelineObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -15% 0px', threshold: 0.3 });
+    timelineObserver.observe(timelineEl);
+  }
+}
+
 /* --- Nav: sticky shadow on scroll --- */
 const nav = document.querySelector('.nav');
 if (nav) {

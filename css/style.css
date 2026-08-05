@@ -747,6 +747,23 @@ p { max-width: 62ch; }
   background: rgba(43,46,51,.12);
   z-index: 0;
 }
+/* Fill line: starts at 0 width, animates to full once the section is in
+   view (.timeline.in, toggled in js/main.js). Dots activate on a delay
+   timed to when the fill visually reaches their position. */
+.timeline::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: calc(100% / 6);
+  width: 0;
+  height: 2px;
+  background: var(--blue-accent);
+  z-index: 0;
+  transition: width 1.3s cubic-bezier(.65,0,.35,1);
+}
+.timeline.in::after {
+  width: calc(100% - 100% / 3);
+}
 .timeline-step {
   position: relative;
   z-index: 1;
@@ -756,8 +773,8 @@ p { max-width: 62ch; }
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--blue-accent);
-  color: var(--white);
+  background: var(--grey-light);
+  color: var(--charcoal-text);
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.05rem;
@@ -766,7 +783,17 @@ p { max-width: 62ch; }
   justify-content: center;
   margin: 0 auto 1.25rem;
   box-shadow: 0 0 0 6px var(--white);
+  transform: scale(.82);
+  transition: background .45s ease, color .45s ease, transform .45s cubic-bezier(.34,1.3,.64,1);
 }
+.timeline.in .timeline-dot {
+  background: var(--blue-accent);
+  color: var(--white);
+  transform: scale(1);
+}
+.timeline.in .timeline-step:nth-child(1) .timeline-dot { transition-delay: 0s; }
+.timeline.in .timeline-step:nth-child(2) .timeline-dot { transition-delay: .62s; }
+.timeline.in .timeline-step:nth-child(3) .timeline-dot { transition-delay: 1.22s; }
 .timeline-step h3 {
   color: var(--charcoal-text);
   margin-bottom: 0.5rem;
@@ -1362,7 +1389,8 @@ select:focus-visible {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  .timeline::before {
+  .timeline::before,
+  .timeline::after {
     display: none;
   }
   .cycle-word {
@@ -1442,6 +1470,14 @@ select:focus-visible {
   .cycle-word .cw-char {
     opacity: 1;
     transform: none;
+  }
+  .timeline::after {
+    width: calc(100% - 100% / 3);
+  }
+  .timeline-dot {
+    background: var(--blue-accent);
+    color: var(--white);
+    transform: scale(1);
   }
   html {
     scroll-behavior: auto;
