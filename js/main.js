@@ -83,8 +83,8 @@ if (heroCanvas) {
   }
 
   function seedNodes() {
-    const density = 22000; // px^2 per node — fewer nodes on small screens
-    const count = Math.max(18, Math.min(70, Math.round((w * h) / density)));
+    const density = 15000; // px^2 per node — fewer nodes on small screens
+    const count = Math.max(26, Math.min(110, Math.round((w * h) / density)));
     nodes = Array.from({ length: count }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -105,7 +105,7 @@ if (heroCanvas) {
         const dx = a.x - b.x, dy = a.y - b.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * 0.32;
+          const alpha = (1 - dist / maxDist) * 0.4;
           ctx.strokeStyle = 'rgba(49,148,224,' + alpha + ')';
           ctx.lineWidth = 1;
           ctx.beginPath();
@@ -118,7 +118,7 @@ if (heroCanvas) {
     for (const n of nodes) {
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(184,187,194,.55)';
+      ctx.fillStyle = 'rgba(196,199,206,.68)';
       ctx.fill();
     }
   }
