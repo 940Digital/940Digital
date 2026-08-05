@@ -948,12 +948,15 @@ p { max-width: 62ch; }
   box-shadow: var(--shadow-lg);
   transform: scale(1.035);
   position: relative;
-  overflow: hidden;
 }
 .price-card.featured::before {
   content: '';
   position: absolute;
   inset: 0;
+  /* Rounded to match the card on its own — a background is clipped to its
+     element's border-radius automatically, so this no longer needs the
+     parent's overflow:hidden (which was also clipping the badge above). */
+  border-radius: var(--radius);
   background: radial-gradient(ellipse 500px 350px at 100% 0%, rgba(49,148,224,.22), transparent 65%);
   pointer-events: none;
 }
