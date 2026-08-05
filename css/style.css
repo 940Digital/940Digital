@@ -540,16 +540,17 @@ p { max-width: 62ch; }
   font-size: 0.98rem;
   margin-bottom: 1.5rem;
 }
+/* No fixed aspect-ratio here on purpose — this wraps a browser-frame
+   mockup that has its own intrinsic height (chrome bar + a few wireframe
+   lines). Forcing a 4:3 box left a dead gap above/below the content,
+   worse on mobile where the box goes full-width (and so much taller
+   under that ratio). Let it hug the content instead. */
 .bento-feature-visual {
   position: relative;
   z-index: 1;
-  aspect-ratio: 4 / 3;
   border-radius: calc(var(--radius) + 2px);
   background: var(--charcoal-mid);
   border: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 .bento-feature-visual .browser-frame {
