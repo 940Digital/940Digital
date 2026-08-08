@@ -81,9 +81,10 @@
     }
 
     /* QR scan intro — full-screen dark takeover that cycles three
-       "[adjective] [noun]" phrases before revealing the page. The noun
-       animates in first (blue), the adjective follows quickly after
-       (white), landing together, then the pair fades before the next. */
+       "[adjective] [noun]" phrases before revealing the page. The
+       adjective (white) falls in from the top first, then the noun
+       (blue) fades in in place right after — every blue word uses that
+       same plain fade, no drop. Then the pair fades out before the next. */
     body.qr-intro-active { overflow: hidden; }
     .qr-intro {
       position: fixed;
@@ -113,11 +114,10 @@
       font-size: clamp(2.1rem, 8vw, 4.2rem);
       line-height: 1.1;
       opacity: 0;
-      transform: translateY(-42px);
       transition: opacity 0.45s ease, transform 0.45s ease;
     }
-    .qr-intro-word--adj { color: var(--white); }
-    .qr-intro-word--noun { color: var(--blue-accent); }
+    .qr-intro-word--adj { color: var(--white); transform: translateY(-42px); }
+    .qr-intro-word--noun { color: var(--blue-accent); transform: translateY(0); }
     .qr-intro-word.is-in { opacity: 1; transform: translateY(0); }
     .qr-intro-phrase.is-out .qr-intro-word {
       opacity: 0;
@@ -172,14 +172,14 @@
         void phraseEl.offsetWidth; // force reflow so the animation replays
 
         requestAnimationFrame(function () {
-          nounEl.classList.add('is-in');
-          setTimeout(function () { adjEl.classList.add('is-in'); }, 220);
+          adjEl.classList.add('is-in');
+          setTimeout(function () { nounEl.classList.add('is-in'); }, 220);
         });
 
         setTimeout(function () {
           phraseEl.classList.add('is-out');
           setTimeout(done, 400);
-        }, 1500);
+        }, 2500);
       }
 
       function run(i) {
@@ -236,18 +236,18 @@
           <p class="eyebrow">Who we are</p>
           <h2>Websites that keep working, long after&nbsp;launch</h2>
         </div>
-        <p class="reveal" style="max-width:46ch; margin:0 auto; font-size:1.05rem; color:var(--brown-muted)">I'm Owen. 940Digital builds custom websites and SEO for local service businesses across DFW — I design it, build it, and stick around after it&nbsp;launches.</p>
+        <p class="reveal" style="max-width:46ch; margin:0 auto; font-size:1.05rem; color:var(--brown-muted)">I'm Owen. 940Digital builds websites for local service businesses across DFW — and makes sure people can actually find you. That means getting your business closer to the top of Google Maps when someone nearby searches for what you do. I design it, build it, and stick around after it&nbsp;launches.</p>
 
         <ul class="pitch-list reveal" style="margin:2.25rem auto 0">
           <li>Custom-built, never a template</li>
-          <li>SEO built in from day one</li>
+          <li>Gets you closer to the top of Google Maps</li>
           <li>Hosting &amp; maintenance included</li>
           <li>Google Business Profile, managed</li>
         </ul>
 
         <div class="quick-actions reveal" style="margin-top:2.25rem; justify-content:center">
           <a href="pricing" class="btn btn-primary">See pricing</a>
-          <a href="#card-form" class="btn btn-ghost">Contact us</a>
+          <a href="#card-form" class="btn btn-ghost btn-ghost--dark">Contact us</a>
         </div>
       </div>
     </section>
