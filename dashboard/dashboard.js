@@ -26,7 +26,7 @@ function clearActivePoll() {
 signOutBtn.addEventListener("click", async () => {
   clearActivePoll();
   await supabase.auth.signOut();
-  window.location.href = "/dashboard/login.html";
+  window.location.href = "/dashboard/login";
 });
 
 function escapeHtml(str) {
@@ -106,11 +106,11 @@ async function requireSession() {
       history.replaceState(null, "", window.location.pathname);
       return session;
     }
-    window.location.href = "/dashboard/login.html?expired=1";
+    window.location.href = "/dashboard/login?expired=1";
     return null;
   }
 
-  window.location.href = "/dashboard/login.html";
+  window.location.href = "/dashboard/login";
   return null;
 }
 
@@ -659,7 +659,7 @@ async function init() {
   const account = await loadAccount(session.user.id);
   if (!account) {
     await supabase.auth.signOut();
-    window.location.href = "/dashboard/login.html";
+    window.location.href = "/dashboard/login";
     return;
   }
 

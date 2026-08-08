@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /dashboard/
 
 Sitemap: https://www.940digital.com/sitemap.xml

@@ -155,7 +155,7 @@ passwordStep.addEventListener("submit", async (e) => {
   }
 
   if (account.role === "client") {
-    window.location.href = "/dashboard/index.html";
+    window.location.href = "/dashboard";
     return;
   }
 
@@ -239,5 +239,5 @@ otpStep.addEventListener("submit", async (e) => {
     return;
   }
 
-  window.location.href = "/dashboard/index.html";
+  window.location.href = "/dashboard";
 });
