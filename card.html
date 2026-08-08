@@ -82,9 +82,9 @@
 
     /* QR scan intro — full-screen dark takeover that cycles three
        "[adjective] [noun]" phrases before revealing the page. The
-       adjective (white) falls in from the top first, then the noun
-       (blue) fades in in place right after — every blue word uses that
-       same plain fade, no drop. Then the pair fades out before the next. */
+       adjective (white) fades in first, then the noun (blue) fades in
+       right after — both use the same plain opacity fade, no motion.
+       Then the pair fades out before the next. */
     body.qr-intro-active { overflow: hidden; }
     .qr-intro {
       position: fixed;
@@ -114,11 +114,11 @@
       font-size: clamp(2.1rem, 8vw, 4.2rem);
       line-height: 1.1;
       opacity: 0;
-      transition: opacity 0.45s ease, transform 0.45s ease;
+      transition: opacity 0.45s ease;
     }
-    .qr-intro-word--adj { color: var(--white); transform: translateY(-42px); }
-    .qr-intro-word--noun { color: var(--blue-accent); transform: translateY(0); }
-    .qr-intro-word.is-in { opacity: 1; transform: translateY(0); }
+    .qr-intro-word--adj { color: var(--white); }
+    .qr-intro-word--noun { color: var(--blue-accent); }
+    .qr-intro-word.is-in { opacity: 1; }
     .qr-intro-phrase.is-out .qr-intro-word {
       opacity: 0;
       transform: translateY(0);
