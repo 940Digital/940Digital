@@ -79,9 +79,123 @@
       transform: rotate(45deg);
       box-shadow: 0 0 0 4px rgba(49, 148, 224, 0.14);
     }
+
+    /* QR scan intro — full-screen dark takeover that cycles three
+       "[adjective] [noun]" phrases before revealing the page. The noun
+       animates in first (blue), the adjective follows quickly after
+       (white), landing together, then the pair fades before the next. */
+    body.qr-intro-active { overflow: hidden; }
+    .qr-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--charcoal-dark);
+      transition: opacity 0.6s ease;
+    }
+    .qr-intro.qr-intro--hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .qr-intro-phrase {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45em;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .qr-intro-word {
+      font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+      font-weight: 800;
+      font-size: clamp(2.1rem, 8vw, 4.2rem);
+      line-height: 1.1;
+      opacity: 0;
+      transform: translateY(-42px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .qr-intro-word--adj { color: var(--white); }
+    .qr-intro-word--noun { color: var(--blue-accent); }
+    .qr-intro-word.is-in { opacity: 1; transform: translateY(0); }
+    .qr-intro-phrase.is-out .qr-intro-word {
+      opacity: 0;
+      transform: translateY(0);
+      transition: opacity 0.4s ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .qr-intro { display: none; }
+    }
   </style>
 </head>
 <body>
+
+  <div class="qr-intro" id="qrIntro" aria-hidden="true">
+    <div class="qr-intro-phrase" id="qrIntroPhrase">
+      <span class="qr-intro-word qr-intro-word--adj" id="qrIntroAdj"></span>
+      <span class="qr-intro-word qr-intro-word--noun" id="qrIntroNoun"></span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var overlay = document.getElementById('qrIntro');
+      if (!overlay) return;
+
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var seen = false;
+      try { seen = sessionStorage.getItem('_940_qr_intro_seen') === '1'; } catch (e) {}
+
+      if (reduced || seen) {
+        overlay.remove();
+        return;
+      }
+
+      document.body.classList.add('qr-intro-active');
+
+      var phraseEl = document.getElementById('qrIntroPhrase');
+      var adjEl = document.getElementById('qrIntroAdj');
+      var nounEl = document.getElementById('qrIntroNoun');
+      var phrases = [
+        { adj: 'Tangible', noun: 'Visibility' },
+        { adj: 'Affordable', noun: 'Credibility' },
+        { adj: 'Consistent', noun: 'Growth' }
+      ];
+
+      function showPhrase(i, done) {
+        var p = phrases[i];
+        nounEl.textContent = p.noun;
+        adjEl.textContent = p.adj;
+        phraseEl.classList.remove('is-out');
+        nounEl.classList.remove('is-in');
+        adjEl.classList.remove('is-in');
+        void phraseEl.offsetWidth; // force reflow so the animation replays
+
+        requestAnimationFrame(function () {
+          nounEl.classList.add('is-in');
+          setTimeout(function () { adjEl.classList.add('is-in'); }, 220);
+        });
+
+        setTimeout(function () {
+          phraseEl.classList.add('is-out');
+          setTimeout(done, 400);
+        }, 1500);
+      }
+
+      function run(i) {
+        if (i >= phrases.length) {
+          overlay.classList.add('qr-intro--hidden');
+          document.body.classList.remove('qr-intro-active');
+          try { sessionStorage.setItem('_940_qr_intro_seen', '1'); } catch (e) {}
+          setTimeout(function () { overlay.remove(); }, 650);
+          return;
+        }
+        showPhrase(i, function () { run(i + 1); });
+      }
+
+      run(0);
+    })();
+  </script>
 
   <nav class="nav" id="nav">
     <div class="nav-inner container">
