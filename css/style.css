@@ -614,6 +614,11 @@ p { max-width: 62ch; }
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
+.portfolio-card--centered {
+  grid-column: 1 / -1;
+  width: calc((100% - 1.5rem) / 2);
+  margin: 0 auto;
+}
 .portfolio-card-img {
   display: block;
   width: 100%;
@@ -1389,6 +1394,7 @@ select:focus-visible {
   .value-row { grid-template-columns: 56px 1fr; }
   .compare-grid { grid-template-columns: 1fr; }
   .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-card--centered { width: 100%; }
   .timeline {
     grid-template-columns: 1fr;
     gap: 2.5rem;
