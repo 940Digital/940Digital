@@ -290,8 +290,11 @@ async function renderClientEntry(accountId) {
 const STAT_DEFS = {
   visitors: { label: "Visitors", group: "Traffic", color: "#3194E0", description: "Real visits from actual people. Bots and crawlers are counted separately, not included here.", inDetails: true },
   bots: { label: "Bots", group: "Traffic", color: "#7B7E85", description: "Automated traffic — search engine crawlers, scanners, scripts. Not real customers.", inDetails: true },
-  avgDuration: { label: "Avg. Time on Site", group: "Engagement", color: "#8A8272", description: "How long the average real visitor stays before leaving.", inDetails: false },
-  bounceRate: { label: "Bounce Rate", group: "Engagement", color: "#DC2626", description: "The share of visits where someone left without clicking anything or looking at a second page.", inDetails: false },
+  // Avg. Time is measured in seconds, a different scale from every other stat here (all raw counts) —
+  // it stays its own metric card with its own axis, but is excluded from the combinable overlay graph
+  // below so it's never plotted on the same shared axis as visitor/bounce/lead counts.
+  avgDuration: { label: "Avg. Time on Site", group: "Engagement", color: "#8A8272", description: "How long the average real visitor stays before leaving.", inDetails: false, graphable: false },
+  bounces: { label: "Bounces", group: "Engagement", color: "#DC2626", description: "How many visits ended without anyone clicking anything or loading a second page.", inDetails: false },
   leads: { label: "Lead Follow-Through", group: "Leads & Social", color: "#16A34A", description: "Form submissions, phone taps, and email clicks — real interest, not just a page view.", inDetails: true },
   social: { label: "Social Clicks", group: "Leads & Social", color: "#A855F7", description: "Clicks on your Instagram, Facebook, and other social links.", inDetails: true },
 };
@@ -341,7 +344,10 @@ function computeDashboardData(buckets, sess, evts) {
     if (s.is_bounce) bounceCounts[idx] += 1;
   });
   const avgDurationSeries = buckets.map((_, i) => (durationCounts[i] ? durationSums[i] / durationCounts[i] : 0));
-  const bounceRateSeries = buckets.map((_, i) => (visitorsSeries[i] ? (bounceCounts[i] / visitorsSeries[i]) * 100 : 0));
+  // bounceCounts is already a raw per-bucket count — use it directly as the graphable series
+  // instead of converting to a percentage, so it's on the same count-based scale as every other
+  // series that can be checked into the overlay graph.
+  const bouncesSeries = bounceCounts;
 
   const totalVisitors = visitors.length;
   const totalDuration = visitors.reduce((sum, s) => sum + (s.duration_seconds || 0), 0);
@@ -360,8 +366,8 @@ function computeDashboardData(buckets, sess, evts) {
   return {
     buckets,
     raw: { visitors, bots, leads, social },
-    series: { visitors: visitorsSeries, bots: botsSeries, avgDuration: avgDurationSeries, bounceRate: bounceRateSeries, leads: leadsSeries, social: socialSeries },
-    totals: { visitors: totalVisitors, bots: bots.length, avgDuration, bounceRate, leads: leads.length, leadRate, social: social.length, socialCounts },
+    series: { visitors: visitorsSeries, bots: botsSeries, avgDuration: avgDurationSeries, bounces: bouncesSeries, leads: leadsSeries, social: socialSeries },
+    totals: { visitors: totalVisitors, bots: bots.length, avgDuration, bounces: bounceCount, bounceRate, leads: leads.length, leadRate, social: social.length, socialCounts },
   };
 }
 
@@ -448,7 +454,7 @@ async function renderSiteView(site, { backTo }) {
         <div class="metric-card"><h3>Visitors</h3><div class="metric-value">${totals.visitors.toLocaleString()}</div><canvas id="cVisitors"></canvas></div>
         <div class="metric-card"><h3>Bots</h3><div class="metric-value">${totals.bots.toLocaleString()}</div><canvas id="cBots"></canvas></div>
         <div class="metric-card"><h3>Avg. Time on Site</h3><div class="metric-value">${fmtDuration(totals.avgDuration)}</div><canvas id="cDuration"></canvas></div>
-        <div class="metric-card"><h3>Bounce Rate</h3><div class="metric-value">${totals.bounceRate.toFixed(0)}%</div><canvas id="cBounce"></canvas></div>
+        <div class="metric-card"><h3>Bounces</h3><div class="metric-value">${totals.bounces.toLocaleString()} <small>(${totals.bounceRate.toFixed(0)}%)</small></div><canvas id="cBounce"></canvas></div>
         <div class="metric-card"><h3>Lead Follow-Through</h3><div class="metric-value">${totals.leads} <small>(${totals.leadRate.toFixed(0)}%)</small></div><canvas id="cLeads"></canvas></div>
         <div class="metric-card">
           <h3>Social Clicks</h3>
@@ -464,7 +470,7 @@ async function renderSiteView(site, { backTo }) {
     lineChart("cVisitors", currentData.buckets, currentData.series.visitors, STAT_DEFS.visitors.color);
     lineChart("cBots", currentData.buckets, currentData.series.bots, STAT_DEFS.bots.color);
     lineChart("cDuration", currentData.buckets, currentData.series.avgDuration, STAT_DEFS.avgDuration.color);
-    lineChart("cBounce", currentData.buckets, currentData.series.bounceRate, STAT_DEFS.bounceRate.color);
+    lineChart("cBounce", currentData.buckets, currentData.series.bounces, STAT_DEFS.bounces.color);
     lineChart("cLeads", currentData.buckets, currentData.series.leads, STAT_DEFS.leads.color);
   }
 
@@ -472,7 +478,7 @@ async function renderSiteView(site, { backTo }) {
     const canvas = document.getElementById("cGraph");
     const emptyEl = document.getElementById("graphEmpty");
     if (!canvas) return;
-    const activeKeys = Object.keys(STAT_DEFS).filter((k) => checkedStats.has(k));
+    const activeKeys = Object.keys(STAT_DEFS).filter((k) => checkedStats.has(k) && STAT_DEFS[k].graphable !== false);
     if (graphChart) {
       graphChart.destroy();
       graphChart = null;
@@ -510,9 +516,11 @@ async function renderSiteView(site, { backTo }) {
 
   function renderGraphsTab() {
     const groups = {};
-    Object.entries(STAT_DEFS).forEach(([key, def]) => {
-      (groups[def.group] ||= []).push(key);
-    });
+    Object.entries(STAT_DEFS)
+      .filter(([, def]) => def.graphable !== false)
+      .forEach(([key, def]) => {
+        (groups[def.group] ||= []).push(key);
+      });
     const groupsHtml = Object.entries(groups)
       .map(
         ([group, keys]) => `
