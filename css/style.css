@@ -267,17 +267,19 @@ p { max-width: 62ch; }
   color: var(--white);
   margin-bottom: 1.25rem;
 }
-/* Sentence-length headline, so it runs smaller than the global h1 clamp and
-   is measure-capped rather than filling the full 950px hero width. Measure is
-   wide enough to fit the unbreakable "Dallas-Fort Worth, Texas" span below. */
+/* Sentence-length headline, so it runs smaller than the global h1 clamp.
+   Ceiling is 3.2rem because that is the largest size at which the full
+   sentence still sets in two lines inside .hero-inner's 950px, rather than
+   spilling to three with a stranded short middle line. No max-width needed:
+   .hero-inner already caps the measure. */
 .hero-headline {
-  font-size: clamp(2.1rem, 5.2vw, 3.6rem);
-  max-width: 26ch;
+  font-size: clamp(2.1rem, 5.2vw, 3.2rem);
 }
 /* Keeps "Dallas-Fort Worth, Texas" on one line where there is room. Released
    below 620px, where the whole phrase is wider than the viewport and would
-   otherwise overflow; the &nbsp; inside it still holds "Worth, Texas"
-   together, so the narrow-screen break falls after "Dallas-Fort". */
+   otherwise overflow. Two joiners in the markup shape the narrow-screen break:
+   a word joiner after the hyphen stops "Dallas-/Fort", and an &nbsp; holds
+   "Worth, Texas" together, so the only break left falls between them. */
 .nowrap { white-space: nowrap; }
 @media (max-width: 620px) {
   .hero-headline .nowrap { white-space: normal; }
