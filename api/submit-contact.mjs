@@ -44,7 +44,7 @@ export default async function handler(req, res) {
   const body = req.body || {};
   const { name, business, email, service, message, altcha, website, site_id, session_id } = body;
 
-  // Honeypot — real users never see or fill this field.
+  // Honeypot: real users never see or fill this field.
   if (website) {
     await logBotBlocked(site_id, session_id);
     res.status(400).json({ error: "submission rejected" });

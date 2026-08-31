@@ -32,7 +32,7 @@
   var siteId = paramFromScript("site");
   if (!siteId) return;
 
-  // Optional page tag (e.g. ?tag=qr_business_card) — fires a page_view
+  // Optional page tag (e.g. ?tag=qr_business_card) fires a page_view
   // event so a specific landing page (QR code, campaign link, etc.) can be
   // identified in the dashboard without changing behavior for untagged pages.
   var pageTag = paramFromScript("tag");
@@ -113,7 +113,7 @@
     markInteracted();
   }
 
-  // Page views don't count as "interacted" — a glance-and-leave scan of a
+  // Page views don't count as "interacted". A glance-and-leave scan of a
   // tagged page (e.g. a QR code) should still be able to register as a bounce.
   if (pageTag) {
     send({
@@ -204,7 +204,7 @@
   }
 
   // visibilitychange is the reliable cross-platform signal for "the user is
-  // probably leaving" — it fires for tab switches and mobile backgrounding,
+  // probably leaving": it fires for tab switches and mobile backgrounding,
   // which pagehide/unload can miss (especially on mobile). pagehide stays as
   // a fallback for actual navigation/close, and the heartbeat is a safety
   // net so a hard crash only loses ~20s of data instead of the whole visit.

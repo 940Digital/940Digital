@@ -1,5 +1,5 @@
 // Self-hosted CAPTCHA challenge endpoint (ALTCHA, proof-of-work based).
-// Replaces Cloudflare Turnstile — no external account, no per-hostname cap.
+// Replaces Cloudflare Turnstile: no external account, no per-hostname cap.
 import { createChallenge } from "altcha-lib/v1";
 
 const HMAC_KEY = process.env.ALTCHA_HMAC_KEY;

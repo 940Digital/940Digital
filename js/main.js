@@ -1,5 +1,5 @@
 /* ============================================
-   940Digital — Site Logic
+   940Digital | Site Logic
    ============================================ */
 
 /* --- Config (change these to update site-wide) --- */
@@ -58,7 +58,7 @@ if (cycleWordEl) {
 }
 
 /* --- Hero background: drifting node network on canvas ---
-   No photography — a field of slow-moving dots that link to nearby
+   No photography. Just a field of slow-moving dots that link to nearby
    neighbors with fading lines, in the brand's blue accent. Pauses when
    the tab is hidden or the hero scrolls out of view; renders one static
    frame (no rAF loop) under prefers-reduced-motion. */
@@ -83,7 +83,7 @@ if (heroCanvas) {
   }
 
   function seedNodes() {
-    const density = 15000; // px^2 per node — fewer nodes on small screens
+    const density = 15000; // px^2 per node, fewer nodes on small screens
     const count = Math.max(26, Math.min(110, Math.round((w * h) / density)));
     nodes = Array.from({ length: count }, () => ({
       x: Math.random() * w,
@@ -191,7 +191,7 @@ if (!prefersReducedMotion) {
 
 /* --- "How it works" timeline: bar loads in blue, dots light up as it
    reaches them. Separate from .reveal since it's a fill/activate effect,
-   not a fade — see the .timeline::after / .timeline-dot rules in CSS.
+   not a fade. See the .timeline::after / .timeline-dot rules in CSS.
    Under reduced motion, CSS shows the completed state directly (no JS). */
 if (!prefersReducedMotion) {
   const timelineEl = document.querySelector('.timeline');

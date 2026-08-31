@@ -1,5 +1,5 @@
 /* ============================================
-   940Digital — Design System
+   940Digital | Design System
    ============================================ */
 
 /* --- Tokens --- */
@@ -230,7 +230,7 @@ p { max-width: 62ch; }
   display: flex;
   align-items: center;
 }
-/* Animated network canvas — sits behind the content, above the base color/glow.
+/* Animated network canvas, sits behind the content, above the base color/glow.
    No photography: a field of slow-drifting nodes with proximity-linked lines,
    in the brand's mono/blue-accent language. See js/main.js for the draw loop. */
 .hero-canvas {
@@ -366,7 +366,7 @@ p { max-width: 62ch; }
   height: auto;
 }
 
-/* Abstract wireframe mock — used in the bento feature card in place of a
+/* Abstract wireframe mock, used in the bento feature card in place of a
    real screenshot. Purely decorative shapes, not a fabricated product photo. */
 .mock-page {
   padding: 1.9rem 1.6rem 2.3rem;
@@ -438,9 +438,9 @@ p { max-width: 62ch; }
   font-weight: 700;
 }
 
-/* Page hero (inner pages) — a quieter echo of the homepage network: just
+/* Page hero (inner pages): a quieter echo of the homepage network, just
    the corner glow, no motion/canvas cost on every page. Dropped the dot
-   grid overlay Owen didn't like — glow only now. */
+   grid overlay Owen didn't like. Glow only now. */
 .page-hero {
   position: relative;
   overflow: hidden;
@@ -493,7 +493,7 @@ p { max-width: 62ch; }
   margin: 0 auto;
 }
 /* Bento layout: one large featured service (inverted, dark) + three
-   smaller supporting ones — deliberate asymmetry instead of a uniform
+   smaller supporting ones. Deliberate asymmetry instead of a uniform
    4-up card grid, per feedback that identical repeated cards read as
    templated. */
 .services-bento {
@@ -540,7 +540,7 @@ p { max-width: 62ch; }
   font-size: 0.98rem;
   margin-bottom: 1.5rem;
 }
-/* No fixed aspect-ratio here on purpose — this wraps a browser-frame
+/* No fixed aspect-ratio here on purpose: this wraps a browser-frame
    mockup that has its own intrinsic height (chrome bar + a few wireframe
    lines). Forcing a 4:3 box left a dead gap above/below the content,
    worse on mobile where the box goes full-width (and so much taller
@@ -945,7 +945,7 @@ p { max-width: 62ch; }
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
-/* Featured tier is inverted (dark) rather than just outlined — makes it
+/* Featured tier is inverted (dark) rather than just outlined, which makes it
    the visual anchor of the row instead of "same card, blue border". */
 .price-card.featured {
   background: var(--charcoal-dark);
@@ -958,7 +958,7 @@ p { max-width: 62ch; }
   content: '';
   position: absolute;
   inset: 0;
-  /* Rounded to match the card on its own — a background is clipped to its
+  /* Rounded to match the card on its own; a background is clipped to its
      element's border-radius automatically, so this no longer needs the
      parent's overflow:hidden (which was also clipping the badge above). */
   border-radius: var(--radius);
@@ -1075,7 +1075,7 @@ p { max-width: 62ch; }
   min-height: 280px;
   box-shadow: var(--shadow-md);
 }
-/* Large faint chapter numeral behind the icon — set per-block via a data
+/* Large faint chapter numeral behind the icon, set per-block via a data
    attribute so the three sections don't read as identical repeated boxes. */
 .service-visual::before {
   content: attr(data-chapter);
@@ -1134,7 +1134,7 @@ p { max-width: 62ch; }
   position: relative;
 }
 .service-list li::before {
-  content: '—';
+  content: '–';
   position: absolute;
   left: 0;
   color: var(--blue-accent);
@@ -1192,7 +1192,7 @@ p { max-width: 62ch; }
 }
 
 /* Value ledger: stacked rows with a large mono index instead of a
-   3-up card grid — reads as a considered list, not templated tiles. */
+   3-up card grid. Reads as a considered list, not templated tiles. */
 .value-ledger {
   margin-top: clamp(2rem, 4vh, 3rem);
   border-top: 1px solid rgba(43,46,51,.12);

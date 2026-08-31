@@ -47,7 +47,7 @@
       gap: 0.75rem;
       margin-top: 1.5rem;
     }
-    /* Unique bullet treatment for the card page's short pitch list — a small
+    /* Unique bullet treatment for the card page's short pitch list. A small
        rotated-square marker in the brand blue with a soft ring, instead of the
        plain em-dash bullet used elsewhere on the site. Centered as a block,
        left-aligned within so short lines still read naturally. */
@@ -80,10 +80,10 @@
       box-shadow: 0 0 0 4px rgba(49, 148, 224, 0.14);
     }
 
-    /* QR scan intro — full-screen dark takeover that cycles three
+    /* QR scan intro: full-screen dark takeover that cycles three
        "[adjective] [noun]" phrases before revealing the page. The
        adjective (white) fades in first, then the noun (blue) fades in
-       right after — both use the same plain opacity fade, no motion.
+       right after. Both use the same plain opacity fade, no motion.
        Then the pair fades out before the next. */
     body.qr-intro-active { overflow: hidden; }
     .qr-intro {
@@ -220,7 +220,7 @@
     <section class="page-hero">
       <div class="container">
         <p class="hero-eyebrow">You found my card</p>
-        <h1>Hey — thanks for scanning.</h1>
+        <h1>Hey, thanks for scanning.</h1>
         <p>I'm Owen, I run 940Digital. Below is a couple of sites I've built and a quick way to reach&nbsp;me.</p>
         <div class="quick-actions">
           <a href="#card-work" class="btn btn-ghost">See my work</a>
@@ -235,7 +235,7 @@
           <p class="eyebrow">Who we are</p>
           <h2>Websites that keep working, long after&nbsp;launch</h2>
         </div>
-        <p class="reveal" style="max-width:54ch; margin:0 auto; font-size:1.1rem; line-height:1.6; color:var(--charcoal-text)">I'm Owen. 940Digital builds websites for local service businesses across DFW — and makes sure people can actually find you. That means getting your business closer to the top of Google Maps when someone nearby searches for what you do. I design it, build it, and stick around after it&nbsp;launches.</p>
+        <p class="reveal" style="max-width:54ch; margin:0 auto; font-size:1.1rem; line-height:1.6; color:var(--charcoal-text)">I'm Owen. 940Digital builds websites for local service businesses across DFW, and makes sure people can actually find you. That means getting your business closer to the top of Google Maps when someone nearby searches for what you do. I design it, build it, and stick around after it&nbsp;launches.</p>
 
         <ul class="pitch-list reveal" style="margin:2.25rem auto 0">
           <li>Custom-built, never a template</li>
@@ -257,7 +257,7 @@
 
           <div class="contact-info reveal reveal-side-left">
             <h2>Let's talk</h2>
-            <p>If your business needs a better site, or you just want to ask a question — this goes straight to&nbsp;me.</p>
+            <p>If your business needs a better site, or you just want to ask a question, this goes straight to&nbsp;me.</p>
 
             <div class="contact-detail">
               <div class="contact-detail-icon">
@@ -317,16 +317,16 @@
         </div>
         <div class="portfolio-grid">
           <a href="https://www.jcarpenterlandscaping.com/" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-1">
-            <img src="img/portfolio/jc-landscaping.jpg" alt="JC Landscaping — stone patio and pathway build" class="portfolio-card-img" loading="lazy">
+            <img src="img/portfolio/jc-landscaping.jpg" alt="JC Landscaping: stone patio and pathway build" class="portfolio-card-img" loading="lazy">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Landscaping &amp; hardscaping</div>
               <h3>JC Landscaping</h3>
-              <p>Denton County, TX — in business since 1989. A full site covering services, a project gallery, and a free-estimate contact&nbsp;flow.</p>
+              <p>Denton County, TX. In business since 1989. A full site covering services, a project gallery, and a free-estimate contact&nbsp;flow.</p>
               <span class="portfolio-card-link">Visit site &#8599;</span>
             </div>
           </a>
           <a href="https://www.gunnargalvanmobiledetailing.com/" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-2">
-            <img src="img/portfolio/gunnar-galvan.jpg" alt="Gunnar Galvan Mobile Detailing — detailed vehicle" class="portfolio-card-img" loading="lazy">
+            <img src="img/portfolio/gunnar-galvan.jpg" alt="Gunnar Galvan Mobile Detailing: detailed vehicle" class="portfolio-card-img" loading="lazy">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Mobile car detailing</div>
               <h3>Gunnar Galvan Mobile Detailing</h3>
@@ -335,7 +335,7 @@
             </div>
           </a>
           <a href="https://glory-unveiled-weddings.vercel.app" target="_blank" rel="noopener" class="portfolio-card portfolio-card--centered reveal reveal-scale reveal-delay-3">
-            <img src="img/portfolio/glory-unveiled.jpg" alt="Glory Unveiled by Bailey Elaine — couple embracing in a garden" class="portfolio-card-img" loading="lazy">
+            <img src="img/portfolio/glory-unveiled.jpg" alt="Glory Unveiled by Bailey Elaine: couple embracing in a garden" class="portfolio-card-img" loading="lazy">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Wedding planning &amp; coordination</div>
               <h3>Glory Unveiled by Bailey Elaine</h3>
@@ -422,7 +422,7 @@
           .then(function (res) {
             if (!res.ok) throw new Error("failed");
             msg.className = "form-msg ok";
-            msg.textContent = "Thanks — I'll try to be in touch within one business day.";
+            msg.textContent = "Thanks. I'll try to be in touch within one business day.";
             form.reset();
             if (window.altcha) form.querySelectorAll("altcha-widget").forEach(function (w) { w.reset && w.reset(); });
           })
