@@ -24,39 +24,6 @@ document.querySelectorAll('[data-year]').forEach(el => {
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* --- Hero word cycle: per-letter "assemble" in the mono accent face --- */
-const cycleWordEl = document.getElementById('cycleWord');
-if (cycleWordEl) {
-  const CYCLE_WORDS = ['Presence', 'Momentum', 'Authority', 'Impact', 'Movement', 'Exposure', 'Leverage', 'Futures'];
-
-  function setCycleWord(word) {
-    cycleWordEl.classList.remove('in');
-    cycleWordEl.innerHTML = '';
-    word.split('').forEach((ch, i) => {
-      const span = document.createElement('span');
-      span.className = 'cw-char';
-      span.textContent = ch;
-      span.style.animationDelay = (i * 0.028) + 's';
-      cycleWordEl.appendChild(span);
-    });
-    void cycleWordEl.offsetWidth; // force reflow so the animation restarts
-    cycleWordEl.classList.add('in');
-  }
-
-  if (prefersReducedMotion) {
-    cycleWordEl.textContent = CYCLE_WORDS[0];
-  } else {
-    let cycleIndex = 0;
-    setCycleWord(CYCLE_WORDS[cycleIndex]);
-    if (CYCLE_WORDS.length > 1) {
-      setInterval(() => {
-        cycleIndex = (cycleIndex + 1) % CYCLE_WORDS.length;
-        setCycleWord(CYCLE_WORDS[cycleIndex]);
-      }, 3200);
-    }
-  }
-}
-
 /* --- Hero background: drifting node network on canvas ---
    No photography. Just a field of slow-moving dots that link to nearby
    neighbors with fading lines, in the brand's blue accent. Pauses when
