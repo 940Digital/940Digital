@@ -305,6 +305,23 @@ p { max-width: 62ch; }
   white-space: nowrap;
   border: 0;
 }
+/* SEO line living inside the h1 so crawlers get the service + market in the
+   page's main heading, while the cycling line above stays the visual headline.
+   flex-basis 100% forces it onto its own row in the flex h1. */
+.hero-h1-seo {
+  flex: 0 0 100%;
+  margin-top: 1.1rem;
+  max-width: 54ch;
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.15vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  /* grey-light, not grey-muted: muted is 4.15:1 on charcoal-dark and fails
+     WCAG AA for text this size. Size and weight carry the hierarchy instead. */
+  color: var(--grey-light);
+  opacity: 0.82;
+}
 .hero-sub {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
   color: var(--grey-light);
