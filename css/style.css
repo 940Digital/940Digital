@@ -318,10 +318,9 @@ p { max-width: 62ch; }
   font-weight: 500;
   letter-spacing: 0.01em;
   line-height: 1.5;
-  /* grey-light, not grey-muted: muted is 4.15:1 on charcoal-dark and fails
-     WCAG AA for text this size. Size and weight carry the hierarchy instead. */
-  color: var(--grey-light);
-  opacity: 0.82;
+  /* Full opacity is load-bearing: blue-accent is 5.18:1 on charcoal-dark, but
+     fading it to 82% drops it to 3.93:1 and fails WCAG AA at this size. */
+  color: var(--blue-accent);
 }
 .hero-sub {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
