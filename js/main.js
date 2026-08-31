@@ -3,9 +3,11 @@
    ============================================ */
 
 /* --- Config (change these to update site-wide) --- */
+/* Service area is intentionally NOT here: it is hardcoded into each page's
+   footer and contact block so the location keywords sit in server-rendered
+   HTML rather than being injected after load. Update it in the markup. */
 const SITE_CONFIG = {
   email: '940digital@gmail.com',
-  serviceArea: 'the Dallas-Fort Worth metroplex (DFW), Denton, and surrounding areas',
 };
 
 /* --- Populate contact info from config --- */
@@ -13,10 +15,6 @@ document.querySelectorAll('[data-email]').forEach(el => {
   el.textContent = SITE_CONFIG.email;
   if (el.tagName === 'A') el.href = 'mailto:' + SITE_CONFIG.email;
 });
-document.querySelectorAll('[data-area]').forEach(el => {
-  el.textContent = SITE_CONFIG.serviceArea;
-});
-
 /* --- Copyright year --- */
 document.querySelectorAll('[data-year]').forEach(el => {
   el.textContent = new Date().getFullYear();
