@@ -306,11 +306,12 @@ p { max-width: 62ch; }
   border: 0;
 }
 /* SEO line living inside the h1 so crawlers get the service + market in the
-   page's main heading, while the cycling line above stays the visual headline.
+   page's main heading, while the cycling line below stays the visual headline.
+   Sits in the slot the blue .hero-eyebrow used to occupy on this page.
    flex-basis 100% forces it onto its own row in the flex h1. */
 .hero-h1-seo {
   flex: 0 0 100%;
-  margin-top: 1.1rem;
+  margin-bottom: 1.25rem;
   max-width: 54ch;
   font-family: var(--font-display);
   font-size: clamp(0.9rem, 1.15vw, 1rem);
