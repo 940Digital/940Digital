@@ -267,9 +267,14 @@ p { max-width: 62ch; }
   color: var(--white);
   margin-bottom: 1.25rem;
 }
-/* No font-size override: the headline uses the global h1 scale. At this copy
-   length that sets in two lines inside .hero-inner's 950px, and only spills
-   to three past 4.8rem. Re-measure if the headline copy gets longer. */
+/* Runs below the global h1 scale because the headline names two markets and
+   is long. 3rem is the largest size that still sets in two lines inside
+   .hero-inner's 950px; above it "Denton" strands on a third line of its own.
+   A word joiner in the markup keeps "Dallas-Fort" from splitting at its
+   hyphen. Re-measure both if this copy changes. */
+.hero-headline {
+  font-size: clamp(2.1rem, 4.5vw, 3rem);
+}
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;

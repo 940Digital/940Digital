@@ -5,7 +5,7 @@
 /* --- Config (change these to update site-wide) --- */
 const SITE_CONFIG = {
   email: '940digital@gmail.com',
-  serviceArea: 'DFW, Texas and surrounding areas',
+  serviceArea: 'the Dallas-Fort Worth metroplex (DFW), Denton, and surrounding areas',
 };
 
 /* --- Populate contact info from config --- */
