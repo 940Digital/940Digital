@@ -268,12 +268,12 @@ p { max-width: 62ch; }
   margin-bottom: 1.25rem;
 }
 /* Sentence-length headline, so it runs smaller than the global h1 clamp.
-   Ceiling is 3.2rem because that is the largest size at which the full
-   sentence still sets in two lines inside .hero-inner's 950px, rather than
-   spilling to three with a stranded short middle line. No max-width needed:
-   .hero-inner already caps the measure. */
+   Ceiling is set so the sentence still breaks into two lines inside
+   .hero-inner's 950px instead of spilling to three; it goes to three at
+   4rem, so 3.6rem leaves a step of margin. Re-measure this if the headline
+   copy gets longer. No max-width needed: .hero-inner caps the measure. */
 .hero-headline {
-  font-size: clamp(2.1rem, 5.2vw, 3.2rem);
+  font-size: clamp(2.1rem, 5.2vw, 3.6rem);
 }
 /* Keeps "Dallas-Fort Worth, Texas" on one line where there is room. Released
    below 620px, where the whole phrase is wider than the viewport and would
