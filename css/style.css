@@ -202,8 +202,9 @@ p { max-width: 62ch; }
   transform: translateY(-2px);
 }
 .btn-ghost--dark {
+  background: transparent;
   color: var(--charcoal-text);
-  border-color: var(--charcoal-text);
+  border: 1.5px solid var(--charcoal-text);
 }
 .btn-ghost--dark:hover {
   background: var(--charcoal-text);
@@ -680,7 +681,7 @@ p { max-width: 62ch; }
    HORIZONTAL SCROLL (signature)
    ============================================ */
 .compare-section {
-  background: var(--charcoal-dark);
+  background: var(--white);
 }
 .compare-grid {
   display: grid;
