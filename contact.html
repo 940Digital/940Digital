@@ -96,7 +96,7 @@
       <div class="container">
         <p class="hero-eyebrow">Contact</p>
         <h1>Let's talk about your&nbsp;business</h1>
-        <p>No pitch deck, no pressure. Tell us what you need and we'll figure out the right next step&nbsp;together.</p>
+        <p>No pitch deck, no pressure. Tell me what you need and I'll figure out the right next step&nbsp;together.</p>
       </div>
     </section>
 
@@ -106,7 +106,7 @@
 
           <div class="contact-info reveal reveal-side-left">
             <h2>Get in touch</h2>
-            <p>Whether you need a new site, want to improve an existing one, or just want to talk through what's possible, we're here. Reach out however works best for&nbsp;you.</p>
+            <p>Whether you need a new site, want to improve an existing one, or just want to talk through what's possible, I'm here. Reach out however works best for&nbsp;you.</p>
 
             <div class="contact-detail">
               <div class="contact-detail-icon">
@@ -130,7 +130,7 @@
 
             <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(0,0,0,.08)">
               <h3 style="font-size:1rem; margin-bottom:0.5rem; color:var(--charcoal-text)">What happens next?</h3>
-              <p style="font-size:0.9rem; color:var(--brown-muted)">We'll try to get back to you within one business day. If there's a fit, we'll schedule a quick call to understand your business and scope the project. No&nbsp;obligation.</p>
+              <p style="font-size:0.9rem; color:var(--brown-muted)">I'll try to get back to you within one business day. If there's a fit, I'll schedule a quick call to understand your business and scope the project. No&nbsp;obligation.</p>
             </div>
           </div>
 
@@ -160,7 +160,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="message">Tell us about your project</label>
+              <label for="message">Tell me about your project</label>
               <textarea id="message" name="message" placeholder="What does your business do? What's your biggest challenge with your current site or online presence?"></textarea>
             </div>
 
@@ -253,13 +253,13 @@
           .then(function (res) {
             if (!res.ok) throw new Error("failed");
             msg.className = "form-msg ok";
-            msg.textContent = "Thanks. We'll try to be in touch within one business day.";
+            msg.textContent = "Thanks. I'll try to be in touch within one business day.";
             form.reset();
             if (window.altcha) form.querySelectorAll("altcha-widget").forEach(function (w) { w.reset && w.reset(); });
           })
           .catch(function () {
             msg.className = "form-msg err";
-            msg.textContent = "Something went wrong sending your message. Please try again or email us directly.";
+            msg.textContent = "Something went wrong sending your message. Please try again or email me directly.";
           })
           .finally(function () {
             submitBtn.disabled = false;
