@@ -482,10 +482,16 @@ p { max-width: 62ch; }
 }
 
 /* ============================================
-   SERVICES SECTION (sand bg, home)
+   SERVICES SECTION (charcoal bg, home)
    ============================================ */
 .services-section {
-  background: var(--sand);
+  background: var(--charcoal-dark);
+}
+.services-section .section-header h2 {
+  color: var(--white);
+}
+.services-section .section-header p {
+  color: var(--grey-light);
 }
 .section-header {
   text-align: center;
@@ -523,7 +529,8 @@ p { max-width: 62ch; }
   grid-template-columns: 1.15fr 1fr;
   gap: clamp(2rem, 4vw, 3.5rem);
   align-items: center;
-  background: var(--charcoal-dark);
+  background: var(--charcoal-mid);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: var(--radius);
   padding: clamp(2.25rem, 5vw, 3.5rem);
   box-shadow: var(--shadow-lg);
@@ -566,7 +573,7 @@ p { max-width: 62ch; }
   position: relative;
   z-index: 1;
   border-radius: calc(var(--radius) + 2px);
-  background: var(--charcoal-mid);
+  background: var(--charcoal-dark);
   border: 1px solid rgba(255,255,255,.08);
   overflow: hidden;
 }
@@ -681,7 +688,7 @@ p { max-width: 62ch; }
    HORIZONTAL SCROLL (signature)
    ============================================ */
 .compare-section {
-  background: var(--white);
+  background: var(--sand);
 }
 .compare-grid {
   display: grid;
