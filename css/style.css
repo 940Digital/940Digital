@@ -319,7 +319,7 @@ p { max-width: 62ch; }
   line-height: 1.55;
   letter-spacing: normal;
   color: var(--grey-light);
-  max-width: 54ch;
+  max-width: none;
   margin-top: 0.25rem;
 }
 .hero-sub {
