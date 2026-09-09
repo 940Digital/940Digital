@@ -1114,12 +1114,6 @@ p { max-width: 62ch; }
   color: var(--charcoal-text);
   font-size: 0.95rem;
 }
-.about-content p.about-lead {
-  font-size: clamp(1.2rem, 2.1vw, 1.45rem);
-  font-weight: 500;
-  line-height: 1.5;
-  margin-bottom: 1.35rem;
-}
 /* A "consultant card" standing in for a team photo: brand mark, title,
    name, and a plain capability/location list. Signals a considered
    practice rather than a freelancer with a logo, without faking a
