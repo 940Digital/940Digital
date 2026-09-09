@@ -497,7 +497,7 @@ p { max-width: 62ch; }
   text-align: center;
   margin-bottom: clamp(2.5rem, 5vh, 4rem);
 }
-.section-header .eyebrow {
+.eyebrow {
   font-family: var(--font-display);
   font-size: 0.8rem;
   font-weight: 600;
@@ -1109,45 +1109,86 @@ p { max-width: 62ch; }
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
 }
-.about-visual {
-  background: var(--charcoal-dark);
-  border-radius: var(--radius);
-  padding: clamp(3rem, 5vw, 5rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 320px;
-  box-shadow: var(--shadow-md);
-  text-align: center;
-}
-.about-visual .wordmark {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-}
-.about-visual .wm-num { font-size: 2.5rem; }
-.about-visual .wm-script { font-size: 2.8rem; }
-.about-tagline {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--grey-muted);
-}
-.about-content h2 {
-  color: var(--charcoal-text);
-  margin-bottom: 1rem;
-}
 .about-content p {
   margin-bottom: 1rem;
   color: var(--charcoal-text);
   font-size: 0.95rem;
 }
-.about-content p.muted {
-  color: var(--brown-muted);
-  font-size: 0.9rem;
-  font-style: italic;
+.about-content p.about-lead {
+  font-size: clamp(1.2rem, 2.1vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 1.35rem;
+}
+/* A "consultant card" standing in for a team photo: brand mark, title,
+   name, and a plain capability/location list. Signals a considered
+   practice rather than a freelancer with a logo, without faking a
+   photo or a team that doesn't exist. */
+.about-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--charcoal-dark);
+  border-radius: var(--radius);
+  padding: clamp(3rem, 5vw, 4.5rem) clamp(2.25rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 320px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+.about-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 500px 380px at 50% -10%, rgba(49,148,224,.16), transparent 65%);
+  pointer-events: none;
+}
+.about-visual > * {
+  position: relative;
+  z-index: 1;
+}
+.about-visual-mark {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+.about-visual-mark .wm-num { font-size: 1.9rem; }
+.about-visual-mark .wm-script { font-size: 2.1rem; }
+.about-visual-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-accent);
+  margin-bottom: 0.6rem;
+}
+.about-visual-name {
+  color: var(--white);
+  font-size: clamp(1.75rem, 3vw, 2.15rem);
+  margin-bottom: 1.75rem;
+}
+.about-visual-divider {
+  width: 36px;
+  height: 2px;
+  background: var(--blue-accent);
+  opacity: .6;
+  margin-bottom: 1.75rem;
+}
+.about-visual-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+.about-visual-list li {
+  font-size: 0.92rem;
+  color: var(--grey-light);
+}
+.about-visual-location {
+  font-size: 0.82rem;
+  color: var(--grey-muted);
+  margin-top: auto;
 }
 
 /* Value ledger: stacked rows with a large mono index instead of a
@@ -1291,6 +1332,7 @@ p { max-width: 62ch; }
 .reveal-delay-1 { transition-delay: .12s; }
 .reveal-delay-2 { transition-delay: .24s; }
 .reveal-delay-3 { transition-delay: .36s; }
+.reveal-delay-4 { transition-delay: .48s; }
 
 /* Variant: gentle scale-in, for card/grid layouts */
 .reveal-scale {
