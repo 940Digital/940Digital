@@ -31,7 +31,20 @@ function isBotReferrer(referrer) {
 }
 
 module.exports = async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // navigator.sendBeacon() - the tracker's primary send path - always makes
+  // cross-origin requests with credentials mode "include" (not something
+  // the caller can opt out of, per the Beacon spec), and browsers now
+  // reject a wildcard Access-Control-Allow-Origin whenever credentials are
+  // included. That silently broke every beacon from every tracked site
+  // other than 940digital.com itself (same-origin, so CORS never applied
+  // there) - the OPTIONS preflight kept succeeding, masking the failure,
+  // while the actual POST was rejected client-side before it ever reached
+  // this handler. Reflecting the real Origin instead of "*" satisfies that
+  // check; this endpoint has no cookies/auth of its own to protect, so
+  // there's nothing sensitive being exposed by allowing credentials here.
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 
