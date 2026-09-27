@@ -2,6 +2,11 @@
    940Digital | Site Logic
    ============================================ */
 
+/* --- Mark JS as available. CSS uses html:not(.js) to keep .reveal content
+   visible when this file never runs, since .reveal starts at opacity 0 and is
+   only revealed by the IntersectionObserver below. --- */
+document.documentElement.classList.add('js');
+
 /* --- Config (change these to update site-wide) --- */
 /* Service area is intentionally NOT here: it is hardcoded into each page's
    footer and contact block so the location keywords sit in server-rendered
@@ -234,6 +239,9 @@ if (navToggle && navMenu) {
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
+  /* Every nav link closes the drawer, including the "Services" trigger. On
+     mobile the submenu renders expanded inline (see the 860px media query), so
+     the trigger has no toggle behaviour to preserve and navigates normally. */
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('open');
@@ -244,14 +252,33 @@ if (navToggle && navMenu) {
   });
 }
 
-/* --- Active nav link --- */
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.nav-link').forEach(link => {
-  const href = link.getAttribute('href');
-  if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
-    link.classList.add('active');
-  }
-});
+/* --- Active nav link ---
+   Compares full pathnames. The old version compared
+   location.pathname.split('/').pop() against a relative href, which broke as
+   soon as pages moved into subdirectories: from /seo/seo-audit it produced
+   "seo-audit" and matched nothing. Links are now root-absolute, and the build
+   already marks the active item server-side, so this only has to handle the
+   nested case where a child page should light up its parent hub. --- */
+(function () {
+  const path = window.location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+  const current = path.length > 1 ? path.replace(/\/$/, '') : '/';
+
+  document.querySelectorAll('.nav-link, .nav-group-menu a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href.charAt(0) !== '/') return;
+    const isExact = href === current;
+    /* A service page lights up its hub: /seo/seo-audit activates /seo. */
+    const isAncestor = href !== '/' && current.indexOf(href + '/') === 0;
+    if (isExact || isAncestor) {
+      link.classList.add('active');
+      const group = link.closest('.nav-group');
+      if (group) {
+        const trigger = group.querySelector('.nav-group-trigger');
+        if (trigger) trigger.classList.add('active');
+      }
+    }
+  });
+})();
 
 /* Contact form submission is handled by the dedicated inline script on
    contact.html (Altcha verification + /api/submit-contact). A duplicate

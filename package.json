@@ -3,5 +3,10 @@
   "private": true,
   "dependencies": {
     "altcha-lib": "^2.2.0"
+  },
+  "scripts": {
+    "generate": "node scripts/build-pages.mjs && node scripts/build-sitemap.mjs",
+    "check": "node scripts/check-seo.mjs",
+    "verify": "npm run generate && npm run check"
   }
 }

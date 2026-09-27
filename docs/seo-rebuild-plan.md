@@ -215,3 +215,80 @@ Nothing starts until you approve this document and answer `docs/service-page-que
 After each wave: `npm run build && npm run check`, broken-link and orphan sweep, `curl -s <url> | grep` for each new H1 and answer-first paragraph, Schema.org validator and Rich Results Test on one page per template, confirm no `TODO(owen)` page is indexable or in the sitemap, Lighthouse on `/`, one hub, and one service page against today's numbers, then a short diff summary to you.
 
 Any page still holding a `TODO(owen)` ships as `noindex`, stays out of the sitemap, and is unlinked, until you fill it in.
+
+---
+
+# Wave 1: built and verified, 2026-09-27
+
+Owen's decisions: use all four clients as proof, show the phone number, and do not build the two risky page pairs.
+
+## What shipped
+
+Foundation, all five published pages, and the guard.
+
+| Page | Status | Notes |
+| --- | --- | --- |
+| `/` | published | Static H1, four GBP categories, all 45 services named and linked where published |
+| `/services` | published | Directory, all 45 with profile descriptions |
+| `/seo` | published | Hub, also the landing page for Search engine optimization AND Local SEO |
+| `/local-marketing` | published | Hub, 7 children |
+| `/consulting` | published | Hub, 6 children |
+| 41 service pages | draft | No file written at all. Waiting on the questions doc. |
+
+Drafts render no file, so there is no URL to 404 and nothing to accidentally index. They are named in every listing but not linked, which keeps the profile-landing-page rule satisfied without pointing anyone at a page that does not exist.
+
+## Decisions taken during the build
+
+**`.mjs` with JSDoc, not `.ts`.** As proposed. No new dependency.
+
+**The npm script is `generate`, not `build`.** This one bit us. Naming it `build` made Vercel auto-detect the project as build-mode, run it during deploy, then fail with `No Output Directory named "public" found`. Caught in local preview before it reached production. Do not rename this script back to `build` without also setting `outputDirectory` in `vercel.json`.
+
+**JSON-LD is emitted compactly.** Pretty-printing the 45-service offer catalog made it 19KB instead of 10KB, which was more than half the homepage and measurably hurt First Contentful Paint.
+
+**The offer catalog only emits a `url` for published services.** Emitting one for all 45 would have pointed Google at 41 pages that do not exist.
+
+**`numberOfEmployees: 1` was kept.** Question 8 is unanswered, so the existing behaviour stands rather than me deciding it.
+
+**`/about` expertise line changed** from "Hosting & Maintenance" to "Website Maintenance", per the hosting rule. Question 9 is still open if you want different wording.
+
+**`card.html` is not generated.** It has a pre-nav overlay, its own scripts, and a tracker call carrying a `tag` parameter. Its links were made absolute by hand. It is noindex, unlinked, and out of the sitemap, so it stays hand-maintained.
+
+**`/local-marketing` and `/consulting` carry no `Service` block.** Neither hub is the landing page for a GBP service (Local SEO and AI search optimization moved into the SEO silo). Emitting a Service named after the category would be inventing a service that is not on the profile.
+
+## Bugs found and fixed during verification
+
+1. **Every internal link on the site was relative.** Converted all 8 existing pages plus `card.html` to root-absolute. The guard now fails the build on any relative internal path, because this would silently break every nested page in wave 2.
+2. **`parts.hubServices` was never defined**, so `/local-marketing` and `/consulting` rendered the literal string "undefined" in place of their entire service lists. The build now throws if any template part renders undefined.
+3. **The favicon trap.** `favicon.svg` was deleted from the root in the working tree with an untracked `img/favicon.svg`, while all pages pointed at the old path. Resolved to `/img/favicon.svg`.
+4. **Social meta was being flattened** to the title tag on regenerate. Restored the distinct og/twitter copy every page had.
+5. **The footer wordmark lost its smaller inline sizing.** Restored.
+6. **A mobile nav toggle I added would have blocked navigation to `/services`.** Reverted; the submenu renders expanded inline on mobile instead.
+
+## Verification
+
+- `npm run verify` passes: 11 HTML files, 46 mapped pages, 45 services, 0 failures.
+- The guard was negative-tested: injecting `TODO(owen)` into a live page correctly failed on all three counts (indexable, in sitemap, linked).
+- All 45 profile service names appear in the raw homepage HTML with JavaScript disabled, confirmed over HTTP rather than in DevTools.
+- 24 JSON-LD blocks across 11 pages, 0 parse failures. Offer catalog groups 12 / 18 / 9 / 6, matching the profile exactly.
+- Regenerated pages diffed against git HEAD: only the intended chrome changes appear. Pricing numbers and plan contents are byte-identical.
+
+### Lighthouse, same local server for both runs
+
+| Page | Perf | A11y | Best practices | SEO |
+| --- | --- | --- | --- | --- |
+| `/` before | 95 | 94 | 100 | 100 |
+| `/` after | **96** | **95** | 100 | 100 |
+| `/services` before | 100 | 95 | 100 | 100 |
+| `/services` after | 100 | 95 | 100 | 100 |
+| `/seo` new | 100 | 95 | 100 | 100 |
+| `/local-marketing` new | 100 | 95 | 100 | 100 |
+| `/consulting` new | 100 | 95 | 100 | 100 |
+
+No regressions. The homepage improved on both perf and accessibility.
+
+## Still open
+
+- 41 service pages, blocked on `docs/service-page-questions.md`. The table in section 2 unblocks the most.
+- Site-wide schema TODOs: postal code, LinkedIn, GBP Maps URL, hours, other socials. Each is currently omitted from schema rather than emitted empty.
+- `/work` should link each project to the service pages it demonstrates. Nothing to link to until wave 2 publishes them.
+- `og:image` is still missing site-wide. Out of scope, worth doing before these URLs get shared.

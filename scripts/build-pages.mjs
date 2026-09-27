@@ -1,0 +1,196 @@
+/**
+ * Renders every page from src/ into committed .html files at the repo root.
+ *
+ * Output is committed deliberately. Vercel keeps serving plain static files
+ * with no build command, so a build failure can never take the site down, and
+ * the diff of what actually ships is reviewable.
+ *
+ * card.html is NOT generated. It is a bespoke QR landing page with a pre-nav
+ * overlay, its own tracker call carrying a tag parameter, and its own scripts.
+ * It is noindex, absent from the sitemap, and unlinked from nav, so routing it
+ * through here would add risk for no SEO benefit. Its links were converted to
+ * absolute paths by hand.
+ */
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { PAGES, byUrl, childrenOf } from '../src/data/services.mjs';
+import * as layout from '../src/templates/layout.mjs';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+/** Hub pages whose service list is split into AI and everything else. */
+const AI_SLUGS = new Set([
+  '/seo/ai-overview-optimization',
+  '/seo/ai-citation-building',
+  '/seo/ai-search-visibility-audit',
+  '/seo/answer-ready-content-writing',
+]);
+
+function hubList(hubUrl, filter) {
+  const kids = childrenOf(hubUrl).filter(filter || (() => true));
+  return kids
+    .map((p) => {
+      const label = p.name.replace(/&/g, '&amp;');
+      const title =
+        p.status === 'published'
+          ? `<a href="${p.url}">${label}</a>`
+          : `${label} <span class="svc-soon-tag">page in progress</span>`;
+      return `          <li class="hub-svc">
+            <h3>${title}</h3>
+            <p>${(p.gbpDescription || p.meta).replace(/&/g, '&amp;')}</p>
+          </li>`;
+    })
+    .join('\n');
+}
+
+const sharedParts = {
+  serviceIndex: layout.serviceIndexBlock({ headingLevel: 3 }),
+  serviceIndexDetail: layout.serviceIndexBlock({ withDescriptions: true, headingLevel: 2 }),
+  aiServices: hubList('/seo', (p) => AI_SLUGS.has(p.url)),
+  otherServices: hubList('/seo', (p) => !AI_SLUGS.has(p.url)),
+};
+
+/**
+ * `hubServices` is per-page: each hub lists its own children. Building it once
+ * globally silently rendered the string "undefined" inside the <ul> on
+ * /local-marketing and /consulting, which also tripped Lighthouse's `list`
+ * audit. Resolve it against the page being built instead.
+ */
+function partsFor(url) {
+  return { ...sharedParts, hubServices: hubList(url) };
+}
+
+/** Pages that carry hand-written bodies in src/content/. */
+const CONTENT_PAGES = [
+  {
+    url: '/', mod: 'index', out: 'index.html',
+    ogTitle: '940Digital | Visibility, Credibility, Growth',
+    ogDescription: 'Websites, SEO, and AI search visibility that grow your business. Serving the Dallas-Fort Worth metroplex (DFW), Denton, and surrounding areas.',
+  },
+  {
+    url: '/services', mod: 'services', out: 'services.html',
+    ogTitle: 'All services | 940Digital',
+    ogDescription: 'Forty-five services across website design, SEO and AI search, local marketing, and consulting, for small businesses in Dallas-Fort Worth and Denton.',
+  },
+  { url: '/seo', mod: 'seo', out: 'seo.html' },
+  { url: '/local-marketing', mod: 'local-marketing', out: 'local-marketing.html' },
+  { url: '/consulting', mod: 'consulting', out: 'consulting.html' },
+];
+
+/**
+ * Pages outside the service map that still need generated chrome so the nav,
+ * footer, and business schema stay in sync with everything else.
+ */
+const STATIC_PAGES = [
+  {
+    url: '/about', mod: 'about', out: 'about.html', robots: 'index, follow',
+    title: 'About | 940Digital | Owen Leiter, Denton, TX',
+    meta: '940Digital is a personal, senior-level digital marketing partner founded by Owen Leiter, serving small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.',
+    ogTitle: 'About | 940Digital',
+    ogDescription: 'A personal, senior-level digital marketing partner for small businesses. Founded by Owen Leiter, serving Dallas-Fort Worth and Denton, Texas.',
+    h1: 'About',
+  },
+  {
+    url: '/pricing', mod: 'pricing', out: 'pricing.html', robots: 'index, follow',
+    title: 'Pricing | 940Digital | Website Pricing in Denton, TX',
+    meta: '940Digital website pricing: Basic $200 setup, Plus $400, Pro $800. Flat-rate plans for small businesses in Dallas-Fort Worth and Denton, Texas.',
+    ogTitle: 'Pricing | 940Digital',
+    ogDescription: 'Transparent website pricing for small businesses. No hidden fees, no hourly billing surprises.',
+    h1: 'Pricing',
+  },
+  {
+    /* Title and meta unchanged from the hand-written page. Owen's brief says not
+       to restructure /work beyond adding internal links. */
+    url: '/work', mod: 'work', out: 'work.html', robots: 'index, follow',
+    title: 'Portfolio | 940Digital | Website Portfolio, Denton, TX',
+    meta: '940Digital portfolio: websites built for small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.',
+    ogTitle: 'Portfolio | 940Digital',
+    ogDescription: "See the sites I've built for small businesses in Dallas-Fort Worth and Denton, Texas.",
+    h1: 'Portfolio',
+  },
+  {
+    url: '/contact', mod: 'contact', out: 'contact.html', robots: 'index, follow',
+    title: 'Contact | 940Digital | Denton, TX Web Design & SEO',
+    meta: 'Book a free consult with 940Digital. Call (940) 977-6253 or send a message about your website, SEO, or Google Business Profile in Denton and DFW.',
+    ogTitle: 'Contact | 940Digital',
+    ogDescription: 'Book a free consult. No pitch deck, no pressure. Just a conversation about what your business needs.',
+    h1: 'Contact',
+    extraHead: `  <link rel="stylesheet" href="/css/altcha.css">
+  <style>
+    altcha-widget {
+      --altcha-color-base: var(--white, #fff);
+      --altcha-color-border: #ddd6c9;
+      --altcha-color-text: var(--charcoal-text, #2B2E33);
+      --altcha-color-border-focus: var(--blue-accent, #3194E0);
+      --altcha-border-radius: var(--radius, 6px);
+      --altcha-max-width: 100%;
+    }
+  </style>`,
+    extraBodyFrom: 'contact',
+  },
+  {
+    /* Unchanged. Already noindex and out of the sitemap; out of scope. */
+    url: '/blog', mod: 'blog', out: 'blog.html', robots: 'noindex, nofollow',
+    title: 'Blog | 940Digital | Websites & SEO for Small Businesses',
+    meta: 'Straight-talk notes on websites, SEO, and getting found online, written for small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.',
+    ogTitle: 'Blog | 940Digital',
+    ogDescription: 'Straight-talk notes on websites, SEO, and getting found online, written for small businesses.',
+    h1: 'Blog',
+  },
+];
+
+let written = 0;
+const manifest = [];
+
+for (const spec of [...CONTENT_PAGES, ...STATIC_PAGES]) {
+  const mod = await import(`../src/content/${spec.mod}.mjs`);
+  const body = typeof mod.body === 'function' ? mod.body(partsFor(spec.url)) : mod.body;
+
+  const mapped = byUrl(spec.url);
+  const page = mapped ? { ...mapped, ogTitle: spec.ogTitle, ogDescription: spec.ogDescription } : {
+    url: spec.url,
+    slug: spec.out.replace(/\.html$/, ''),
+    role: 'static',
+    name: null,
+    covers: [],
+    alsoCovers: [],
+    gbpCategory: null,
+    hub: null,
+    primaryKeyword: null,
+    title: spec.title,
+    h1: spec.h1,
+    meta: spec.meta,
+    nearestSibling: null,
+    gbpDescription: null,
+    status: spec.robots.startsWith('noindex') ? 'draft' : 'published',
+    ogTitle: spec.ogTitle,
+    ogDescription: spec.ogDescription,
+  };
+
+  let html = layout.page({ page, body, robots: spec.robots });
+
+  if (spec.extraHead) html = html.replace('</head>', spec.extraHead + '\n</head>');
+  if (spec.extraBodyFrom) {
+    const extra = await import(`../src/content/${spec.extraBodyFrom}-scripts.mjs`);
+    html = html.replace('</body>', extra.scripts + '\n</body>');
+  }
+
+  if (/(^|>)\s*undefined\s*(<|$)/m.test(html) || html.includes('[object Object]')) {
+    throw new Error(`${spec.out}: a template part was missing (rendered "undefined"). Check partsFor().`);
+  }
+
+  writeFileSync(join(ROOT, spec.out), html);
+  const emitted = html.match(/name="robots" content="([^"]*)"/)[1];
+  manifest.push({ url: spec.url, out: spec.out, bytes: html.length, robots: emitted });
+  written++;
+}
+
+/* Draft service pages render nothing at all. No file, no URL, no 404 risk. */
+const draftServices = PAGES.filter((p) => p.role === 'service' && p.status === 'draft');
+
+console.log(`built ${written} pages`);
+for (const m of manifest) {
+  console.log(`  ${m.out.padEnd(22)} ${String(m.bytes).padStart(6)}b  ${m.robots}`);
+}
+console.log(`\n${draftServices.length} service pages held as drafts (no file written, waiting on answers)`);

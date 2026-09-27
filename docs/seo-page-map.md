@@ -147,8 +147,9 @@ Hub: `/seo`
 - **Title:** `SEO & Internet Marketing Denton, TX | 940Digital`
 - **H1:** Search engine optimization for Denton and DFW businesses
 - **Meta:** Search engine optimization and AI search for Denton and DFW businesses. Built on clean pages, useful content, and credibility search engines can verify.
-- **Nearest sibling:** `/local-marketing/local-seo`
-- **Differs:** **RISK.** This hub owns organic rankings across your whole website: the pages, the content, the technical foundation, and now AI answers. It hands off Google Maps, the map pack, and profile-driven ranking to Local SEO and never argues that case itself.
+- **Also covers (GBP):** Local SEO
+- **Nearest sibling:** `/local-marketing`
+- **Differs:** **MERGED, per Owen 2026-09-27.** This one page now owns the entire SEO query space: organic rankings across the site *and* the map pack, Maps, and profile-driven local ranking. `/local-marketing/local-seo` is not being built. The nearest sibling is now the local marketing hub, which targets an agency-choice query ("who do I hire") rather than a ranking problem ("how do I rank"), so there is nothing left competing here.
 - **Note:** The AI search group (four pages) gets real placement near the top of this hub, above the traditional on-page and technical group. AI search is a main service line and burying it would misrepresent that.
 
 ### `/seo/seo-audit`
@@ -275,8 +276,9 @@ Hub: `/seo`
 - **Title:** `AI Overview Optimization Denton, TX | GEO & AEO`
 - **H1:** AI Overview optimization, also called GEO and AEO
 - **Meta:** Get your pages cited in Google's AI Overviews and by tools like ChatGPT and Perplexity. Also called GEO or AEO: same work, three different names.
-- **Nearest sibling:** `/local-marketing/ai-search-optimization`
-- **Differs:** **RISK.** This is the umbrella page for the whole discipline and it is about your **pages** being cited: content, structure, schema, the material an AI quotes. The local page is about your **business** being recommended by name. This page owns the GEO and AEO terminology explainer.
+- **Also covers (GBP):** AI search optimization (GEO)
+- **Nearest sibling:** `/seo/ai-search-visibility-audit`
+- **Differs:** **MERGED, per Owen 2026-09-27.** This is now the single page for the whole discipline, covering both your **pages** being cited as a source and your **business** being recommended by name. `/local-marketing/ai-search-optimization` is not being built. It owns the GEO and AEO terminology explainer. Its nearest sibling is now the visibility audit, which diagnoses where you stand today while this page is the work that changes it.
 
 ### `/seo/ai-citation-building`
 - **Service (GBP):** AI citation building
@@ -316,28 +318,11 @@ Hub: `/local-marketing`
 - **Title:** `Local Marketing Agency Denton, TX | 940Digital`
 - **H1:** Local marketing for Denton and DFW businesses
 - **Meta:** Local marketing for Denton and DFW businesses: Google Business Profile, reviews, listings, local SEO, and getting recommended by AI search tools.
-- **Nearest sibling:** `/local-marketing/local-seo`
-- **Differs:** The hub answers "who do I hire for all of this", positioning and scope. Its child answers "how do I get into the map pack", a specific ranking problem. The hub is the only page in the map that targets an agency-choice query.
-- **Note:** This is the thinnest of the three hubs by design. The Marketing agency category's flagship service, Local SEO, sits one level down, so this page has to earn its place on positioning alone. See section 7 of the plan doc.
-
-### `/local-marketing/local-seo`
-- **Service (GBP):** Local SEO
-- **Primary keyword:** local seo denton tx
-- **Title:** `Local SEO Denton, TX | Map Pack & Near Me Searches`
-- **H1:** Local SEO: getting into the Denton map pack
-- **Meta:** Get found in the map pack and in near me searches. Built on your Google Business Profile, your reviews, and correct listings across your service area.
 - **Nearest sibling:** `/seo`
-- **Differs:** **RISK.** This page is about Google Maps and the three-pack: the profile, the reviews, the listings, and proximity across a service area. It does not make the case for site-wide organic ranking, which is `/seo`'s job, and it links there for it.
+- **Differs:** The hub answers "who do I hire for all of this", an agency-choice query. `/seo` answers "how do I rank", a ranking problem. No other page in the map targets an agency-choice query.
+- **Note:** With Local SEO and AI search optimization merged into the SEO silo, this hub is now cleanly about your presence on the platforms themselves: the Google profile, reviews, Bing, and Apple Maps. That is a more coherent hub than it was in the first draft, and it no longer overlaps `/seo` at all.
 
-### `/local-marketing/ai-search-optimization`
-- **Service (GBP):** AI search optimization (GEO)
-- **Primary keyword:** ai search optimization for local business
-- **Title:** `AI Search Optimization Denton, TX | Get Recommended` **[title shortens the GBP name]**
-- **H1:** AI search optimization (GEO) for local businesses
-- **Meta:** Get your business recommended when someone asks an AI tool who is best nearby. Driven by your profile, your reviews, and the listings AI tools read.
-- **Nearest sibling:** `/seo/ai-overview-optimization`
-- **Differs:** **RISK.** This page is about your **business being named** when someone asks an AI assistant for a local recommendation, which runs on your profile, reviews, and listings. The `/seo` page is about your **pages being cited** as a source. This page does not carry the GEO and AEO terminology explainer.
-- **Deviation:** The title drops `(GEO)` to stay under 60 characters. The full name `AI search optimization (GEO)` appears in the H1 and the opening paragraph.
+
 
 ### `/local-marketing/google-business-profile-setup`
 - **Service (GBP):** Google Business Profile setup
@@ -476,15 +461,27 @@ Hub: `/consulting`
 
 # Summary counts
 
+Revised 2026-09-27 after Owen's decisions: the two risky pairs are merged, so the map is now **46 pages covering 45 services**. Two pages each carry two GBP services, the same pattern the homepage already uses for "website design".
+
 | Category | GBP services | Pages |
 | --- | --- | --- |
 | Website designer (primary) | 12 | 1 homepage + 11 service pages |
-| Internet marketing service | 18 | 1 hub (doubles as a service page) + 17 service pages |
-| Marketing agency | 9 | 1 hub + 9 service pages |
+| Internet marketing service | 18 | 1 hub (also the Search engine optimization and Local SEO page) + 17 service pages |
+| Marketing agency | 9 | 1 hub + 7 service pages |
 | Marketing consultant | 6 | 1 hub + 6 service pages |
 | Directory | 0 | `/services` |
-| **Total** | **45** | **48** |
+| **Total** | **45** | **46** |
+
+Pages carrying two services each:
+
+| URL | GBP services covered |
+| --- | --- |
+| `/` | website design |
+| `/seo` | Search engine optimization **and** Local SEO |
+| `/seo/ai-overview-optimization` | AI Overview optimization **and** AI search optimization (GEO) |
+
+Not built, per Owen: `/local-marketing/local-seo` and `/local-marketing/ai-search-optimization`. Neither URL has ever existed, so no redirect is needed. Both are absent from the data module rather than marked draft, so nothing links to them and nothing can accidentally publish them.
 
 No two published pages share a primary keyword. `scripts/check-seo.mjs` enforces this on every build.
 
-Pages deliberately not created: `/web-design` and `/services/website-design`, both 301 to `/`. There is no hosting page, no hosting hub, and no "Hosting & Maintenance" heading anywhere in the map.
+Also deliberately not created: `/web-design` and `/services/website-design`, both 301 to `/`. There is no hosting page, no hosting hub, and no "Hosting & Maintenance" heading anywhere in the map.

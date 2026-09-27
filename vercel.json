@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/web-design", "destination": "/", "permanent": true },
+    { "source": "/services/website-design", "destination": "/", "permanent": true }
+  ]
 }
