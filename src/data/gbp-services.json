@@ -9,50 +9,178 @@
   ],
   "primaryCategory": "Website designer",
   "services": [
-    { "name": "website design", "gbpCategory": "Website designer" },
-    { "name": "Website Maintenance", "gbpCategory": "Website designer" },
-    { "name": "Website redesign", "gbpCategory": "Website designer" },
-    { "name": "Landing page design", "gbpCategory": "Website designer" },
-    { "name": "Ecommerce website design", "gbpCategory": "Website designer" },
-    { "name": "UX/UI design", "gbpCategory": "Website designer" },
-    { "name": "Website speed optimization", "gbpCategory": "Website designer" },
-    { "name": "Website copywriting", "gbpCategory": "Website designer" },
-    { "name": "Website migration", "gbpCategory": "Website designer" },
-    { "name": "Conversion rate optimization", "gbpCategory": "Website designer" },
-    { "name": "Service area page design", "gbpCategory": "Website designer" },
-    { "name": "Online booking setup", "gbpCategory": "Website designer" },
-    { "name": "Search engine optimization", "gbpCategory": "Internet marketing service" },
-    { "name": "SEO audit", "gbpCategory": "Internet marketing service" },
-    { "name": "Technical SEO", "gbpCategory": "Internet marketing service" },
-    { "name": "On-page SEO", "gbpCategory": "Internet marketing service" },
-    { "name": "Link building", "gbpCategory": "Internet marketing service" },
-    { "name": "Citation building", "gbpCategory": "Internet marketing service" },
-    { "name": "Local listings cleanup", "gbpCategory": "Internet marketing service" },
-    { "name": "Schema markup", "gbpCategory": "Internet marketing service" },
-    { "name": "Blog writing", "gbpCategory": "Internet marketing service" },
-    { "name": "SEO content writing", "gbpCategory": "Internet marketing service" },
-    { "name": "Rank tracking and geo-grid reports", "gbpCategory": "Internet marketing service" },
-    { "name": "Competitor analysis", "gbpCategory": "Internet marketing service" },
-    { "name": "Google Search Console setup", "gbpCategory": "Internet marketing service" },
-    { "name": "Website analytics setup", "gbpCategory": "Internet marketing service" },
-    { "name": "AI Overview optimization", "gbpCategory": "Internet marketing service" },
-    { "name": "AI citation building", "gbpCategory": "Internet marketing service" },
-    { "name": "AI search visibility audit", "gbpCategory": "Internet marketing service" },
-    { "name": "Answer-ready content writing", "gbpCategory": "Internet marketing service" },
-    { "name": "Local SEO", "gbpCategory": "Marketing agency" },
-    { "name": "AI search optimization (GEO)", "gbpCategory": "Marketing agency" },
-    { "name": "Google Business Profile setup", "gbpCategory": "Marketing agency" },
-    { "name": "Google Business Profile optimization", "gbpCategory": "Marketing agency" },
-    { "name": "Google Business Profile management", "gbpCategory": "Marketing agency" },
-    { "name": "Review generation strategy", "gbpCategory": "Marketing agency" },
-    { "name": "Review response management", "gbpCategory": "Marketing agency" },
-    { "name": "Bing Places listing setup", "gbpCategory": "Marketing agency" },
-    { "name": "Apple Maps listing setup", "gbpCategory": "Marketing agency" },
-    { "name": "SEO consulting", "gbpCategory": "Marketing consultant" },
-    { "name": "Marketing strategy", "gbpCategory": "Marketing consultant" },
-    { "name": "Website strategy session", "gbpCategory": "Marketing consultant" },
-    { "name": "Google Business Profile training", "gbpCategory": "Marketing consultant" },
-    { "name": "SEO training for business owners", "gbpCategory": "Marketing consultant" },
-    { "name": "Photo and video strategy", "gbpCategory": "Marketing consultant" }
-  ]
+    {
+      "name": "website design",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Website Maintenance",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Website redesign",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Landing page design",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Ecommerce website design",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "UX/UI design",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Website speed optimization",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Website copywriting",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Website migration",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Conversion rate optimization",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Service area page design",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Online booking setup",
+      "gbpCategory": "Website designer"
+    },
+    {
+      "name": "Search engine optimization",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "SEO audit",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Technical SEO",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "On-page SEO",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Link building",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Citation building",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Local listings cleanup",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Schema markup",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Blog writing",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "SEO content writing",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Rank tracking and geo-grid reports",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Competitor analysis",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Google Search Console setup",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Website analytics setup",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "AI Overview optimization",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "AI citation building",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "AI search visibility audit",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Answer-ready content writing",
+      "gbpCategory": "Internet marketing service"
+    },
+    {
+      "name": "Google Business Profile setup",
+      "gbpCategory": "Marketing agency"
+    },
+    {
+      "name": "Google Business Profile optimization",
+      "gbpCategory": "Marketing agency"
+    },
+    {
+      "name": "Google Business Profile management",
+      "gbpCategory": "Marketing agency"
+    },
+    {
+      "name": "Review generation strategy",
+      "gbpCategory": "Marketing agency"
+    },
+    {
+      "name": "Review response management",
+      "gbpCategory": "Marketing agency"
+    },
+    {
+      "name": "Bing Places listing setup",
+      "gbpCategory": "Marketing agency"
+    },
+    {
+      "name": "Apple Maps listing setup",
+      "gbpCategory": "Marketing agency"
+    },
+    {
+      "name": "SEO consulting",
+      "gbpCategory": "Marketing consultant"
+    },
+    {
+      "name": "Marketing strategy",
+      "gbpCategory": "Marketing consultant"
+    },
+    {
+      "name": "Website strategy session",
+      "gbpCategory": "Marketing consultant"
+    },
+    {
+      "name": "Google Business Profile training",
+      "gbpCategory": "Marketing consultant"
+    },
+    {
+      "name": "SEO training for business owners",
+      "gbpCategory": "Marketing consultant"
+    },
+    {
+      "name": "Photo and video strategy",
+      "gbpCategory": "Marketing consultant"
+    }
+  ],
+  "_revised": "2026-09-27: Owen removed 'Local SEO' and 'AI search optimization (GEO)' from the profile so the services list matches the site exactly. Those two were the merged halves of the cannibalizing pairs he declined to build, so they had no page of their own. Every remaining service now has exactly one page. The /seo and /seo/ai-overview-optimization pages still COVER that ground in their copy; they just no longer claim it as a separately named profile service."
 }

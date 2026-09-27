@@ -1,5 +1,5 @@
 /**
- * The 45 Google Business Profile services and the 46 pages that carry them.
+ * The 43 Google Business Profile services and the 46 pages that carry them.
  * SINGLE SOURCE OF TRUTH. Nav, the /services directory, hub listings, the
  * homepage service list, breadcrumbs, schema, internal links, and sitemap.xml
  * are all generated from this file. No service name is typed anywhere else.
@@ -14,9 +14,14 @@
  *         answers docs/service-page-questions.md, because the copy depends on
  *         facts only he has.
  *
- * covers: the GBP service names this one page is the landing page for. Three
- *         pages carry two names each (see the summary table in the page map),
- *         which is why 45 services map to 46 pages.
+ * covers: the GBP service names this one page is the landing page for.
+ *
+ *         2026-09-27: Owen removed "Local SEO" and "AI search optimization
+ *         (GEO)" from the profile so the services list matches the site
+ *         exactly. Every service now has exactly one page, one to one. 43
+ *         services across 46 pages; the three extras are /services (a
+ *         directory) and the /local-marketing and /consulting hubs, which
+ *         carry no named profile service of their own.
  */
 
 /**
@@ -84,8 +89,6 @@ export const SERVICE_CATEGORY = {
   "AI citation building": "Internet marketing service",
   "AI search visibility audit": "Internet marketing service",
   "Answer-ready content writing": "Internet marketing service",
-  "Local SEO": "Marketing agency",
-  "AI search optimization (GEO)": "Marketing agency",
   "Google Business Profile setup": "Marketing agency",
   "Google Business Profile optimization": "Marketing agency",
   "Google Business Profile management": "Marketing agency",
@@ -369,9 +372,7 @@ export const PAGES = [
   {
     "url": "/seo",
     "name": "Search engine optimization",
-    "alsoCovers": [
-      "Local SEO"
-    ],
+    "alsoCovers": [],
     "gbpCategory": "Internet marketing service",
     "primaryKeyword": "seo denton tx",
     "title": "SEO & Internet Marketing Denton, TX | 940Digital",
@@ -382,8 +383,7 @@ export const PAGES = [
     "hub": null,
     "gbpDescription": "Improve how your site ranks for the searches that bring paying customers. Built on clean pages, useful content, and real credibility.",
     "covers": [
-      "Search engine optimization",
-      "Local SEO"
+      "Search engine optimization"
     ],
     "status": "published",
     "slug": "seo"
@@ -638,9 +638,7 @@ export const PAGES = [
   {
     "url": "/seo/ai-overview-optimization",
     "name": "AI Overview optimization",
-    "alsoCovers": [
-      "AI search optimization (GEO)"
-    ],
+    "alsoCovers": [],
     "gbpCategory": "Internet marketing service",
     "primaryKeyword": "ai overview optimization",
     "title": "AI Overview Optimization Denton, TX | GEO & AEO",
@@ -651,8 +649,7 @@ export const PAGES = [
     "hub": "/seo",
     "gbpDescription": "Get your pages picked up in Google's AI Overviews and cited by ChatGPT and other AI tools. Also called generative engine optimization (GEO) or answer engine optimization (AEO): same goal, different name.",
     "covers": [
-      "AI Overview optimization",
-      "AI search optimization (GEO)"
+      "AI Overview optimization"
     ],
     "status": "draft",
     "slug": "seo/ai-overview-optimization"

@@ -292,3 +292,19 @@ No regressions. The homepage improved on both perf and accessibility.
 - Site-wide schema TODOs: postal code, LinkedIn, GBP Maps URL, hours, other socials. Each is currently omitted from schema rather than emitted empty.
 - `/work` should link each project to the service pages it demonstrates. Nothing to link to until wave 2 publishes them.
 - `og:image` is still missing site-wide. Out of scope, worth doing before these URLs get shared.
+
+---
+
+# Profile and site brought to one to one, 2026-09-27
+
+Owen's call: if a page was too risky to build, the service should not be on the profile either.
+
+Removed from the Google Business Profile: **Local SEO** and **AI search optimization (GEO)**. Both were the merged-away halves of the cannibalizing pairs, so neither had a page of its own.
+
+Result: **43 services, 46 pages, one to one.** Every profile service has exactly one page and no page carries more than one service. The three pages carrying no named service are `/services` (directory) and the `/local-marketing` and `/consulting` hubs.
+
+What did not change: `/seo` still covers the map pack, Maps, and profile-driven local ranking in its copy, and still targets "local seo denton tx" as a secondary query. `/seo/ai-overview-optimization` still carries the GEO and AEO terminology in its title, H1, and body. Removing a name from the profile's services list does not remove the subject from the site.
+
+The tradeoff, on the record: the profile's services list is a relevance signal, and "Local SEO" is a high-intent term. Giving it up costs some profile visibility on that query. The page still competes on content. Reversing it means adding the name back to `src/data/gbp-services.json` and deciding which page carries it.
+
+Schema now matches the profile exactly: offer catalog 12 / 18 / 7 / 6 = 43.

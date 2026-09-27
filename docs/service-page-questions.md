@@ -36,6 +36,8 @@ These fill the `TODO(owen)` placeholders in the business-entity schema and settl
 
 ## 2. The one table that unblocks the most
 
+Rows for "Local SEO" and "AI search optimization (GEO)" were removed on 2026-09-27 when those services came off the profile. Numbering is left as-is so any answers you have already written still line up.
+
 For each service: **have you delivered it for a paying client?** (`yes` / `no` / `part of a build`), **typical turnaround**, and **what it costs** (a plan name, a dollar figure, or `quote`).
 
 If a whole block is the same answer, write it once at the top of the block and I will apply it down the column.
@@ -72,8 +74,6 @@ If a whole block is the same answer, write it once at the top of the block and I
 | 28 | AI citation building | | | |
 | 29 | AI search visibility audit | | | |
 | 30 | Answer-ready content writing | | | |
-| 31 | Local SEO | | | |
-| 32 | AI search optimization (GEO) | | | |
 | 33 | Google Business Profile setup | | | |
 | 34 | Google Business Profile optimization | | | |
 | 35 | Google Business Profile management | | | |
@@ -170,7 +170,7 @@ Your brief named two usable clients: JC Landscaping and Gunnar Galvan Mobile Det
 ## 4. Internet marketing service pages
 
 ### `/seo` hub, Search engine optimization
-42. Approve the split? `/seo` owns whole-site organic and never argues the map pack case; `/local-marketing/local-seo` owns Maps, profile, reviews, and listings. See section 7 of the plan doc. This is the highest-risk pair in the build.
+42. ~~Approve the split with Local SEO?~~ **Settled 2026-09-27.** `/seo` owns the whole SEO query space including the map pack, and Local SEO came off the profile. No answer needed.
 43. What does an SEO engagement with you actually look like month to month?
 44. Is SEO ever sold on its own, or only alongside a site you built? The plan tiers suggest the latter and the page has to be honest either way.
 45. What do you tell someone who asks how long SEO takes?
@@ -244,7 +244,7 @@ Your brief named two usable clients: JC Landscaping and Gunnar Galvan Mobile Det
 87. Is privacy or cookie-consent a selling point here? If your tracker does not use cookies or collect personal data, that is a real differentiator worth stating, and I need you to confirm it is true before I write it.
 
 ### AI Overview optimization `/seo/ai-overview-optimization`
-88. Approve this page owning the GEO and AEO terminology explainer, with the local page not repeating it? See section 7, risk 2.
+88. ~~Approve this page owning the GEO and AEO explainer?~~ **Settled 2026-09-27.** It is the only AI search optimization page now, and AI search optimization (GEO) came off the profile. No answer needed.
 89. What do you actually do that is different from ordinary SEO? Be concrete. This page will be the most scrutinised on the site and generic AI-era language will sink it.
 90. Have you got a client cited in an AI Overview or named by ChatGPT? If yes, that is the most valuable proof you own right now.
 91. How do you check whether it worked?
@@ -270,17 +270,6 @@ Your brief named two usable clients: JC Landscaping and Gunnar Galvan Mobile Det
 ### `/local-marketing` hub
 100. This hub has no service of its own and has to hold "local marketing agency Denton" on positioning. What is the 100-word version of why someone hires you for local marketing rather than a Dallas agency?
 101. Do you want to be found as an "agency" at all? You are one person, and my read of your positioning is that "direct line to the person building it" beats agency framing. The hub can target the query while the copy makes the one-person thing an advantage. Confirm that is the tone you want.
-
-### Local SEO `/local-marketing/local-seo`
-102. Approve the split with `/seo` (same as Q42)?
-103. Has a client moved in the map pack? Any movement at all, even modest, is worth more than method.
-104. What do you do in month one of a local SEO engagement?
-105. What is the honest timeline for map pack movement?
-
-### AI search optimization (GEO) `/local-marketing/ai-search-optimization`
-106. Approve the split with AI Overview optimization: this page is your business being recommended, that page is your pages being cited? See section 7, risk 2. If you would rather merge them into one page, now is the moment.
-107. Approve the title dropping `(GEO)` to fit 60 characters, with the full name in the H1 and opening paragraph?
-108. Have you tested whether an AI tool recommends any of your clients when asked for a local recommendation? What happened?
 
 ### Google Business Profile setup `/local-marketing/google-business-profile-setup`
 109. How many profiles have you set up from scratch?
@@ -365,5 +354,7 @@ Your brief named two usable clients: JC Landscaping and Gunnar Galvan Mobile Det
 
 Noting these now since you asked for GBP recommendations in the final report. Neither blocks the build.
 
+**Done 2026-09-27:** "Local SEO" and "AI search optimization (GEO)" were removed from the profile so its services list matches the site one to one. Remaining suggestions:
+
 154. **"Rank tracking and geo-grid reports"** is the only service name on the profile written as a phrase with "and" rather than a term someone would search. It is also the one name too long for a clean title tag. If you ever revise the profile, "Geo-grid rank tracking" or "Rank tracking" would search better. I am not changing the site name unless you change the profile first, because they have to match.
-155. **"AI search optimization (GEO)"** and **"AI Overview optimization"** are two profile services covering ground a customer reads as one thing. If section 7 risk 2 makes you want to merge the two pages, the profile should be edited first and the site should follow.
+155. Nothing else. The profile's remaining 43 services each map to exactly one page.

@@ -147,9 +147,9 @@ Hub: `/seo`
 - **Title:** `SEO & Internet Marketing Denton, TX | 940Digital`
 - **H1:** Search engine optimization for Denton and DFW businesses
 - **Meta:** Search engine optimization and AI search for Denton and DFW businesses. Built on clean pages, useful content, and credibility search engines can verify.
-- **Also covers (GBP):** Local SEO
 - **Nearest sibling:** `/local-marketing`
-- **Differs:** **MERGED, per Owen 2026-09-27.** This one page now owns the entire SEO query space: organic rankings across the site *and* the map pack, Maps, and profile-driven local ranking. `/local-marketing/local-seo` is not being built. The nearest sibling is now the local marketing hub, which targets an agency-choice query ("who do I hire") rather than a ranking problem ("how do I rank"), so there is nothing left competing here.
+- **Differs:** This one page owns the entire SEO query space: organic rankings across the site *and* the map pack, Maps, and profile-driven local ranking. Its nearest sibling targets an agency-choice query ("who do I hire") rather than a ranking problem ("how do I rank"), so nothing competes with it.
+- **Profile note, 2026-09-27:** "Local SEO" was removed from the Google Business Profile so the services list matches the site one to one. This page still covers that ground in its copy and still targets "local seo denton tx" as a secondary query. It simply no longer claims Local SEO as a separately named profile service.
 - **Note:** The AI search group (four pages) gets real placement near the top of this hub, above the traditional on-page and technical group. AI search is a main service line and burying it would misrepresent that.
 
 ### `/seo/seo-audit`
@@ -276,9 +276,9 @@ Hub: `/seo`
 - **Title:** `AI Overview Optimization Denton, TX | GEO & AEO`
 - **H1:** AI Overview optimization, also called GEO and AEO
 - **Meta:** Get your pages cited in Google's AI Overviews and by tools like ChatGPT and Perplexity. Also called GEO or AEO: same work, three different names.
-- **Also covers (GBP):** AI search optimization (GEO)
 - **Nearest sibling:** `/seo/ai-search-visibility-audit`
-- **Differs:** **MERGED, per Owen 2026-09-27.** This is now the single page for the whole discipline, covering both your **pages** being cited as a source and your **business** being recommended by name. `/local-marketing/ai-search-optimization` is not being built. It owns the GEO and AEO terminology explainer. Its nearest sibling is now the visibility audit, which diagnoses where you stand today while this page is the work that changes it.
+- **Differs:** This is the single page for the whole discipline, covering both your **pages** being cited as a source and your **business** being recommended by name. It owns the GEO and AEO terminology explainer. Its nearest sibling is the visibility audit, which diagnoses where you stand today while this page is the work that changes it.
+- **Profile note, 2026-09-27:** "AI search optimization (GEO)" was removed from the profile for the same reason. The GEO acronym still appears in this page's title, H1, and copy, so the terminology is not lost.
 
 ### `/seo/ai-citation-building`
 - **Service (GBP):** AI citation building
@@ -461,27 +461,30 @@ Hub: `/consulting`
 
 # Summary counts
 
-Revised 2026-09-27 after Owen's decisions: the two risky pairs are merged, so the map is now **46 pages covering 45 services**. Two pages each carry two GBP services, the same pattern the homepage already uses for "website design".
+Revised 2026-09-27, twice. First the two risky pairs were merged. Then Owen removed both merged-away services from the Google Business Profile so the profile and the site match exactly.
+
+**43 services, 46 pages, one to one.** Every service on the profile has exactly one page, and no page carries more than one service.
 
 | Category | GBP services | Pages |
 | --- | --- | --- |
 | Website designer (primary) | 12 | 1 homepage + 11 service pages |
-| Internet marketing service | 18 | 1 hub (also the Search engine optimization and Local SEO page) + 17 service pages |
-| Marketing agency | 9 | 1 hub + 7 service pages |
-| Marketing consultant | 6 | 1 hub + 6 service pages |
+| Internet marketing service | 18 | 1 hub (the Search engine optimization page) + 17 service pages |
+| Marketing agency | 7 | 1 hub (no service of its own) + 7 service pages |
+| Marketing consultant | 6 | 1 hub (no service of its own) + 6 service pages |
 | Directory | 0 | `/services` |
-| **Total** | **45** | **46** |
+| **Total** | **43** | **46** |
 
-Pages carrying two services each:
+The three pages that carry no named profile service are `/services` (a directory targeting no keyword) and the `/local-marketing` and `/consulting` hubs, which exist to hold their categories and target agency-choice queries.
 
-| URL | GBP services covered |
-| --- | --- |
-| `/` | website design |
-| `/seo` | Search engine optimization **and** Local SEO |
-| `/seo/ai-overview-optimization` | AI Overview optimization **and** AI search optimization (GEO) |
+## Removed from the profile, 2026-09-27
 
-Not built, per Owen: `/local-marketing/local-seo` and `/local-marketing/ai-search-optimization`. Neither URL has ever existed, so no redirect is needed. Both are absent from the data module rather than marked draft, so nothing links to them and nothing can accidentally publish them.
+| Service | Was going to be | Why removed |
+| --- | --- | --- |
+| Local SEO | `/local-marketing/local-seo` | Would have competed with `/seo` for the same query. `/seo` covers the map pack instead. |
+| AI search optimization (GEO) | `/local-marketing/ai-search-optimization` | Would have competed with `/seo/ai-overview-optimization`. That page covers both halves instead. |
 
-No two published pages share a primary keyword. `scripts/check-seo.mjs` enforces this on every build.
+Neither URL was ever created, so no redirect is needed. Both are absent from the data module rather than marked draft, so nothing can link to them or accidentally publish them.
+
+**The cost, stated plainly:** "Local SEO" is a high-intent term and the profile's services list is a relevance signal. Removing it gives up a little profile visibility for "local SEO" searches. The `/seo` page still competes for that query on its content. Re-adding it to the profile later is a one-line change to `src/data/gbp-services.json` plus a decision about which page carries it.
 
 Also deliberately not created: `/web-design` and `/services/website-design`, both 301 to `/`. There is no hosting page, no hosting hub, and no "Hosting & Maintenance" heading anywhere in the map.
