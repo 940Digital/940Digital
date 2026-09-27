@@ -1,0 +1,217 @@
+# Service page rebuild: Phase 0 audit and plan
+
+Status: awaiting Owen's approval. No pages written yet.
+Date: 2026-09-27
+
+---
+
+## 1. Stack audit
+
+| Question | Answer |
+| --- | --- |
+| Framework | None. Hand-written static HTML, one file per page at the repo root. |
+| Build step | None. `package.json` has no `scripts` block and one dependency (`altcha-lib`, used by the contact form API route). |
+| Rendering mode | 100% static. Every page is a complete HTML document on disk. Nothing is client-rendered. |
+| Routing | Vercel static file serving. `vercel.json` sets `cleanUrls: true` and `trailingSlash: false`, so `services.html` serves at `/services`. |
+| Trailing slash | None, confirmed in `vercel.json`. |
+| Where page content lives | Inline in each `.html` file. Nav, footer, and the schema block are duplicated by hand across all 8 files. |
+| `sitemap.xml` | Hand-written and hand-maintained. 6 URLs, hardcoded `lastmod` dates. Last commit was literally "Refresh stale sitemap lastmod dates", which is the maintenance cost showing. |
+| `robots.txt` | 3 lines. `User-agent: * / Allow: /` plus the sitemap line. Nothing blocked. |
+| Existing structured data | Per page, inline: a `ProfessionalService` node `@id .../#business` (duplicated and inconsistent between pages), a `BreadcrumbList`, and a `FAQPage` on the homepage. |
+| Serverless functions | `api/collect.js` (analytics beacon), `api/submit-contact.mjs`, `api/altcha-challenge.mjs`. All `.mjs`/`.js`, no TypeScript anywhere. |
+| Analytics | Own tracker, `tracker.js`, site id `496da1ce…`, loaded by an inline script on every page. No Google Analytics present anywhere. |
+| Git | `940Digital/940Digital` via the `github-940digital` SSH alias. Local identity is already set to the 940Digital account. |
+
+### Current indexable pages
+
+Your list was close. The actual set is:
+
+| URL | In sitemap | `robots` meta |
+| --- | --- | --- |
+| `/` | yes | index, follow |
+| `/services` | yes | index, follow |
+| `/pricing` | yes | index, follow |
+| `/contact` | yes | index, follow |
+| `/work` | yes | index, follow |
+| `/about` | yes | index, follow |
+| `/blog` | no | **noindex, nofollow** |
+| `/card` | no | **noindex, follow** |
+
+Two corrections to your assumption:
+
+- There is no `/dashboard/login` in this repo. That route belongs to the 940Analytics app, which is a separate project and a separate deployment. Nothing to exclude here.
+- There are two pages you did not list: `/blog` (a "first post is on the way" placeholder) and `/card` (the QR business-card landing page). Both are already `noindex` and already out of the sitemap, so they need no change. I am leaving both alone.
+
+---
+
+## 2. The one architectural decision I need from you
+
+The prompt asks for `src/data/services.ts` as a single source of truth that nav, hubs, schema, breadcrumbs, internal links, and the sitemap all read from. That assumes a framework. This repo has none, so "reads from" has to mean *reads from at build time*, which means introducing a build step that does not exist today.
+
+I am about to add 42 HTML files to a site where the nav and footer are already copy-pasted 8 times. Hand-writing them is not an option: one nav change would become a 48-file find-and-replace, and the "no service name hand-typed anywhere else" rule would be unenforceable.
+
+**My recommendation: add a small Node generator, and commit its HTML output to the repo.**
+
+```
+src/data/services.mjs        # the 45 services. Single source of truth.
+src/data/site.mjs            # business entity, phone, area served, nav
+src/content/<slug>.mjs       # hand-written prose for one page, one file each
+src/templates/*.mjs          # layout, nav, footer, breadcrumb, schema builders
+scripts/build-pages.mjs      # renders every .html file
+scripts/build-sitemap.mjs    # renders sitemap.xml from published pages only
+scripts/check-seo.mjs        # the guard (see section 5)
+```
+
+`npm run build` regenerates the HTML, `npm run check` runs the guard. Both are plain Node, zero new runtime dependencies.
+
+Three points where I am deviating from the prompt, so you can overrule me:
+
+1. **`.mjs` with JSDoc types, not `.ts`.** There is no TypeScript in this repo and no compiler. Adding one to hold a list of 45 strings is not worth the toolchain. I will write JSDoc `@typedef` annotations, which gives real editor autocomplete and lets you run `npx tsc --noEmit --allowJs --checkJs` if you ever want enforced checking, without a build dependency. If you want genuine `.ts`, say so and I will add `esbuild` as a devDependency.
+2. **Generated HTML gets committed.** Vercel keeps deploying plain static files with no build command, which means zero deploy risk and zero chance of a build failure taking the site down. It also means you can read the diff of what actually ships, and `curl` output is byte-identical to a file you can open. The cost is generated files in git, which I will mitigate with a `<!-- Generated by scripts/build-pages.mjs. Do not edit by hand. -->` header on every page. The alternative, setting a Vercel `buildCommand`, is cleaner in theory and riskier in practice.
+3. **Prose lives in `src/content/`, one file per page, hand-written.** The data module holds structure (name, URL, keyword, title, meta, siblings, status). It does **not** hold page copy. This is deliberate and it is the main defence against the scaled-content problem: there is no template slot that says "insert service name here", because each page's body is written by hand in its own file. The generator assembles chrome around prose it did not write.
+
+---
+
+## 3. Blocker found: every internal link on the site is relative
+
+This is the single biggest technical obstacle and it affects existing pages, so I need to fix it before any nested page can exist.
+
+Every link and asset reference today is relative with no leading slash:
+
+```html
+<a href="services" class="nav-link">Services</a>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="js/main.js"></script>
+```
+
+From `/` that resolves correctly. From `/seo/seo-audit` it resolves to `/seo/services`, `/seo/css/style.css`, `/seo/js/main.js`. Every nested page would ship with a broken nav, no stylesheet, and no JavaScript.
+
+**Fix:** convert every internal link and asset path to root-absolute (`/services`, `/css/style.css`, `/js/main.js`, `/img/favicon.svg`) across all 8 existing pages. This is mechanical, changes no URLs, and changes nothing a visitor sees.
+
+Related: the active-nav-link logic in `js/main.js` compares `window.location.pathname.split('/').pop()` against the raw `href`. Once hrefs are absolute and pages are nested, that comparison never matches. It needs to compare full pathnames. Small rewrite, same behaviour.
+
+---
+
+## 4. Other findings worth acting on
+
+**Uncommitted trap in the working tree.** `git status` shows `favicon.svg` deleted from the repo root and an untracked `img/favicon.svg`. All 8 pages still reference `href="favicon.svg"`. The live site is fine because HEAD still has the root file, but committing the working tree as-is would break the favicon everywhere. I will fold this into the absolute-paths pass: move it properly to `img/favicon.svg` and point every page at `/img/favicon.svg`.
+
+**The homepage `FAQPage` block should come out.** Google stopped showing FAQ rich results on 2026-05-07. It earns nothing now and it is one more block to keep in sync with visible copy. Per your own rule for the new pages, I am proposing the existing one be removed too. The visible `<details>` FAQ stays exactly as it is.
+
+**The `founder` reference is broken.** Every page has `"founder": { "@id": "https://www.940digital.com/#owen" }` but no `Person` node with that `@id` exists anywhere on the site. Google is following a dangling pointer. The new business-entity block fixes this with a real `Person` node.
+
+**The `ProfessionalService` block is inconsistent between pages.** `/services` omits `priceRange` and `description`; `/` and `/pricing` include them. Once it is generated from `src/data/site.mjs` this cannot drift.
+
+**Your phone number is nowhere on the website.** The GBP has `+1-940-977-6253`. The site shows only a JavaScript-injected email address. NAP consistency between the profile and the landing page is a real local ranking signal, and the prompt asks me to put that exact number in schema. Putting a number in schema that appears nowhere on the page is the kind of thing I would flag on a client site. **Question for you in the questions doc:** do you want the number visible in the footer and on `/contact`, or do you want it left off the site and out of schema too?
+
+**`.reveal` starts at `opacity: 0`.** Text is present in the HTML, so crawlers that read raw HTML are unaffected, and Google renders CSS and JS so it is fine there too. But a visitor with JavaScript disabled sees a blank page below the hero. One CSS rule fixes it. Out of scope, worth one line: I would add `html.no-js .reveal { opacity: 1; transform: none; }`.
+
+**No `og:image` on any page.** Every share of any 940Digital URL renders as a bare text card. Out of scope for this job, flagging it because we are about to create 42 more shareable URLs.
+
+**Scale, honestly.** This will be a 48-page site built by one person, sold from a `/pricing` page whose top tier is "Up to 13 pages". Two thoughts. First, a sharp prospect may notice. I do not think it is a real objection (your site is your showcase, and the pages are the argument), but you should have an answer ready. Second and more importantly: 45 service pages is 45 promises. Several of these are services I have no evidence you have delivered yet. That is fine to sell, and it is not fine to imply experience you do not have, so the questions doc asks per service whether you have actually done it.
+
+---
+
+## 5. The TODO guard
+
+`scripts/check-seo.mjs`, run by `npm run check`, exits non-zero if any of these fail:
+
+1. A page whose source content contains `TODO(owen)` is missing `<meta name="robots" content="noindex, follow">`.
+2. A page containing `TODO(owen)` appears in `sitemap.xml`.
+3. A page containing `TODO(owen)` is linked from nav, a hub listing, the `/services` directory, or the homepage service list.
+4. The service names in `src/data/services.mjs` do not match the canonical 45 GBP names, character for character. (This is the diff test you asked for. The reference list lives in `src/data/gbp-services.json` and is treated as read-only.)
+5. Two published pages declare the same `primaryKeyword`.
+6. A published page has zero contextual in-body inbound links from another page (orphan check).
+7. Any internal `href` in generated output points at a path with no corresponding file.
+8. Any page is missing a self-referencing canonical, a `Service` block, or a `BreadcrumbList`.
+
+Non-zero exit rather than a warning, so it can gate a commit.
+
+---
+
+## 6. Changes to existing pages
+
+Nothing here happens without your sign-off. Grouped by how much judgement is involved.
+
+### Mechanical, no copy changes, I would just do these
+
+| File | Change |
+| --- | --- |
+| all 8 `.html` | Relative links and assets to root-absolute. Required for nested pages (section 3). |
+| all 8 `.html` | `favicon.svg` to `/img/favicon.svg`, resolving the uncommitted move. |
+| all 8 `.html` | Replace the hand-copied `ProfessionalService` block with the generated business entity, including the real `Person` node for you. |
+| `js/main.js` | Active-nav-link comparison by full pathname. |
+| `sitemap.xml` | Becomes generated from published pages. |
+
+### Copy and structure changes I want you to read first
+
+**`/` homepage**
+
+1. **H1.** Today it renders to a crawler as roughly "I build Presence Presence, Momentum, Authority, Impact, Movement, Exposure, Leverage, and Futures for your business. Web design and SEO for small businesses in Dallas-Fort Worth and Denton". That is a keyword-soup heading, and the `sr-only` span makes it worse by listing all eight words inside the `<h1>`. Proposed: the `<h1>` becomes one static sentence, and the rotating word moves into a sibling element outside the heading, `aria-hidden`, so the animation survives untouched.
+
+   Proposed H1: **"Website design for small businesses in Denton and DFW"**
+
+   The visual line above it keeps the rotating word as a non-heading element. Nothing about the animation changes.
+
+2. **Title and meta.** Current title is `940Digital | Web Design & SEO — Denton, TX & DFW`, which buries the primary category keyword behind the brand and uses an em dash. This is your GBP landing page, so the category keyword goes first. Proposed in the page map.
+
+3. **Services section.** The four H3s (`Website Design & Development`, `Search Engine Optimization`, `Hosting & Maintenance`, `Google Business Profile`) become the four GBP categories, each linking to its hub. `Hosting & Maintenance` becomes **Website Maintenance**, with hosting demoted to a feature line inside it. A new compact "Everything I do" section lists and links all 45 services grouped by the four categories, so the GBP landing page mentions every service on the profile.
+
+4. **AI search.** Appears nowhere on the site today except the phrase "GEO" twice, unexplained. It gets a real block on the homepage and real weight near the top of `/seo`.
+
+5. Remove the `FAQPage` JSON-LD. Visible FAQ unchanged.
+
+**`/services`** becomes the directory: all 45 services, grouped by the four categories, each linked with its GBP description. The four long service blocks that live there now are replaced. Two of them (`Website Design & Development`, `Search Engine Optimization`) have copy worth salvaging into `/` and `/seo`, and I will reuse it rather than rewrite from scratch.
+
+**`/about`** lists `Hosting & Maintenance` as one of four areas of expertise in the founder card. Per the hosting rule this should not read as a service line. Smallest honest fix is `Website Maintenance`. Your call, flagged in the questions doc.
+
+**`/work`** gets a line per project linking to the service pages it demonstrates. No restructuring.
+
+**`/contact`** gets nothing structural. The `service` dropdown has a `maintenance` option labelled "Hosting & maintenance" which I would relabel "Website maintenance" for consistency. Also flagged: the phone number question above.
+
+**`/pricing`** gets nothing except inbound links from service pages. No number and no plan line changes, as instructed.
+
+**Nav** stays four items plus the CTA. `Services` becomes a group containing the three hubs and the `/services` directory, so `Home / About / Services / Pricing / Portfolio / Get a quote` keeps its shape. The three hubs also get footer links.
+
+### Redirects
+
+No existing URL changes, so no redirects are strictly required. I am adding two defensive 301s in `vercel.json` per your instruction, for URLs that do not exist today and that people will guess: `/web-design` and `/services/website-design` both to `/`.
+
+---
+
+## 7. Cannibalization: four pairs I want a decision on
+
+The page map has a differentiator sentence for all 48 pages. These four are the ones where I am not comfortable shipping both pages on my own judgement. You said to stop and tell you rather than ship two pages that compete, so here they are.
+
+**1. `/seo` vs `/local-marketing/local-seo`. The worst pair.**
+"SEO Denton" and "local SEO Denton" are, for a local agency, close to the same search with the same intent. Google will likely pick one of these two pages for both queries. The disambiguation you wrote (whole-site organic vs map pack and GBP) is real and it is a distinction almost no searcher makes when typing the query.
+My recommendation: keep both, and make the split structural rather than rhetorical. `/seo` never mentions the map pack except to hand it off; `/local-marketing/local-seo` is about Maps, the profile, reviews, and listings, and never talks about site-wide organic. `/seo` gets the stronger internal linking, since it is a top-level hub. If you would rather not take the risk, the alternative is to drop `/local-marketing/local-seo` and let `/seo` plus the three GBP pages cover it. I would keep both.
+
+**2. `/seo/ai-overview-optimization` vs `/local-marketing/ai-search-optimization`.**
+The GBP names are "AI Overview optimization" and "AI search optimization (GEO)". Both will attract "AI search optimization Denton". Worse, your own brief says the AI Overview page should explain that GEO and AEO are two names for this work, which puts "GEO" prominently on both pages.
+My recommendation: keep both, and tighten the split so it is about *what gets optimised*. The `/seo` page is about your **pages** being cited (content, structure, schema, the thing an AI quotes). The `/local-marketing` page is about your **business** being recommended (profile, reviews, listings, the thing an AI names when asked for a recommendation). I would also move the "GEO and AEO are the same thing" explainer to only one of them. I recommend the `/seo` one, since that is where someone searching the acronym will land. This is the pair most likely to need merging in six months. Flagging it now.
+
+**3. `/consulting/seo-consulting` vs `/seo`.**
+"SEO consultant Denton" and "SEO Denton" overlap. Lower risk than the pair above, because the consulting page's intent is advice-without-execution and the hub's is done-for-you. Manageable if the consulting page is unambiguous that you are selling your time and not the work. No change recommended, noting it for completeness.
+
+**4. `/local-marketing/google-business-profile-setup` vs `google-business-profile-optimization`.**
+"Google Business Profile setup Denton" will pull both. The honest split is new profile vs existing profile, which is a real distinction a buyer makes. Manageable. The risk is that the optimization page ends up describing the same work list as the setup page, since the deliverables genuinely overlap. I will keep the optimization page focused on auditing and fixing what is already there, including suspension risk on an existing listing, which the setup page will not cover.
+
+One more, not a cannibalization issue but a positioning one: `/local-marketing` is a hub with no service of its own (the four categories give `/`, `/seo`, and `/consulting` a service each, but "Marketing agency" maps to Local SEO, which sits one level down). That hub has to earn its keep as an agency-positioning page targeting "local marketing agency Denton" while its own child targets "local SEO Denton". It is the thinnest of the three hubs by design. Worth knowing.
+
+---
+
+## 8. Build order
+
+Nothing starts until you approve this document and answer `docs/service-page-questions.md`.
+
+**Wave 1, foundation.** Data module, the 45-name diff test, templates, business-entity schema, absolute-path conversion across existing pages, homepage changes, `/services` directory, the three hubs, nav, footer, breadcrumbs, the TODO guard, generated sitemap, the two defensive redirects. Build, curl-verify, validate schema, report.
+
+**Wave 2, core pages.** Website redesign, Website Maintenance, Landing page design, Local SEO, AI search optimization (GEO), the three Google Business Profile pages, AI Overview optimization, SEO audit, SEO consulting.
+
+**Wave 3, the remaining 31.**
+
+After each wave: `npm run build && npm run check`, broken-link and orphan sweep, `curl -s <url> | grep` for each new H1 and answer-first paragraph, Schema.org validator and Rich Results Test on one page per template, confirm no `TODO(owen)` page is indexable or in the sitemap, Lighthouse on `/`, one hub, and one service page against today's numbers, then a short diff summary to you.
+
+Any page still holding a `TODO(owen)` ships as `noindex`, stays out of the sitemap, and is unlinked, until you fill it in.
