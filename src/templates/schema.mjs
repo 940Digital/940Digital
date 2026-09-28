@@ -11,6 +11,7 @@
  */
 import { SITE } from '../data/site.mjs';
 import { CATEGORIES, serviceIndex } from '../data/services.mjs';
+import { PLANS } from '../data/plans.mjs';
 
 const BUSINESS_ID = `${SITE.origin}/#business`;
 const FOUNDER_ID = `${SITE.origin}/#owen`;
@@ -79,7 +80,9 @@ export function businessEntity() {
     description: SITE.description,
     email: SITE.email,
     telephone: SITE.phone,
-    priceRange: SITE.priceRange,
+    /* Derived from the parsed pricing page. Hand-typing this is how a schema
+       price range ends up contradicting the page it describes. */
+    priceRange: priceRange(),
     /* Kept as-is pending question 8 in docs/service-page-questions.md. Owen has
        not decided whether to keep a headcount of one on the profile entity, so
        the existing behaviour stands rather than me deciding for him. */
@@ -163,4 +166,12 @@ export function render(blocks) {
     .filter(Boolean)
     .map((b) => `  <script type="application/ld+json">${JSON.stringify(b)}</script>`)
     .join('\n');
+}
+
+/** Setup-fee range across all published plans, read from /pricing. */
+function priceRange() {
+  const fees = PLANS.map((p) => Number(String(p.setup).replace(/[^0-9]/g, ''))).filter(Boolean);
+  if (!fees.length) return null;
+  const lo = Math.min(...fees), hi = Math.max(...fees);
+  return lo === hi ? `$${lo}` : `$${lo}-$${hi}`;
 }
