@@ -18,7 +18,7 @@ export const body = String.raw`    <section class="page-hero">
           <h2>Website plans</h2>
           <p>Flat setup fee, flat monthly. Hosting and maintenance are in every tier, so there is no separate IT bill and no invoice when something needs&nbsp;changing.</p>
         </div>
-        <div class="pricing-grid pricing-grid--4" data-family="Websites">
+        <div class="pricing-grid pricing-grid--5" data-family="Websites">
 
           <!-- LANDING -->
           <div class="price-card reveal reveal-scale reveal-delay-1">
@@ -86,13 +86,31 @@ export const body = String.raw`    <section class="page-hero">
             </div>
             <p class="price-setup">$1,600 one-time setup fee</p>
             <ul class="price-features">
-              <li>Page count set at scope</li>
+              <li>Up to 13 pages</li>
               <li>Everything in Plus</li>
-              <li>Online store, product pages and checkout</li>
-              <li>Service area pages for the towns you cover</li>
               <li>Advanced SEO strategy and consulting</li>
               <li>Analytics &amp; monthly reporting</li>
+              <li>Priority support &amp; maintenance</li>
               <li>Hands-on account management</li>
+            </ul>
+            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
+          </div>
+
+          <!-- SCALE -->
+          <div class="price-card reveal reveal-scale reveal-delay-4">
+            <div class="price-tier">Scale</div>
+            <div class="price-amount">
+              <span class="dollar">$320</span>
+              <span class="period">/month</span>
+            </div>
+            <p class="price-setup">$3,200 one-time setup fee</p>
+            <ul class="price-features">
+              <li>Page count set at scope</li>
+              <li>Everything in Pro</li>
+              <li>Online store, product pages and checkout</li>
+              <li>Service area pages for every town you cover</li>
+              <li>A Google profile per location, managed</li>
+              <li>Per-location tracking and reporting</li>
             </ul>
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>

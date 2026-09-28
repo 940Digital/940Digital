@@ -2132,17 +2132,21 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
   .plan-strip { grid-template-columns: 1fr; max-width: 22rem; }
 }
 
-/* --- Four-tier pricing grid. Explicit breakpoints rather than auto-fit: 4, 2
-   then 1 column. Four items divide evenly into all three, so no breakpoint can
-   strand a lone card on its own row. --- */
-.pricing-grid--4 {
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 1200px;
+/* --- Five-tier pricing grid. Five divides evenly into 5 and 1 and into
+   nothing else, so the breakpoints go straight from five columns to one rather
+   than passing through 2, 3 or 4 and stranding a lone card on its own row. --- */
+.pricing-grid--5 {
+  grid-template-columns: repeat(5, 1fr);
+  max-width: 1320px;
+  gap: 1rem;
 }
-@media (max-width: 1100px) {
-  .pricing-grid--4 { grid-template-columns: repeat(2, 1fr); max-width: 42rem; }
+.pricing-grid--5 .price-card { padding: 1.4rem 1.15rem; }
+.pricing-grid--5 .price-features li { font-size: 0.83rem; line-height: 1.45; }
+.pricing-grid--5 .price-tier { font-size: 0.8rem; }
+.pricing-grid--5 .price-amount .dollar { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
+.pricing-grid--5 .price-setup { font-size: 0.78rem; }
+@media (max-width: 1150px) {
+  .pricing-grid--5 { grid-template-columns: 1fr; max-width: 26rem; gap: 1.25rem; }
+  .pricing-grid--5 .price-card { padding: 1.75rem 1.5rem; }
+  .pricing-grid--5 .price-features li { font-size: 0.9rem; }
 }
-@media (max-width: 620px) {
-  .pricing-grid--4 { grid-template-columns: 1fr; max-width: 24rem; }
-}
-.pricing-grid--4 .price-features li { font-size: 0.88rem; }
