@@ -1794,7 +1794,11 @@ select:focus-visible {
   padding-top: clamp(1.75rem, 3.5vh, 2.75rem);
   border-top: 1px solid rgba(0,0,0,.14);
 }
-.dir > .cat:first-child { border-top: none; padding-top: 0; }
+/* The first block has no divider above it. Excludes the featured panel, which
+   is a filled box and needs its padding on all four sides: this selector is
+   more specific than .cat--primary, so without the :not() it silently zeroed
+   the panel's top padding and the heading sat flush against the edge. */
+.dir > .cat:not(.cat--primary):first-child { border-top: none; padding-top: 0; }
 .cat-num {
   display: block;
   font-family: var(--font-mono);
