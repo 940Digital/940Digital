@@ -15,7 +15,8 @@
  * @property {string} [includedTitle]
  * @property {{title:string, paras:string[]}} [extra]  One page-specific block.
  * @property {{h:string,p:string}[]} [steps]     What actually happens, in order.
- * @property {string[]} differs     How this differs from its nearest sibling.
+ * @property {string[]} [differs]   How this differs from its nearest sibling. Omit
+ *   where the page's own service list already makes the distinction obvious.
  * @property {'plan'|'quote'} [cost]
  * @property {string} [costNote]
  * @property {{q:string,a:string}[]} faqs
@@ -155,15 +156,20 @@ ${parts.proofFor(page.url)}
       </div>
     </section>`);
 
-  out.push(`    <section class="section">
+  /* Optional. On a page whose own service list already shows the sibling, a
+     paragraph explaining the difference restates what the reader can see. It
+     earns its place only where two services are genuinely confusable. */
+  if ((content.differs && content.differs.length) || content.limit) {
+    out.push(`    <section class="section">
       <div class="container">
         <div class="prose reveal">
-          <h2>How this differs</h2>
-${content.differs.map((p) => `          <p>${rich(p)}</p>`).join('\n')}
+          <h2>${esc(content.differsTitle || 'How this differs')}</h2>
+${(content.differs || []).map((p) => `          <p>${rich(p)}</p>`).join('\n')}
 ${content.limit ? `          <p class="svc-limit">${rich(content.limit)}</p>` : ''}
         </div>
       </div>
     </section>`);
+  }
 
   out.push(`    <section class="section" style="background:var(--sand)">
       <div class="container">

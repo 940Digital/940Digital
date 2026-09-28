@@ -164,16 +164,6 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="prose reveal">
-          <h2>How this differs from a redesign</h2>
-          <p>This page is for a business with nothing online yet, or with something so dated that there is nothing worth keeping. If you already have a site that ranks and brings in work, do not start from scratch: a ` + parts.link('/services/website-redesign', 'website redesign') + ` replaces the site while protecting the rankings you already have, which is a different job with different risks.</p>
-          <p>If the site is fine and only needs to move somewhere else, that is a ` + parts.link('/services/website-migration', 'website migration') + `.</p>
-        </div>
-      </div>
-    </section>
-
     <section class="section" style="background:var(--sand)">
       <div class="container">
         <div class="section-header reveal">

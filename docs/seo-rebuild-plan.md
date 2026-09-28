@@ -572,3 +572,15 @@ Consequences, all verified:
 Retitled to "What comes as standard" under the eyebrow "Every build", with a lead line stating plainly that these are not separate services and not add-ons. The real services now sit above them, so the order of the page answers the question before it gets asked.
 
 **The lesson worth keeping:** on a site whose whole purpose is mirroring a profile's service list, any bulleted list of capabilities reads as a service list. Inclusions, features and benefits all need framing that distinguishes them from the thing being sold.
+
+## "How this differs" removed from the website design page, 2026-09-28
+
+Owen: remove this section, it's useless.
+
+He was right, and the reason is specific to that page rather than to the section. `/services/website-design` became a category hub in the previous change, so it now lists Website redesign and Website migration directly above, under "Rebuilds and moves". A paragraph explaining how website design differs from a redesign was restating a distinction the reader could already see in the list.
+
+Removed there. The `differs` block is now optional in `src/templates/service-page.mjs` rather than mandatory.
+
+**Checked whether the same redundancy exists elsewhere, and it does not.** A differs section is redundant only where the page also lists the sibling it is distinguishing itself from. Measured across all published pages: zero pages have both, 43 have a differs section where it is the only cross-link to that sibling, and 4 have none. Leaf service pages do not list siblings, so on those it is the only thing pointing a reader from Citation building to Local listings cleanup. That is also the anti-cannibalization content the original brief asked for, so it stays.
+
+The general rule now applied: a differs paragraph earns its place where the sibling is not otherwise on the page, and is filler where it is.
