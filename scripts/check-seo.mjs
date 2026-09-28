@@ -22,7 +22,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE } from '../src/data/site.mjs';
-import { PAGES, serviceIndex, childrenOf } from '../src/data/services.mjs';
+import { PAGES, serviceIndex, childrenOf, CATEGORY_HUB } from '../src/data/services.mjs';
 import { GROUPS } from '../src/data/groups.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -204,12 +204,25 @@ for (const [f, html] of docs) {
     err('rule', `${f} h1 duplicates the title tag`);
 }
 
-/* ---------- the GBP landing page must mention every service ---------- */
+/* ---------- profile coverage ----------
+   Sterling Sky's guidance is that the page the GBP links to should mention the
+   services on the profile. Owen chose a cleaner homepage that routes to the
+   four categories instead, with every service one click away. So the rule is
+   split: the homepage must reach all four category hubs, and /services must
+   still name all 43. If neither held, a service could become unreachable. */
 {
-  const home = docs.get('index.html') || '';
-  const decoded = home.replace(/&amp;/g, '&');
+  /* Scoped to <main>: the footer links every hub, so checking the whole
+     document would pass trivially and tell us nothing about whether the page
+     actually routes a reader anywhere. */
+  const homeDoc = docs.get('index.html') || '';
+  const home = (homeDoc.match(/<main>[\s\S]*?<\/main>/) || [''])[0].replace(/&amp;/g, '&');
+  for (const hub of Object.values(CATEGORY_HUB)) {
+    if (!new RegExp(`<a[^>]+href="${hub}"`).test(home))
+      err('gbp-landing', `homepage does not link to the category hub ${hub}`);
+  }
+  const dir = (docs.get('services.html') || '').replace(/&amp;/g, '&');
   for (const s of serviceIndex()) {
-    if (!decoded.includes(s.name)) err('gbp-landing', `homepage does not mention "${s.name}"`);
+    if (!dir.includes(s.name)) err('gbp-landing', `/services does not name "${s.name}"`);
   }
 }
 

@@ -607,3 +607,26 @@ Verified: five sections, backgrounds alternating dark, sand, white, sand, dark, 
 **Noted for whoever revisits this.** As the money page for the primary category it can justify more depth than a hub normally would, and it is now about half the length it was. Owen said "for now", so this is a deliberate interim state rather than a final answer. The removed sections are in git history.
 
 Also worth carrying forward: adjacent-section background clashes are a class of bug worth a guard check rather than an eye check, since removing any section can create one.
+
+## Homepage routes to categories instead of listing services, 2026-09-28
+
+Owen: no big ugly list on the home page, just change the services section to send users to each category, not mentioning the services yet.
+
+The "Everything I do" section listing all 43 services is gone. The existing services section now routes to all four category hubs: the feature card to `/services/website-design` (it previously jumped straight to `/contact`, which skipped the category entirely) and the three support cards to `/seo`, `/local-marketing` and `/consulting`.
+
+Homepage is now hero, why us, services, process, FAQ, CTA. 20KB, down from 25KB, with zero service names in the body.
+
+### The rule this trades away, and what replaced it
+
+The list existed because of the Sterling Sky guidance quoted in the original brief: the page the GBP links to should mention every service on the profile. `scripts/check-seo.mjs` enforced exactly that.
+
+That check would now fail, so rather than delete it the rule was split:
+
+- The homepage must link to **all four category hubs** from within `<main>`.
+- `/services` must still name **all 43 services**.
+
+Every service stays reachable, one click further than before. That is a real tradeoff against a cited recommendation and it is a defensible one, since 43 names on a homepage is a directory rather than a sales page.
+
+**The check is scoped to `<main>` deliberately.** The footer links every hub, so checking the whole document passed trivially and proved nothing about whether the page routes a reader anywhere. Negative-tested by repointing one card: it now fails and names the missing hub.
+
+Lighthouse homepage: 100 / 100 / 100 / 100.

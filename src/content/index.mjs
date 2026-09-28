@@ -3,7 +3,7 @@
  * hand-written index.html on 2026-09-27, with internal links converted to
  * root-absolute paths. Chrome (head, nav, footer, schema) is generated.
  */
-const TEMPLATE = String.raw`    <!-- HERO -->
+export const body = String.raw`    <!-- HERO -->
     <section class="hero">
       <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
       <div class="container">
@@ -48,7 +48,7 @@ const TEMPLATE = String.raw`    <!-- HERO -->
               <p class="bento-feature-tag">Where every project starts</p>
               <h3>Website design</h3>
               <p>Fast, mobile-first sites built around your business, not stretched to fit a template. Every page earns its place, and hosting and website maintenance are included in every plan.</p>
-              <a href="/contact" class="btn btn-primary">Book a free consult</a>
+              <a href="/services/website-design" class="btn btn-primary">Explore website design</a>
             </div>
             <div class="bento-feature-visual" aria-hidden="true">
               <div class="browser-frame" style="width:100%">
@@ -124,23 +124,6 @@ const TEMPLATE = String.raw`    <!-- HERO -->
       </div>
     </section>
 
-    <!-- EVERYTHING I DO: names and links all 45 GBP services, grouped by the
-         four profile categories. This is the Google Business Profile landing
-         page, so every service on the profile is mentioned here. Generated from
-         src/data/services.mjs, so it cannot drift from the profile. -->
-    <section class="section svc-index-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <p class="eyebrow">Everything I do</p>
-          <h2>The full list</h2>
-          <p>Four areas, one person doing the work. Pick a heading to see how that side of it fits together, or go straight to the thing you came&nbsp;for.</p>
-        </div>
-        <div class="svc-index reveal">
-<!--@SERVICE_INDEX-->
-        </div>
-      </div>
-    </section>
-
     <!-- FAQ -->
     <section class="section faq-section" style="background:var(--sand)">
       <div class="container">
@@ -173,5 +156,3 @@ const TEMPLATE = String.raw`    <!-- HERO -->
         <a href="/contact" class="btn btn-primary btn-lg reveal">Book a free consult</a>
       </div>
     </section>`;
-
-export const body = (parts) => TEMPLATE.replace("<!--@SERVICE_INDEX-->", parts.serviceIndex);
