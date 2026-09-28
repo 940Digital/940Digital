@@ -43,7 +43,7 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <div class="prose reveal">
           <h2>Advice or execution</h2>
-          <p>If you would rather I just did the work, that is the rest of the site: <a href="/#website-design">website design</a>, <a href="/seo">SEO and AI search</a>, and <a href="/local-marketing">local marketing</a>. Nothing here is a prerequisite for any of that, and hiring me to advise you does not commit you to hiring me to build anything.</p>
+          <p>If you would rather I just did the work, that is the rest of the site: <a href="/services/website-design">website design</a>, <a href="/seo">SEO and AI search</a>, and <a href="/local-marketing">local marketing</a>. Nothing here is a prerequisite for any of that, and hiring me to advise you does not commit you to hiring me to build anything.</p>
         </div>
       </div>
     </section>

@@ -34,7 +34,7 @@ const TEMPLATE = String.raw`    <!-- HERO -->
     </section>
 
     <!-- SERVICES: normal flow, no pin, scroll through like a regular section -->
-    <section class="section services-section" id="website-design">
+    <section class="section services-section">
       <div class="container">
         <div class="section-header reveal">
           <p class="eyebrow">What I build</p>

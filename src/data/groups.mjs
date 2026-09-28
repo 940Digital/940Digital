@@ -15,7 +15,7 @@
  */
 export const GROUPS = {
   '/': [
-    ['New builds', ['/services/ecommerce-website-design','/services/landing-page-design','/services/service-area-page-design']],
+    ['New builds', ['/services/website-design','/services/ecommerce-website-design','/services/landing-page-design','/services/service-area-page-design']],
     ['Replacing what you have', ['/services/website-redesign','/services/website-migration']],
     ['Getting more from the traffic you have', ['/services/conversion-rate-optimization','/services/ux-ui-design']],
     ['Words and bookings', ['/services/website-copywriting','/services/online-booking-setup']],

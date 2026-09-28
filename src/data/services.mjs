@@ -130,8 +130,7 @@ export const CATEGORY_LABEL = {
 export const PAGES = [
   {
     "url": "/",
-    "serviceAnchor": "#website-design",
-    "name": "website design",
+    "name": null,
     "alsoCovers": [],
     "gbpCategory": "Website designer",
     "primaryKeyword": "website designer denton tx",
@@ -142,11 +141,28 @@ export const PAGES = [
     "role": "homepage",
     "hub": null,
     "gbpDescription": "A full professional custom website built around your business, not a template. Fast, mobile-friendly, and structured so both customers and Google understand what you do and where. Every project starts with a working demo you can see before committing to anything.",
+    "covers": [],
+    "status": "published",
+    "slug": "index"
+  },
+  {
+    "url": "/services/website-design",
+    "name": "website design",
+    "alsoCovers": [],
+    "gbpCategory": "Website designer",
+    "primaryKeyword": "website design denton tx",
+    "title": "Website Design Denton, TX | See It Before You Pay",
+    "h1": "Website design for small businesses in Denton and DFW",
+    "meta": "Custom websites for small businesses in Denton and DFW. Built around your business, structured to be found, and you see a working demo before you pay anything.",
+    "nearestSibling": "/services/website-redesign",
+    "role": "service",
+    "hub": "/",
+    "gbpDescription": "A full professional custom website built around your business, not a template. Fast, mobile-friendly, and structured so both customers and Google understand what you do and where. Every project starts with a working demo you can see before committing to anything.",
     "covers": [
       "website design"
     ],
     "status": "published",
-    "slug": "index"
+    "slug": "services/website-design"
   },
   {
     "url": "/services",

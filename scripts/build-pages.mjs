@@ -14,8 +14,10 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PAGES, byUrl, childrenOf, serviceIndex } from '../src/data/services.mjs';
+import { PAGES, byUrl, childrenOf, serviceIndex, isPublished } from '../src/data/services.mjs';
 import * as layout from '../src/templates/layout.mjs';
+import { CLIENTS } from '../src/data/site.mjs';
+import { PLANS } from '../src/data/plans.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -30,10 +32,43 @@ const spell = (n) => {
 };
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
+const esc = (t) => String(t).replace(/&(?!(?:[a-zA-Z]+|#\d+);)/g, '&amp;').replace(/</g, '&lt;');
+
+/** Portfolio cards for a service page, from the four real client builds. */
+function proofCards(urlsFilter) {
+  return Object.values(CLIENTS)
+    .filter((c) => !urlsFilter || c.demonstrates.includes(urlsFilter))
+    .map((c, i) => `          <a href="${c.url}" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-${(i % 3) + 1}">
+            <div class="portfolio-card-body">
+              <div class="portfolio-card-tag">${esc(c.trade)}</div>
+              <h3>${esc(c.name)}</h3>
+              <p>${esc(c.location)}. ${esc(c.note)}</p>
+              <span class="portfolio-card-link">Visit site &#8599;</span>
+            </div>
+          </a>`)
+    .join('\n');
+}
+
+/** Plan summary, rendered from the parsed /pricing data. Never hand-typed. */
+function planStrip() {
+  return PLANS.map((p) => `          <div class="plan${p.featured ? ' plan--featured' : ''}">
+            <p class="plan-tier">${esc(p.tier)}</p>
+            <p class="plan-price"><span>${esc(p.monthly)}</span>${esc(p.period)}</p>
+            <p class="plan-setup">${esc(p.setup)}</p>
+            <p class="plan-pages">${esc(p.features[0])}</p>
+          </div>`).join('\n');
+}
+
 const sharedParts = {
   serviceIndex: layout.serviceIndexBlock(),
   serviceDirectory: layout.serviceDirectoryBlock(),
   serviceCount: cap(spell(serviceIndex().length)),
+  /* Link only to a published page. A draft renders as plain text, so no page
+     can ever link to a URL that has no file. These upgrade themselves the
+     moment the target is published. */
+  link: (url, text) => (isPublished(url) ? `<a href="${url}">${text}</a>` : text),
+  proofCards: proofCards(),
+  planStrip: planStrip(),
 };
 
 /**
@@ -64,8 +99,9 @@ const CONTENT_PAGES = [
   {
     url: '/services', mod: 'services', out: 'services.html',
     ogTitle: 'All services | 940Digital',
-    ogDescription: 'Forty-five services across website design, SEO and AI search, local marketing, and consulting, for small businesses in Dallas-Fort Worth and Denton.',
+    ogDescription: 'Every service 940Digital offers across website design, SEO and AI search, local marketing, and consulting, for small businesses in Dallas-Fort Worth and Denton.',
   },
+  { url: '/services/website-design', mod: 'services-website-design', out: 'services/website-design.html' },
   { url: '/seo', mod: 'seo', out: 'seo.html' },
   { url: '/local-marketing', mod: 'local-marketing', out: 'local-marketing.html' },
   { url: '/consulting', mod: 'consulting', out: 'consulting.html' },
@@ -173,6 +209,7 @@ for (const spec of [...CONTENT_PAGES, ...STATIC_PAGES]) {
     throw new Error(`${spec.out}: a template part was missing (rendered "undefined"). Check partsFor().`);
   }
 
+  mkdirSync(dirname(join(ROOT, spec.out)), { recursive: true });
   writeFileSync(join(ROOT, spec.out), html);
   const emitted = html.match(/name="robots" content="([^"]*)"/)[1];
   manifest.push({ url: spec.url, out: spec.out, bytes: html.length, robots: emitted });

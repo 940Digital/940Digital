@@ -30,7 +30,20 @@ const fail = [];
 const warn = [];
 const err = (check, msg) => fail.push(`[${check}] ${msg}`);
 
-const htmlFiles = readdirSync(ROOT).filter((f) => f.endsWith('.html'));
+/* Walk for .html output, including the nested service pages under /services,
+   /seo, /local-marketing and /consulting. Source and tooling directories are
+   skipped: they hold templates, not published pages. */
+const SKIP = new Set(['node_modules', 'src', 'scripts', 'docs', 'api', 'css', 'js', 'img', '.git', '.vercel', '.claude']);
+function findHtml(dir = '', out = []) {
+  for (const e of readdirSync(join(ROOT, dir), { withFileTypes: true })) {
+    if (e.name.startsWith('.') || SKIP.has(e.name)) continue;
+    const rel = dir ? `${dir}/${e.name}` : e.name;
+    if (e.isDirectory()) findHtml(rel, out);
+    else if (e.name.endsWith('.html')) out.push(rel);
+  }
+  return out;
+}
+const htmlFiles = findHtml();
 const read = (f) => readFileSync(join(ROOT, f), 'utf8');
 const docs = new Map(htmlFiles.map((f) => [f, read(f)]));
 

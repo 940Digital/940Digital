@@ -434,3 +434,40 @@ The nav "Home" link deliberately stays a bare `/`.
 **Caught while testing:** the first attempt added `html { scroll-behavior: smooth }`, which broke the thing it was meant to fix. On a cross-document navigation to a fragment the browser animates the jump, and that animation is cancelled while the hero canvas sizes on load, leaving the reader at scroll position 0. Direct navigation worked, clicking through did not. Removed it; an instant jump is reliable. Verified by clicking the real link: scrollY 1006, section top 88px, clearing the 72px nav.
 
 **The real fix is still pending.** An anchor is a patch. The homepage needs to genuinely become the website design service page, which needs Owen's answers to questions 1 to 5. Until then a reader who clicks "Website design" lands on a services overview rather than a service page.
+
+## Website design gets its own page, 2026-09-28
+
+Owen: "web design doesn't even have its own PAGE? It's my main service!"
+
+He is right and I should have flagged this rather than implementing the brief faithfully. The original spec said the homepage **is** the website design page and `/services/website-design` must not exist, on the reasoning that "website design Denton" and "website designer Denton" are the same search. The reasoning is sound in the abstract. The outcome was not: 42 lesser services each got a page and the primary one got an anchor link into a homepage.
+
+**Reversed.** `/services/website-design` is now a real published page, the first service page on the site.
+
+The two pages are kept apart by job rather than by hair-splitting keywords:
+
+| Page | Job | Target |
+| --- | --- | --- |
+| `/` | Who 940Digital is, the whole offering, routes into the four categories | `website designer denton tx` |
+| `/services/website-design` | The engagement in depth: what you get, how it runs, what it costs, what happens first | `website design denton tx` |
+
+The homepage no longer carries a GBP service in `covers`, the same as the `/local-marketing` and `/consulting` hubs. The `/services/website-design` redirect is removed from `vercel.json`. The `#website-design` anchor and its `serviceAnchor` machinery are gone, since links now have a real page to point at.
+
+Counts: 43 services, 47 pages. One published service page, 41 drafts.
+
+### What the page says, and what it deliberately does not
+
+Written from facts already established on the site: the demo-before-you-pay process (homepage timeline and FAQ), the custom-not-template position and inclusions (the old `/services` web design block), the four live client builds, and the plans parsed from `/pricing`. 1,080 words.
+
+Absent on purpose, because Owen has not answered and inventing them would be making promises for him: **turnaround time, what he needs from a client to start, and who he will not take on** (questions 2, 3 and 5). The page is honest without them and stronger with them. It carries no `TODO(owen)`, so it publishes.
+
+### Two pieces of machinery this added, both needed for waves 2 and 3
+
+**`src/data/plans.mjs`** parses tier, price, setup fee and features out of `src/content/pricing.mjs` at build time. Service pages state cost without a single hardcoded figure, so a price change on `/pricing` cannot leave a stale number on a service page. Verified: no `$200/$400/$800` anywhere in the page source, all three present in the output.
+
+**`parts.link(url, text)`** renders a link only when the target is published, and plain text otherwise. The guard caught four links to unbuilt pages on the first build. Rather than hand-fixing them, cross-links now upgrade themselves the moment the target ships. Verified: the page mentions website redesign and website migration in prose with zero anchors pointing at them.
+
+### Guard changes
+
+It now walks subdirectories for output, which every nested service page in waves 2 and 3 needs. It also caught the "Hosting and maintenance included" heading under the hosting rule. The rule is doing its job: hosting may be a feature line but should not read as a service heading. Reworded to "Hosting is included".
+
+Lighthouse: 100 / 100 / 100 / 100.

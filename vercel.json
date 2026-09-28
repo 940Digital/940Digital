@@ -2,7 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/web-design", "destination": "/", "permanent": true },
-    { "source": "/services/website-design", "destination": "/", "permanent": true }
+    {
+      "source": "/web-design",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }

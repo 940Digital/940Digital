@@ -2097,3 +2097,37 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
    is still sizing on load, leaving the reader at the top of the page instead of
    at the section they clicked. An instant jump is reliable. */
 [id] { scroll-margin-top: calc(var(--nav-h) + 1rem); }
+
+/* --- Plan strip on service pages. Rendered from the parsed /pricing data. --- */
+.plan-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  max-width: 820px;
+  margin: 0 auto;
+}
+.plan {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: clamp(1.1rem, 2.2vw, 1.5rem);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+.plan--featured { box-shadow: var(--shadow-md); outline: 2px solid var(--blue-accent); }
+.plan-tier {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-ink);
+  margin-bottom: 0.5rem;
+}
+.plan-price { font-family: var(--font-display); font-weight: 800; color: var(--charcoal-text); line-height: 1; }
+.plan-price span { font-size: clamp(1.5rem, 3vw, 2rem); }
+.plan-setup { font-size: 0.8rem; color: var(--brown-muted); margin-top: 0.4rem; }
+.plan-pages { font-size: 0.82rem; color: var(--charcoal-text); margin-top: 0.6rem; font-weight: 500; }
+.plan-note { text-align: center; font-size: 0.88rem; color: var(--brown-muted); margin-top: 1.5rem; }
+@media (max-width: 700px) {
+  .plan-strip { grid-template-columns: 1fr; max-width: 22rem; }
+}
