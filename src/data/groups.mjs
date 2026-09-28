@@ -3,8 +3,13 @@
  *
  * These exist for two reasons, and the second one matters as much as the first.
  *
- * 1. Navigation. A flat list of 17 services is not scannable. "Fixing your
- *    site" and "Knowing if it worked" tell someone where to look.
+ * 1. Navigation. A flat list of 17 services is not scannable. "Troubleshooting"
+ *    and "Reporting" tell someone where to look at a glance.
+ *
+ *    Labels are short noun phrases. They are navigation rather than prose, and
+ *    a label written as a sentence ("Finding out what is wrong") reads as
+ *    padding next to the service names underneath it. scripts/check-seo.mjs
+ *    enforces a length limit so this does not creep back.
  *
  * 2. Layout. Services render as ROWS inside a group, not as cards in a
  *    responsive grid. A grid of 7 items strands a lone item on the last row at
@@ -16,27 +21,27 @@
 export const GROUPS = {
   '/': [
     ['New builds', ['/services/website-design','/services/ecommerce-website-design','/services/landing-page-design','/services/service-area-page-design']],
-    ['Replacing what you have', ['/services/website-redesign','/services/website-migration']],
-    ['Getting more from the traffic you have', ['/services/conversion-rate-optimization','/services/ux-ui-design']],
-    ['Words and bookings', ['/services/website-copywriting','/services/online-booking-setup']],
-    ['Keeping it fast and current', ['/services/website-speed-optimization','/services/website-maintenance']],
+    ['Rebuilds and moves', ['/services/website-redesign','/services/website-migration']],
+    ['Conversion', ['/services/conversion-rate-optimization','/services/ux-ui-design']],
+    ['Copy and booking', ['/services/website-copywriting','/services/online-booking-setup']],
+    ['Upkeep', ['/services/website-speed-optimization','/services/website-maintenance']],
   ],
   '/seo': [
     ['AI search', ['/seo/ai-overview-optimization','/seo/ai-citation-building','/seo/ai-search-visibility-audit','/seo/answer-ready-content-writing']],
-    ['Finding out what is wrong', ['/seo/seo-audit','/seo/competitor-analysis']],
-    ['Fixing your site', ['/seo/technical-seo','/seo/on-page-seo','/seo/schema-markup']],
-    ['Writing', ['/seo/seo-content-writing','/seo/blog-writing']],
-    ['Off your site', ['/seo/link-building','/seo/citation-building','/seo/local-listings-cleanup']],
-    ['Knowing if it worked', ['/seo/rank-tracking','/seo/google-search-console-setup','/seo/website-analytics-setup']],
+    ['Troubleshooting', ['/seo/seo-audit','/seo/competitor-analysis']],
+    ['On-site fixes', ['/seo/technical-seo','/seo/on-page-seo','/seo/schema-markup']],
+    ['Content', ['/seo/seo-content-writing','/seo/blog-writing']],
+    ['Links and listings', ['/seo/link-building','/seo/citation-building','/seo/local-listings-cleanup']],
+    ['Reporting', ['/seo/rank-tracking','/seo/google-search-console-setup','/seo/website-analytics-setup']],
   ],
   '/local-marketing': [
-    ['Your Google Business Profile', ['/local-marketing/google-business-profile-setup','/local-marketing/google-business-profile-optimization','/local-marketing/google-business-profile-management']],
-    ['Your reviews', ['/local-marketing/review-generation-strategy','/local-marketing/review-response-management']],
-    ['The other maps', ['/local-marketing/bing-places-listing-setup','/local-marketing/apple-maps-listing-setup']],
+    ['Google Business Profile', ['/local-marketing/google-business-profile-setup','/local-marketing/google-business-profile-optimization','/local-marketing/google-business-profile-management']],
+    ['Reviews', ['/local-marketing/review-generation-strategy','/local-marketing/review-response-management']],
+    ['Bing and Apple Maps', ['/local-marketing/bing-places-listing-setup','/local-marketing/apple-maps-listing-setup']],
   ],
   '/consulting': [
-    ['Advice on your situation', ['/consulting/seo-consulting','/consulting/marketing-strategy']],
-    ['Planning sessions', ['/consulting/website-strategy-session','/consulting/photo-and-video-strategy']],
-    ['Learning to run it yourself', ['/consulting/google-business-profile-training','/consulting/seo-training']],
+    ['Advice', ['/consulting/seo-consulting','/consulting/marketing-strategy']],
+    ['Planning', ['/consulting/website-strategy-session','/consulting/photo-and-video-strategy']],
+    ['Training', ['/consulting/google-business-profile-training','/consulting/seo-training']],
   ],
 };

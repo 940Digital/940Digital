@@ -82,6 +82,12 @@ for (const [hub, groups] of Object.entries(GROUPS)) {
 for (const hub of ['/', '/seo', '/local-marketing', '/consulting'])
   if (!GROUPS[hub]) err('grouping', `${hub} has no groups defined`);
 
+/* Group labels are navigation, not prose. A label written as a sentence reads
+   as padding beside the service names under it. */
+for (const [hub, groups] of Object.entries(GROUPS))
+  for (const [label] of groups)
+    if (label.length > 24) err('grouping', `group label "${label}" on ${hub} is ${label.length} chars; labels are short noun phrases, max 24`);
+
 /* ---------- collect every internal link that appears in a listing ---------- */
 const listedLinks = new Set();
 for (const [f, html] of docs) {

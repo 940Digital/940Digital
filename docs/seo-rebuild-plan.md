@@ -520,3 +520,31 @@ The most similar pair is the two platform-listing pages, which genuinely are the
 The delivery table in section 2 of the questions doc, and questions 2, 3 and 5 in particular. Roughly eight pages carry most of the commercial value and all eight would benefit from real specifics: turnaround, what Owen needs from a client to start, and who he will not take on.
 
 There is also still no verified client result anywhere on the site (question 14). One real number would do more for these 42 pages than any amount of rewriting.
+
+## Group labels rewritten as labels, 2026-09-28
+
+Owen, on seeing "Finding out what is wrong": just say troubleshooting.
+
+He was right, and it was not one label. Eleven of the seventeen were written as sentences. A group label is navigation, and a sentence reads as padding sitting above a list of service names.
+
+| Was | Now |
+| --- | --- |
+| Finding out what is wrong | Troubleshooting |
+| Getting more from the traffic you have | Conversion |
+| Keeping it fast and current | Upkeep |
+| Learning to run it yourself | Training |
+| Knowing if it worked | Reporting |
+| Replacing what you have | Rebuilds and moves |
+| Advice on your situation | Advice |
+| Planning sessions | Planning |
+| Off your site | Links and listings |
+| Fixing your site | On-site fixes |
+| Words and bookings | Copy and booking |
+| Your Google Business Profile | Google Business Profile |
+| Your reviews | Reviews |
+| The other maps | Bing and Apple Maps |
+| Writing | Content |
+
+Longest is now 23 characters. `scripts/check-seo.mjs` fails the build on any group label over 24, negative-tested by restoring the old one.
+
+Worth noting for the rest of the site: section headlines can be sentences ("Seventeen ways this gets done"), and labels cannot. The distinction is whether the reader is being told something or being pointed somewhere.
