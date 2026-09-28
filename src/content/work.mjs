@@ -19,7 +19,7 @@ export const body = String.raw`    <section class="page-hero">
         </div>
         <div class="portfolio-grid">
           <a href="https://www.jcarpenterlandscaping.com/" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-1">
-            <img src="/img/portfolio/jc-landscaping.jpg" alt="JC Landscaping: stone patio and pathway build" class="portfolio-card-img" loading="lazy">
+            <img src="/img/portfolio/jc-landscaping.jpg" srcset="/img/portfolio/jc-landscaping-700.jpg 700w, /img/portfolio/jc-landscaping.jpg 900w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw" alt="JC Landscaping: stone patio and pathway build" width="900" height="675" class="portfolio-card-img" fetchpriority="high" decoding="async">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Landscaping &amp; hardscaping</div>
               <h3>JC Landscaping</h3>
@@ -28,7 +28,10 @@ export const body = String.raw`    <section class="page-hero">
             </div>
           </a>
           <a href="https://www.gunnargalvanmobiledetailing.com/" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-2">
-            <img src="/img/portfolio/gunnar-galvan.jpg" alt="Gunnar Galvan Mobile Detailing: detailed vehicle" class="portfolio-card-img" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/img/portfolio/gunnar-galvan-700.webp 700w, /img/portfolio/gunnar-galvan.webp 900w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw">
+              <img src="/img/portfolio/gunnar-galvan.jpg" srcset="/img/portfolio/gunnar-galvan-700.jpg 700w, /img/portfolio/gunnar-galvan.jpg 900w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw" alt="Gunnar Galvan Mobile Detailing: detailed vehicle" width="900" height="661" class="portfolio-card-img" loading="lazy" decoding="async">
+            </picture>
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Mobile car detailing</div>
               <h3>Gunnar Galvan Mobile Detailing</h3>
@@ -37,7 +40,10 @@ export const body = String.raw`    <section class="page-hero">
             </div>
           </a>
           <a href="https://gloryunveiledevents.com" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-3">
-            <img src="/img/portfolio/glory-unveiled.jpg" alt="Glory Unveiled by Bailey Elaine: couple embracing in a garden" class="portfolio-card-img" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/img/portfolio/glory-unveiled-700.webp 700w, /img/portfolio/glory-unveiled.webp 1080w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw">
+              <img src="/img/portfolio/glory-unveiled.jpg" srcset="/img/portfolio/glory-unveiled-700.jpg 700w, /img/portfolio/glory-unveiled.jpg 1080w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw" alt="Glory Unveiled by Bailey Elaine: couple embracing in a garden" width="1080" height="713" class="portfolio-card-img" loading="lazy" decoding="async">
+            </picture>
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Wedding planning &amp; coordination</div>
               <h3>Glory Unveiled by Bailey Elaine</h3>
@@ -46,7 +52,10 @@ export const body = String.raw`    <section class="page-hero">
             </div>
           </a>
           <a href="https://lilylynnephotography.com/" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-3">
-            <img src="/img/portfolio/lilylynne.jpg" alt="Lilylynne Photography: two friends dancing at golden hour in a field" class="portfolio-card-img" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/img/portfolio/lilylynne-700.webp 700w, /img/portfolio/lilylynne.webp 1080w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw">
+              <img src="/img/portfolio/lilylynne.jpg" srcset="/img/portfolio/lilylynne-700.jpg 700w, /img/portfolio/lilylynne.jpg 1080w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw" alt="Lilylynne Photography: two friends dancing at golden hour in a field" width="1080" height="720" class="portfolio-card-img" loading="lazy" decoding="async">
+            </picture>
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Family &amp; portrait photography</div>
               <h3>Lilylynne Photography</h3>

@@ -644,6 +644,9 @@ p { max-width: 62ch; }
   width: calc((100% - 1.5rem) / 2);
   margin: 0 auto;
 }
+.portfolio-card picture {
+  display: block;
+}
 .portfolio-card-img {
   display: block;
   width: 100%;
