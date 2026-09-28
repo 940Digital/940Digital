@@ -32,11 +32,29 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       </div>
     </section>
 
+    <!-- The twelve Website designer services from the Google Business Profile,
+         grouped by job. This page is the category hub as well as the website
+         design service page, the same arrangement /seo has for Internet
+         marketing service. -->
+    <section class="section svc-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow eyebrow--accent">Services</p>
+          <h2>` + parts.hubCount + ` more under website&nbsp;design</h2>
+          <p>Everything on this side of the work, grouped by what you are trying to&nbsp;do.</p>
+        </div>
+        <div class="svc-groups reveal">
+` + parts.hubServices + `
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="eyebrow eyebrow--accent">What you get</p>
-          <h2>What is included in every&nbsp;build</h2>
+          <p class="eyebrow eyebrow--accent">Every build</p>
+          <h2>What comes as standard</h2>
+          <p>Not separate services and not add-ons. These are in every website I build, at every&nbsp;tier.</p>
         </div>
         <div class="svc-groups reveal">
           <section class="svc-group">

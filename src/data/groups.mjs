@@ -19,8 +19,8 @@
  * listed twice, or listed under the wrong hub.
  */
 export const GROUPS = {
-  '/': [
-    ['New builds', ['/services/website-design','/services/ecommerce-website-design','/services/landing-page-design','/services/service-area-page-design']],
+  '/services/website-design': [
+    ['New builds', ['/services/ecommerce-website-design','/services/landing-page-design','/services/service-area-page-design']],
     ['Rebuilds and moves', ['/services/website-redesign','/services/website-migration']],
     ['Conversion', ['/services/conversion-rate-optimization','/services/ux-ui-design']],
     ['Copy and booking', ['/services/website-copywriting','/services/online-booking-setup']],

@@ -79,7 +79,7 @@ for (const [hub, groups] of Object.entries(GROUPS)) {
   const dupes = grouped.filter((u, i) => grouped.indexOf(u) !== i);
   for (const u of new Set(dupes)) err('grouping', `${u} appears in more than one group`);
 }
-for (const hub of ['/', '/seo', '/local-marketing', '/consulting'])
+for (const hub of ['/services/website-design', '/seo', '/local-marketing', '/consulting'])
   if (!GROUPS[hub]) err('grouping', `${hub} has no groups defined`);
 
 /* Group labels are navigation, not prose. A label written as a sentence reads

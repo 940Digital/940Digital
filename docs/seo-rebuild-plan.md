@@ -548,3 +548,27 @@ He was right, and it was not one label. Eleven of the seventeen were written as 
 Longest is now 23 characters. `scripts/check-seo.mjs` fails the build on any group label over 24, negative-tested by restoring the old one.
 
 Worth noting for the rest of the site: section headlines can be sentences ("Seventeen ways this gets done"), and labels cannot. The distinction is whether the reader is being told something or being pointed somewhere.
+
+## Website designer gets a real category hub, 2026-09-28
+
+Owen: the website design page is full of random services I never gave you, and it needs to match the other category pages with my real GBP services on it.
+
+Two separate faults, and he identified both in one sentence.
+
+**The category had no hub.** `CATEGORY_HUB['Website designer']` still pointed at `/`, a holdover from when the homepage was meant to be the website design page. So the other three categories each had a hub listing their services, and the primary category had none. Its twelve services appeared only in the `/services` directory and the homepage index, never on a page of their own.
+
+Fixed by making `/services/website-design` the category hub as well as the website design service page. That is exactly the arrangement `/seo` already has: it is both the Search engine optimization page and the Internet marketing service hub. Now all four categories work the same way.
+
+Consequences, all verified:
+
+- The eleven other Website designer services list on it, grouped by job.
+- Breadcrumbs route through it: Home › Website design › Website redesign, matching Home › SEO & AI search › SEO audit.
+- The `/services` directory's "Website design in detail" link points at it rather than at the homepage.
+- `GROUPS` re-keyed from `/` to `/services/website-design`, and the hub removed from its own group, which the guard caught immediately.
+- The homepage is now purely a homepage and carries no category-hub duty.
+
+**The invented bullets.** "What is included in every build" listed eight items I wrote (Custom design, Mobile first, Structured data and so on). They are true and they are build inclusions, and under a heading saying "What you get" on a services site they read as a list of services Owen does not offer.
+
+Retitled to "What comes as standard" under the eyebrow "Every build", with a lead line stating plainly that these are not separate services and not add-ons. The real services now sit above them, so the order of the page answers the question before it gets asked.
+
+**The lesson worth keeping:** on a site whose whole purpose is mirroring a profile's service list, any bulleted list of capabilities reads as a service list. Inclusions, features and benefits all need framing that distinguishes them from the thing being sold.

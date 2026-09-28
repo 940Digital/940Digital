@@ -112,7 +112,7 @@ export const PRIMARY_CATEGORY = "Website designer";
 
 /** Hub URL for each GBP category. */
 export const CATEGORY_HUB = {
-  "Website designer": "/",
+  "Website designer": "/services/website-design",
   "Internet marketing service": "/seo",
   "Marketing agency": "/local-marketing",
   "Marketing consultant": "/consulting"
@@ -155,8 +155,8 @@ export const PAGES = [
     "h1": "Website design for small businesses in Denton and DFW",
     "meta": "Custom websites for small businesses in Denton and DFW. Built around your business, structured to be found, and you see a working demo before you pay anything.",
     "nearestSibling": "/services/website-redesign",
-    "role": "service",
-    "hub": "/",
+    "role": "hub",
+    "hub": null,
     "gbpDescription": "A full professional custom website built around your business, not a template. Fast, mobile-friendly, and structured so both customers and Google understand what you do and where. Every project starts with a working demo you can see before committing to anything.",
     "covers": [
       "website design"
@@ -192,7 +192,7 @@ export const PAGES = [
     "meta": "Ongoing upkeep that keeps your site running the way it did on launch day. Covers speed, content updates, analytics, hosting, and catching issues early.",
     "nearestSibling": "/services/website-speed-optimization",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Ongoing upkeep to keep your site running the way it did on launch day. Covers analytics, speed, content updates, hosting, and catching issues before they cost you visitors. Pairs with SEO and GBP work so the site keeps performing without added effort on your end.",
     "covers": [
       "Website Maintenance"
@@ -211,7 +211,7 @@ export const PAGES = [
     "meta": "Turn a dated or slow site into a modern one without losing the rankings you already have. Includes redirect mapping, rewritten content, and mobile-first layout.",
     "nearestSibling": "/services/website-migration",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Turn a dated or slow site into a modern one without losing the rankings you already have. Includes redirect mapping, rewritten content, and a mobile-first layout.",
     "covers": [
       "Website redesign"
@@ -230,7 +230,7 @@ export const PAGES = [
     "meta": "A single focused page built for one goal, like booking a call or requesting a quote. Useful for ads, a promotion, or a service you want more of.",
     "nearestSibling": "/services/conversion-rate-optimization",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "A single focused page built for one goal, like booking a call or requesting a quote. Useful for ads, promotions, or a service you want more of.",
     "covers": [
       "Landing page design"
@@ -249,7 +249,7 @@ export const PAGES = [
     "meta": "Online stores for local businesses that sell products. Clear product pages, simple checkout, and setup for local pickup or shipping in the DFW area.",
     "nearestSibling": "/",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Online stores for local businesses that sell products. Clear product pages, simple checkout, and setup for local pickup or shipping.",
     "covers": [
       "Ecommerce website design"
@@ -268,7 +268,7 @@ export const PAGES = [
     "meta": "Layout and navigation planned so visitors find what they need and get in touch faster. The structural work behind a site that turns traffic into calls.",
     "nearestSibling": "/services/conversion-rate-optimization",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Layout and navigation tactically planned to keep your leads hooked on the page, so visitors find what they need and get in touch faster.",
     "covers": [
       "UX/UI design"
@@ -287,7 +287,7 @@ export const PAGES = [
     "meta": "Fix the heavy images, bloated code, and slow hosting that keep your pages from loading. Faster pages hold visitors and support better search rankings.",
     "nearestSibling": "/seo/technical-seo",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Fix the heavy images, bloated code, and slow hosting that keep pages from loading. Faster pages hold visitors and support better rankings.",
     "covers": [
       "Website speed optimization"
@@ -306,7 +306,7 @@ export const PAGES = [
     "meta": "Website copy that explains what you do, who you help, and why someone should pick you. Written in your voice, for the customers you actually want.",
     "nearestSibling": "/seo/seo-content-writing",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Website copy that explains what you do, who you help, and why someone should pick you. Written in your voice, for your customers.",
     "covers": [
       "Website copywriting"
@@ -325,7 +325,7 @@ export const PAGES = [
     "meta": "Move your site to a new platform or host without breaking pages or losing search traffic. Includes redirect mapping and a full check after the move.",
     "nearestSibling": "/services/website-redesign",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Move your site to a new platform or host without breaking pages or losing search traffic. Includes redirect mapping and a check after the move.",
     "covers": [
       "Website migration"
@@ -344,7 +344,7 @@ export const PAGES = [
     "meta": "Changes that turn more of the visitors you already have into leads: clearer calls to action, better forms, trust signals, and tested page layouts.",
     "nearestSibling": "/services/ux-ui-design",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Changes that turn more of the visitors you already have into leads: clearer calls to action, better forms, trust signals, and tested layouts.",
     "covers": [
       "Conversion rate optimization"
@@ -363,7 +363,7 @@ export const PAGES = [
     "meta": "A page for each town you genuinely serve, built on real local detail so customers and Google both see you work there. No swapped-city templates.",
     "nearestSibling": "/seo/seo-content-writing",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "A page for each town you serve, with real local detail, so customers in those areas and Google can both see that you work there.",
     "covers": [
       "Service area page design"
@@ -382,7 +382,7 @@ export const PAGES = [
     "meta": "Let customers book a call, a consult, or a job straight from your site. Connects to your calendar so you stop trading voicemails to find a time.",
     "nearestSibling": "/services/landing-page-design",
     "role": "service",
-    "hub": "/",
+    "hub": "/services/website-design",
     "gbpDescription": "Let customers book a call, a consult, or a job straight from your site. Connects to your calendar so you stop trading voicemails just to find a time that works.",
     "covers": [
       "Online booking setup"
