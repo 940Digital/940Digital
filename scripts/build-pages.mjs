@@ -18,6 +18,8 @@ import { PAGES, byUrl, childrenOf, serviceIndex, isPublished } from '../src/data
 import * as layout from '../src/templates/layout.mjs';
 import { CLIENTS } from '../src/data/site.mjs';
 import { PLANS } from '../src/data/plans.mjs';
+import { renderService } from '../src/templates/service-page.mjs';
+import { existsSync } from 'node:fs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -68,6 +70,13 @@ const sharedParts = {
      moment the target is published. */
   link: (url, text) => (isPublished(url) ? `<a href="${url}">${text}</a>` : text),
   proofCards: proofCards(),
+  /* Client proof, only where a build genuinely demonstrates the service. Pages
+     with no genuinely relevant client simply omit the section: an absent proof
+     block is honest, an invented one is not. */
+  proofFor: (url) => {
+    const cards = proofCards(url);
+    return cards.length ? cards : null;
+  },
   planStrip: planStrip(),
 };
 
@@ -216,10 +225,27 @@ for (const spec of [...CONTENT_PAGES, ...STATIC_PAGES]) {
   written++;
 }
 
-/* Draft service pages render nothing at all. No file, no URL, no 404 risk. */
+/* Service pages driven by a structured content module in src/content/services.
+   A page without a module stays a draft and writes no file at all. */
+let serviceCount = 0;
+for (const p of PAGES) {
+  if (p.role !== 'service' || p.status !== 'published') continue;
+  const slug = p.url.split('/').pop();
+  const modPath = new URL(`../src/content/services/${slug}.mjs`, import.meta.url);
+  if (!existsSync(modPath)) continue;
+  const content = (await import(modPath.href)).default;
+  const body = renderService(p, content, partsFor(p.url));
+  const html = layout.page({ page: p, body });
+  const out = `${p.slug}.html`;
+  mkdirSync(dirname(join(ROOT, out)), { recursive: true });
+  writeFileSync(join(ROOT, out), html);
+  manifest.push({ url: p.url, out, bytes: html.length, robots: html.match(/name="robots" content="([^"]*)"/)[1] });
+  serviceCount++;
+}
+
 const draftServices = PAGES.filter((p) => p.role === 'service' && p.status === 'draft');
 
-console.log(`built ${written} pages`);
+console.log(`built ${written + serviceCount} pages (${serviceCount} service pages)`);
 for (const m of manifest) {
   console.log(`  ${m.out.padEnd(22)} ${String(m.bytes).padStart(6)}b  ${m.robots}`);
 }

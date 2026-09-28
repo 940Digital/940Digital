@@ -115,7 +115,11 @@ export const CLIENTS = {
     location: 'Denton County, TX',
     trade: 'Landscaping and hardscaping',
     note: 'In business since 1989. Full site with a services overview, a project gallery, and a free-estimate form.',
-    demonstrates: ['/', '/services/website-copywriting', '/services/service-area-page-design'],
+    /* Only what /work actually states. Whether Owen wrote the copy, or built
+       town pages, is unverified: questions 28 and 36. Do not add a service here
+       without evidence, because this array is what puts a client's name on a
+       page as proof. */
+    demonstrates: ['/services/website-design'],
   },
   gunnarGalvan: {
     name: 'Gunnar Galvan Mobile Detailing',
@@ -123,7 +127,7 @@ export const CLIENTS = {
     location: 'Frisco, TX',
     trade: 'Mobile car detailing',
     note: 'Package-based pricing, clear service breakdowns, and a booking flow.',
-    demonstrates: ['/', '/services/online-booking-setup', '/services/landing-page-design'],
+    demonstrates: ['/services/website-design', '/services/online-booking-setup'],
   },
   gloryUnveiled: {
     name: 'Glory Unveiled by Bailey Elaine',
@@ -131,7 +135,7 @@ export const CLIENTS = {
     location: 'Dallas, TX',
     trade: 'Wedding planning and coordination',
     note: 'Service packages, a photo gallery, and an inquiry form built to book calls.',
-    demonstrates: ['/', '/services/website-copywriting', '/services/landing-page-design'],
+    demonstrates: ['/services/website-design'],
   },
   lilylynne: {
     name: 'Lilylynne Photography',
@@ -139,6 +143,6 @@ export const CLIENTS = {
     location: 'Denton, TX',
     trade: 'Family and portrait photography',
     note: 'Full gallery and an inquiry flow built to book sessions.',
-    demonstrates: ['/', '/consulting/photo-and-video-strategy'],
+    demonstrates: ['/services/website-design'],
   },
 };

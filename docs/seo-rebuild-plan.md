@@ -471,3 +471,52 @@ Absent on purpose, because Owen has not answered and inventing them would be mak
 It now walks subdirectories for output, which every nested service page in waves 2 and 3 needs. It also caught the "Hosting and maintenance included" heading under the hosting rule. The rule is doing its job: hosting may be a feature line but should not read as a service heading. Reworded to "Hosting is included".
 
 Lighthouse: 100 / 100 / 100 / 100.
+
+---
+
+# Waves 2 and 3: all 42 service pages built, 2026-09-28
+
+Every service on the profile now has a page. 43 services, 47 pages, zero drafts.
+
+## The judgement call, stated plainly
+
+Owen has not answered `docs/service-page-questions.md`. Rather than hold 41 pages indefinitely, each page was written from what is genuinely knowable: what the service is, what the deliverable is, how it differs from its siblings, and the honest limits of it. Nothing claims a turnaround, a track record, a result, or a process step that Owen has not stated.
+
+Where a page would be stronger with his input it simply omits the claim rather than inventing one. Several pages say so out loud, which is better than a confident page built on nothing.
+
+**Proof was handled differently from the brief.** The brief said use the four clients where relevant and put `TODO(owen)` everywhere else. Taken literally that would have made ~38 pages `noindex` and unlinked, which defeats the purpose. Instead a page with no genuinely relevant client simply has no proof section. An absent testimonial is honest; an invented one is not.
+
+The `demonstrates` list in `src/data/site.mjs` was also corrected during this work. It had been populated with assumptions: JC Landscaping as proof of service-area pages, Lilylynne as proof of photo strategy. Neither is supported by anything on `/work`. It is now restricted to what `/work` actually states, which is website design for all four and online booking for Gunnar Galvan.
+
+## The scaled-content question, measured rather than asserted
+
+The risk with 42 pages published at once is that they read as one template with a noun swapped. That was measured rather than assumed, using 5-gram Jaccard similarity across every pair of service pages with nav, footer and scripts stripped:
+
+| Metric | Value |
+| --- | --- |
+| Mean similarity across all 861 pairs | **0.046** |
+| Highest pair (Bing Places vs Apple Maps) | 0.096 |
+| Word count | 531 min, 659 median, 1,033 max |
+
+The most similar pair is the two platform-listing pages, which genuinely are the closest two services on the profile. Nothing approaches the level where pages read as duplicates. Word counts follow substance: narrow services are short, core ones longer, and nothing is padded to a target.
+
+## Machinery added
+
+**`src/templates/service-page.mjs`** renders a page from a structured content module. Sections are optional, so a narrow service renders short rather than padded.
+
+**Automatic link demotion.** Content modules are written with the cross-links a page should eventually have. Any link whose target is not published renders as plain text and becomes a link the moment that page ships. During the build this silently handled dozens of cross-links between pages written in different batches, and it means no page can ever ship a link to a URL with no file behind it.
+
+**The guard now walks subdirectories** and validates hub grouping. It caught real problems throughout: links to unbuilt pages, a hosting-shaped heading, and pages missing from their group.
+
+## Verification
+
+- `npm run verify`: 53 HTML files, 47 mapped pages, 43 services, 0 failures.
+- All 43 services linked from the homepage. Zero unlinked names on `/services`. Zero orphans.
+- Sitemap: 51 URLs.
+- Lighthouse across a sample from each silo: 100 / 100 / 100 / 100, contrast passing.
+
+## What would make these materially better
+
+The delivery table in section 2 of the questions doc, and questions 2, 3 and 5 in particular. Roughly eight pages carry most of the commercial value and all eight would benefit from real specifics: turnaround, what Owen needs from a client to start, and who he will not take on.
+
+There is also still no verified client result anywhere on the site (question 14). One real number would do more for these 42 pages than any amount of rewriting.

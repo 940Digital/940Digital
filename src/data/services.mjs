@@ -197,7 +197,7 @@ export const PAGES = [
     "covers": [
       "Website Maintenance"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/website-maintenance"
   },
   {
@@ -216,7 +216,7 @@ export const PAGES = [
     "covers": [
       "Website redesign"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/website-redesign"
   },
   {
@@ -235,7 +235,7 @@ export const PAGES = [
     "covers": [
       "Landing page design"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/landing-page-design"
   },
   {
@@ -254,7 +254,7 @@ export const PAGES = [
     "covers": [
       "Ecommerce website design"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/ecommerce-website-design"
   },
   {
@@ -273,7 +273,7 @@ export const PAGES = [
     "covers": [
       "UX/UI design"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/ux-ui-design"
   },
   {
@@ -292,7 +292,7 @@ export const PAGES = [
     "covers": [
       "Website speed optimization"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/website-speed-optimization"
   },
   {
@@ -311,7 +311,7 @@ export const PAGES = [
     "covers": [
       "Website copywriting"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/website-copywriting"
   },
   {
@@ -330,7 +330,7 @@ export const PAGES = [
     "covers": [
       "Website migration"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/website-migration"
   },
   {
@@ -349,7 +349,7 @@ export const PAGES = [
     "covers": [
       "Conversion rate optimization"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/conversion-rate-optimization"
   },
   {
@@ -368,7 +368,7 @@ export const PAGES = [
     "covers": [
       "Service area page design"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/service-area-page-design"
   },
   {
@@ -387,7 +387,7 @@ export const PAGES = [
     "covers": [
       "Online booking setup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "services/online-booking-setup"
   },
   {
@@ -425,7 +425,7 @@ export const PAGES = [
     "covers": [
       "SEO audit"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/seo-audit"
   },
   {
@@ -444,7 +444,7 @@ export const PAGES = [
     "covers": [
       "Technical SEO"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/technical-seo"
   },
   {
@@ -463,7 +463,7 @@ export const PAGES = [
     "covers": [
       "On-page SEO"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/on-page-seo"
   },
   {
@@ -482,7 +482,7 @@ export const PAGES = [
     "covers": [
       "Link building"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/link-building"
   },
   {
@@ -501,7 +501,7 @@ export const PAGES = [
     "covers": [
       "Citation building"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/citation-building"
   },
   {
@@ -520,7 +520,7 @@ export const PAGES = [
     "covers": [
       "Local listings cleanup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/local-listings-cleanup"
   },
   {
@@ -539,7 +539,7 @@ export const PAGES = [
     "covers": [
       "Schema markup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/schema-markup"
   },
   {
@@ -558,7 +558,7 @@ export const PAGES = [
     "covers": [
       "Blog writing"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/blog-writing"
   },
   {
@@ -577,7 +577,7 @@ export const PAGES = [
     "covers": [
       "SEO content writing"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/seo-content-writing"
   },
   {
@@ -596,7 +596,7 @@ export const PAGES = [
     "covers": [
       "Rank tracking and geo-grid reports"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/rank-tracking"
   },
   {
@@ -615,7 +615,7 @@ export const PAGES = [
     "covers": [
       "Competitor analysis"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/competitor-analysis"
   },
   {
@@ -634,7 +634,7 @@ export const PAGES = [
     "covers": [
       "Google Search Console setup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/google-search-console-setup"
   },
   {
@@ -653,7 +653,7 @@ export const PAGES = [
     "covers": [
       "Website analytics setup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/website-analytics-setup"
   },
   {
@@ -672,7 +672,7 @@ export const PAGES = [
     "covers": [
       "AI Overview optimization"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/ai-overview-optimization"
   },
   {
@@ -691,7 +691,7 @@ export const PAGES = [
     "covers": [
       "AI citation building"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/ai-citation-building"
   },
   {
@@ -710,7 +710,7 @@ export const PAGES = [
     "covers": [
       "AI search visibility audit"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/ai-search-visibility-audit"
   },
   {
@@ -729,7 +729,7 @@ export const PAGES = [
     "covers": [
       "Answer-ready content writing"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "seo/answer-ready-content-writing"
   },
   {
@@ -765,7 +765,7 @@ export const PAGES = [
     "covers": [
       "Google Business Profile setup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "local-marketing/google-business-profile-setup"
   },
   {
@@ -784,7 +784,7 @@ export const PAGES = [
     "covers": [
       "Google Business Profile optimization"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "local-marketing/google-business-profile-optimization"
   },
   {
@@ -803,7 +803,7 @@ export const PAGES = [
     "covers": [
       "Google Business Profile management"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "local-marketing/google-business-profile-management"
   },
   {
@@ -822,7 +822,7 @@ export const PAGES = [
     "covers": [
       "Review generation strategy"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "local-marketing/review-generation-strategy"
   },
   {
@@ -841,7 +841,7 @@ export const PAGES = [
     "covers": [
       "Review response management"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "local-marketing/review-response-management"
   },
   {
@@ -860,7 +860,7 @@ export const PAGES = [
     "covers": [
       "Bing Places listing setup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "local-marketing/bing-places-listing-setup"
   },
   {
@@ -879,7 +879,7 @@ export const PAGES = [
     "covers": [
       "Apple Maps listing setup"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "local-marketing/apple-maps-listing-setup"
   },
   {
@@ -915,7 +915,7 @@ export const PAGES = [
     "covers": [
       "SEO consulting"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "consulting/seo-consulting"
   },
   {
@@ -934,7 +934,7 @@ export const PAGES = [
     "covers": [
       "Marketing strategy"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "consulting/marketing-strategy"
   },
   {
@@ -953,7 +953,7 @@ export const PAGES = [
     "covers": [
       "Website strategy session"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "consulting/website-strategy-session"
   },
   {
@@ -972,7 +972,7 @@ export const PAGES = [
     "covers": [
       "Google Business Profile training"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "consulting/google-business-profile-training"
   },
   {
@@ -991,7 +991,7 @@ export const PAGES = [
     "covers": [
       "SEO training for business owners"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "consulting/seo-training"
   },
   {
@@ -1010,7 +1010,7 @@ export const PAGES = [
     "covers": [
       "Photo and video strategy"
     ],
-    "status": "draft",
+    "status": "published",
     "slug": "consulting/photo-and-video-strategy"
   }
 ];
