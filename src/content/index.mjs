@@ -23,7 +23,7 @@ const TEMPLATE = String.raw`    <!-- HERO -->
     <section class="section compare-section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="eyebrow" style="color:var(--blue-accent)">The difference</p>
+          <p class="eyebrow eyebrow--accent">The difference</p>
           <h2>Why&nbsp;us?</h2>
           <p>I help you attract and convert more customers by building trust with Google, AI search bots, and the people who need you. That means a premium website, SEO, GEO, and a Google Business Profile, all built to make your business look like the best option the moment someone finds&nbsp;you.</p>
         </div>

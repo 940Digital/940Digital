@@ -308,3 +308,69 @@ What did not change: `/seo` still covers the map pack, Maps, and profile-driven 
 The tradeoff, on the record: the profile's services list is a relevance signal, and "Local SEO" is a high-intent term. Giving it up costs some profile visibility on that query. The page still competes on content. Reversing it means adding the name back to `src/data/gbp-services.json` and deciding which page carries it.
 
 Schema now matches the profile exactly: offer catalog 12 / 18 / 7 / 6 = 43.
+
+---
+
+# Listing redesign, 2026-09-27
+
+Owen's verdict on the first pass: "some of the sloppiest service pages I've ever seen, miles of lists." He was right, and the fault was structural rather than cosmetic.
+
+## What was actually wrong
+
+1. **Seventeen services rendered as seventeen identical blocks.** No hierarchy, no grouping, nothing to scan. A card grid of N equal items is not a design, it is a dump.
+2. **Stranded grid rows, the exact bug from the Opulence critique.** `/local-marketing` measured 2-2-2-1 at desktop width. `/seo` stranded items in both of its groups. `.pricing-grid` had the same latent bug: an auto-fit grid that drops to two columns and leaves the third plan alone on a second row.
+3. **The homepage index was a four-column sitemap dump** of 43 links with a ragged bottom edge, because the categories are 12 / 18 / 7 / 6.
+
+## What changed
+
+**Services are now grouped by the job the buyer is trying to do**, in `src/data/groups.mjs`. "Fixing your site", "Knowing if it worked", "Your reviews", "The other maps". This does navigation work and design work at once: it breaks 17 items into six readable sets, and it gives each group a heading that means something.
+
+**Rows replaced the card grid.** A grid strands a lone item at some breakpoint for any count that is not a multiple of the column count. Rows cannot, at any width, for any count. There is now no `auto-fit` or `auto-fill` grid anywhere in the stylesheet.
+
+**Hierarchy instead of uniformity.** The AI search group on `/seo` renders as a dark featured panel above the lighter row groups, so the page has a shape. Group headings went up to `clamp(1.25rem, 2.1vw, 1.75rem)` and each group is separated by a hairline rule.
+
+**The homepage index is now an editorial index**: a fixed label column naming the category, with services flowing in balanced CSS columns beside it. CSS columns self-balance, so 12 / 18 / 7 / 6 render as 6+6, 9+9, 4+3, 3+3 with no ragged edge.
+
+**`/services` uses a different skeleton on purpose**, a two-column definition list with ruled category headers, so it does not read as the homepage block repeated.
+
+**The draft marker got quieter.** With 41 pages unwritten, a loud uppercase chip on every row made the whole site look unfinished.
+
+## Bugs caught while doing it
+
+- **`/local-marketing` and `/consulting` wrapped `<section>` elements in a `<ul>`**, which is invalid HTML and was failing Lighthouse's `list` audit.
+- **The footer overflowed off-screen.** It grew from four links to eight when the hubs were added, and `.footer-links` was `flex-wrap: nowrap`, so the last three sat outside the viewport at common widths. This was what Lighthouse kept reporting as grey text on a white background: it was sampling links that were off the painted footer.
+- **Hardcoded counts.** `/services` still said "Forty-five services" after the profile dropped to 43. Both spelled-out counts are now generated from the data, so the copy cannot drift again.
+
+## Accessibility: 94/95 to 100 site-wide
+
+Every one of these was failing before this rebuild started, not introduced by it. Fixed by adding two tokens rather than changing the brand blue, which stays exactly as it is for borders, rules, dots, and text on dark:
+
+| Element | Was | Now |
+| --- | --- | --- |
+| Footer text and links on charcoal | 4.15:1 | 5.35:1 via `--grey-on-dark` |
+| Body copy on sand (`--brown-muted`) | 3.39:1 | 4.99:1 |
+| Blue eyebrows on sand | 2.90:1 | 5.89:1 via `--blue-ink` |
+| `.price-tier`, `.portfolio-card-tag` on white | 3.25:1 | 6.62:1 |
+| Phone and email links on `/contact` | 2.90:1 | 5.89:1 |
+
+## Lighthouse, after
+
+| Page | Perf | A11y | Best practices | SEO |
+| --- | --- | --- | --- | --- |
+| `/` | 100 | 100 | 100 | 100 |
+| `/seo` | 100 | 100 | 100 | 100 |
+| `/local-marketing` | 100 | 100 | 100 | 100 |
+| `/consulting` | 100 | 100 | 100 | 100 |
+| `/services` | 100 | 100 | 100 | 100 |
+| `/pricing` | 100 | 100 | 100 | 100 |
+| `/about` | 97 | 100 | 100 | 100 |
+| `/contact` | 96 | 100 | 100 | 100 |
+| `/work` | 81 | 100 | 100 | 100 |
+
+The homepage started this rebuild at 95 perf / 94 a11y.
+
+`/work` at 81 is entirely four oversized portfolio JPEGs (~840KB total, ~526KB recoverable from correct sizing alone). They predate this work and were not touched by it. Flagged separately rather than silently re-encoding client photos.
+
+## The guard grew
+
+`scripts/check-seo.mjs` now also fails the build if a service is missing from a group, appears in two groups, or is grouped under the wrong hub. Negative-tested: removing one service from its group exits 1 with a named error.

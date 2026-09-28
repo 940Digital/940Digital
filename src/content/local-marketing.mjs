@@ -29,12 +29,12 @@ export const body = (parts) => String.raw`    <section class="page-hero">
     <section class="section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="eyebrow" style="color:var(--blue-accent)">Services</p>
+          <p class="eyebrow eyebrow--accent">Services</p>
           <h2>What I handle</h2>
         </div>
-        <ul class="hub-svc-list reveal">
+        <div class="svc-groups reveal">
 ` + parts.hubServices + `
-        </ul>
+        </div>
       </div>
     </section>
 

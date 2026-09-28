@@ -22,7 +22,8 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE } from '../src/data/site.mjs';
-import { PAGES, serviceIndex } from '../src/data/services.mjs';
+import { PAGES, serviceIndex, childrenOf } from '../src/data/services.mjs';
+import { GROUPS } from '../src/data/groups.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fail = [];
@@ -55,6 +56,18 @@ const urlFor = (f) => (f === 'index.html' ? '/' : '/' + f.replace(/\.html$/, '')
       err('names', `"${name}" category is "${mine.gbpCategory}", profile says "${cat}"`);
   }
 }
+
+/* ---------- every service sits in exactly one hub group ---------- */
+for (const [hub, groups] of Object.entries(GROUPS)) {
+  const grouped = groups.flatMap(([, urls]) => urls);
+  const actual = childrenOf(hub).map((p) => p.url);
+  for (const u of actual) if (!grouped.includes(u)) err('grouping', `${u} is a child of ${hub} but is in no group`);
+  for (const u of grouped) if (!actual.includes(u)) err('grouping', `${u} is grouped under ${hub} but is not its child`);
+  const dupes = grouped.filter((u, i) => grouped.indexOf(u) !== i);
+  for (const u of new Set(dupes)) err('grouping', `${u} appears in more than one group`);
+}
+for (const hub of ['/', '/seo', '/local-marketing', '/consulting'])
+  if (!GROUPS[hub]) err('grouping', `${hub} has no groups defined`);
 
 /* ---------- collect every internal link that appears in a listing ---------- */
 const listedLinks = new Set();

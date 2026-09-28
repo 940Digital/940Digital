@@ -8,6 +8,7 @@
  */
 import { SITE } from '../data/site.mjs';
 import { CATEGORIES, CATEGORY_HUB, CATEGORY_LABEL, byUrl, servicesByCategory, childrenOf } from '../data/services.mjs';
+import { GROUPS } from '../data/groups.mjs';
 import * as chrome from './chrome.mjs';
 import * as schema from './schema.mjs';
 
@@ -35,12 +36,46 @@ function cleanTrail(page) {
 }
 
 /**
- * The compact "Everything I do" block: all 45 service names grouped by the four
- * GBP categories. Used on the homepage (Sterling Sky: the GBP landing page
- * should mention every service on the profile) and on /services.
+ * The "Everything I do" index: all 43 profile services grouped by the four GBP
+ * categories. Used on the homepage, because the GBP landing page should mention
+ * every service on the profile (Sterling Sky).
+ *
+ * Laid out as an editorial index, not a card grid: a fixed label column on the
+ * left naming the category, and the services flowing in balanced CSS columns on
+ * the right. CSS columns balance themselves, so the wildly different category
+ * sizes (12 / 18 / 7 / 6) cannot leave a stranded item the way a grid does.
  */
-export function serviceIndexBlock({ withDescriptions = false, headingLevel = 3 } = {}) {
-  const H = `h${headingLevel}`;
+export function serviceIndexBlock() {
+  return CATEGORIES.map((cat, i) => {
+    const hub = CATEGORY_HUB[cat];
+    const services = servicesByCategory(cat);
+    const items = services
+      .map((s) => {
+        const label = esc(s.name);
+        return s.published
+          ? `            <li><a href="${s.url}">${label}</a></li>`
+          : `            <li><span class="svc-soon">${label}</span></li>`;
+      })
+      .join('\n');
+    return `        <div class="svc-row">
+          <div class="svc-row-label">
+            <span class="svc-row-num">${String(i + 1).padStart(2, '0')}</span>
+            <h3><a href="${hub}">${esc(CATEGORY_LABEL[cat])}</a></h3>
+            <p class="svc-row-count">${services.length} service${services.length === 1 ? '' : 's'}</p>
+          </div>
+          <ul class="svc-row-items">
+${items}
+          </ul>
+        </div>`;
+  }).join('\n');
+}
+
+/**
+ * The /services directory: the same 43 services with their profile
+ * descriptions. Deliberately a different skeleton from the homepage index, so
+ * the two pages do not read as the same block twice.
+ */
+export function serviceDirectoryBlock() {
   return CATEGORIES.map((cat) => {
     const hub = CATEGORY_HUB[cat];
     const hubPage = byUrl(hub);
@@ -51,37 +86,66 @@ export function serviceIndexBlock({ withDescriptions = false, headingLevel = 3 }
         const name = s.published
           ? `<a href="${s.url}">${label}</a>`
           : `<span class="svc-soon">${label}</span>`;
-        const desc =
-          withDescriptions && s.gbpDescription
-            ? `\n            <p>${esc(s.gbpDescription)}</p>`
-            : '';
-        return `          <li>\n            ${name}${desc}\n          </li>`;
+        const desc = s.gbpDescription ? esc(s.gbpDescription) : esc(byUrl(s.url)?.meta || '');
+        return `            <div class="dir-item">
+              <dt>${name}</dt>
+              <dd>${desc}</dd>
+            </div>`;
       })
       .join('\n');
-    return `      <div class="svc-group">
-        <${H} class="svc-group-title"><a href="${hub}">${esc(cat)}</a></${H}>
-        <p class="svc-group-lead">${esc(hubPage ? hubPage.meta : '')}</p>
-        <ul class="svc-group-list${withDescriptions ? ' svc-group-list--detail' : ''}">
+    return `        <section class="dir-cat">
+          <header class="dir-cat-head">
+            <h2><a href="${hub}">${esc(cat)}</a></h2>
+            <p>${esc(hubPage ? hubPage.meta : '')}</p>
+          </header>
+          <dl class="dir-list">
 ${items}
-        </ul>
-      </div>`;
+          </dl>
+        </section>`;
   }).join('\n');
 }
 
-/** Hub listing: every service in this hub's category with a short blurb. */
-export function hubServiceList(hubUrl) {
-  const kids = childrenOf(hubUrl);
-  if (!kids.length) return '';
-  return kids
-    .map((p) => {
-      const label = esc(p.name);
-      const title = p.status === 'published'
-        ? `<a href="${p.url}">${label}</a>`
-        : `${label} <span class="svc-soon-tag">page in progress</span>`;
-      return `          <li class="hub-svc">
-            <h3>${title}</h3>
-            <p>${esc(p.gbpDescription || p.meta)}</p>
-          </li>`;
+/**
+ * A hub's services, grouped by job and rendered as rows.
+ *
+ * Rows rather than a card grid on purpose: a responsive grid of 7 items leaves
+ * a lone card stranded on the last row at some breakpoint. Rows never do, at
+ * any width, for any count.
+ *
+ * `feature` renders one named group with more weight (larger type, a lead
+ * paragraph), which gives the page a hierarchy instead of N identical blocks.
+ */
+export function hubGroupedList(hubUrl, { feature = null } = {}) {
+  const groups = GROUPS[hubUrl] || [];
+  return groups
+    .map(([label, urls], gi) => {
+      const isFeature = feature === label;
+      const rows = urls
+        .map((u, i) => {
+          const p = byUrl(u);
+          if (!p) return '';
+          const name = esc(p.name);
+          const title = p.status === 'published'
+            ? `<a href="${p.url}">${name}<span class="svc-arrow" aria-hidden="true">&#8594;</span></a>`
+            : `<span class="svc-soon">${name}</span><span class="svc-soon-tag">page in progress</span>`;
+          return `            <li class="svc-item">
+              <span class="svc-item-num">${String(i + 1).padStart(2, '0')}</span>
+              <div class="svc-item-body">
+                <h4>${title}</h4>
+                <p>${esc(p.gbpDescription || p.meta)}</p>
+              </div>
+            </li>`;
+        })
+        .join('\n');
+      return `        <section class="svc-group${isFeature ? ' svc-group--feature' : ''}">
+          <header class="svc-group-head">
+            <span class="svc-group-index" aria-hidden="true">${String(gi + 1).padStart(2, '0')}</span>
+            <h3>${esc(label)}</h3>
+          </header>
+          <ul class="svc-items">
+${rows}
+          </ul>
+        </section>`;
     })
     .join('\n');
 }

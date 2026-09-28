@@ -13,7 +13,9 @@
   --grey-light: #B8BBC2;
   --grey-muted: #7B7E85;
   --charcoal-text: #2B2E33;
-  --brown-muted: #8A8272;
+  --brown-muted: #6E6759;      /* darkened 2026-09-27: #8A8272 was 3.39:1 on sand, below WCAG AA */
+  --grey-on-dark: #8E9199;     /* muted grey that clears 4.5:1 on charcoal (#7B7E85 was 4.15) */
+  --blue-ink: #1D5C8F;         /* blue for TEXT on light backgrounds; --blue-accent is 2.90:1 on sand */
 
   --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -865,7 +867,16 @@ p { max-width: 62ch; }
 }
 .footer-links {
   display: flex;
-  gap: 1.5rem;
+  /* Wraps. The footer grew from 4 links to 8 when the three category hubs and
+     the directory were added; without wrapping the last three overflowed off
+     the right edge of the viewport at common widths. */
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.6rem 1.35rem;
+  max-width: 34rem;
+}
+@media (max-width: 700px) {
+  .footer-links { justify-content: flex-start; max-width: none; }
 }
 .footer-links a {
   font-size: 0.85rem;
@@ -883,11 +894,18 @@ p { max-width: 62ch; }
   background: var(--sand);
 }
 .pricing-grid {
+  /* Three plans. An auto-fit grid drops to 2 columns at mid widths and strands
+     the third card alone on a second row. Explicit breakpoints instead: 3 up
+     on desktop, 1 up below, never 2. */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   max-width: 1020px;
   margin: 0 auto;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 30rem; margin-inline: auto; }
 }
 .price-card {
   background: var(--white);
@@ -1634,106 +1652,169 @@ select:focus-visible {
 }
 .bento-card--link:hover .bento-card-link { color: var(--blue-accent); }
 
-/* --- "Everything I do": all 45 services grouped by profile category --- */
-.svc-index {
+/* --- "Everything I do" (homepage): an editorial index. A fixed label column
+   naming the category, services flowing in balanced CSS columns beside it.
+   CSS columns balance themselves, so categories of 12 / 18 / 7 / 6 cannot
+   strand a lone item the way a responsive card grid does. --- */
+.svc-index { border-top: 1px solid rgba(255,255,255,.12); }
+.svc-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(180px, 250px) 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(1.75rem, 3.5vh, 2.75rem) 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
 }
-.svc-index--detail {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+.svc-row-label { position: relative; }
+.svc-row-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--blue-accent);
+  margin-bottom: 0.5rem;
 }
-.svc-group-title {
-  font-size: 1.05rem;
-  margin-bottom: 0.4rem;
+.svc-row-label h3 { font-size: clamp(1.1rem, 1.7vw, 1.35rem); margin-bottom: 0.3rem; }
+.svc-row-label h3 a { color: var(--white); text-decoration: none; }
+.svc-row-label h3 a:hover { color: var(--blue-accent); }
+.svc-row-count {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--grey-muted);
 }
-.svc-group-title a {
-  color: var(--charcoal-text);
-  text-decoration: none;
-  border-bottom: 2px solid var(--blue-accent);
-  padding-bottom: 1px;
-}
-.svc-group-title a:hover { color: var(--blue-hover); }
-.svc-index-section .svc-group-title a { color: var(--white); }
-.svc-index-section .svc-group-title a:hover { color: var(--blue-accent); }
-.svc-group-lead {
-  font-size: 0.85rem;
-  color: var(--brown-muted);
-  margin-bottom: 1rem;
-  line-height: 1.5;
-}
-.svc-index-section .svc-group-lead { color: var(--grey-muted); }
-.svc-group-list {
+.svc-row-items {
   list-style: none;
-  padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
+  padding: 0;
+  columns: 2;
+  column-gap: clamp(1.5rem, 3vw, 3rem);
 }
-.svc-group-list > li { font-size: 0.92rem; line-height: 1.45; }
-.svc-group-list a {
-  color: var(--charcoal-text);
+.svc-row-items li {
+  break-inside: avoid;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  padding: 0.28rem 0;
+}
+.svc-row-items a {
+  color: var(--grey-light);
   text-decoration: none;
   border-bottom: 1px solid transparent;
 }
-.svc-group-list a:hover {
-  color: var(--blue-hover);
-  border-bottom-color: var(--blue-accent);
-}
-.svc-index-section .svc-group-list a { color: var(--grey-light); }
-.svc-index-section .svc-group-list a:hover { color: var(--white); }
+.svc-row-items a:hover { color: var(--white); border-bottom-color: var(--blue-accent); }
+.svc-soon { color: var(--grey-muted); }
 
-/* A service whose page is not published yet is named but not linked, so no
-   listing can ever point at an unfinished page. */
-.svc-soon { color: var(--brown-muted); }
-.svc-index-section .svc-soon { color: var(--grey-muted); }
-.svc-group-list--detail > li { margin-bottom: 0.9rem; }
-.svc-group-list--detail > li > p {
-  font-size: 0.85rem;
-  color: var(--brown-muted);
-  line-height: 1.5;
-  margin-top: 0.2rem;
-}
-
-/* --- Hub service listings --- */
-.hub-svc-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* --- Hub service groups: rows inside a labelled group. Rows cannot strand at
+   any viewport width, for any item count. --- */
+.svc-groups { display: flex; flex-direction: column; gap: clamp(2.25rem, 4.5vh, 3.5rem); }
+.svc-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+  grid-template-columns: minmax(170px, 230px) 1fr;
+  gap: clamp(1.25rem, 3.5vw, 3rem);
+  align-items: start;
+  border-top: 1px solid rgba(0,0,0,.14);
+  padding-top: clamp(1.5rem, 3vh, 2.25rem);
 }
-.hub-svc h3 {
-  font-size: 1.05rem;
+.svc-group-head { position: sticky; top: calc(var(--nav-h) + 1.25rem); }
+.svc-group-index {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--blue-accent);
   margin-bottom: 0.4rem;
 }
-.hub-svc h3 a {
+.svc-group-head h3 {
+  font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--charcoal-text);
+}
+.svc-items { list-style: none; margin: 0; padding: 0; }
+.svc-item {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: 0.5rem;
+  padding: 1.05rem 0;
+  border-top: 1px solid rgba(0,0,0,.09);
+}
+.svc-item:first-child { border-top: none; padding-top: 0; }
+.svc-item-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--brown-muted);
+  padding-top: 0.28rem;
+}
+.svc-item-body h4 { font-size: 1rem; margin-bottom: 0.25rem; line-height: 1.35; }
+.svc-item-body h4 a {
   color: var(--charcoal-text);
   text-decoration: none;
-  border-bottom: 1px solid var(--blue-accent);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
 }
-.hub-svc h3 a:hover { color: var(--blue-hover); }
-.hub-svc p {
-  font-size: 0.9rem;
-  color: var(--brown-muted);
-  line-height: 1.55;
+.svc-item-body h4 a:hover { color: var(--blue-hover); }
+.svc-arrow { transition: transform .2s; color: var(--blue-accent); }
+.svc-item-body h4 a:hover .svc-arrow { transform: translateX(3px); }
+.svc-item-body p { font-size: 0.88rem; color: var(--brown-muted); line-height: 1.55; max-width: 62ch; }
+
+/* The featured group carries more weight so the page has a hierarchy instead
+   of N identical blocks. Used for AI search on /seo. */
+.svc-group--feature {
+  background: var(--charcoal-dark);
+  border-radius: var(--radius);
+  border-top: none;
+  padding: clamp(1.75rem, 3.5vw, 2.75rem);
+  box-shadow: var(--shadow-md);
 }
+.svc-group--feature .svc-group-head h3 { color: var(--white); font-size: clamp(1.2rem, 2vw, 1.6rem); }
+.svc-group--feature .svc-item { border-top-color: rgba(255,255,255,.12); }
+.svc-group--feature .svc-item-body h4 a { color: var(--white); }
+.svc-group--feature .svc-item-body h4 a:hover { color: var(--blue-accent); }
+.svc-group--feature .svc-item-body p { color: var(--grey-light); }
+.svc-group--feature .svc-item-num { color: var(--grey-muted); }
+.svc-group--feature .svc-soon { color: var(--grey-light); }
+.svc-group--feature .svc-soon-tag { background: rgba(255,255,255,.1); color: var(--grey-light); }
+
+/* --- /services directory: a definition list, a deliberately different
+   skeleton from the homepage index so the two do not read as the same block. --- */
+.dir { display: flex; flex-direction: column; gap: clamp(2.5rem, 5vh, 4rem); }
+.dir-cat-head {
+  border-bottom: 2px solid var(--charcoal-text);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.dir-cat-head h2 { font-size: clamp(1.25rem, 2.2vw, 1.7rem); margin-bottom: 0.35rem; }
+.dir-cat-head h2 a { color: var(--charcoal-text); text-decoration: none; }
+.dir-cat-head h2 a:hover { color: var(--blue-hover); }
+.dir-cat-head p { font-size: 0.9rem; color: var(--brown-muted); max-width: 70ch; }
+.dir-list {
+  margin: 0;
+  columns: 2;
+  column-gap: clamp(1.75rem, 4vw, 3.5rem);
+}
+.dir-item { break-inside: avoid; margin-bottom: 1.4rem; }
+.dir-item dt { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; }
+.dir-item dt a { color: var(--charcoal-text); text-decoration: none; border-bottom: 1px solid var(--blue-accent); }
+.dir-item dt a:hover { color: var(--blue-hover); }
+.dir-item dd { margin: 0; font-size: 0.85rem; color: var(--brown-muted); line-height: 1.55; }
+
+/* Draft marker. Deliberately quiet: while 41 pages are unwritten this appears
+   a lot, and a loud chip on every row makes the whole site look unfinished. */
 .svc-soon-tag {
   display: inline-block;
-  margin-left: 0.4rem;
-  padding: 0.12rem 0.45rem;
-  border-radius: 3px;
-  background: rgba(0,0,0,.06);
-  font-family: var(--font-display);
-  font-size: 0.65rem;
+  margin-left: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--brown-muted);
+  letter-spacing: 0.03em;
+  color: var(--grey-muted);
+  opacity: 0.75;
   vertical-align: middle;
 }
+.svc-group--feature .svc-soon-tag { color: var(--grey-muted); }
 
 /* --- Long-form copy blocks on hubs and service pages --- */
 .prose { max-width: 68ch; }
@@ -1763,6 +1844,15 @@ select:focus-visible {
    runs. --- */
 html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
 
+@media (max-width: 900px) {
+  /* The label/items split collapses to stacked rows. CSS columns drop to one,
+     so nothing can strand and nothing gets squeezed. */
+  .svc-row, .svc-group { grid-template-columns: 1fr; gap: 1rem; }
+  .svc-group-head { position: static; }
+  .svc-row-items, .dir-list { columns: 1; }
+  .svc-row { padding: 1.5rem 0; }
+}
+
 @media (max-width: 860px) {
   /* Mobile: the nav group expands inline inside the drawer rather than
      floating, since there is no hover on touch. */
@@ -1784,3 +1874,45 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
   .breadcrumb { padding-top: calc(var(--nav-h) + 0.75rem); }
   .breadcrumb ol { font-size: 0.8rem; }
 }
+
+
+/* ============================================
+   CONTRAST FIXES (2026-09-27)
+   Audited with Lighthouse. Every item below was
+   already failing WCAG AA before this rebuild.
+   ============================================ */
+
+/* Footer sits on charcoal #1B1D21. --grey-muted gave 4.15:1, under the 4.5
+   threshold. --grey-on-dark gives 5.35:1. The token is separate because
+   --grey-muted is also used on lighter surfaces, where lightening it would
+   make things worse. */
+.footer-copy,
+.footer-area,
+.footer-links a {
+  color: var(--grey-on-dark);
+}
+.footer-links a:hover { color: var(--white); }
+
+/* Breadcrumbs also sit on charcoal. */
+.breadcrumb ol,
+.breadcrumb li + li::before { color: var(--grey-on-dark); }
+
+/* Blue eyebrow text on the sand background was 2.90:1. --blue-ink is 5.89:1.
+   The brand blue is unchanged everywhere it is used as a border, rule, dot, or
+   text on a dark background. */
+.eyebrow--accent,
+.link-accent { color: var(--blue-ink); }
+.link-accent:hover { color: var(--blue-hover); }
+.svc-group-index,
+.dir-item dt a { color: var(--blue-ink); }
+
+/* Blue text on light surfaces. --blue-accent is the brand blue and stays as-is
+   for borders, rules, dots, and text on dark; as TEXT on white it is 3.25:1 and
+   on sand 2.90:1, both under WCAG AA. */
+.price-tier,
+.portfolio-card-tag,
+.contact-detail a,
+.faq-item p a,
+.about-visual-eyebrow { color: var(--blue-ink); }
+.contact-detail a:hover,
+.faq-item p a:hover { color: var(--blue-hover); }

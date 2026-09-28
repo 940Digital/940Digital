@@ -10,14 +10,14 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <p class="hero-eyebrow">All services</p>
         <h1>Everything I do, in one list</h1>
-        <p>Forty-five services across four areas. Same person on all of them, which is the point: the site, the search work, and your Google profile get built to fit each&nbsp;other.</p>
+        <p>` + parts.serviceCount + ` services across four areas. Same person on all of them, which is the point: the site, the search work, and your Google profile get built to fit each&nbsp;other.</p>
       </div>
     </section>
 
     <section class="section" style="background:var(--sand)">
       <div class="container">
-        <div class="svc-index svc-index--detail reveal">
-` + parts.serviceIndexDetail + `
+        <div class="dir reveal">
+` + parts.serviceDirectory + `
         </div>
       </div>
     </section>

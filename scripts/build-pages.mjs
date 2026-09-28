@@ -14,51 +14,44 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PAGES, byUrl, childrenOf } from '../src/data/services.mjs';
+import { PAGES, byUrl, childrenOf, serviceIndex } from '../src/data/services.mjs';
 import * as layout from '../src/templates/layout.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-/** Hub pages whose service list is split into AI and everything else. */
-const AI_SLUGS = new Set([
-  '/seo/ai-overview-optimization',
-  '/seo/ai-citation-building',
-  '/seo/ai-search-visibility-audit',
-  '/seo/answer-ready-content-writing',
-]);
-
-function hubList(hubUrl, filter) {
-  const kids = childrenOf(hubUrl).filter(filter || (() => true));
-  return kids
-    .map((p) => {
-      const label = p.name.replace(/&/g, '&amp;');
-      const title =
-        p.status === 'published'
-          ? `<a href="${p.url}">${label}</a>`
-          : `${label} <span class="svc-soon-tag">page in progress</span>`;
-      return `          <li class="hub-svc">
-            <h3>${title}</h3>
-            <p>${(p.gbpDescription || p.meta).replace(/&/g, '&amp;')}</p>
-          </li>`;
-    })
-    .join('\n');
-}
+/** Spelled-out counts, generated so copy cannot drift from the data. */
+const WORDS = ['zero','one','two','three','four','five','six','seven','eight','nine','ten',
+  'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+const spell = (n) => {
+  if (n <= 20) return WORDS[n];
+  const tens = ['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+  const t = Math.floor(n / 10), o = n % 10;
+  return o ? `${tens[t]}-${WORDS[o]}` : tens[t];
+};
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const sharedParts = {
-  serviceIndex: layout.serviceIndexBlock({ headingLevel: 3 }),
-  serviceIndexDetail: layout.serviceIndexBlock({ withDescriptions: true, headingLevel: 2 }),
-  aiServices: hubList('/seo', (p) => AI_SLUGS.has(p.url)),
-  otherServices: hubList('/seo', (p) => !AI_SLUGS.has(p.url)),
+  serviceIndex: layout.serviceIndexBlock(),
+  serviceDirectory: layout.serviceDirectoryBlock(),
+  serviceCount: cap(spell(serviceIndex().length)),
 };
 
 /**
- * `hubServices` is per-page: each hub lists its own children. Building it once
- * globally silently rendered the string "undefined" inside the <ul> on
- * /local-marketing and /consulting, which also tripped Lighthouse's `list`
- * audit. Resolve it against the page being built instead.
+ * `hubServices` is per-page: each hub lists its own children, grouped by job.
+ * Building it once globally silently rendered the string "undefined" inside the
+ * <ul> on /local-marketing and /consulting. Resolve it against the page instead.
+ *
+ * /seo features its AI search group, because AI search is a main service line
+ * and a flat run of six equal groups would bury it.
  */
+const FEATURE_GROUP = { '/seo': 'AI search' };
+
 function partsFor(url) {
-  return { ...sharedParts, hubServices: hubList(url) };
+  return {
+    ...sharedParts,
+    hubServices: layout.hubGroupedList(url, { feature: FEATURE_GROUP[url] || null }),
+    hubCount: cap(spell(childrenOf(url).length)),
+  };
 }
 
 /** Pages that carry hand-written bodies in src/content/. */

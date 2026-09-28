@@ -37,7 +37,7 @@ export const body = String.raw`    <section class="page-hero">
           </div>
         </div>
 
-        <p class="eyebrow" style="color:var(--blue-accent); margin-top:clamp(3rem,6vh,5rem)">How I work</p>
+        <p class="eyebrow eyebrow--accent" style=" margin-top:clamp(3rem,6vh,5rem)">How I work</p>
         <div class="value-ledger">
           <div class="value-row reveal reveal-delay-1">
             <span class="value-index">01</span>

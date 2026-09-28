@@ -33,30 +33,19 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       </div>
     </section>
 
-    <!-- AI search group, deliberately above traditional SEO -->
-    <section class="section">
+    <!-- Services, grouped by the job the buyer is trying to do. The AI search
+         group is featured and sits first: it is a main service line and a flat
+         run of six equal groups would bury it. -->
+    <section class="section svc-section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="eyebrow" style="color:var(--blue-accent)">AI search</p>
-          <h2>Getting found when nobody&nbsp;googles</h2>
-          <p>A growing share of people ask ChatGPT, Perplexity, Gemini, or Google's own AI Overviews instead of scrolling results. Those tools pick who to name, and the way you earn that is related to SEO but not identical to it. This is one of my main service&nbsp;lines.</p>
+          <p class="eyebrow eyebrow--accent">Services</p>
+          <h2>` + parts.hubCount + ` ways this gets&nbsp;done</h2>
+          <p>Grouped by what you are actually trying to fix. Start with whichever one describes your&nbsp;problem.</p>
         </div>
-        <ul class="hub-svc-list reveal">
-` + parts.aiServices + `
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" style="background:var(--sand)">
-      <div class="container">
-        <div class="section-header reveal">
-          <p class="eyebrow" style="color:var(--blue-accent)">Traditional search</p>
-          <h2>The rest of the&nbsp;work</h2>
-          <p>Audits, technical fixes, content, links, listings, and the reporting that tells you whether any of it&nbsp;worked.</p>
+        <div class="svc-groups reveal">
+` + parts.hubServices + `
         </div>
-        <ul class="hub-svc-list reveal">
-` + parts.otherServices + `
-        </ul>
       </div>
     </section>
 
