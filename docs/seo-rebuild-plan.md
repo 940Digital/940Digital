@@ -400,3 +400,21 @@ The primary profile category (Website designer) renders as a full-width dark pan
 Verified: 4 category blocks, 43 list items, zero prose elements inside any list item, no horizontal scroll at 375px, and the hub pages still carry all their per-service descriptions (17 / 7 / 6).
 
 Lighthouse after: `/services` and `/` both 100 / 100 / 100 / 100.
+
+## Directory layout corrected, 2026-09-28
+
+Owen: "don't just slap some padding on it, even it out. Since the services are on the bottom you have space for the text on top, stretch the text out. Internet marketing service should have that too."
+
+Three things, and the first one was mine to own.
+
+**The stylesheet had accumulated duplicate rules.** Several of my edits used `s.index(anchor)` to slice and replace a block. When a later edit appended new rules to the end of the file, a subsequent `s.index()` matched the *first* copy and rewrote that, leaving a stale second copy further down that won on source order. One slice anchored on `.svc-soon-tag {`, which matched inside `.svc-group--feature .svc-soon-tag {`, cutting mid-selector and leaving a dangling global rule that made the draft marker light grey on light backgrounds.
+
+Fixed with a proper CSS rule-walker (brace matching, recursing into `@media`) that removed every `.dir` and `.cat` rule wherever it appeared, 98 in total, plus the truncated one-liner. Then one canonical directory block was appended once. Verified: braces balanced, every other rule intact, no duplicates. **Do not edit this stylesheet by string index again. Append, or rewrite a named block wholesale.**
+
+**Dead gutter.** The prose sat in a 62ch strip inside a 1008px panel, leaving 284px of empty space on the right. Since the services list runs along the bottom, the prose has the full width available, so it now runs in two columns. Gutter measures 0.
+
+**Even spacing.** The panel now measures 48px on all five: top, left, right, above the services divider, and below the list. Getting the last 7px required making `.cat-hub-link` block-level; as `inline-flex` it sat in a line box using the parent's line-height and left descender space beneath it.
+
+**The wide layout is now a rule, not a special case.** Any category with 10 or more services gets it (`WIDE_LAYOUT_MIN_SERVICES`), which covers Website designer (12) and Internet marketing service (18). Marketing agency (7) and Marketing consultant (6) keep prose-left / card-right, since there is not enough list to justify a full-width bottom row. The dark treatment stays exclusive to the primary profile category, so it still reads as primary.
+
+Verified at 1440px and 375px: no horizontal overflow, columns collapse 2 to 1 and 3 to 2 to 1. Lighthouse `/services` 100 / 100 / 100 / 100.

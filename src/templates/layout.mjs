@@ -83,12 +83,19 @@ ${items}
  * device used for the AI search group on /seo, so the page has a shape rather
  * than four identical blocks.
  */
+const WIDE_LAYOUT_MIN_SERVICES = 10;
+
 export function serviceDirectoryBlock() {
   return CATEGORIES.map((cat, i) => {
     const hub = CATEGORY_HUB[cat];
     const services = servicesByCategory(cat);
     const copy = CATEGORY_COPY[cat];
     const isPrimary = cat === PRIMARY_CATEGORY;
+    /* Categories with a lot of services get the full-width treatment: prose
+       spanning the panel in two columns, services listed across the bottom.
+       With only a handful of services there is not enough list to justify a
+       full-width bottom row, so those keep prose left / service card right. */
+    const isWide = services.length >= WIDE_LAYOUT_MIN_SERVICES;
 
     const items = services
       .map((s) => {
@@ -99,14 +106,16 @@ export function serviceDirectoryBlock() {
       })
       .join('\n');
 
-    const paras = copy.body.map((t) => `            <p>${esc(t)}</p>`).join('\n');
+    const paras = copy.body.map((t) => `              <p>${esc(t)}</p>`).join('\n');
 
-    return `        <section class="cat${isPrimary ? ' cat--primary' : ''}">
+    return `        <section class="cat${isWide ? ' cat--wide' : ''}${isPrimary ? ' cat--primary' : ''}">
           <div class="cat-copy">
             <span class="cat-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
             <h2>${esc(cat)}</h2>
             <p class="cat-lead">${esc(copy.lead)}</p>
+            <div class="cat-body">
 ${paras}
+            </div>
             <a class="cat-hub-link" href="${hub}">${esc(CATEGORY_LABEL[cat])} in detail<span aria-hidden="true">&#8594;</span></a>
           </div>
           <div class="cat-services">
