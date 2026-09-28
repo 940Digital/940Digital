@@ -7,8 +7,9 @@
  * so no listing can ever point at a TODO page or a 404.
  */
 import { SITE } from '../data/site.mjs';
-import { CATEGORIES, CATEGORY_HUB, CATEGORY_LABEL, byUrl, servicesByCategory, childrenOf } from '../data/services.mjs';
+import { CATEGORIES, CATEGORY_HUB, CATEGORY_LABEL, PRIMARY_CATEGORY, byUrl, servicesByCategory, childrenOf } from '../data/services.mjs';
 import { GROUPS } from '../data/groups.mjs';
+import { CATEGORY_COPY } from '../content/categories.mjs';
 import * as chrome from './chrome.mjs';
 import * as schema from './schema.mjs';
 
@@ -71,36 +72,50 @@ ${items}
 }
 
 /**
- * The /services directory: the same 43 services with their profile
- * descriptions. Deliberately a different skeleton from the homepage index, so
- * the two pages do not read as the same block twice.
+ * The /services directory.
+ *
+ * Sells the four profile categories, then lists the service names under each.
+ * Per-service descriptions deliberately live on the hub pages instead: someone
+ * on this page is choosing a direction, and 43 descriptions here made it a wall
+ * of undifferentiated text.
+ *
+ * The primary category renders as a dark featured panel, the same hierarchy
+ * device used for the AI search group on /seo, so the page has a shape rather
+ * than four identical blocks.
  */
 export function serviceDirectoryBlock() {
-  return CATEGORIES.map((cat) => {
+  return CATEGORIES.map((cat, i) => {
     const hub = CATEGORY_HUB[cat];
-    const hubPage = byUrl(hub);
     const services = servicesByCategory(cat);
+    const copy = CATEGORY_COPY[cat];
+    const isPrimary = cat === PRIMARY_CATEGORY;
+
     const items = services
       .map((s) => {
         const label = esc(s.name);
-        const name = s.published
-          ? `<a href="${s.url}">${label}</a>`
-          : `<span class="svc-soon">${label}</span>`;
-        const desc = s.gbpDescription ? esc(s.gbpDescription) : esc(byUrl(s.url)?.meta || '');
-        return `            <div class="dir-item">
-              <dt>${name}</dt>
-              <dd>${desc}</dd>
-            </div>`;
+        return s.published
+          ? `              <li><a href="${s.url}">${label}</a></li>`
+          : `              <li><span class="svc-soon">${label}</span></li>`;
       })
       .join('\n');
-    return `        <section class="dir-cat">
-          <header class="dir-cat-head">
-            <h2><a href="${hub}">${esc(cat)}</a></h2>
-            <p>${esc(hubPage ? hubPage.meta : '')}</p>
-          </header>
-          <dl class="dir-list">
+
+    const paras = copy.body.map((t) => `            <p>${esc(t)}</p>`).join('\n');
+
+    return `        <section class="cat${isPrimary ? ' cat--primary' : ''}">
+          <div class="cat-copy">
+            <span class="cat-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+            <h2>${esc(cat)}</h2>
+            <p class="cat-lead">${esc(copy.lead)}</p>
+${paras}
+            <a class="cat-hub-link" href="${hub}">${esc(CATEGORY_LABEL[cat])} in detail<span aria-hidden="true">&#8594;</span></a>
+          </div>
+          <div class="cat-services">
+            <p class="cat-services-head">${services.length} service${services.length === 1 ? '' : 's'}</p>
+            <ul class="cat-list">
 ${items}
-          </dl>
+            </ul>
+            <p class="cat-note">Full descriptions for each of these are on the <a href="${hub}">${esc(CATEGORY_LABEL[cat].toLowerCase())} page</a>.</p>
+          </div>
         </section>`;
   }).join('\n');
 }

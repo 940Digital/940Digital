@@ -1781,6 +1781,135 @@ select:focus-visible {
 .svc-group--feature .svc-soon { color: var(--grey-light); }
 .svc-group--feature .svc-soon-tag { background: rgba(255,255,255,.1); color: var(--grey-light); }
 
+/* --- /services directory: four category blocks. Each one sells the category
+   in prose, then lists its service names. Per-service descriptions live on the
+   hub pages. The primary category gets the dark featured treatment, the same
+   hierarchy device used for the AI search group on /seo. --- */
+.dir { display: flex; flex-direction: column; gap: clamp(2rem, 4vh, 3.25rem); }
+.cat {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+  padding-top: clamp(1.75rem, 3.5vh, 2.75rem);
+  border-top: 1px solid rgba(0,0,0,.14);
+}
+.dir > .cat:first-child { border-top: none; padding-top: 0; }
+.cat-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--blue-ink);
+  margin-bottom: 0.5rem;
+}
+.cat-copy h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.15rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+.cat-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--charcoal-text);
+  margin-bottom: 1rem;
+}
+.cat-copy > p:not(.cat-lead) {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--brown-muted);
+  margin-bottom: 0.85rem;
+  max-width: 62ch;
+}
+.cat-hub-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--blue-ink);
+  text-decoration: none;
+}
+.cat-hub-link:hover { color: var(--blue-hover); }
+.cat-hub-link span { transition: transform .2s; }
+.cat-hub-link:hover span { transform: translateX(3px); }
+
+.cat-services {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  box-shadow: var(--shadow-sm);
+}
+.cat-services-head {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-muted);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.cat-list {
+  list-style: none;
+  margin: 0 0 0.9rem;
+  padding: 0;
+}
+.cat-list li {
+  font-size: 0.92rem;
+  line-height: 1.4;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(0,0,0,.055);
+}
+.cat-list li:last-child { border-bottom: none; }
+.cat-list a {
+  color: var(--charcoal-text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.cat-list a:hover { color: var(--blue-hover); border-bottom-color: var(--blue-accent); }
+.cat-note { font-size: 0.78rem; line-height: 1.5; color: var(--brown-muted); }
+.cat-note a { color: var(--blue-ink); }
+
+/* Primary profile category: dark panel, full width, list in two columns. */
+.cat--primary {
+  grid-template-columns: 1fr;
+  background: var(--charcoal-dark);
+  border-radius: var(--radius);
+  border-top: none;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  box-shadow: var(--shadow-md);
+}
+.cat--primary .cat-num { color: var(--blue-accent); }
+.cat--primary .cat-copy h2,
+.cat--primary .cat-lead { color: var(--white); }
+.cat--primary .cat-copy > p:not(.cat-lead) { color: var(--grey-light); }
+.cat--primary .cat-hub-link { color: var(--blue-accent); }
+.cat--primary .cat-services {
+  background: transparent;
+  box-shadow: none;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid rgba(255,255,255,.14);
+  margin-top: 1.5rem;
+}
+.cat--primary .cat-services-head { color: var(--grey-on-dark); border-bottom-color: rgba(255,255,255,.14); }
+.cat--primary .cat-list { columns: 2; column-gap: clamp(1.5rem, 3vw, 3rem); }
+.cat--primary .cat-list li { break-inside: avoid; border-bottom-color: rgba(255,255,255,.08); }
+.cat--primary .cat-list a { color: var(--grey-light); }
+.cat--primary .cat-list a:hover { color: var(--white); }
+.cat--primary .cat-note { color: var(--grey-on-dark); }
+.cat--primary .cat-note a { color: var(--blue-accent); }
+.cat--primary .svc-soon { color: var(--grey-on-dark); }
+
+.svc-soon-tag { background: rgba(255,255,255,.1); color: var(--grey-light); }
+
 /* --- /services directory: a definition list, a deliberately different
    skeleton from the homepage index so the two do not read as the same block. --- */
 .dir { display: flex; flex-direction: column; gap: clamp(2.5rem, 5vh, 4rem); }
@@ -1852,7 +1981,9 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
      so nothing can strand and nothing gets squeezed. */
   .svc-row, .svc-group { grid-template-columns: 1fr; gap: 1rem; }
   .svc-group-head { position: static; }
-  .svc-row-items, .dir-list { columns: 1; }
+  .svc-row-items { columns: 1; }
+  .cat { grid-template-columns: 1fr; }
+  .cat--primary .cat-list { columns: 1; }
   .svc-row { padding: 1.5rem 0; }
 }
 

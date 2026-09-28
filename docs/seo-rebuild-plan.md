@@ -374,3 +374,29 @@ The homepage started this rebuild at 95 perf / 94 a11y.
 ## The guard grew
 
 `scripts/check-seo.mjs` now also fails the build if a service is missing from a group, appears in two groups, or is grouped under the wrong hub. Negative-tested: removing one service from its group exits 1 with a named error.
+
+---
+
+# /services rebuilt around the categories, 2026-09-28
+
+Owen: "still looks painfully generic. I want a description of all the business categories with a list of the services under them. Each individual service doesn't need a full description until you're on the category page."
+
+He is right about the information architecture, and it is the same mistake as the first pass in a different costume: repeating all 43 profile descriptions on the directory made it a wall of undifferentiated text, and it duplicated what the hub pages already say.
+
+## New structure
+
+The directory now sells the four profile categories and lists the service names under each. Nothing more.
+
+- Each category gets a written description in `src/content/categories.mjs`: a lead line and three paragraphs saying what that area of work covers and who it is for. Hand-written prose, kept in a content file like every other page's copy.
+- Under it, the service names as a plain linked list with a count.
+- A link into the hub, plus an explicit line telling the reader that the full description of each service is on that hub page.
+
+Per-service descriptions now appear in exactly one place: the hub. That is where someone has already chosen a direction and wants detail.
+
+## Layout
+
+The primary profile category (Website designer) renders as a full-width dark panel with its 12 services in two columns. The other three are prose on the left, a light service card on the right. This is the same hierarchy device already used for the AI search group on `/seo`, so the site is developing one visual language rather than a new pattern per page.
+
+Verified: 4 category blocks, 43 list items, zero prose elements inside any list item, no horizontal scroll at 375px, and the hub pages still carry all their per-service descriptions (17 / 7 / 6).
+
+Lighthouse after: `/services` and `/` both 100 / 100 / 100 / 100.
