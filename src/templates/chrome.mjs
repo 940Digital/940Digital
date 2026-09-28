@@ -75,7 +75,7 @@ export function nav(currentUrl) {
       .filter((c) => isPublished(c.href))
       .map(
         (c) =>
-          `            <li><a href="${c.href}"${c.href === currentUrl ? ' class="active"' : ''}>${esc(c.label)}</a></li>`
+          `            <li><a href="${c.href}${c.anchor || ''}"${c.href === currentUrl ? ' class="active"' : ''}>${esc(c.label)}</a></li>`
       )
       .join('\n');
     const groupActive = item.children.some((c) => c.href === currentUrl) ? ' active' : active;
@@ -120,7 +120,7 @@ ${items}
 
 export function footer() {
   const links = FOOTER_LINKS.filter((l) => isPublished(l.href) || l.href === '/about' || l.href === '/pricing' || l.href === '/contact')
-    .map((l) => `          <a href="${l.href}">${esc(l.label)}</a>`)
+    .map((l) => `          <a href="${l.href}${l.anchor || ''}">${esc(l.label)}</a>`)
     .join('\n');
   return `  <footer class="footer">
     <div class="container">

@@ -2089,3 +2089,11 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
 @media (max-width: 620px) {
   .cat--wide .cat-list { columns: 1; }
 }
+
+/* Deep links (notably /#website-design, since the homepage doubles as the
+   website design page) must clear the sticky nav.
+   No scroll-behavior: smooth here on purpose. It animates the cross-document
+   jump to a fragment, and that animation gets cancelled while the hero canvas
+   is still sizing on load, leaving the reader at the top of the page instead of
+   at the section they clicked. An instant jump is reliable. */
+[id] { scroll-margin-top: calc(var(--nav-h) + 1rem); }

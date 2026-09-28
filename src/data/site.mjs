@@ -75,7 +75,7 @@ export const NAV = [
     label: 'Services',
     href: '/services',
     children: [
-      { label: 'Website design', href: '/' },
+      { label: 'Website design', href: '/', anchor: '#website-design' },
       { label: 'SEO & AI search', href: '/seo' },
       { label: 'Local marketing', href: '/local-marketing' },
       { label: 'Consulting', href: '/consulting' },
@@ -89,7 +89,7 @@ export const NAV = [
 
 export const FOOTER_LINKS = [
   { label: 'About', href: '/about' },
-  { label: 'Website design', href: '/' },
+  { label: 'Website design', href: '/', anchor: '#website-design' },
   { label: 'SEO & AI search', href: '/seo' },
   { label: 'Local marketing', href: '/local-marketing' },
   { label: 'Consulting', href: '/consulting' },

@@ -7,7 +7,7 @@
  * so no listing can ever point at a TODO page or a 404.
  */
 import { SITE } from '../data/site.mjs';
-import { CATEGORIES, CATEGORY_HUB, CATEGORY_LABEL, PRIMARY_CATEGORY, byUrl, servicesByCategory, childrenOf } from '../data/services.mjs';
+import { CATEGORIES, CATEGORY_HUB, CATEGORY_LABEL, PRIMARY_CATEGORY, byUrl, servicesByCategory, childrenOf, linkTo } from '../data/services.mjs';
 import { GROUPS } from '../data/groups.mjs';
 import { CATEGORY_COPY } from '../content/categories.mjs';
 import * as chrome from './chrome.mjs';
@@ -54,14 +54,14 @@ export function serviceIndexBlock() {
       .map((s) => {
         const label = esc(s.name);
         return s.published
-          ? `            <li><a href="${s.url}">${label}</a></li>`
+          ? `            <li><a href="${linkTo(s.url)}">${label}</a></li>`
           : `            <li><span class="svc-soon">${label}</span></li>`;
       })
       .join('\n');
     return `        <div class="svc-row">
           <div class="svc-row-label">
             <span class="svc-row-num">${String(i + 1).padStart(2, '0')}</span>
-            <h3><a href="${hub}">${esc(CATEGORY_LABEL[cat])}</a></h3>
+            <h3><a href="${linkTo(hub)}">${esc(CATEGORY_LABEL[cat])}</a></h3>
             <p class="svc-row-count">${services.length} service${services.length === 1 ? '' : 's'}</p>
           </div>
           <ul class="svc-row-items">
@@ -101,7 +101,7 @@ export function serviceDirectoryBlock() {
       .map((s) => {
         const label = esc(s.name);
         return s.published
-          ? `              <li><a href="${s.url}">${label}</a></li>`
+          ? `              <li><a href="${linkTo(s.url)}">${label}</a></li>`
           : `              <li><span class="svc-soon">${label}</span></li>`;
       })
       .join('\n');
@@ -116,14 +116,14 @@ export function serviceDirectoryBlock() {
             <div class="cat-body">
 ${paras}
             </div>
-            <a class="cat-hub-link" href="${hub}">${esc(CATEGORY_LABEL[cat])} in detail<span aria-hidden="true">&#8594;</span></a>
+            <a class="cat-hub-link" href="${linkTo(hub)}">${esc(CATEGORY_LABEL[cat])} in detail<span aria-hidden="true">&#8594;</span></a>
           </div>
           <div class="cat-services">
             <p class="cat-services-head">${services.length} service${services.length === 1 ? '' : 's'}</p>
             <ul class="cat-list">
 ${items}
             </ul>
-            <p class="cat-note">Full descriptions for each of these are on the <a href="${hub}">${esc(CATEGORY_LABEL[cat].toLowerCase())} page</a>.</p>
+            <p class="cat-note">Full descriptions for each of these are on the <a href="${linkTo(hub)}">${esc(CATEGORY_LABEL[cat].toLowerCase())} page</a>.</p>
           </div>
         </section>`;
   }).join('\n');

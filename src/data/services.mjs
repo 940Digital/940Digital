@@ -27,6 +27,10 @@
 /**
  * @typedef {Object} Page
  * @property {string} url                Root-absolute, no trailing slash.
+ * @property {string} [serviceAnchor]    Display-only fragment for links that
+ *   point at this page AS a service. The homepage doubles as the website design
+ *   page, so a bare "/" drops the reader at the top of a hero about everything.
+ *   Never used for canonical, schema or sitemap URLs.
  * @property {string} slug               Output path without .html.
  * @property {'homepage'|'hub'|'directory'|'service'} role
  * @property {string|null} name          Primary GBP service name, verbatim.
@@ -126,6 +130,7 @@ export const CATEGORY_LABEL = {
 export const PAGES = [
   {
     "url": "/",
+    "serviceAnchor": "#website-design",
     "name": "website design",
     "alsoCovers": [],
     "gbpCategory": "Website designer",
@@ -1022,3 +1027,10 @@ export const serviceIndex = () =>
 /** The 45 service names grouped by their profile category, in profile order. */
 export const servicesByCategory = (cat) =>
   serviceIndex().filter(s => s.gbpCategory === cat);
+
+/** Href to use when linking to a page as a service. Display only. */
+export const linkTo = (urlOrPage) => {
+  const p = typeof urlOrPage === 'string' ? byUrl(urlOrPage) : urlOrPage;
+  if (!p) return typeof urlOrPage === 'string' ? urlOrPage : '#';
+  return p.url + (p.serviceAnchor || '');
+};

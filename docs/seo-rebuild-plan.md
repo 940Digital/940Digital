@@ -418,3 +418,19 @@ Fixed with a proper CSS rule-walker (brace matching, recursing into `@media`) th
 **The wide layout is now a rule, not a special case.** Any category with 10 or more services gets it (`WIDE_LAYOUT_MIN_SERVICES`), which covers Website designer (12) and Internet marketing service (18). Marketing agency (7) and Marketing consultant (6) keep prose-left / card-right, since there is not enough list to justify a full-width bottom row. The dark treatment stays exclusive to the primary profile category, so it still reads as primary.
 
 Verified at 1440px and 375px: no horizontal overflow, columns collapse 2 to 1 and 3 to 2 to 1. Lighthouse `/services` 100 / 100 / 100 / 100.
+
+## "Website design" links landing on the homepage, 2026-09-28
+
+Owen: why does the "web design" link take me to the home page?
+
+Because by design `/` **is** the website design page: "website designer Denton" and "website design Denton" are the same search, so a separate `/services/website-design` would compete with the homepage, which is the page the Google profile links to. That model is unchanged and still right.
+
+The problem is that the destination does not deliver on the label. The homepage is still a general homepage. It has not received the website design service content (answer-first block, what's included, process, proof, FAQs) because that is blocked on questions 1 to 5. So 25 links promising a service page dropped the reader at the top of a hero about everything.
+
+**Interim fix:** links that point at `/` *as a service* now carry `#website-design`, landing the reader on the services section instead of the top of the page. Implemented as a display-only `serviceAnchor` field plus a `linkTo()` helper, so canonical, schema, sitemap and breadcrumb URLs stay fragment-free. Verified: 10 schema URLs, zero fragments; sitemap clean; canonical still `https://www.940digital.com/`. Google consolidates fragments to the base URL, so no link equity is split.
+
+The nav "Home" link deliberately stays a bare `/`.
+
+**Caught while testing:** the first attempt added `html { scroll-behavior: smooth }`, which broke the thing it was meant to fix. On a cross-document navigation to a fragment the browser animates the jump, and that animation is cancelled while the hero canvas sizes on load, leaving the reader at scroll position 0. Direct navigation worked, clicking through did not. Removed it; an instant jump is reliable. Verified by clicking the real link: scrollY 1006, section top 88px, clearing the 72px nav.
+
+**The real fix is still pending.** An anchor is a patch. The homepage needs to genuinely become the website design service page, which needs Owen's answers to questions 1 to 5. Until then a reader who clicks "Website design" lands on a services overview rather than a service page.
