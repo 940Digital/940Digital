@@ -226,6 +226,35 @@ for (const [f, html] of docs) {
   }
 }
 
+/* ---------- crawlability files ---------- */
+{
+  const robots = existsSync(join(ROOT, 'robots.txt')) ? readFileSync(join(ROOT, 'robots.txt'), 'utf8') : '';
+  if (!robots) err('robots', 'robots.txt is missing');
+  /* Nothing may be disallowed. Blocking a URL stops a crawler fetching it,
+     which means it never sees a noindex and the page can still be indexed
+     from an external link. */
+  for (const m of robots.matchAll(/^\s*Disallow:\s*(\S+)/gim))
+    err('robots', `robots.txt disallows ${m[1]}. Use a noindex meta tag instead; a blocked page cannot be crawled and so its noindex is never read.`);
+  if (!robots.includes(`Sitemap: ${SITE.origin}/sitemap.xml`))
+    err('robots', 'robots.txt has no Sitemap line');
+  for (const agent of ['GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'PerplexityBot', 'Googlebot', 'Bingbot'])
+    if (!new RegExp(`User-agent: ${agent}\\b`).test(robots))
+      err('robots', `robots.txt does not name ${agent}`);
+
+  /* llms.txt must not drift from the published pages. */
+  const llms = existsSync(join(ROOT, 'llms.txt')) ? readFileSync(join(ROOT, 'llms.txt'), 'utf8') : '';
+  if (!llms) err('llms', 'llms.txt is missing');
+  else for (const p of PAGES.filter((x) => x.status === 'published' && x.role === 'service'))
+    if (!llms.includes(`${SITE.origin}${p.url})`)) err('llms', `llms.txt omits ${p.url}`);
+}
+
+/* ---------- social card ---------- */
+for (const [f, html] of docs) {
+  if (f === 'card.html') continue;
+  if (!/property="og:image" content="https?:\/\//.test(html)) err('og', `${f} has no absolute og:image`);
+  if (!/name="twitter:card" content="summary_large_image"/.test(html)) err('og', `${f} is not using a large summary card`);
+}
+
 /* ---------- report ---------- */
 console.log(`checked ${docs.size} html files, ${PAGES.length} mapped pages, ${serviceIndex().length} services\n`);
 if (warn.length) {

@@ -15,15 +15,21 @@ function parsePlans() {
   const blocks = html.split('<div class="price-card').slice(1);
   return blocks.map((b) => {
     const tier = (b.match(/<div class="price-tier">([^<]+)<\/div>/) || [])[1] || null;
-    const monthly = (b.match(/<span class="dollar">([^<]+)<\/span>/) || [])[1] || null;
-    const period = (b.match(/<span class="period">([^<]+)<\/span>/) || [])[1] || null;
-    const setup = (b.match(/<p class="price-setup">([^<]+)<\/p>/) || [])[1] || null;
+    /* A quoted tier carries a setup floor and no fixed monthly, so the headline
+       figure means the opposite of what it means on the fixed tiers. */
+    const quoted = /data-quoted="true"/.test(b);
+    const headline = (b.match(/<span class="dollar">([^<]+)<\/span>/) || [])[1] || null;
+    const monthly = quoted ? null : headline;
+    const period = quoted ? null : ((b.match(/<span class="period">([^<]+)<\/span>/) || [])[1] || null);
+    const setup = quoted
+      ? (headline ? `from ${headline} setup` : null)
+      : ((b.match(/<p class="price-setup">([^<]+)<\/p>/) || [])[1] || null);
     const featureBlock = (b.match(/<ul class="price-features">([\s\S]*?)<\/ul>/) || [])[1] || '';
     const features = [...featureBlock.matchAll(/<li>([\s\S]*?)<\/li>/g)].map((m) =>
       m[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim()
     );
     const featured = b.startsWith(' featured');
-    return { tier, monthly, period, setup, features, featured };
+    return { tier, monthly, period, setup, features, featured, quoted };
   }).filter((p) => p.tier);
 }
 

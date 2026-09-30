@@ -96,23 +96,23 @@ export const body = String.raw`    <section class="page-hero">
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>
 
-          <!-- SCALE -->
-          <div class="price-card reveal reveal-scale reveal-delay-4">
-            <div class="price-tier">Scale</div>
+          <!-- CUSTOM: quoted rather than fixed, so it carries no monthly figure. -->
+          <div class="price-card price-card--quoted reveal reveal-scale reveal-delay-4" data-quoted="true">
+            <div class="price-tier">Custom</div>
             <div class="price-amount">
-              <span class="dollar">$320</span>
-              <span class="period">/month</span>
+              <span class="price-prefix">From</span>
+              <span class="dollar">$800</span>
             </div>
-            <p class="price-setup">$3,200 one-time setup fee</p>
+            <p class="price-setup">setup. Monthly quoted with the project.</p>
             <ul class="price-features">
-              <li>Page count set at scope</li>
-              <li>Everything in Pro</li>
+              <li>Anything the other tiers do not cover</li>
               <li>Online store, product pages and checkout</li>
               <li>Service area pages for every town you cover</li>
               <li>A Google profile per location, managed</li>
               <li>Per-location tracking and reporting</li>
+              <li>Scoped and quoted after a free consult</li>
             </ul>
-            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
+            <a href="/contact" class="btn btn-ghost--dark">Talk it through</a>
           </div>
 
         </div>

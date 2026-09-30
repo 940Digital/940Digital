@@ -630,3 +630,36 @@ Every service stays reachable, one click further than before. That is a real tra
 **The check is scoped to `<main>` deliberately.** The footer links every hub, so checking the whole document passed trivially and proved nothing about whether the page routes a reader anywhere. Negative-tested by repointing one card: it now fails and names the missing hub.
 
 Lighthouse homepage: 100 / 100 / 100 / 100.
+
+---
+
+# Equal-height pricing cards and crawlability pass, 2026-09-30
+
+## Card heights
+
+`.pricing-grid` carried `align-items: start`, which sized every card to its own content and left five buttons at five different heights. Changed to `stretch`. The card was already a flex column with `flex: 1` on the feature list, so the buttons now land on one baseline automatically. Verified: all five cards 597px.
+
+The featured card's button sits 2px lower, which is its `transform: scale(1.035)`. That scale is a deliberate emphasis device and the rendered heights still match, so it was left alone.
+
+## Crawlability
+
+**`robots.txt` is now generated** (`scripts/build-robots.mjs`) and names 19 agents explicitly: Googlebot, Bingbot, Applebot, DuckDuckBot, GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, Google-Extended, Applebot-Extended, meta-externalagent, Amazonbot, Bytespider, CCBot. The wildcard already allowed all of them, so this documents intent rather than changing behaviour.
+
+**A mistake worth recording.** The first version disallowed `/card` and `/blog` because both are noindex. That is backwards: a URL blocked in `robots.txt` cannot be fetched, so the crawler never reads the `noindex`, and the page can still be indexed from an external link. Noindex only works on a page that is allowed to be crawled. Removed, and the guard now fails the build on any `Disallow` line with that explanation attached.
+
+**Snippet directives on every indexable page.** `max-snippet:-1, max-image-preview:large, max-video-preview:-1`. Google applies shorter defaults without these, which directly caps how much of a page can appear in a search result or an AI Overview. Noindex pages are excluded.
+
+**`og:image` site-wide.** There was none, so every share of any URL rendered as a bare text card. Built a 1200x630 image from the logo: the source PNG is 1254x1254 at 871KB with its own dark background, so padding it left a visible square. Cropped to the inked bounds with PIL and composited onto a canvas of the sampled background colour. 72KB. Also added `og:site_name`, `og:locale`, `og:image:alt`, and switched Twitter to `summary_large_image`.
+
+**`llms.txt` generated** from the data module: every published page with its description, grouped by profile category. It is a proposed convention rather than a standard and Google has said no special file is required for AI Overviews, so the value is speculative. It is generated rather than written, so it costs nothing and cannot drift.
+
+**Guard additions**, all negative-tested:
+- `robots.txt` must exist, name the major crawlers, carry the sitemap line, and contain no `Disallow`.
+- `llms.txt` must list every published service page.
+- Every page must carry an absolute `og:image` and a large summary card.
+
+## The real performance ceiling, unfixed
+
+Lighthouse on the homepage returned 100 and 90 on consecutive runs of the identical page, FCP swinging 1.4s to 2.8s. The cause is the render-blocking Google Fonts stylesheet, which Lighthouse estimates at up to 2.1s. Every page carries it.
+
+Nothing here caused it and nothing here fixed it. It is the single largest performance item on the site, and self-hosting the fonts would remove both the third-party dependency and the variance. Worth doing during the design pass.

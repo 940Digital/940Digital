@@ -30,7 +30,14 @@ export function head({ page, schema, canonical, robots }) {
   <meta property="og:description" content="${escAttr(ogDesc)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:site_name" content="${escAttr(SITE.name)}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="${SITE.origin}${SITE.ogImage}">
+  <meta property="og:image:width" content="${SITE.ogImageWidth}">
+  <meta property="og:image:height" content="${SITE.ogImageHeight}">
+  <meta property="og:image:alt" content="${escAttr(SITE.name)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${SITE.origin}${SITE.ogImage}">
   <meta name="twitter:title" content="${escAttr(ogTitle)}">
   <meta name="twitter:description" content="${escAttr(ogDesc)}">
   <meta name="robots" content="${robots}">

@@ -63,6 +63,11 @@ export const SITE = {
   trackerSrc: 'https://www.940digital.com/tracker.js',
   trackerSiteId: '496da1ce-3717-434d-865b-c61ef8f15c4e',
 
+  /* Social card. 1200x630, the size every major platform crops to. */
+  ogImage: '/img/og-default.png',
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+
   fonts:
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap',
 };
