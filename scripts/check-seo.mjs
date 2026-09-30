@@ -149,7 +149,7 @@ for (const p of PAGES) {
       else assets.add(`/${prefix}${e.name}`);
     }
   };
-  for (const d of ['css', 'js', 'img']) if (existsSync(join(ROOT, d))) walk(d, `${d}/`);
+  for (const d of ['css', 'js', 'img', 'fonts']) if (existsSync(join(ROOT, d))) walk(d, `${d}/`);
 
   for (const [f, html] of docs) {
     for (const m of html.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {

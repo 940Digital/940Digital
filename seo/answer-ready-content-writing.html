@@ -23,13 +23,13 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://www.940digital.com/seo/answer-ready-content-writing">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://www.940digital.com/#business","name":"940Digital","url":"https://www.940digital.com/"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Answer-ready content writing","serviceType":"Answer-ready content writing","description":"Content written and formatted so AI assistants and search engines can pull out and quote it: direct answers up front, real specifics, nothing to wade through.","url":"https://www.940digital.com/seo/answer-ready-content-writing","provider":{"@id":"https://www.940digital.com/#business"},"areaServed":[{"@type":"City","name":"Denton, Texas"},{"@type":"AdministrativeArea","name":"Denton County, Texas"},{"@type":"AdministrativeArea","name":"Dallas-Fort Worth Metroplex, Texas"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.940digital.com/"},{"@type":"ListItem","position":2,"name":"SEO & AI search","item":"https://www.940digital.com/seo"},{"@type":"ListItem","position":3,"name":"Answer-ready content writing","item":"https://www.940digital.com/seo/answer-ready-content-writing"}]}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -227,7 +227,11 @@
     </div>
   </footer>
 
-  <script src="/js/main.js"></script>
+  <!-- defer: the script already sits at the end of the body so the DOM is
+       parsed either way, but without it Lighthouse counts main.js as a
+       render-blocking resource. Execution still happens before
+       DOMContentLoaded, so nothing about the behaviour changes. -->
+  <script src="/js/main.js" defer></script>
   <script>(function(d,s,src,site){var e=d.createElement(s);e.async=true;e.src=src+'?site='+site;d.head.appendChild(e);})(document,'script','https://www.940digital.com/tracker.js','496da1ce-3717-434d-865b-c61ef8f15c4e');</script>
 </body>
 </html>

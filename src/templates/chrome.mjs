@@ -43,11 +43,9 @@ export function head({ page, schema, canonical, robots }) {
   <meta name="robots" content="${robots}">
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="${url}">
+  ${SITE.preloadFonts.map((f) => `<link rel="preload" href="${f}" as="font" type="font/woff2" crossorigin>`).join('\n  ')}
   <link rel="stylesheet" href="/css/style.css">
-${schema}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="${SITE.fonts}" rel="stylesheet">`;
+${schema}`;
 }
 
 /**
@@ -147,7 +145,11 @@ ${links}
 }
 
 export function tracker() {
-  return `  <script src="/js/main.js"></script>
+  return `  <!-- defer: the script already sits at the end of the body so the DOM is
+       parsed either way, but without it Lighthouse counts main.js as a
+       render-blocking resource. Execution still happens before
+       DOMContentLoaded, so nothing about the behaviour changes. -->
+  <script src="/js/main.js" defer></script>
   <script>(function(d,s,src,site){var e=d.createElement(s);e.async=true;e.src=src+'?site='+site;d.head.appendChild(e);})(document,'script','${SITE.trackerSrc}','${SITE.trackerSiteId}');</script>`;
 }
 

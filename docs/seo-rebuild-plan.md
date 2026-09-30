@@ -663,3 +663,42 @@ The featured card's button sits 2px lower, which is its `transform: scale(1.035)
 Lighthouse on the homepage returned 100 and 90 on consecutive runs of the identical page, FCP swinging 1.4s to 2.8s. The cause is the render-blocking Google Fonts stylesheet, which Lighthouse estimates at up to 2.1s. Every page carries it.
 
 Nothing here caused it and nothing here fixed it. It is the single largest performance item on the site, and self-hosting the fonts would remove both the third-party dependency and the variance. Worth doing during the design pass.
+
+---
+
+# Self-hosted fonts, 2026-09-30
+
+The render-blocking Google Fonts stylesheet was the site's largest performance item and the sole cause of its score variance. Now served from this origin.
+
+## What was done
+
+**Variable woff2, latin and latin-ext only.** Google returned 17 font files across 7 subsets. Cyrillic, Greek and Vietnamese were dropped, leaving 6 files. Variable fonts mean one file per family rather than one per weight, so nine weights across three families come from three files per subset.
+
+On an English page the browser fetches only the three latin files, **106 KB total**, because `unicode-range` gates latin-ext behind characters the page does not contain.
+
+**Zero new render-blocking requests.** The `@font-face` rules were inlined into `css/style.css` between markers rather than shipped as a second stylesheet. The page went from two render-blocking requests on two extra origins to one it was already making.
+
+**The three latin files are preloaded**, placed ahead of the stylesheet link so the fetches start before the CSS request is even issued. All three families appear above the fold, since the nav wordmark alone uses two of them. `crossorigin` is required even same-origin, because fonts are always fetched in CORS mode.
+
+**`main.js` is now deferred.** It already sat at the end of the body so the DOM was parsed either way, but without the attribute Lighthouse counted it as render-blocking. Behaviour is unchanged: it still executes before `DOMContentLoaded`.
+
+**Cache headers** in `vercel.json`: fonts get a year and `immutable`, since Google's filenames carry a content hash and a changed font is a changed filename. Images get a week with `stale-while-revalidate`.
+
+## Measured
+
+Five consecutive runs of the identical homepage, before and after:
+
+| | Performance | FCP | Spread |
+| --- | --- | --- | --- |
+| Before | 90 to 100 | 1.4s to 2.8s | 1.4s |
+| After | 100, five times | 0.95s, five times | **0.00s** |
+
+FCP improved 32% against the previous best case and 66% against its worst. The variance is gone entirely, because the critical path no longer depends on how quickly a third party answers.
+
+Render-blocking resources went from 3 to 1. The one remaining is `style.css` at 15 KB, which legitimately has to block.
+
+Verified in the browser afterwards: all three families loaded from `/fonts/`, **zero requests to googleapis or gstatic**, the cycle-word animation running, the scroll reveals firing, and the nav intact under deferred JavaScript.
+
+## Regenerating
+
+The font files and the `@font-face` block are committed, so the build has no network dependency. To pull new versions, refetch the Google CSS with a modern user-agent, keep the latin and latin-ext faces, download the woff2 files to `/fonts`, and replace the block between the `FONTS:START` and `FONTS:END` markers in `css/style.css`.

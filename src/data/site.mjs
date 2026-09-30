@@ -68,8 +68,16 @@ export const SITE = {
   ogImageWidth: 1200,
   ogImageHeight: 630,
 
-  fonts:
-    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap',
+  /* Self-hosted variable woff2. Only the latin files are preloaded: latin-ext
+     is gated behind unicode-range and is never fetched on an English page.
+     All three families appear above the fold (the nav wordmark uses two of
+     them), so all three are worth preloading. crossorigin is required even
+     same-origin, because fonts are always fetched in CORS mode. */
+  preloadFonts: [
+    '/fonts/inter-latin.woff2',
+    '/fonts/plus-jakarta-sans-latin.woff2',
+    '/fonts/jetbrains-mono-latin.woff2',
+  ],
 };
 
 /** @type {NavItem[]} */
