@@ -26,7 +26,7 @@ export const SITE = {
   phone: '+1-940-977-6253',
   phoneDisplay: '(940) 977-6253',
 
-  priceRange: '$200-$800',
+  priceRange: '$800-$1600',
 
   /* Service-area business. No street address is published anywhere. */
   address: {

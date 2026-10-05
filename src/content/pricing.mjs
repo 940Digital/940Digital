@@ -18,48 +18,10 @@ export const body = String.raw`    <section class="page-hero">
           <h2>Website plans</h2>
           <p>Flat setup fee, flat monthly. Hosting and maintenance are in every tier, so there is no separate IT bill and no invoice when something needs&nbsp;changing.</p>
         </div>
-        <div class="pricing-grid pricing-grid--5" data-family="Websites">
-
-          <!-- LANDING -->
-          <div class="price-card reveal reveal-scale reveal-delay-1">
-            <div class="price-tier">Landing</div>
-            <div class="price-amount">
-              <span class="dollar">$20</span>
-              <span class="period">/month</span>
-            </div>
-            <p class="price-setup">$200 one-time setup fee</p>
-            <ul class="price-features">
-              <li>One page</li>
-              <li>Custom design, no templates</li>
-              <li>Mobile responsive</li>
-              <li>Contact form</li>
-              <li>Hosting included</li>
-              <li>Design only, no SEO work</li>
-            </ul>
-            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
-          </div>
-
-          <!-- BASIC -->
-          <div class="price-card reveal reveal-scale reveal-delay-2">
-            <div class="price-tier">Basic</div>
-            <div class="price-amount">
-              <span class="dollar">$40</span>
-              <span class="period">/month</span>
-            </div>
-            <p class="price-setup">$400 one-time setup fee</p>
-            <ul class="price-features">
-              <li>4-page website</li>
-              <li>Everything in Landing</li>
-              <li>Photo gallery</li>
-              <li>Search foundations built in</li>
-              <li>Hosting and maintenance included</li>
-            </ul>
-            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
-          </div>
+        <div class="pricing-grid" data-family="Websites">
 
           <!-- PLUS -->
-          <div class="price-card featured reveal reveal-scale reveal-delay-3">
-            <span class="price-badge">Most popular</span>
+          <div class="price-card reveal reveal-scale reveal-delay-1">
             <div class="price-tier">Plus</div>
             <div class="price-amount">
               <span class="dollar">$80</span>
@@ -68,17 +30,20 @@ export const body = String.raw`    <section class="page-hero">
             <p class="price-setup">$800 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 10 pages</li>
-              <li>Everything in Basic</li>
+              <li>Custom design, no templates</li>
+              <li>Mobile responsive, with a contact form and photo gallery</li>
               <li>On-page SEO basics</li>
               <li>Service-specific landing pages</li>
               <li>Google Business Profile setup &amp; management</li>
+              <li>Hosting and maintenance included</li>
               <li>Priority support</li>
             </ul>
-            <a href="/contact" class="btn btn-primary">Get started</a>
+            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>
 
           <!-- PRO -->
-          <div class="price-card reveal reveal-scale reveal-delay-4">
+          <div class="price-card featured reveal reveal-scale reveal-delay-2">
+            <span class="price-badge">Recommended</span>
             <div class="price-tier">Pro</div>
             <div class="price-amount">
               <span class="dollar">$160</span>
@@ -93,11 +58,11 @@ export const body = String.raw`    <section class="page-hero">
               <li>Priority support &amp; maintenance</li>
               <li>Hands-on account management</li>
             </ul>
-            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
+            <a href="/contact" class="btn btn-primary">Get started</a>
           </div>
 
           <!-- CUSTOM: quoted rather than fixed, so it carries no monthly figure. -->
-          <div class="price-card price-card--quoted reveal reveal-scale reveal-delay-4" data-quoted="true">
+          <div class="price-card price-card--quoted reveal reveal-scale reveal-delay-3" data-quoted="true">
             <div class="price-tier">Custom</div>
             <div class="price-amount">
               <span class="price-prefix">From</span>

@@ -57,7 +57,7 @@ export const body = (parts) => String.raw`    <section class="page-hero">
         <div class="prose reveal">
           <h2>How a build runs</h2>
           <p>You book a free consult and tell me about the business. I design and build a working version before you pay for anything. If it is not what you wanted you walk away, and if it is, it goes live on your domain.</p>
-          <p>Every site is custom and mobile-first. From the Basic plan up, the search foundations are in place from the start: clean structure, fast pages, structured data, and content that lives in the page source so AI crawlers can read it rather than seeing an empty page. The one-page Landing plan is design only, with no search work, and the <a href="/pricing">pricing page</a> says so plainly.</p>
+          <p>Every site is custom and mobile-first. On every plan, the search foundations are in place from the start: clean structure, fast pages, structured data, and content that lives in the page source so AI crawlers can read it rather than seeing an empty page. The <a href="/pricing">pricing page</a> spells out what each plan adds on top.</p>
           <h2>What is included</h2>
           <p>Hosting and website maintenance are part of every plan, so there is no separate IT bill and no invoice when your hours change or you want a new photo up. The tiers and what each one covers are on the <a href="/pricing">pricing page</a>.</p>
         </div>

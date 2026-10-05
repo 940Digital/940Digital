@@ -132,7 +132,7 @@ const STATIC_PAGES = [
   {
     url: '/pricing', mod: 'pricing', out: 'pricing.html', robots: 'index, follow',
     title: 'Pricing | 940Digital | Website Pricing in Denton, TX',
-    meta: '940Digital website pricing: Basic $200 setup, Plus $400, Pro $800. Flat-rate plans for small businesses in Dallas-Fort Worth and Denton, Texas.',
+    meta: '940Digital website pricing: Plus $800 setup, Pro $1,600, plus custom quotes. Flat-rate plans for small businesses in Dallas-Fort Worth and Denton, Texas.',
     ogTitle: 'Pricing | 940Digital',
     ogDescription: 'Transparent website pricing for small businesses. No hidden fees, no hourly billing surprises.',
     h1: 'Pricing',
