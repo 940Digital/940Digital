@@ -65,7 +65,21 @@ module.exports = async function handler(req, res) {
       FAKE_UA_REGEX.test(userAgent) ||
       webdriverFlag ||
       isBotReferrer(req.body && req.body.referrer);
-    const body = { ...req.body, user_agent: userAgent, is_bot: isBot };
+    // Geography comes from Vercel's edge headers, so it is the visitor's
+    // approximate location without the IP address ever being stored. These
+    // always overwrite whatever the client body says.
+    const decode = (v) => {
+      if (typeof v !== "string" || !v) return null;
+      try { return decodeURIComponent(v); } catch { return v; }
+    };
+    const body = {
+      ...req.body,
+      user_agent: userAgent,
+      is_bot: isBot,
+      geo_country: decode(req.headers["x-vercel-ip-country"]),
+      geo_region: decode(req.headers["x-vercel-ip-country-region"]),
+      geo_city: decode(req.headers["x-vercel-ip-city"]),
+    };
 
     const upstream = await fetch(UPSTREAM_URL, {
       method: "POST",
