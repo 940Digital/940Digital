@@ -621,7 +621,8 @@
     if (document.visibilityState === "visible") startHeartbeat();
   });
 
-  document.addEventListener("pagehide", function () {
+  // pagehide is dispatched on window, so listening on document never fired it.
+  window.addEventListener("pagehide", function () {
     markReady();
     finishPageview();
     sendSessionUpdate();
