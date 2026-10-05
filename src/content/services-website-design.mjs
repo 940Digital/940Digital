@@ -19,7 +19,7 @@
 export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <p class="hero-eyebrow">Website design</p>
-        <h1>Website design for small businesses in Denton and DFW</h1>
+        <h1>Custom website design for Denton and DFW small businesses</h1>
         <p>A custom site built around how your business actually works, structured so customers and search engines both understand what you do and where you do&nbsp;it.</p>
       </div>
     </section>

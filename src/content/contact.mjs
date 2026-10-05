@@ -98,4 +98,15 @@ export const body = String.raw`    <section class="page-hero">
 
         </div>
       </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="prose reveal">
+          <h2>What to send me</h2>
+          <p>You do not need a brief or a budget to get started. A sentence or two about your business, what you sell, and what is frustrating you about your website or your Google results is plenty. If you already have a site, include the address and I will look at it before we talk.</p>
+          <p>I work with small businesses in Denton, Denton County, and the wider Dallas-Fort Worth metroplex. That includes new websites, redesigns, SEO, Google Business Profile work, and one-on-one consulting. If you are not sure which of those you need, say so. Sorting that out is the first part of the conversation.</p>
+          <p>The first call is free, and so is the demo. Before you commit to anything, you can see pricing on the <a href="/pricing">pricing page</a>, browse the full <a href="/services">list of services</a>, or look at recent <a href="/work">work</a>.</p>
+        </div>
+      </div>
     </section>`;

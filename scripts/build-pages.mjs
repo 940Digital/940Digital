@@ -124,7 +124,7 @@ const STATIC_PAGES = [
   {
     url: '/about', mod: 'about', out: 'about.html', robots: 'index, follow',
     title: 'About | 940Digital | Owen Leiter, Denton, TX',
-    meta: '940Digital is a personal, senior-level digital marketing partner founded by Owen Leiter, serving small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.',
+    meta: '940Digital is a senior-level digital marketing partner founded by Owen Leiter, serving small businesses in Dallas-Fort Worth and Denton, Texas.',
     ogTitle: 'About | 940Digital',
     ogDescription: 'A personal, senior-level digital marketing partner for small businesses. Founded by Owen Leiter, serving Dallas-Fort Worth and Denton, Texas.',
     h1: 'About',

@@ -15,14 +15,14 @@
 
 ## Website designer
 
-Custom websites for small businesses in Denton and DFW. Built around your business, structured to be found, and you see a working demo before you pay anything.
+Custom websites for small businesses in Denton and DFW. Built around your business, structured to be found, with a working demo before you pay.
 
 - [Website design overview](https://www.940digital.com/services/website-design)
-- [Website Maintenance](https://www.940digital.com/services/website-maintenance): Ongoing upkeep that keeps your site running the way it did on launch day. Covers speed, content updates, analytics, hosting, and catching issues early.
-- [Website redesign](https://www.940digital.com/services/website-redesign): Turn a dated or slow site into a modern one without losing the rankings you already have. Includes redirect mapping, rewritten content, and mobile-first layout.
+- [Website Maintenance](https://www.940digital.com/services/website-maintenance): Ongoing upkeep that keeps your site running like launch day. Covers speed, content updates, analytics, hosting, and catching issues early.
+- [Website redesign](https://www.940digital.com/services/website-redesign): Turn a dated or slow site into a modern one without losing your rankings. Includes redirect mapping, rewritten content, and mobile-first layout.
 - [Landing page design](https://www.940digital.com/services/landing-page-design): A single focused page built for one goal, like booking a call or requesting a quote. Useful for ads, a promotion, or a service you want more of.
 - [Ecommerce website design](https://www.940digital.com/services/ecommerce-website-design): Online stores for local businesses that sell products. Clear product pages, simple checkout, and setup for local pickup or shipping in the DFW area.
-- [UX/UI design](https://www.940digital.com/services/ux-ui-design): Layout and navigation planned so visitors find what they need and get in touch faster. The structural work behind a site that turns traffic into calls.
+- [UX/UI design](https://www.940digital.com/services/ux-ui-design): Layout and navigation planned so visitors find what they need and get in touch faster. The structure behind a site that turns traffic into calls.
 - [Website speed optimization](https://www.940digital.com/services/website-speed-optimization): Fix the heavy images, bloated code, and slow hosting that keep your pages from loading. Faster pages hold visitors and support better search rankings.
 - [Website copywriting](https://www.940digital.com/services/website-copywriting): Website copy that explains what you do, who you help, and why someone should pick you. Written in your voice, for the customers you actually want.
 - [Website migration](https://www.940digital.com/services/website-migration): Move your site to a new platform or host without breaking pages or losing search traffic. Includes redirect mapping and a full check after the move.
@@ -32,34 +32,34 @@ Custom websites for small businesses in Denton and DFW. Built around your busine
 
 ## Internet marketing service
 
-Search engine optimization and AI search for Denton and DFW businesses. Built on clean pages, useful content, and credibility search engines can verify.
+SEO and AI search for Denton and DFW businesses. Built on clean pages, useful content, and credibility search engines can verify.
 
 - [SEO & AI search overview](https://www.940digital.com/seo)
-- [SEO audit](https://www.940digital.com/seo/seo-audit): A plain-English review of what is holding your site back, with a prioritized fix list covering technical issues, content gaps, and local ranking signals.
-- [Technical SEO](https://www.940digital.com/seo/technical-seo): Fix what stops Google reading your site properly: indexing errors, broken links, duplicate pages, slow pages, and problems that only show up on mobile.
-- [On-page SEO](https://www.940digital.com/seo/on-page-seo): Tune each page's title, headings, content, and internal links so search engines can tell what that page is about and which town it serves. Done page by page.
-- [Link building](https://www.940digital.com/seo/link-building): Earn links from real local sites: chambers, sponsorships, partners, and local news coverage. No link schemes and no paid networks that put your site at risk.
+- [SEO audit](https://www.940digital.com/seo/seo-audit): A plain-English review of what is holding your site back, with a prioritized fix list for technical issues, content gaps, and local ranking signals.
+- [Technical SEO](https://www.940digital.com/seo/technical-seo): Fix what stops Google reading your site: indexing errors, broken links, duplicate pages, slow pages, and problems that only show up on mobile.
+- [On-page SEO](https://www.940digital.com/seo/on-page-seo): Tune each page's title, headings, content, and internal links so search engines know what the page is about and which town it serves.
+- [Link building](https://www.940digital.com/seo/link-building): Earn links from real local sites: chambers, sponsorships, partners, and local news. No link schemes or paid networks that put your site at risk.
 - [Citation building](https://www.940digital.com/seo/citation-building): Get your name, address, and phone listed correctly on the directories that count, so search engines and customers see the same details everywhere.
 - [Local listings cleanup](https://www.940digital.com/seo/local-listings-cleanup): Track down the duplicate and incorrect listings, old phone numbers, and dead addresses that confuse customers and undercut your local rankings.
-- [Schema markup](https://www.940digital.com/seo/schema-markup): Structured data that tells search engines your business type, services, and service area in a format they read without guessing. Built to match your site.
+- [Schema markup](https://www.940digital.com/seo/schema-markup): Structured data that tells search engines your business type, services, and service area in a format they read without guessing.
 - [Blog writing](https://www.940digital.com/seo/blog-writing): Articles that answer the questions customers ask before they buy. Written for people first, and planned around the topics that actually bring in work.
-- [SEO content writing](https://www.940digital.com/seo/seo-content-writing): Service and location page content that is specific, accurate, and built to rank, using real detail from your business instead of filler and keyword padding.
+- [SEO content writing](https://www.940digital.com/seo/seo-content-writing): Service and location page content that is specific, accurate, and built to rank, using real detail from your business instead of filler.
 - [Rank tracking and geo-grid reports](https://www.940digital.com/seo/rank-tracking): See where you rank across your whole service area on Google Maps, not just at your own address, in monthly reports that show exactly what moved.
 - [Competitor analysis](https://www.940digital.com/seo/competitor-analysis): Find out why a specific competitor outranks you in Maps and search, and get a plan to close the gap on their categories, content, reviews, and links.
 - [Google Search Console setup](https://www.940digital.com/seo/google-search-console-setup): Connect your site to Google Search Console so you can see what you show up for, fix indexing problems, and catch issues before they cost you traffic.
-- [Website analytics setup](https://www.940digital.com/seo/website-analytics-setup): See where your visitors come from and which pages turn them into calls and form fills, reported in plain numbers you can act on instead of a dashboard.
+- [Website analytics setup](https://www.940digital.com/seo/website-analytics-setup): See where visitors come from and which pages turn them into calls and form fills, reported in plain numbers you can act on instead of a dashboard.
 - [AI Overview optimization](https://www.940digital.com/seo/ai-overview-optimization): Get your pages cited in Google's AI Overviews and by tools like ChatGPT and Perplexity. Also called GEO or AEO: same work, three different names.
 - [AI citation building](https://www.940digital.com/seo/ai-citation-building): Earn the mentions and links AI tools actually pull from, so your business gets named when someone asks ChatGPT or Perplexity for a recommendation.
-- [AI search visibility audit](https://www.940digital.com/seo/ai-search-visibility-audit): Find out whether your business shows up when people ask AI tools what you do, see who is beating you there, and get a fix list ranked by what moves first.
-- [Answer-ready content writing](https://www.940digital.com/seo/answer-ready-content-writing): Content written and formatted so AI assistants and search engines can pull out and quote it: direct answers up front, real specifics, nothing to wade through.
+- [AI search visibility audit](https://www.940digital.com/seo/ai-search-visibility-audit): Find out whether your business shows up when people ask AI tools what you do, see who is beating you there, and get a fix list ranked by impact.
+- [Answer-ready content writing](https://www.940digital.com/seo/answer-ready-content-writing): Content formatted so AI assistants and search engines can pull out and quote it: direct answers up front, real specifics, nothing to wade through.
 
 ## Marketing agency
 
 Local marketing for Denton and DFW businesses: Google Business Profile, reviews, listings, local SEO, and getting recommended by AI search tools.
 
 - [Local marketing overview](https://www.940digital.com/local-marketing)
-- [Google Business Profile setup](https://www.940digital.com/local-marketing/google-business-profile-setup): Build your Google Business Profile right from day one: the correct categories, services, service area, hours, photos, and a description that follows the rules.
-- [Google Business Profile optimization](https://www.940digital.com/local-marketing/google-business-profile-optimization): Fill out an existing Google Business Profile properly, with the right categories, services, photos, and attributes, so it shows up for more local searches.
+- [Google Business Profile setup](https://www.940digital.com/local-marketing/google-business-profile-setup): Build your Google Business Profile right from day one: correct categories, services, service area, hours, photos, and a compliant description.
+- [Google Business Profile optimization](https://www.940digital.com/local-marketing/google-business-profile-optimization): Fill out your Google Business Profile properly, with the right categories, services, photos, and attributes, so it shows up in more local searches.
 - [Google Business Profile management](https://www.940digital.com/local-marketing/google-business-profile-management): Monthly care for your Google Business Profile: posts, photos, service updates, questions and answers, review replies, and watching for unwanted edits.
 - [Review generation strategy](https://www.940digital.com/local-marketing/review-generation-strategy): A simple system for asking happy customers for reviews at the right moment, with text and email templates that stay inside Google's review policies.
 - [Review response management](https://www.940digital.com/local-marketing/review-response-management): Replies to your reviews, good and bad, that show future customers how you handle people and keep your Google Business Profile active every month.
@@ -71,10 +71,10 @@ Local marketing for Denton and DFW businesses: Google Business Profile, reviews,
 One-on-one marketing and SEO consulting for owner-operated businesses in Denton and DFW. Straight answers and a plan you can act on yourself.
 
 - [Consulting overview](https://www.940digital.com/consulting)
-- [SEO consulting](https://www.940digital.com/consulting/seo-consulting): One-on-one advice from the person doing the work. Straight answers about your rankings, your site, and your Google profile, plus a plan you can act on.
-- [Marketing strategy](https://www.940digital.com/consulting/marketing-strategy): Help deciding where to put your marketing time and money, based on what actually brings in customers for owner-operated local businesses in Denton and DFW.
+- [SEO consulting](https://www.940digital.com/consulting/seo-consulting): One-on-one advice from the person doing the work. Straight answers about your rankings, your site, and your Google profile, plus a plan to act on.
+- [Marketing strategy](https://www.940digital.com/consulting/marketing-strategy): Help deciding where to put your marketing time and money, based on what actually brings in customers for owner-operated Denton and DFW businesses.
 - [Website strategy session](https://www.940digital.com/consulting/website-strategy-session): A working session to plan your pages, services, and site structure before you build or rebuild, so the site serves customers and search engines both.
-- [Google Business Profile training](https://www.940digital.com/consulting/google-business-profile-training): Learn to run your own Google Business Profile: posting, replying to reviews, adding services and photos, and avoiding the changes that trigger suspensions.
+- [Google Business Profile training](https://www.940digital.com/consulting/google-business-profile-training): Learn to run your own Google Business Profile: posting, replying to reviews, adding services and photos, and avoiding changes that cause suspensions.
 - [SEO training for business owners](https://www.940digital.com/consulting/seo-training): Practical training for owners or staff who want to handle basic SEO in-house, from writing service pages to tracking what actually moved the needle.
 - [Photo and video strategy](https://www.940digital.com/consulting/photo-and-video-strategy): What to photograph and film for your profile and website so customers see real work and real people, shot at the angle your business looks best from.
 

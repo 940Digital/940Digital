@@ -19,7 +19,7 @@ export const body = String.raw`    <section class="page-hero">
         </div>
         <div class="portfolio-grid">
           <a href="https://www.jcarpenterlandscaping.com/" target="_blank" rel="noopener" class="portfolio-card reveal reveal-scale reveal-delay-1">
-            <img src="/img/portfolio/jc-landscaping.jpg" srcset="/img/portfolio/jc-landscaping-700.jpg 700w, /img/portfolio/jc-landscaping.jpg 900w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw" alt="JC Landscaping: stone patio and pathway build" width="900" height="675" class="portfolio-card-img" fetchpriority="high" decoding="async">
+            <img src="/img/portfolio/jc-landscaping.webp" srcset="/img/portfolio/jc-landscaping-700.webp 700w, /img/portfolio/jc-landscaping.webp 900w" sizes="(min-width: 1200px) 540px, (min-width: 769px) 46vw, 92vw" alt="JC Landscaping: stone patio and pathway build" width="900" height="675" class="portfolio-card-img" fetchpriority="high" decoding="async">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Landscaping &amp; hardscaping</div>
               <h3>JC Landscaping</h3>
