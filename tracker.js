@@ -9,6 +9,17 @@
     return;
   }
 
+  // Own-visit opt-out. Open any tracked page once with ?t940=ignore and this
+  // browser stops reporting, so testing never shows up in the numbers.
+  // ?t940=track switches it back on. The flag lives in this browser's own
+  // storage for that site, so use the link once per tracked site.
+  try {
+    var optFlag = new URLSearchParams(location.search).get("t940");
+    if (optFlag === "ignore") localStorage.setItem("t940_ignore", "1");
+    else if (optFlag === "track") localStorage.removeItem("t940_ignore");
+    if (localStorage.getItem("t940_ignore") === "1") return;
+  } catch (e) {}
+
   var COLLECT_URL = "https://www.940digital.com/api/collect";
 
   function getScriptEl() {
@@ -471,32 +482,42 @@
     true
   );
 
+  // The start of the funnel whose end is lead_submit. One start per form per
+  // page view, whatever signal arrives first.
+  function startForm(form) {
+    if (!form || !pv) return;
+    var key = form.id || form.name || "form";
+    if (pv.formsStarted[key]) return;
+    pv.formsStarted[key] = true;
+    fireEvent("form_start", key.slice(0, 100));
+  }
+
   document.addEventListener(
     "submit",
     function (e) {
       var form = e.target;
       var target = (form && (form.id || form.name)) || "form";
+      // A form cannot be sent without having been started. Autofill and pasted
+      // values never move focus into a field, so count the start here too, or
+      // completion can read over 100%.
+      startForm(form);
       fireEvent("lead_submit", target);
     },
     true
   );
 
-  // First time someone touches a field in a form: the start of the funnel whose
-  // end is lead_submit.
-  document.addEventListener(
-    "focusin",
-    function (e) {
-      var t = e.target;
-      if (!t || !t.tagName || !/^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName) || !pv) return;
-      var form = t.form;
-      if (!form) return;
-      var key = form.id || form.name || "form";
-      if (pv.formsStarted[key]) return;
-      pv.formsStarted[key] = true;
-      fireEvent("form_start", key.slice(0, 100));
-    },
-    true
-  );
+  // First time someone touches a field: focus, typing, or autofill (which
+  // fires input and change without focusing anything).
+  function fieldStart(e) {
+    var t = e.target;
+    if (!t || !t.tagName || !/^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName)) return;
+    // Hidden anti-bot honeypots are filled by scripts, not people.
+    if (t.tabIndex === -1 && t.closest && t.closest("[aria-hidden='true']")) return;
+    startForm(t.form);
+  }
+  document.addEventListener("focusin", fieldStart, true);
+  document.addEventListener("input", fieldStart, true);
+  document.addEventListener("change", fieldStart, true);
 
   // Media events do not bubble, but they can be caught in the capture phase.
   document.addEventListener(
@@ -517,6 +538,9 @@
     if (!pv || pv.errors >= 5) return;
     var msg = (e && e.message) || "";
     if (!msg || /^script error\.?$/i.test(msg) || /ResizeObserver/i.test(msg)) return;
+    // Wallets and other browser extensions inject scripts into every page and
+    // throw errors that have nothing to do with this site.
+    if (/ethereum|chrome-extension:|moz-extension:|safari-(web-)?extension:/i.test(msg + " " + (e.filename || ""))) return;
     pv.errors += 1;
     var where = e.filename ? " @ " + String(e.filename).split("/").pop().split("?")[0] + ":" + (e.lineno || 0) : "";
     fireEvent("js_error", (msg + where).slice(0, 100));

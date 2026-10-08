@@ -29,7 +29,10 @@
   <link rel="stylesheet" href="/css/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://www.940digital.com/#business","name":"940Digital","url":"https://www.940digital.com/"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.940digital.com/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://www.940digital.com/contact"}]}</script>
-  <link rel="stylesheet" href="/css/altcha.css">
+  <!-- The spam-check widget sits below the fold and only draws once its script runs,
+       so its stylesheet should not hold up the first paint of the page. -->
+  <link rel="stylesheet" href="/css/altcha.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/altcha.css"></noscript>
   <style>
     altcha-widget {
       --altcha-color-base: var(--white, #fff);
