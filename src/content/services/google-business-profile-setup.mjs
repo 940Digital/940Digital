@@ -24,9 +24,8 @@ export default {
     'Setup means there is no profile yet, or it was never claimed. The work is creation and verification. <a href="/local-marketing/google-business-profile-optimization">Optimization</a> is for a profile that already exists and needs assessing and repairing, which carries different risks because editing a live listing can trigger review.',
     'Ongoing posts, photos and review replies afterwards are <a href="/local-marketing/google-business-profile-management">profile management</a>.',
   ],
-  cost: 'plan',
-  planPhrase: 'Google Business Profile',
-  costNote: 'Setup on its own, without a website plan, is quoted after a consult.',
+  cost: 'quote',
+  costNote: 'Setup is a separate, one-time service and is not part of the website plans.',
   faqs: [
     { q: 'Can I do this myself?', a: 'Yes, and plenty of owners should. It is free and the interface is not hard. What is worth paying for is the category choice and the service area configuration, which are the two decisions with lasting consequences. If you want to run it yourself properly, that is <a href="/consulting/google-business-profile-training">Google Business Profile training</a>.' },
     { q: 'I do not have a shop. Can I still have a profile?', a: 'Yes. A service-area business hides its address and lists the areas it covers. Configuring that correctly matters, because an address shown when it should be hidden is a common suspension trigger.' },

@@ -25,9 +25,8 @@ export default {
     '<a href="/local-marketing/google-business-profile-setup">Setup</a> creates a profile that does not exist. This assesses and repairs one that does, and the constraint is not disturbing what currently works.',
     '<a href="/local-marketing/google-business-profile-management">Management</a> is the recurring monthly commitment afterwards. Optimization is a project with an end date.',
   ],
-  cost: 'plan',
-  planPhrase: 'Google Business Profile',
-  costNote: 'A one-time overhaul without a website plan is quoted after looking at the current profile, which can be done from outside before anything is agreed.',
+  cost: 'quote',
+  costNote: 'A one-time overhaul is quoted after looking at the current profile, which can be done from outside before anything is agreed.',
   faqs: [
     { q: 'Will changing my categories hurt my rankings?', a: 'It can move them in either direction, which is why it is the change made most deliberately. A wrong primary category is worth correcting; changing a correct one to chase a term is usually a mistake.' },
     { q: 'Could this get my profile suspended?', a: 'Careless editing can. That is precisely why the work is sequenced and spaced rather than done in one sitting. The riskiest edits are the ones people make casually because the interface makes them look trivial.' },

@@ -18,9 +18,8 @@ export default {
     'If you would rather do this yourself, that is <a href="/consulting/google-business-profile-training">Google Business Profile training</a>, and for a lot of businesses that is the better value.',
   ],
   limit: 'This is genuinely optional. An owner with ten minutes a week can do most of it, and I will tell you that rather than sell you a retainer for work you could handle. What you are buying is that it actually happens every month.',
-  cost: 'plan',
-  planPhrase: 'Google Business Profile',
-  costNote: 'Available without a website plan, quoted monthly.',
+  cost: 'quote',
+  costNote: 'Quoted monthly, and available whether or not I built your website.',
   faqs: [
     { q: 'How many posts a month?', a: 'Enough that the profile does not look dormant, which is a lower bar than most agencies imply. Posting weekly for its own sake produces filler nobody reads.' },
     { q: 'Do posts actually affect rankings?', a: 'Direct ranking impact is modest at best. The honest case for posting is that an active profile looks like a running business to a customer comparing you with someone whose last update was in 2023.' },

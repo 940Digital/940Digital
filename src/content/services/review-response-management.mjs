@@ -24,9 +24,8 @@ export default {
     '<a href="/local-marketing/review-generation-strategy">Review generation</a> is about getting reviews written at all. This is what happens once they exist, and the two are usually run together.',
     'Included as part of <a href="/local-marketing/google-business-profile-management">profile management</a>, and available on its own if that is all you want handled.',
   ],
-  cost: 'plan',
-  planPhrase: 'Google Business Profile',
-  costNote: 'Available separately if you want reviews handled and nothing else.',
+  cost: 'quote',
+  costNote: 'Available on its own if you want reviews handled and nothing else.',
   faqs: [
     { q: 'Do you post replies directly or send them to me?', a: 'Either. Some owners want to approve everything, particularly early on, and some want it handled. Negative reviews are always worth a quick word with you first, because you know what happened and I do not.' },
     { q: 'Should I reply to every review?', a: 'Yes, including the one-line positive ones. It costs a sentence and it is visible to everyone reading afterwards.' },

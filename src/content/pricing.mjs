@@ -20,9 +20,9 @@ export const body = String.raw`    <section class="page-hero">
         </div>
         <div class="pricing-grid" data-family="Websites">
 
-          <!-- PLUS -->
+          <!-- STARTER -->
           <div class="price-card reveal reveal-scale reveal-delay-1">
-            <div class="price-tier">Plus</div>
+            <div class="price-tier">Starter</div>
             <div class="price-amount">
               <span class="dollar">$80</span>
               <span class="period">/month</span>
@@ -34,7 +34,6 @@ export const body = String.raw`    <section class="page-hero">
               <li>Mobile responsive, with a contact form and photo gallery</li>
               <li>On-page SEO basics</li>
               <li>Service-specific landing pages</li>
-              <li>Google Business Profile setup &amp; management</li>
               <li>Hosting and maintenance included</li>
               <li>Priority support</li>
             </ul>
@@ -52,7 +51,7 @@ export const body = String.raw`    <section class="page-hero">
             <p class="price-setup">$1,600 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 13 pages</li>
-              <li>Everything in Plus</li>
+              <li>Everything in Starter</li>
               <li>Advanced SEO strategy and consulting</li>
               <li>Analytics &amp; monthly reporting</li>
               <li>Priority support &amp; maintenance</li>

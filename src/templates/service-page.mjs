@@ -215,6 +215,6 @@ function costBlock(content, page) {
   }
   return `<p>Quoted after a free consult, because what it takes depends entirely on what you already have. ${esc(
     'Book a call, I will tell you what is involved, and you get a number before anything starts.'
-  )} If you are already on a plan, this may fold into it: the tiers are on the <a href="/pricing">pricing page</a>.</p>
+  )} Website plan details are on the <a href="/pricing">pricing page</a>.</p>
           ${content.costNote ? `<p>${rich(content.costNote)}</p>` : ''}`;
 }
