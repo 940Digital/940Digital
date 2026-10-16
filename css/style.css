@@ -790,12 +790,9 @@ p { max-width: 62ch; }
   color: var(--charcoal-dark);
 }
 .why-lede .why-hl {
-  color: inherit;
+  background: none;
+  color: var(--blue-ink);
   font-weight: 700;
-  padding: 0 .15em;
-  background: linear-gradient(transparent 58%, rgba(49,148,224,.28) 58%, rgba(49,148,224,.28) 92%, transparent 92%);
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 .why-lede a {
   color: var(--blue-ink);
