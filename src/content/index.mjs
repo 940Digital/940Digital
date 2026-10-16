@@ -25,7 +25,24 @@ export const body = String.raw`    <!-- HERO -->
         <div class="section-header reveal">
           <p class="eyebrow eyebrow--accent">The difference</p>
           <h2>Why&nbsp;us?</h2>
-          <p class="why-lede">I help you <mark class="why-hl">attract and convert more customers</mark> by building trust with <strong>Google</strong>, <strong>AI search bots</strong>, and <strong>the people who need you</strong>. That means a <a href="/services/website-design">premium website</a>, <a href="/seo">SEO</a>, <a href="/seo/ai-overview-optimization">GEO</a>, and a <a href="/local-marketing/google-business-profile-optimization">Google Business Profile</a>, all built to make your business look like <mark class="why-hl">the best option</mark> the moment someone finds&nbsp;you.</p>
+          <p class="why-lede">I help you <mark class="why-hl">attract and convert more customers</mark> by earning trust from three audiences at once.</p>
+        </div>
+        <div class="why-grid">
+          <article class="why-card reveal">
+            <span class="why-num" aria-hidden="true">01</span>
+            <h3>Google</h3>
+            <p>A fully built-out <a href="/local-marketing/google-business-profile-optimization">Google Business Profile</a> and <a href="/seo">SEO</a> put you in the map pack and at the top of the results.</p>
+          </article>
+          <article class="why-card reveal">
+            <span class="why-num" aria-hidden="true">02</span>
+            <h3>AI search bots</h3>
+            <p><a href="/seo/ai-overview-optimization">GEO</a> makes your business easy for ChatGPT, Gemini, and AI Overviews to understand, trust, and recommend.</p>
+          </article>
+          <article class="why-card reveal">
+            <span class="why-num" aria-hidden="true">03</span>
+            <h3>The people who need you</h3>
+            <p>A <a href="/services/website-design">premium website</a> makes your business look like the best option the moment someone finds&nbsp;you.</p>
+          </article>
         </div>
         <div style="text-align:center; margin-top:clamp(2rem,4vh,3rem)" class="reveal">
           <a href="/work" class="btn btn-ghost--dark">See my portfolio</a>

@@ -815,6 +815,56 @@ p { max-width: 62ch; }
   .why-lede a { transition: none; }
 }
 
+/* "Why us" trust cards: one card per audience being won over. */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vh, 3rem);
+}
+.why-card {
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 16px;
+  padding: 1.75rem 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.why-num {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--blue-ink);
+}
+.why-card h3 {
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--charcoal-dark);
+  margin: 0;
+}
+.why-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--charcoal-text);
+  margin: 0;
+}
+.why-card a {
+  color: var(--blue-ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--blue-accent);
+  text-underline-offset: 3px;
+}
+.why-card a:hover,
+.why-card a:focus-visible {
+  color: var(--blue-hover);
+}
+@media (max-width: 860px) {
+  .why-grid { grid-template-columns: 1fr; }
+}
+
 /* ============================================
    HOW IT WORKS
    ============================================ */
