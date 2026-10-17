@@ -2329,7 +2329,8 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
   .pricing-grid--5 .price-features li { font-size: 0.9rem; }
 }
 
-/* A quoted tier leads with a setup floor instead of a monthly figure. */
+/* A quoted tier shows "Quoted" in place of a monthly figure. .price-prefix is
+   unused since Custom dropped its "From $800" base (2026-10-17). */
 .price-prefix {
   font-family: var(--font-display);
   font-size: 0.85rem;
