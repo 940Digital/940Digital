@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'A single page built for one goal, like booking a call or requesting a quote, for businesses in Denton and DFW.',
+    'A single page built for one goal, like booking a call or requesting a quote.',
     'A landing page exists because a homepage has a conflict of interest. A homepage has to introduce the business, list what you do, prove you are real, and route people to half a dozen places. A landing page has one job, and everything that does not serve it comes off.',
     'Most often it is the page behind an ad, a promotion, or one service you want more of.',
   ],

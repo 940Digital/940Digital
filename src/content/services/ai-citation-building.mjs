@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Earning the mentions AI tools actually pull from, so your business gets named when someone asks for a recommendation, for businesses in Denton and DFW.',
+    'Earning the mentions AI tools actually pull from, so your business gets named when someone asks for a recommendation.',
     'When an assistant recommends local businesses it is not reading everybody\'s website. It draws on a relatively small set of sources it treats as reliable: established directories, review platforms, local publications, industry bodies and community sites.',
     'If you are absent from those, you are absent from the answer, however good your own site is.',
   ],

@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Service and location page content that is specific, accurate and built to rank, for businesses in Denton and DFW.',
+    'Service and location page content that is specific, accurate and built to rank.',
     'These are the money pages. A service page has to convince someone who is actively looking for that service, and it has to do it while being findable for the search that brought them.',
     'The two goals only conflict when the writing is bad. Pages stuffed for search read badly to people and increasingly do not work on search engines either.',
   ],

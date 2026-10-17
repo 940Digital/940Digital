@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'A page for each town you genuinely serve, built on real local detail, for businesses working across Denton County and DFW.',
+    'A page for each town you genuinely serve, built on real local detail.',
     'If you work in eight towns and your site only mentions the one you are based in, you are invisible to most of the people looking for you. A service area page fixes that by giving each town a page with something real on it.',
     'The word doing the work in that sentence is "real". This service comes with a limit attached, and the limit is the point.',
   ],
@@ -27,7 +27,7 @@ export default {
   cost: 'quote',
   costNote: 'Priced per page, and the number of pages gets decided together after working out which towns you genuinely serve and what real detail exists for each.',
   faqs: [
-    { q: 'Can I have a page for every town in the metroplex?', a: 'No. I build pages for towns you actually work in, with detail specific to each. Beyond that the pages stop helping and start carrying risk, and I would be taking your money to build something that could hurt you.' },
+    { q: 'Can I have a page for every town in my region?', a: 'No. I build pages for towns you actually work in, with detail specific to each. Beyond that the pages stop helping and start carrying risk, and I would be taking your money to build something that could hurt you.' },
     { q: 'What if I serve a town but have no photos from it yet?', a: 'Then we either wait for a job, or the page leans on what is genuinely true: your service area, your drive time, what you do there. It can still be a real page. What it cannot be is a copy of another one.' },
     { q: 'How many pages is normal?', a: 'Fewer than most people expect, and it depends entirely on where you really work. Somewhere between a handful and a dozen covers most local trades honestly.' },
     { q: 'Will these rank straight away?', a: 'No. A new page takes time to be crawled and to earn position, and a town where established competitors are strong takes longer. Anyone promising a timeline on this is guessing.' },

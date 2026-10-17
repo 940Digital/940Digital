@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'One-to-one advice about your rankings, your site and your Google profile, for owner-operated businesses in Denton and DFW.',
+    'One-to-one advice about your rankings, your site and your Google profile, for owner-operated businesses.',
     'Consulting is for the owner who does not want to hand this over. You want to understand what is going on, decide for yourself, and either do the work in-house or brief somebody properly.',
     'What you get is straight answers from the person who does this work, rather than a proposal dressed as advice.',
   ],
@@ -23,7 +23,7 @@ export default {
     { q: 'What is the difference between this and the free consult?', a: 'The free consult is a conversation about your situation and an honest first read. Paid consulting is when answering properly means digging into your site, your profile and your competitors first. I will tell you which one your question needs rather than starting the meter automatically.' },
     { q: 'Do I have to hire you for the work afterwards?', a: 'No, and the advice is not written to make that the only option. If the answer is that your existing developer can handle it, that is what I will say.' },
     { q: 'Can you look at work someone else has done?', a: 'Yes, and it is a frequent request. You get an honest assessment. If the work is good I will say so.' },
-    { q: 'Do you work with businesses outside DFW?', a: 'The work is not geographically limited in the way the building is, though local knowledge genuinely helps for local search. Ask on the call.' },
+    { q: 'Does it matter where my business is based?', a: 'No. Consulting happens over calls, screen shares and email, so it works the same wherever you are. For local search I research your market before the call rather than relying on knowing it already.' },
   ],
   cta: 'Bring me a question',
   ctaSub: 'Book a free consult. Tell me what you are trying to work out and I will tell you what I would do and why.',

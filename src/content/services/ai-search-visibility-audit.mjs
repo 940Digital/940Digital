@@ -1,12 +1,12 @@
 export default {
   lead: [
-    'Finding out whether your business shows up when people ask AI tools what you do, and who is being named instead, for businesses in Denton and DFW.',
+    'Finding out whether your business shows up when people ask AI tools what you do, and who is being named instead.',
     'Most owners have never checked. It takes an afternoon to find out and the answer is usually uncomfortable, which is a good argument for knowing it.',
     'This is the diagnostic that comes before any AI search work, because otherwise you are paying to improve something nobody has measured.',
   ],
   includedTitle: 'What gets checked',
   included: [
-    { h: 'A set of real customer questions', p: 'The questions someone would actually type, including the ones where they do not know your business exists. "Who is the best X near Denton" is a different test from asking about you by name, and the first one is the one that matters.' },
+    { h: 'A set of real customer questions', p: 'The questions someone would actually type, including the ones where they do not know your business exists. "Who is the best X near me" is a different test from asking about you by name, and the first one is the one that matters.' },
     { h: 'Across the major assistants', p: 'ChatGPT, Perplexity, Gemini and Google\'s own AI Overviews. They do not agree with each other, and where they disagree is informative.' },
     { h: 'Who gets named instead', p: 'The businesses appearing in your place, and which sources the assistants cite when naming them. That list is the most actionable output of the whole exercise.' },
     { h: 'Whether your site can be read at all', p: 'Checking whether your content is in the page source or injected by script. If it is the latter, most AI crawlers see an empty page, and that finding usually explains everything else.' },

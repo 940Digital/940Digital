@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Ongoing upkeep that keeps your site working the way it did the day it launched, for small businesses in Denton and DFW.',
+    'Ongoing upkeep that keeps your site working the way it did the day it launched, for small businesses.',
     'Websites decay quietly. Hours go stale, a form stops delivering, images pile up until pages crawl, and nobody notices until a customer mentions it. Maintenance is the arrangement where that is somebody\'s job rather than nobody\'s.',
     'On a 940Digital build this is not a separate product you bolt on. It is already in every plan, which is why there is no hosting page on this site and no separate IT bill in your inbox.',
   ],

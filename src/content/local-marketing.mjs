@@ -10,7 +10,7 @@
 export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <p class="hero-eyebrow">Local marketing</p>
-        <h1>Local marketing for Denton and DFW businesses</h1>
+        <h1>Local marketing for small businesses</h1>
         <p>Most people decide whether to call you before they ever reach your website. They read your Google listing, scan your reviews, and look at your photos. That is the part of your marketing that does the most work and gets the least&nbsp;attention.</p>
       </div>
     </section>
@@ -19,7 +19,7 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <div class="prose reveal">
           <h2>What this covers</h2>
-          <p>Local marketing, for small businesses in Denton, Denton County, and the Dallas-Fort Worth metroplex, means the profiles and listings that represent you on the platforms customers actually use. Your Google Business Profile first, then your reviews, then Bing Places and Apple Maps for the people who never open Google at all.</p>
+          <p>Local marketing, for a small business, means the profiles and listings that represent you on the platforms customers actually use. Your Google Business Profile first, then your reviews, then Bing Places and Apple Maps for the people who never open Google at all.</p>
           <p>The work is unglamorous and it compounds. Correct categories, correct hours, real photos, replies to every review, and the same name and phone number everywhere so nothing contradicts anything else.</p>
           <p>Every engagement starts with a free consult and a look at what your listings say about you today.</p>
         </div>

@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Tuning each page so search engines can tell what it is about and which town it serves, for businesses in Denton and DFW.',
+    'Tuning each page so search engines can tell what it is about and which town it serves.',
     'On-page SEO is the per-page editorial work: the title, the headings, the content, and the links between pages. One page, one purpose, one search it is trying to win.',
     'It works with content you already have. Nothing new gets written here, which is what separates it from the writing services.',
   ],

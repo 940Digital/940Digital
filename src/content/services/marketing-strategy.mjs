@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Help deciding where to put your marketing time and money, for owner-operated businesses in Denton and DFW.',
+    'Help deciding where to put your marketing time and money, for owner-operated businesses.',
     'Most small businesses do not have a marketing problem so much as an allocation problem. There is some money, a limited amount of the owner\'s time, and a dozen things that could be done with them.',
     'This is the conversation about which ones, and in what order.',
   ],
@@ -28,7 +28,7 @@ export default {
   faqs: [
     { q: 'Will you tell me to spend money with you?', a: 'Only where I genuinely think it is the right call, and the conversation is worth having precisely because that is not always the answer. If your money is better spent elsewhere, that is what you will hear.' },
     { q: 'Can you advise on things you do not sell?', a: 'On where they fit and whether they are worth your attention, yes. On running a channel I do not work in, I will tell you that you need someone else rather than improvising.' },
-    { q: 'I have almost no budget. Is this worth it?', a: 'Then the conversation is mostly about your time rather than your money, and it is arguably more useful. The highest-return things available to most local businesses cost nothing but attention.' },
+    { q: 'I have almost no budget. Is this worth it?', a: 'Then the conversation is mostly about your time rather than your money, and it is arguably more useful. The highest-return things available to most small businesses cost nothing but attention.' },
     { q: 'How is this different from a sales call?', a: 'A sales call ends with a proposal. This ends with a plan, and the plan is allowed to say that nothing should be bought.' },
   ],
   cta: 'Work out where the money should go',

@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'A working session to plan your pages, services and site structure before you build or rebuild, for businesses in Denton and DFW.',
+    'A working session to plan your pages, services and site structure before you build or rebuild.',
     'Most website projects go wrong before anyone designs anything, because nobody decided what pages should exist and what each one is for. The result is a site that covers everything vaguely and nothing convincingly.',
     'This is the session that happens first, and it produces a plan rather than a picture.',
   ],

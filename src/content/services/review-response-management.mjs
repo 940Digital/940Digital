@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Replies to your reviews, good and bad, that show future customers how you handle people, for businesses in Denton and DFW.',
+    'Replies to your reviews, good and bad, that show future customers how you handle people.',
     'The audience for a review reply is not the reviewer. It is the next person reading, deciding whether to call you.',
     'That reframe changes everything about how replies get written, and it is the whole service in one sentence.',
   ],

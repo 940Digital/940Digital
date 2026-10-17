@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Filling out an existing Google Business Profile properly so it shows up for more local searches, for businesses in Denton and DFW.',
+    'Filling out an existing Google Business Profile properly so it shows up for more local searches.',
     'Most profiles were set up years ago in twenty minutes and never touched again. The categories are approximate, half the services are missing, the photos are from before the van was replaced, and nobody has looked at the hours since a holiday two years ago.',
     'This is a one-time overhaul of a profile that already exists, which is a different job from creating one because everything here carries the risk of disturbing something that currently works.',
   ],

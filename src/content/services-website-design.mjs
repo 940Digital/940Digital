@@ -19,7 +19,7 @@
 export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <p class="hero-eyebrow">Website design</p>
-        <h1>Custom website design for Denton and DFW small businesses</h1>
+        <h1>Custom website design for small businesses</h1>
         <p>A custom site built around how your business actually works, structured so customers and search engines both understand what you do and where you do&nbsp;it.</p>
       </div>
     </section>
@@ -30,7 +30,7 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <div class="prose reveal">
           <h2>What this is</h2>
-          <p>I design and build custom websites for small businesses in Denton, Denton County, and the Dallas-Fort Worth metroplex. Every site is built for one specific business rather than assembled from a template, and every project starts with a working demo you can click through before you pay anything.</p>
+          <p>I design and build custom websites for small businesses, wherever they are based. Every site is built for one specific business rather than assembled from a template, and every project starts with a working demo you can click through before you pay anything.</p>
           <p>That last part is the thing worth reading twice. You are not approving a picture of a website. You get a real site, at a real address, that you can open on your phone and show to someone, and you decide from there.</p>
         </div>
       </div>

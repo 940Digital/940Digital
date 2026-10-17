@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Connecting your site to Google Search Console so you can see what you show up for and fix indexing problems, for businesses in Denton and DFW.',
+    'Connecting your site to Google Search Console so you can see what you show up for and fix indexing problems.',
     'Search Console is Google\'s own free report on your site. It shows the searches you appear for, which pages get clicked, and anything preventing pages from being indexed. It is the only place some of that information exists.',
     'It is free, it takes very little time, and a surprising number of small business sites have never had it connected.',
   ],

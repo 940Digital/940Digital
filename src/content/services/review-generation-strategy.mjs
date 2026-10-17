@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'A simple system for asking happy customers for reviews at the right moment, for businesses in Denton and DFW.',
+    'A simple system for asking happy customers for reviews at the right moment.',
     'Reviews are among the strongest local ranking signals and they are the first thing a customer reads about you. Most small businesses have far fewer than they have earned, because nobody ever asks.',
     'The fix is not complicated. It is a habit, a short message, and knowing when to send it.',
   ],

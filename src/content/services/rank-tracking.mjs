@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Seeing where you rank across your whole service area on Google Maps rather than just at your own address, for businesses in Denton County and DFW.',
+    'Seeing where you rank across your whole service area on Google Maps rather than just at your own address.',
     'Local rankings are not one number. Where someone is standing when they search changes what they see, sometimes dramatically. You can be first from your own street and invisible four miles away, and a single rank-tracking number hides that completely.',
     'A geo-grid shows the whole picture: your position sampled across a grid of points over your service area, as a map rather than a figure.',
   ],
@@ -29,7 +29,7 @@ export default {
   faqs: [
     { q: 'Why not just search for myself?', a: 'Because Google personalises results by your location and history. Searching from your own premises, logged in, on a device that has visited your site, tells you almost nothing about what a stranger across town sees.' },
     { q: 'How often should this be checked?', a: 'Monthly is right for most businesses. Daily tracking produces noise that gets mistaken for signal, and it invites reacting to normal fluctuation.' },
-    { q: 'Should I expect to rank everywhere?', a: 'No. Proximity is weighted heavily in local results, so falloff with distance is normal and not a failure. The goal is a bigger area than you have now, not the whole metroplex.' },
+    { q: 'Should I expect to rank everywhere?', a: 'No. Proximity is weighted heavily in local results, so falloff with distance is normal and not a failure. The goal is a bigger area than you have now, not the whole region.' },
     { q: 'Does this include the website rankings too?', a: 'Maps and organic positions are separate things and can move independently. Which of them gets tracked is agreed at the start, based on where your customers actually come from.' },
   ],
   cta: 'See your whole service area',

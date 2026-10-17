@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Moving your site to a new platform or host without breaking pages or losing search traffic, for businesses in Denton and DFW.',
+    'Moving your site to a new platform or host without breaking pages or losing search traffic.',
     'A migration is the same site at a new address. That sounds simpler than a rebuild and in one sense it is, but it carries a specific risk: everything Google knows about your site is tied to URLs, and moving is exactly when URLs change.',
     'Done properly a visitor should not be able to tell it happened.',
   ],

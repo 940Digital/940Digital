@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Online stores for local businesses that sell products, built for Denton and DFW.',
+    'Online stores for small businesses that sell products.',
     'Selling online as a local business is a different problem from selling nationally. You are usually competing on being nearby and being trusted rather than on price, and a lot of your orders will be picked up rather than shipped.',
     'That changes the build. The store has to handle local pickup as a first-class option, not a checkbox buried at checkout.',
   ],

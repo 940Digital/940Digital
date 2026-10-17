@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Finding out why a specific competitor outranks you in Maps and search, and what it would take to close the gap, for businesses in Denton and DFW.',
+    'Finding out why a specific competitor outranks you in Maps and search, and what it would take to close the gap.',
     'This starts with a name. You point at the business that keeps appearing above you and I work backwards from their profile, their pages and their links to find what they have that you do not.',
     'The answer is usually less mysterious and more actionable than people expect.',
   ],
@@ -26,10 +26,10 @@ export default {
   cost: 'quote',
   costNote: 'Priced per engagement and scoped by how many competitors you want examined. One or two done properly beats five done shallowly.',
   faqs: [
-    { q: 'How many competitors should I look at?', a: 'One or two who genuinely take work from you. A survey of everyone in the metroplex produces a longer document and less clarity.' },
+    { q: 'How many competitors should I look at?', a: 'One or two who genuinely take work from you. A survey of everyone in your market produces a longer document and less clarity.' },
     { q: 'Can you tell me exactly what they are doing?', a: 'I can see everything public: their profile, pages, reviews and links. I cannot see their advertising spend or anything private, and I will not speculate about it as though I could.' },
     { q: 'What if they are just bigger than me?', a: 'Then that is the finding, and it is worth knowing. The plan becomes where you can realistically win rather than a head-on fight you would lose slowly.' },
-    { q: 'Is this a one-off or ongoing?', a: 'Usually one-off. The landscape does not change fast enough to justify monthly, and repeating it quarterly is over-monitoring for most local businesses.' },
+    { q: 'Is this a one-off or ongoing?', a: 'Usually one-off. The landscape does not change fast enough to justify monthly, and repeating it quarterly is over-monitoring for most small businesses.' },
   ],
   cta: 'Find out what they have that you do not',
 };

@@ -1,8 +1,8 @@
 # 940Digital
 
-> 940Digital builds websites, SEO, and AI search visibility for small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.
+> 940Digital builds websites, SEO, and AI search visibility for small businesses, working remotely with owners wherever they are based.
 
-940Digital is a one-person web design and search agency in Denton, Texas, serving small businesses across Denton County and the Dallas-Fort Worth metroplex. Owner and sole operator: Owen Leiter. Phone: (940) 977-6253. Every project starts with a working demo the client can use before paying anything.
+940Digital is a one-person web design and search agency that works remotely with small businesses, wherever they are based. Owner and sole operator: Owen Leiter. Phone: (940) 977-6253. Every project starts with a working demo the client can use before paying anything.
 
 ## Start here
 
@@ -15,13 +15,13 @@
 
 ## Website designer
 
-Custom websites for small businesses in Denton and DFW. Built around your business, structured to be found, with a working demo before you pay.
+Custom websites for small businesses, built around how you work, structured to be found, and shown to you as a working demo before you pay.
 
 - [Website design overview](https://www.940digital.com/services/website-design)
 - [Website Maintenance](https://www.940digital.com/services/website-maintenance): Ongoing upkeep that keeps your site running like launch day. Covers speed, content updates, analytics, hosting, and catching issues early.
 - [Website redesign](https://www.940digital.com/services/website-redesign): Turn a dated or slow site into a modern one without losing your rankings. Includes redirect mapping, rewritten content, and mobile-first layout.
 - [Landing page design](https://www.940digital.com/services/landing-page-design): A single focused page built for one goal, like booking a call or requesting a quote. Useful for ads, a promotion, or a service you want more of.
-- [Ecommerce website design](https://www.940digital.com/services/ecommerce-website-design): Online stores for local businesses that sell products. Clear product pages, simple checkout, and setup for local pickup or shipping in the DFW area.
+- [Ecommerce website design](https://www.940digital.com/services/ecommerce-website-design): Online stores for small businesses that sell products. Clear product pages, simple checkout, and setup for local pickup, delivery, or shipping.
 - [UX/UI design](https://www.940digital.com/services/ux-ui-design): Layout and navigation planned so visitors find what they need and get in touch faster. The structure behind a site that turns traffic into calls.
 - [Website speed optimization](https://www.940digital.com/services/website-speed-optimization): Fix the heavy images, bloated code, and slow hosting that keep your pages from loading. Faster pages hold visitors and support better search rankings.
 - [Website copywriting](https://www.940digital.com/services/website-copywriting): Website copy that explains what you do, who you help, and why someone should pick you. Written in your voice, for the customers you actually want.
@@ -32,7 +32,7 @@ Custom websites for small businesses in Denton and DFW. Built around your busine
 
 ## Internet marketing service
 
-SEO and AI search for Denton and DFW businesses. Built on clean pages, useful content, and credibility search engines can verify.
+SEO and AI search for small businesses, built on clean pages, useful content, and the kind of credibility search engines and AI tools can verify.
 
 - [SEO & AI search overview](https://www.940digital.com/seo)
 - [SEO audit](https://www.940digital.com/seo/seo-audit): A plain-English review of what is holding your site back, with a prioritized fix list for technical issues, content gaps, and local ranking signals.
@@ -55,7 +55,7 @@ SEO and AI search for Denton and DFW businesses. Built on clean pages, useful co
 
 ## Marketing agency
 
-Local marketing for Denton and DFW businesses: Google Business Profile, reviews, listings, local SEO, and getting recommended by AI search tools.
+Local marketing for small businesses: Google Business Profile, reviews, listings, local SEO, and getting recommended by AI search tools.
 
 - [Local marketing overview](https://www.940digital.com/local-marketing)
 - [Google Business Profile setup](https://www.940digital.com/local-marketing/google-business-profile-setup): Build your Google Business Profile right from day one: correct categories, services, service area, hours, photos, and a compliant description.
@@ -68,11 +68,11 @@ Local marketing for Denton and DFW businesses: Google Business Profile, reviews,
 
 ## Marketing consultant
 
-One-on-one marketing and SEO consulting for owner-operated businesses in Denton and DFW. Straight answers and a plan you can act on yourself.
+One-on-one marketing and SEO consulting for owner-operated small businesses. Straight answers, over a call, and a plan you can act on yourself.
 
 - [Consulting overview](https://www.940digital.com/consulting)
 - [SEO consulting](https://www.940digital.com/consulting/seo-consulting): One-on-one advice from the person doing the work. Straight answers about your rankings, your site, and your Google profile, plus a plan to act on.
-- [Marketing strategy](https://www.940digital.com/consulting/marketing-strategy): Help deciding where to put your marketing time and money, based on what actually brings in customers for owner-operated Denton and DFW businesses.
+- [Marketing strategy](https://www.940digital.com/consulting/marketing-strategy): Help deciding where to put your marketing time and money, based on what actually brings in customers for owner-operated small businesses.
 - [Website strategy session](https://www.940digital.com/consulting/website-strategy-session): A working session to plan your pages, services, and site structure before you build or rebuild, so the site serves customers and search engines both.
 - [Google Business Profile training](https://www.940digital.com/consulting/google-business-profile-training): Learn to run your own Google Business Profile: posting, replying to reviews, adding services and photos, and avoiding changes that cause suspensions.
 - [SEO training for business owners](https://www.940digital.com/consulting/seo-training): Practical training for owners or staff who want to handle basic SEO in-house, from writing service pages to tracking what actually moved the needle.

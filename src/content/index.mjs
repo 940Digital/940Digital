@@ -10,7 +10,7 @@ export const body = String.raw`    <!-- HERO -->
         <div class="hero-inner">
           <p class="hero-eyebrow">Visibility, Credibility, Growth</p>
           <p class="hero-headline" aria-hidden="true"><span>I build</span> <span class="cycle-word" id="cycleWord">Presence</span></p>
-          <h1 class="hero-h1">Website design for small businesses in Denton and DFW</h1>
+          <h1 class="hero-h1">Website design for small businesses</h1>
           <div class="hero-actions">
             <a href="/contact" class="btn btn-primary btn-lg">Book a free consult</a>
             <a href="/work" class="btn btn-ghost btn-lg">See my portfolio</a>

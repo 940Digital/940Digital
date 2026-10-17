@@ -18,7 +18,7 @@ export const body = String.raw`    <section class="page-hero">
             <h2>Owen Leiter, Founder</h2>
             <p>Most small businesses end up picking between a cheap templated site that doesn't do much, or a big agency that charges a lot and disappears the day it launches. I started 940Digital to be the&nbsp;alternative.</p>
             <p>I plan the strategy, build the site, and optimize it so it's working the day it launches, not just looking good in a&nbsp;screenshot. That means figuring out what's actually costing you leads right now, and what Google (and AI search) needs to see before it'll trust your&nbsp;business.</p>
-            <p>I work with contractors, photographers, event planners, and service businesses across DFW and Denton, the kind of businesses that don't have a marketing department and don't need&nbsp;one.</p>
+            <p>I work with contractors, photographers, event planners, and service businesses, the kind of businesses that don't have a marketing department and don't need&nbsp;one.</p>
           </div>
           <div class="about-visual">
             <a href="/" class="wordmark about-visual-mark">
@@ -33,7 +33,7 @@ export const body = String.raw`    <section class="page-hero">
               <li>Google Business Profile</li>
               <li>Website Maintenance</li>
             </ul>
-            <p class="about-visual-location">Based in Denton, TX.<br>Serving the DFW&nbsp;metroplex.</p>
+            <p class="about-visual-location">Fully remote.<br>Working with owners wherever they&nbsp;are.</p>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Claiming and verifying your listing on Bing Places, for businesses in Denton and DFW.',
+    'Claiming and verifying your listing on Bing Places.',
     'Bing is a small share of search and it is not nothing, and the reason to care has changed. Bing is the default on Windows devices, and it feeds local results into several AI assistants including Microsoft Copilot.',
     'That makes a Bing listing cheap insurance rather than an afterthought, particularly if you sell to anyone working from a company laptop.',
   ],

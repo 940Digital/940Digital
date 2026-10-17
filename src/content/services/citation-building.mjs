@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Getting your name, address and phone number listed correctly on the directories that count, for businesses in Denton and DFW.',
+    'Getting your name, address and phone number listed correctly on the directories that count.',
     'A citation is any place online that lists your business details. Search engines use the consistency of those details as a trust signal: if twenty sources agree on your phone number, that is corroboration. If six of them disagree, that is doubt.',
     'It is unglamorous, mechanical work, and it is foundational for local ranking.',
   ],

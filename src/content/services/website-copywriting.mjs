@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Website copy that explains what you do, who you help, and why someone should pick you, written for small businesses in Denton and DFW.',
+    'Website copy that explains what you do, who you help, and why someone should pick you, written for small businesses.',
     'Most small business websites are written by the owner late at night, and it shows in a specific way: they describe the business accurately and never say why anyone should care. Accuracy is not the same as persuasion.',
     'The job is to take what you actually know about your work and your customers and put it in the order a stranger needs it.',
   ],

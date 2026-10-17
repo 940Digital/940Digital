@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Fixing what stops Google reading your site properly, for businesses in Denton and DFW.',
+    'Fixing what stops Google reading your site properly.',
     'Technical SEO is the plumbing. None of it is visible to a customer, and all of it decides whether your pages can be found at all. A page Google cannot crawl or index is not competing badly; it is not competing.',
     'This is the work that has to be right before content or links are worth spending anything on.',
   ],

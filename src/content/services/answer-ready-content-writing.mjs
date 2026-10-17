@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Content written and formatted so search engines and AI assistants can pull it out and quote it, for businesses in Denton and DFW.',
+    'Content written and formatted so search engines and AI assistants can pull it out and quote it.',
     'When a system answers a question by quoting a source, it lifts a passage. If your best explanation is spread across four paragraphs with the point at the end, there is nothing to lift.',
     'Answer-ready content is defined by its shape: the answer first, the detail after, specifics throughout.',
   ],

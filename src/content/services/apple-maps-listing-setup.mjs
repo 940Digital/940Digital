@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Setting up and verifying your business on Apple Business Connect so iPhone users find you, for businesses in Denton and DFW.',
+    'Setting up and verifying your business on Apple Business Connect so iPhone users find you.',
     'Apple Maps is the default map on every iPhone, and iPhones are roughly half the phones in the United States. If someone asks Siri for a business near them, or searches Spotlight, or taps a map link, they are in Apple\'s data rather than Google\'s.',
     'Most local businesses have never claimed their Apple listing, and many do not know one exists.',
   ],

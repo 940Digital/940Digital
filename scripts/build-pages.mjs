@@ -44,7 +44,7 @@ function proofCards(urlsFilter) {
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">${esc(c.trade)}</div>
               <h3>${esc(c.name)}</h3>
-              <p>${esc(c.location)}. ${esc(c.note)}</p>
+              <p>${esc(c.note)}</p>
               <span class="portfolio-card-link">Visit site &#8599;</span>
             </div>
           </a>`)
@@ -103,12 +103,12 @@ const CONTENT_PAGES = [
   {
     url: '/', mod: 'index', out: 'index.html',
     ogTitle: '940Digital | Visibility, Credibility, Growth',
-    ogDescription: 'Websites, SEO, and AI search visibility that grow your business. Serving the Dallas-Fort Worth metroplex (DFW), Denton, and surrounding areas.',
+    ogDescription: 'Websites, SEO, and AI search visibility that grow your business. Built remotely for small businesses, wherever they are based.',
   },
   {
     url: '/services', mod: 'services', out: 'services.html',
     ogTitle: 'All services | 940Digital',
-    ogDescription: 'Every service 940Digital offers across website design, SEO and AI search, local marketing, and consulting, for small businesses in Dallas-Fort Worth and Denton.',
+    ogDescription: 'Every service 940Digital offers across website design, SEO and AI search, local marketing, and consulting, for small businesses.',
   },
   { url: '/services/website-design', mod: 'services-website-design', out: 'services/website-design.html' },
   { url: '/seo', mod: 'seo', out: 'seo.html' },
@@ -123,38 +123,41 @@ const CONTENT_PAGES = [
 const STATIC_PAGES = [
   {
     url: '/about', mod: 'about', out: 'about.html', robots: 'index, follow',
-    title: 'About | 940Digital | Owen Leiter, Denton, TX',
-    meta: '940Digital is a senior-level digital marketing partner founded by Owen Leiter, serving small businesses in Dallas-Fort Worth and Denton, Texas.',
+    title: 'About | 940Digital | Owen Leiter, Founder',
+    meta: '940Digital is a senior-level digital marketing partner founded by Owen Leiter, working directly with small business owners on websites, SEO, and AI search.',
     ogTitle: 'About | 940Digital',
-    ogDescription: 'A personal, senior-level digital marketing partner for small businesses. Founded by Owen Leiter, serving Dallas-Fort Worth and Denton, Texas.',
+    ogDescription: 'A personal, senior-level digital marketing partner for small businesses. Founded and run by Owen Leiter.',
     h1: 'About',
   },
   {
     url: '/pricing', mod: 'pricing', out: 'pricing.html', robots: 'index, follow',
-    title: 'Pricing | 940Digital | Website Pricing in Denton, TX',
-    meta: '940Digital website pricing: Starter $800 setup, Pro $1,600, plus custom quotes. Flat-rate plans for small businesses in Dallas-Fort Worth and Denton, Texas.',
+    title: 'Pricing | 940Digital | Flat-Rate Website Plans',
+    meta: '940Digital website pricing: Starter $800 setup, Pro $1,600, plus custom quotes. Flat-rate plans for small businesses, with no hourly billing surprises.',
     ogTitle: 'Pricing | 940Digital',
     ogDescription: 'Transparent website pricing for small businesses. No hidden fees, no hourly billing surprises.',
     h1: 'Pricing',
   },
   {
-    /* Title and meta unchanged from the hand-written page. Owen's brief says not
+    /* Title and meta made location-neutral 2026-10-17, otherwise as hand-written. Owen's brief says not
        to restructure /work beyond adding internal links. */
     url: '/work', mod: 'work', out: 'work.html', robots: 'index, follow',
-    title: 'Portfolio | 940Digital | Website Portfolio, Denton, TX',
-    meta: '940Digital portfolio: websites built for small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.',
+    title: 'Portfolio | 940Digital | Small Business Websites',
+    meta: '940Digital portfolio: live websites built for small businesses, from landscaping and detailing to wedding planning and photography. See the real work.',
     ogTitle: 'Portfolio | 940Digital',
-    ogDescription: "See the sites I've built for small businesses in Dallas-Fort Worth and Denton, Texas.",
+    ogDescription: "See the sites I've built for small businesses.",
     h1: 'Portfolio',
   },
   {
     url: '/contact', mod: 'contact', out: 'contact.html', robots: 'index, follow',
-    title: 'Contact | 940Digital | Denton, TX Web Design & SEO',
-    meta: 'Book a free consult with 940Digital. Call (940) 977-6253 or send a message about your website, SEO, or Google Business Profile in Denton and DFW.',
+    title: 'Contact | 940Digital | Web Design & SEO Quotes',
+    meta: 'Book a free consult with 940Digital. Call (940) 977-6253 or send a message about your website, SEO, or Google Business Profile. Remote, wherever you are.',
     ogTitle: 'Contact | 940Digital',
     ogDescription: 'Book a free consult. No pitch deck, no pressure. Just a conversation about what your business needs.',
     h1: 'Contact',
-    extraHead: `  <link rel="stylesheet" href="/css/altcha.css">
+    extraHead: `  <!-- The spam-check widget sits below the fold and only draws once its script runs,
+       so its stylesheet should not hold up the first paint of the page. -->
+  <link rel="stylesheet" href="/css/altcha.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/altcha.css"></noscript>
   <style>
     altcha-widget {
       --altcha-color-base: var(--white, #fff);
@@ -171,7 +174,7 @@ const STATIC_PAGES = [
     /* Unchanged. Already noindex and out of the sitemap; out of scope. */
     url: '/blog', mod: 'blog', out: 'blog.html', robots: 'noindex, nofollow',
     title: 'Blog | 940Digital | Websites & SEO for Small Businesses',
-    meta: 'Straight-talk notes on websites, SEO, and getting found online, written for small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.',
+    meta: 'Straight-talk notes on websites, SEO, and getting found online, written for small business owners who would rather understand it than be sold on it.',
     ogTitle: 'Blog | 940Digital',
     ogDescription: 'Straight-talk notes on websites, SEO, and getting found online, written for small businesses.',
     h1: 'Blog',

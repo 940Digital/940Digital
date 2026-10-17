@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Replacing a dated or slow website without throwing away the search rankings it already has, for businesses in Denton and DFW.',
+    'Replacing a dated or slow website without throwing away the search rankings it already has.',
     'The reason redesigns go wrong is rarely the design. It is that the new site quietly loses what the old one had earned: URLs change and nothing redirects, a page that ranked gets merged into another, and three months later the phone is quieter and nobody can say exactly why.',
     'A redesign done properly is two jobs at once. Build the better site, and carry the equity across intact.',
   ],
@@ -9,7 +9,7 @@ export default {
     { h: 'An inventory before anything changes', p: 'Every existing URL, and which ones actually bring in traffic or links. You cannot protect what you have not written down, and this is the step most redesigns skip.' },
     { h: 'Redirect mapping', p: 'Every old URL points at its closest equivalent on the new site. Not all of them at the homepage, which is the common shortcut and which throws away most of the value.' },
     { h: 'Rewritten content', p: 'Copy rebuilt around what customers ask and what you want to rank for, rather than pasted across from a site written years ago for a business that has since changed.' },
-    { h: 'A mobile-first rebuild', p: 'Designed for the phone first, because that is where most of the traffic to a local business site comes from.' },
+    { h: 'A mobile-first rebuild', p: 'Designed for the phone first, because that is where most of the traffic to a small business site comes from.' },
     { h: 'A check after launch', p: 'Redirects verified, indexing watched, and the pages that mattered confirmed still present. The window where a redesign goes wrong is the fortnight after it goes live.' },
   ],
   extra: {

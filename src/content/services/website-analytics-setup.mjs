@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Seeing where your visitors come from and which pages turn them into calls and form fills, for businesses in Denton and DFW.',
+    'Seeing where your visitors come from and which pages turn them into calls and form fills.',
     'Most small business owners either have no analytics or have a dashboard they logged into twice and never opened again. Both amount to the same thing: decisions made on instinct.',
     'What is worth having is a small number of figures you actually use. How many people came, where from, and how many got in touch.',
   ],
@@ -15,7 +15,7 @@ export default {
   extra: {
     title: 'A note on privacy',
     paras: [
-      'Analytics that collects personal data brings obligations with it, and it means putting a consent banner in front of every visitor before they can read your page. For a local business chasing a modest number of leads, that is a poor trade.',
+      'Analytics that collects personal data brings obligations with it, and it means putting a consent banner in front of every visitor before they can read your page. For a small business chasing a modest number of leads, that is a poor trade.',
       'Counting visits, sources and conversions without identifying individuals gets you everything you will actually act on and none of the overhead. That is the default here unless you have a specific reason to need more.',
     ],
   },
@@ -30,7 +30,7 @@ export default {
     { q: 'Do I need a cookie banner?', a: 'Not for measurement that does not collect personal data or use tracking cookies, which is the default here. If you later add advertising pixels, that changes and I will tell you when it does.' },
     { q: 'Do I get a login?', a: 'That is worth deciding at setup based on whether you will genuinely use one. Some owners want access and some only want the monthly summary; there is no wrong answer, but it is better chosen than defaulted.' },
     { q: 'Can you track phone calls?', a: 'Taps on a phone number link from the site can be counted. Attributing a call somebody dialled manually needs call tracking, which is a separate thing with its own tradeoffs. Worth discussing before assuming you need it.' },
-    { q: 'How much traffic does a local business normally get?', a: 'Less than most expect, and the number matters less than the direction and the conversion rate. A few hundred relevant visitors a month producing steady enquiries beats thousands producing nothing.' },
+    { q: 'How much traffic does a small business site normally get?', a: 'Less than most expect, and the number matters less than the direction and the conversion rate. A few hundred relevant visitors a month producing steady enquiries beats thousands producing nothing.' },
   ],
   cta: 'Find out what your site actually does',
 };

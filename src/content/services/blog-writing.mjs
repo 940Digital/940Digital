@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Articles that answer the questions customers ask before they buy, written for small businesses in Denton and DFW.',
+    'Articles that answer the questions customers ask before they buy, written for small businesses.',
     'A blog post is for someone who is not ready to hire yet. They are working out what the job involves, what it should cost, or whether they have the problem they think they have. Answer that well and you are the business they remember when they are ready.',
     'This is not a publishing treadmill, and I will say so before you buy anything.',
   ],
@@ -15,7 +15,7 @@ export default {
   extra: {
     title: 'Where I stand on content volume',
     paras: [
-      'I do not believe in publishing constantly for its own sake. A local business that publishes twelve thin posts a year is worse off than one that publishes three genuinely useful ones, and the treadmill costs money every month whether or not it works.',
+      'I do not believe in publishing constantly for its own sake. A small business that publishes twelve thin posts a year is worse off than one that publishes three genuinely useful ones, and the treadmill costs money every month whether or not it works.',
       'If you want a blog, it should be because there are real questions worth answering in writing. If there are only four of those, that is four posts and then we stop, and I would rather tell you that than sell you a monthly retainer.',
       'My own blog is empty for exactly this reason. I would rather ship nothing than filler.',
     ],
@@ -27,7 +27,7 @@ export default {
   cost: 'quote',
   costNote: 'Priced per post rather than as a monthly quota, because a quota is how blogs end up full of things nobody needed written.',
   faqs: [
-    { q: 'How often should I publish?', a: 'Probably less often than you have been told. When there is something genuinely worth writing. For most local businesses that is a handful of pieces rather than a weekly schedule.' },
+    { q: 'How often should I publish?', a: 'Probably less often than you have been told. When there is something genuinely worth writing. For most small businesses that is a handful of pieces rather than a weekly schedule.' },
     { q: 'Will a blog get me more customers?', a: 'Indirectly and slowly, by being useful to someone before they are ready to buy. If you need work this month, this is the wrong lever and I will point you at a faster one.' },
     { q: 'Who is credited as the author?', a: 'You, normally. It is your expertise and your voice; my job is getting it onto the page in a readable order.' },
     { q: 'Do you use AI to write these?', a: 'Not as a substitute for knowing your business. The specifics that make a post worth reading come from a conversation with you, and there is no way to generate those from nothing.' },

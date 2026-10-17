@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Turning more of the visitors you already have into leads, for small businesses in Denton and DFW.',
+    'Turning more of the visitors you already have into leads, for small businesses.',
     'Getting more traffic is one way to get more customers. Losing fewer of the people already arriving is the other, and it is usually cheaper, because you have already paid for them once.',
     'This work starts from the position that your traffic is fine and something between arriving and contacting you is not.',
   ],
@@ -15,7 +15,7 @@ export default {
   extra: {
     title: 'An honest word about testing',
     paras: [
-      'Proper conversion optimisation means running a test and waiting for a statistically meaningful result. Reaching that on a local business site takes a volume of traffic most small businesses do not have, and anyone promising split-tested certainty at low volume is selling you something.',
+      'Proper conversion optimisation means running a test and waiting for a statistically meaningful result. Reaching that on a small business site takes a volume of traffic most small businesses do not have, and anyone promising split-tested certainty at low volume is selling you something.',
       'What is genuinely useful at local scale is informed change: fix the things that are known to lose people, measure the direction of travel over months rather than days, and be honest that a given month\'s number moved for reasons nobody controls. That is what this is, and it is worth doing.',
     ],
   },

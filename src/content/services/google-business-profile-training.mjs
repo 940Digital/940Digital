@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Learning to run your own Google Business Profile properly, for owners and staff in Denton and DFW.',
+    'Learning to run your own Google Business Profile properly, for owners and staff.',
     'Nearly everything that keeps a profile working is something you can do yourself in a few minutes a week. Posting, replying to reviews, adding photos, keeping services current.',
     'What stops most owners is not difficulty. It is not knowing which parts matter and which changes are risky.',
   ],

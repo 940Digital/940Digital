@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Earning links from real local sites, for businesses in Denton, Denton County and DFW.',
+    'Earning links from real sites that have a genuine reason to mention you.',
     'A link from another website is a vote. Search engines have used them as a credibility signal for twenty years and still do, which is why an industry grew up around faking them.',
     'This is the version that does not put your site at risk: links from organisations that genuinely know you exist, because you genuinely have a connection to them.',
   ],

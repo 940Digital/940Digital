@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Letting customers book a call, a consult or a job straight from your website, for businesses in Denton and DFW.',
+    'Letting customers book a call, a consult or a job straight from your website.',
     'Phone tag costs more work than most owners realise. Someone wants to book, you are on a job, you call back while they are at work, they call back while you are driving, and by the third round somebody has given up. Usually them.',
     'Booking on the site removes that entirely for the customers who would rather not ring anyone anyway, which is a growing share of them.',
   ],

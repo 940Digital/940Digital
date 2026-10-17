@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Monthly care for your Google Business Profile, for businesses in Denton and DFW.',
+    'Monthly care for your Google Business Profile.',
     'A profile that is set up well and then left alone slowly stops working. Photos age, questions go unanswered, reviews sit without replies, and competitors who are active look more alive than you do.',
     'Management is the arrangement where keeping it current is somebody\'s job.',
   ],

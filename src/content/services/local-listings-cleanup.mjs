@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Tracking down the wrong and duplicate listings that confuse customers and undercut your local rankings, for businesses in Denton and DFW.',
+    'Tracking down the wrong and duplicate listings that confuse customers and undercut your local rankings.',
     'This is a subtraction job. Somewhere out there is a listing with your old phone number, an address you left in 2019, or a duplicate created by a data aggregator that nobody claimed. Customers ring the old number. Search engines see contradictory information and trust all of it slightly less.',
     'The deliverable is fewer records, and the ones remaining being right.',
   ],

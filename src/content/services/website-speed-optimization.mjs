@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Fixing the heavy images, bloated code and slow hosting that keep pages from loading, for businesses in Denton and DFW.',
+    'Fixing the heavy images, bloated code and slow hosting that keep pages from loading.',
     'Speed is one of the few site problems with an honest number attached. A page either paints quickly on an ordinary phone connection or it does not, and you can measure it before and after rather than argue about it.',
     'It matters twice: visitors leave slow pages, and load speed is a factor search engines use, particularly on mobile.',
   ],

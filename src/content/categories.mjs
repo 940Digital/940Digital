@@ -19,7 +19,7 @@ export const CATEGORY_COPY = {
   'Website designer': {
     lead: 'The primary category on my profile, and where most projects start.',
     body: [
-      'I build custom websites for small businesses in Denton, Denton County, and the wider Dallas-Fort Worth metroplex. No templates, no page builders, and nothing stretched to fit a layout that was designed around a different business.',
+      'I build custom websites for small businesses. No templates, no page builders, and nothing stretched to fit a layout that was designed around a different business.',
       'This group covers building a site from nothing, replacing one you already have without losing the rankings that come with it, moving one between hosts or platforms, and the smaller jobs that make an existing site do more work: speed, layout, copy, bookings.',
       'Hosting and website maintenance are included in every plan, so none of this arrives with a separate IT bill. Every project starts with a working demo you can click through before you commit to anything.',
     ],
@@ -27,9 +27,9 @@ export const CATEGORY_COPY = {
   'Internet marketing service': {
     lead: 'Getting found, in all three places people now search.',
     body: [
-      'Google results, Google Maps, and the AI assistants that increasingly answer a question before anyone clicks anything. This group covers the whole search side of the work for businesses in Denton and DFW.',
+      'Google results, Google Maps, and the AI assistants that increasingly answer a question before anyone clicks anything. This group covers the whole search side of the work.',
       'That means finding out what is holding a site back, fixing what stops Google reading it properly, writing content that earns its rankings, building the links and listings that make a business credible, and reporting plainly on what actually moved.',
-      'The AI search group inside this category is a main service line rather than an add-on. It is the part of search changing fastest, and it is the part most local businesses have no plan for.',
+      'The AI search group inside this category is a main service line rather than an add-on. It is the part of search changing fastest, and it is the part most small businesses have no plan for.',
     ],
   },
   'Marketing agency': {

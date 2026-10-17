@@ -12,7 +12,7 @@
 export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <p class="hero-eyebrow">Consulting</p>
-        <h1>Marketing consulting for Denton and DFW owners</h1>
+        <h1>Marketing consulting for small business owners</h1>
         <p>Some owners do not want to hand this over. They want to understand it, make the call themselves, and keep it in&nbsp;house. That is a legitimate way to run a business and it is what this side of the work is&nbsp;for.</p>
       </div>
     </section>
@@ -21,7 +21,7 @@ export const body = (parts) => String.raw`    <section class="page-hero">
       <div class="container">
         <div class="prose reveal">
           <h2>What consulting means here</h2>
-          <p>I advise owner-operated businesses in Denton, Denton County, and the Dallas-Fort Worth metroplex on their websites, their search visibility, and their Google Business Profile. You get straight answers about your specific situation and a plan you or your staff can act on, from the person who does this work rather than someone reading from a playbook.</p>
+          <p>I advise owner-operated businesses on their websites, their search visibility, and their Google Business Profile. You get straight answers about your specific situation and a plan you or your staff can act on, from the person who does this work rather than someone reading from a playbook.</p>
           <p>Every conversation still starts with a free consult. If a short call answers your question, that is the end of it and you owe nothing.</p>
         </div>
       </div>

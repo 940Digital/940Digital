@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Structured data that tells search engines your business type, services and service area in a format they read without guessing, for businesses in Denton and DFW.',
+    'Structured data that tells search engines your business type, services and service area in a format they read without guessing.',
     'Schema is a block of machine-readable description added to a page. A human sees nothing. A search engine stops inferring what your business is from your prose and gets told directly.',
     'It is not a ranking factor in itself. It is about being understood correctly, which matters more now that AI systems are summarising businesses rather than just listing them.',
   ],

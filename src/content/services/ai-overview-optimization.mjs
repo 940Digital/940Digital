@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Getting your pages cited in Google\'s AI Overviews and by assistants like ChatGPT and Perplexity, for businesses in Denton and DFW.',
+    'Getting your pages cited in Google\'s AI Overviews and by assistants like ChatGPT and Perplexity.',
     'Search increasingly answers the question instead of listing places to find the answer. When it does, it names a small number of sources. Being one of them is the new version of ranking.',
     'This work is also sold as generative engine optimisation (GEO) and answer engine optimisation (AEO). Same job, three names, and the acronym does not change the work.',
   ],

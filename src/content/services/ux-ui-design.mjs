@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Layout and navigation planned so visitors find what they need and get in touch faster, for local service businesses in Denton and DFW.',
+    'Layout and navigation planned so visitors find what they need and get in touch faster, for service businesses.',
     'This is the structural work that happens before anything is styled: what goes on which page, in what order, and how someone moves from arriving to contacting you. Most sites that "look fine" but do not convert have a structure problem rather than a visual one.',
     'For a local service business the decisions are concrete. Where does the phone number live. Does pricing get its own page. How many clicks from landing to a form. What does someone see first on a phone at arm\'s length.',
   ],

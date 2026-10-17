@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'A plain-English review of what is holding your site back, with a prioritised fix list, for businesses in Denton and DFW.',
+    'A plain-English review of what is holding your site back, with a prioritised fix list.',
     'An audit answers one question: why is this site not doing better. It looks at the technical foundation, the content, and the local signals, and comes back with what is wrong and what order to fix it in.',
     'The useful part is the ordering. Most audits produce a list of everything that could be improved, which is overwhelming and therefore ignored. What you need is the three things that matter and permission to ignore the rest for now.',
   ],

@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'What to photograph and film for your website and Google profile, for businesses in Denton and DFW.',
+    'What to photograph and film for your website and Google profile.',
     'This is a plan and a shot list. I do not shoot, and that is worth saying plainly at the top rather than three sections down.',
     'What you get is a decision about what images your business needs and why, which is the part most businesses get wrong long before a camera is involved.',
   ],
@@ -29,7 +29,7 @@ export default {
   costNote: 'A one-off. Frequently folded into a build or a profile overhaul rather than bought separately, because that is when it is most useful.',
   faqs: [
     { q: 'Do you take the photos?', a: 'No. This is the plan for what to capture and how it gets used. If you want someone behind the camera you want a photographer, and I will happily tell them what the site and the profile need.' },
-    { q: 'Can I shoot it on my phone?', a: 'Yes, and for most local businesses that is the right answer. A recent phone in decent light is fine, and real work photographed plainly outperforms stock imagery every time.' },
+    { q: 'Can I shoot it on my phone?', a: 'Yes, and for most small businesses that is the right answer. A recent phone in decent light is fine, and real work photographed plainly outperforms stock imagery every time.' },
     { q: 'How many photos do I need?', a: 'Fewer than you think, chosen deliberately. A dozen images doing specific jobs beats sixty of finished work from the same angle.' },
     { q: 'What about stock photos?', a: 'Avoid them for anything showing your work or your team. Customers recognise stock imagery and it reads as having something to hide. Use your own even when it is imperfect.' },
   ],

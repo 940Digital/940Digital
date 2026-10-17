@@ -53,7 +53,7 @@ lines.push(`# ${SITE.name}`);
 lines.push('');
 lines.push(`> ${SITE.description}`);
 lines.push('');
-lines.push(`940Digital is a one-person web design and search agency in Denton, Texas, serving small businesses across Denton County and the Dallas-Fort Worth metroplex. Owner and sole operator: ${SITE.founder.name}. Phone: ${SITE.phoneDisplay}. Every project starts with a working demo the client can use before paying anything.`);
+lines.push(`940Digital is a one-person web design and search agency that works remotely with small businesses, wherever they are based. Owner and sole operator: ${SITE.founder.name}. Phone: ${SITE.phoneDisplay}. Every project starts with a working demo the client can use before paying anything.`);
 lines.push('');
 lines.push('## Start here');
 lines.push('');

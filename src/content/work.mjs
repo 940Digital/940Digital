@@ -23,7 +23,7 @@ export const body = String.raw`    <section class="page-hero">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Landscaping &amp; hardscaping</div>
               <h3>JC Landscaping</h3>
-              <p>Denton County, TX. In business since 1989. A full site covering services, a project gallery, and a free-estimate contact&nbsp;flow.</p>
+              <p>In business since 1989. A full site covering services, a project gallery, and a free-estimate contact&nbsp;flow.</p>
               <span class="portfolio-card-link">Visit site &#8599;</span>
             </div>
           </a>
@@ -35,7 +35,7 @@ export const body = String.raw`    <section class="page-hero">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Mobile car detailing</div>
               <h3>Gunnar Galvan Mobile Detailing</h3>
-              <p>Frisco, TX. Package-based pricing, clear service breakdowns, and a booking flow built to convert&nbsp;visitors.</p>
+              <p>Package-based pricing, clear service breakdowns, and a booking flow built to convert&nbsp;visitors.</p>
               <span class="portfolio-card-link">Visit site &#8599;</span>
             </div>
           </a>
@@ -47,7 +47,7 @@ export const body = String.raw`    <section class="page-hero">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Wedding planning &amp; coordination</div>
               <h3>Glory Unveiled by Bailey Elaine</h3>
-              <p>Dallas, TX. A faith-rooted wedding planning site with service packages, a photo gallery, and an inquiry form built to book&nbsp;calls.</p>
+              <p>A faith-rooted wedding planning site with service packages, a photo gallery, and an inquiry form built to book&nbsp;calls.</p>
               <span class="portfolio-card-link">Visit site &#8599;</span>
             </div>
           </a>
@@ -59,7 +59,7 @@ export const body = String.raw`    <section class="page-hero">
             <div class="portfolio-card-body">
               <div class="portfolio-card-tag">Family &amp; portrait photography</div>
               <h3>Lilylynne Photography</h3>
-              <p>Denton, TX. A floral, golden-hour-inspired site with a full gallery and inquiry flow built to book&nbsp;sessions.</p>
+              <p>A floral, golden-hour-inspired site with a full gallery and inquiry flow built to book&nbsp;sessions.</p>
               <span class="portfolio-card-link">Visit site &#8599;</span>
             </div>
           </a>

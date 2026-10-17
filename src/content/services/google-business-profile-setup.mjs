@@ -1,6 +1,6 @@
 export default {
   lead: [
-    'Building your Google Business Profile correctly from day one, for businesses in Denton, Denton County and DFW.',
+    'Building your Google Business Profile correctly from day one.',
     'For most local businesses the profile matters more than the website. It is what appears in Maps, what shows on the right of a search for your name, and what people read before deciding whether to call.',
     'Setting it up is free and takes an hour. Setting it up correctly is the difference between appearing for the searches that bring work and appearing for almost nothing.',
   ],

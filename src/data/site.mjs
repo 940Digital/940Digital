@@ -17,7 +17,7 @@ export const SITE = {
   origin: 'https://www.940digital.com',
   slogan: 'Visibility, Credibility, Growth',
   description:
-    '940Digital builds websites, SEO, and AI search visibility for small businesses in the Dallas-Fort Worth metroplex and Denton, Texas.',
+    '940Digital builds websites, SEO, and AI search visibility for small businesses, working remotely with owners wherever they are based.',
   email: '940digital@gmail.com',
 
   /* Matches the Google Business Profile character for character. Owen approved
@@ -28,18 +28,16 @@ export const SITE = {
 
   priceRange: '$800-$1600',
 
-  /* Service-area business. No street address is published anywhere. */
+  /* Remote business, not tied to one city. No street address, city, or region
+     is published anywhere: only the country, so the entity is not read as
+     local to any one place. Changed 2026-10-17 when Owen took the site
+     non-location-specific. */
   address: {
-    locality: 'Denton',
-    region: 'TX',
-    postalCode: null, // TODO(owen): Denton postal code for PostalAddress
     country: 'US',
   },
 
   areaServed: [
-    { type: 'City', name: 'Denton, Texas' },
-    { type: 'AdministrativeArea', name: 'Denton County, Texas' },
-    { type: 'AdministrativeArea', name: 'Dallas-Fort Worth Metroplex, Texas' },
+    { type: 'Country', name: 'United States' },
   ],
 
   founder: {
@@ -112,7 +110,7 @@ export const FOOTER_LINKS = [
 ];
 
 export const SERVICE_AREA_LINE =
-  'Currently serving the Dallas-Fort Worth metroplex (DFW), Denton, and surrounding areas';
+  'Working remotely with small businesses, wherever they are based';
 
 /**
  * Real, live client work. Only these four may be cited as proof, and only on
@@ -125,7 +123,6 @@ export const CLIENTS = {
   jcLandscaping: {
     name: 'JC Landscaping',
     url: 'https://www.jcarpenterlandscaping.com/',
-    location: 'Denton County, TX',
     trade: 'Landscaping and hardscaping',
     note: 'In business since 1989. Full site with a services overview, a project gallery, and a free-estimate form.',
     /* Only what /work actually states. Whether Owen wrote the copy, or built
@@ -137,7 +134,6 @@ export const CLIENTS = {
   gunnarGalvan: {
     name: 'Gunnar Galvan Mobile Detailing',
     url: 'https://www.gunnargalvanmobiledetailing.com/',
-    location: 'Frisco, TX',
     trade: 'Mobile car detailing',
     note: 'Package-based pricing, clear service breakdowns, and a booking flow.',
     demonstrates: ['/services/website-design', '/services/online-booking-setup'],
@@ -145,7 +141,6 @@ export const CLIENTS = {
   gloryUnveiled: {
     name: 'Glory Unveiled by Bailey Elaine',
     url: 'https://gloryunveiledevents.com',
-    location: 'Dallas, TX',
     trade: 'Wedding planning and coordination',
     note: 'Service packages, a photo gallery, and an inquiry form built to book calls.',
     demonstrates: ['/services/website-design'],
@@ -153,7 +148,6 @@ export const CLIENTS = {
   lilylynne: {
     name: 'Lilylynne Photography',
     url: 'https://lilylynnephotography.com/',
-    location: 'Denton, TX',
     trade: 'Family and portrait photography',
     note: 'Full gallery and an inquiry flow built to book sessions.',
     demonstrates: ['/services/website-design'],
