@@ -132,9 +132,9 @@ const STATIC_PAGES = [
   {
     url: '/pricing', mod: 'pricing', out: 'pricing.html', robots: 'index, follow',
     title: 'Pricing | 940Digital | Flat-Rate Website Plans',
-    meta: '940Digital website pricing: Starter $800 setup, Pro $1,600, plus custom quotes. Flat-rate plans for small businesses, with no hourly billing surprises.',
+    meta: '940Digital website pricing: Basic from $300 setup, Starter $700, Pro $1,500, Expert $2,800, plus custom quotes. Flat-rate plans, no hourly billing surprises.',
     ogTitle: 'Pricing | 940Digital',
-    ogDescription: 'Transparent website pricing for small businesses. No hidden fees, no hourly billing surprises.',
+    ogDescription: 'Flat-rate website plans for small businesses, from $300 setup and $60/month. No hidden fees, no hourly billing surprises.',
     h1: 'Pricing',
   },
   {

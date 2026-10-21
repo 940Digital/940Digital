@@ -26,7 +26,7 @@ export const SITE = {
   phone: '+1-940-977-6253',
   phoneDisplay: '(940) 977-6253',
 
-  priceRange: '$800-$1600',
+  priceRange: '$300-$2800',
 
   /* Remote business, not tied to one city. No street address, city, or region
      is published anywhere: only the country, so the entity is not read as

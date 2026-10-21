@@ -14,7 +14,7 @@ function parsePlans() {
   const cards = [...html.matchAll(/<div class="price-card[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/g)];
   const blocks = html.split('<div class="price-card').slice(1);
   return blocks.map((b) => {
-    const tier = (b.match(/<div class="price-tier">([^<]+)<\/div>/) || [])[1] || null;
+    const tier = (b.match(/<(?:h3|div) class="price-tier">([^<]+)<\/(?:h3|div)>/) || [])[1] || null;
     /* A quoted tier has no base fee and no fixed monthly. Its headline is a
        word, not a price, so it must never be read as a setup or monthly figure. */
     const quoted = /data-quoted="true"/.test(b);

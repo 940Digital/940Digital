@@ -2340,3 +2340,49 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
   vertical-align: middle;
 }
 .price-card--quoted .price-setup { text-transform: none; }
+
+/* --- Four flat-rate plans in a 2x2 grid (Basic, Starter / Pro, Expert) with
+   Custom spanning the full row underneath. One column below 1024px. Rows
+   stretch, so cards in a row share a height and the flex:1 feature list
+   pins every button to the bottom. --- */
+.pricing-grid--2x2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 980px;
+  gap: 1.75rem;
+}
+/* No scale on the featured card here: scaling makes Pro taller than Expert
+   beside it and knocks the two buttons off the same line. The dark fill,
+   badge and blue border carry the emphasis instead.
+   Starts at the same .92 as .reveal-scale so it still animates in. */
+.pricing-grid--2x2 .price-card.featured { transform: scale(.92); }
+.pricing-grid--2x2 .price-card.featured.in { transform: none; }
+.pricing-grid--2x2 .price-card.featured.in:hover { transform: translateY(-4px); }
+.pricing-grid--2x2 .price-card.featured { border-color: var(--blue-accent); }
+.price-card h3.price-tier { line-height: 1.4; }
+.price-wide-body { display: flex; flex-direction: column; flex: 1; }
+
+@media (min-width: 1024px) {
+  /* Custom runs side by side so it reads as a band, not a stretched tall card. */
+  .price-card--wide {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    padding: 2.25rem 2.5rem;
+  }
+  .price-wide-head {
+    flex: 0 0 34%;
+    padding-right: clamp(2rem, 4vw, 3.5rem);
+    border-right: 1px solid rgba(0,0,0,.08);
+  }
+  .price-wide-head .price-setup { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+  .price-card--wide .price-features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .price-card--wide .btn { width: auto; align-self: flex-start; }
+}
+@media (max-width: 1023px) {
+  .pricing-grid--2x2 { grid-template-columns: 1fr; max-width: 30rem; gap: 1.5rem; }
+}

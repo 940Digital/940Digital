@@ -18,39 +18,56 @@ export const body = String.raw`    <section class="page-hero">
           <h2>Website plans</h2>
           <p>Flat setup fee, flat monthly. Hosting and maintenance are in every tier, so there is no separate IT bill and no invoice when something needs&nbsp;changing.</p>
         </div>
-        <div class="pricing-grid" data-family="Websites">
+        <div class="pricing-grid pricing-grid--2x2" data-family="Websites">
 
-          <!-- STARTER -->
+          <!-- BASIC -->
           <div class="price-card reveal reveal-scale reveal-delay-1">
-            <div class="price-tier">Starter</div>
+            <h3 class="price-tier">Basic</h3>
             <div class="price-amount">
-              <span class="dollar">$80</span>
+              <span class="dollar">$60</span>
               <span class="period">/month</span>
             </div>
-            <p class="price-setup">$800 one-time setup fee</p>
+            <p class="price-setup">$300 one-time setup fee</p>
             <ul class="price-features">
-              <li>Up to 6 pages</li>
+              <li>Up to 3 pages</li>
               <li>Custom design, no templates</li>
-              <li>Mobile responsive, with a contact form and photo gallery</li>
+              <li>Mobile responsive, with a contact form</li>
+              <li>Hosting and maintenance included</li>
+              <li>Standard support</li>
+            </ul>
+            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
+          </div>
+
+          <!-- STARTER -->
+          <div class="price-card reveal reveal-scale reveal-delay-2">
+            <h3 class="price-tier">Starter</h3>
+            <div class="price-amount">
+              <span class="dollar">$95</span>
+              <span class="period">/month</span>
+            </div>
+            <p class="price-setup">$700 one-time setup fee</p>
+            <ul class="price-features">
+              <li>Up to 8 pages</li>
+              <li>Everything in Basic</li>
+              <li>Photo gallery</li>
               <li>On-page SEO basics</li>
               <li>Service-specific landing pages</li>
-              <li>Hosting and maintenance included</li>
-              <li>Priority support</li>
+              <li>Standard support</li>
             </ul>
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>
 
           <!-- PRO -->
-          <div class="price-card featured reveal reveal-scale reveal-delay-2">
+          <div class="price-card featured reveal reveal-scale reveal-delay-1">
             <span class="price-badge">Recommended</span>
-            <div class="price-tier">Pro</div>
+            <h3 class="price-tier">Pro</h3>
             <div class="price-amount">
-              <span class="dollar">$160</span>
+              <span class="dollar">$300</span>
               <span class="period">/month</span>
             </div>
-            <p class="price-setup">$1,600 one-time setup fee</p>
+            <p class="price-setup">$1,500 one-time setup fee</p>
             <ul class="price-features">
-              <li>Up to 13 pages</li>
+              <li>Up to 60 pages, mostly dedicated service pages</li>
               <li>Everything in Starter</li>
               <li>Advanced SEO strategy and consulting</li>
               <li>Analytics &amp; monthly reporting</li>
@@ -60,23 +77,47 @@ export const body = String.raw`    <section class="page-hero">
             <a href="/contact" class="btn btn-primary">Get started</a>
           </div>
 
-          <!-- CUSTOM: quoted per project. No base fee and no monthly figure, so no
-               dollar amount appears on this card at all. -->
-          <div class="price-card price-card--quoted reveal reveal-scale reveal-delay-3" data-quoted="true">
-            <div class="price-tier">Custom</div>
+          <!-- EXPERT -->
+          <div class="price-card reveal reveal-scale reveal-delay-2">
+            <h3 class="price-tier">Expert</h3>
             <div class="price-amount">
-              <span class="dollar">Quoted</span>
+              <span class="dollar">$650</span>
+              <span class="period">/month</span>
             </div>
-            <p class="price-setup">No base fee. Setup and monthly priced to the project.</p>
+            <p class="price-setup">$2,800 one-time setup fee</p>
             <ul class="price-features">
-              <li>Anything the other tiers do not cover</li>
-              <li>Online store, product pages and checkout</li>
+              <li>Everything in Pro</li>
               <li>Service area pages for every town you cover</li>
-              <li>A Google profile per location, managed</li>
-              <li>Per-location tracking and reporting</li>
-              <li>Scoped and quoted after a free consult</li>
+              <li>One Google Business Profile, managed (weekly posts, service tree, review responses)</li>
+              <li>2 content pieces per month</li>
+              <li>Backlink building</li>
+              <li>Quarterly strategy call</li>
             </ul>
-            <a href="/contact" class="btn btn-ghost--dark">Talk it through</a>
+            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
+          </div>
+
+          <!-- CUSTOM: quoted per project. No base fee and no monthly figure, so no
+               dollar amount appears on this card at all. Spans both columns and
+               lays out side by side on desktop. The inner wrappers must not start
+               with "price-card": plans.mjs splits cards on that string. -->
+          <div class="price-card price-card--quoted price-card--wide reveal reveal-scale reveal-delay-1" data-quoted="true">
+            <div class="price-wide-head">
+              <h3 class="price-tier">Custom</h3>
+              <div class="price-amount">
+                <span class="dollar">Quoted</span>
+              </div>
+              <p class="price-setup">No base fee. Setup and monthly priced to the project.</p>
+            </div>
+            <div class="price-wide-body">
+              <ul class="price-features">
+                <li>Anything the other plans do not cover</li>
+                <li>Online store, product pages and checkout</li>
+                <li>Multiple locations, with a managed Google profile per location</li>
+                <li>Per-location tracking and reporting</li>
+                <li>Scoped and quoted after a free consult</li>
+              </ul>
+              <a href="/contact" class="btn btn-ghost--dark">Talk it through</a>
+            </div>
           </div>
 
         </div>
