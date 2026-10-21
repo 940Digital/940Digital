@@ -70,6 +70,8 @@ export const body = String.raw`    <section class="page-hero">
               <li>Up to 60 pages, mostly dedicated service pages</li>
               <li>Everything in Starter</li>
               <li>Advanced SEO strategy and consulting</li>
+              <li>Google Business Profile setup and management</li>
+              <li>Basic backlink strategy</li>
               <li>Analytics &amp; monthly reporting</li>
               <li>Priority support &amp; maintenance</li>
               <li>Hands-on account management</li>
@@ -88,9 +90,7 @@ export const body = String.raw`    <section class="page-hero">
             <ul class="price-features">
               <li>Everything in Pro</li>
               <li>Service area pages for every town you cover</li>
-              <li>One Google Business Profile, managed (weekly posts, service tree, review responses)</li>
-              <li>2 content pieces per month</li>
-              <li>Backlink building</li>
+              <li>Advanced backlink strategy</li>
             </ul>
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>
