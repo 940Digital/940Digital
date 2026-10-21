@@ -170,7 +170,7 @@ export function render(blocks) {
 
 /** Setup-fee range across all published plans, read from /pricing. */
 function priceRange() {
-  const fees = PLANS.map((p) => Number(String(p.setup).replace(/[^0-9]/g, ''))).filter(Boolean);
+  const fees = PLANS.map((p) => Number(String(p.setup).replace(/[^0-9.]/g, '').replace(/\.$/, ''))).filter(Boolean);
   if (!fees.length) return null;
   const lo = Math.min(...fees), hi = Math.max(...fees);
   return lo === hi ? `$${lo}` : `$${lo}-$${hi}`;

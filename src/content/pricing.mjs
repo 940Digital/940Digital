@@ -24,10 +24,10 @@ export const body = String.raw`    <section class="page-hero">
           <div class="price-card reveal reveal-scale reveal-delay-1">
             <h3 class="price-tier">Basic</h3>
             <div class="price-amount">
-              <span class="dollar">$60</span>
+              <span class="dollar">$59.99</span>
               <span class="period">/month</span>
             </div>
-            <p class="price-setup">$300 one-time setup fee</p>
+            <p class="price-setup">$299.99 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 3 pages</li>
               <li>Custom design, no templates</li>
@@ -42,10 +42,10 @@ export const body = String.raw`    <section class="page-hero">
           <div class="price-card reveal reveal-scale reveal-delay-2">
             <h3 class="price-tier">Starter</h3>
             <div class="price-amount">
-              <span class="dollar">$95</span>
+              <span class="dollar">$99.99</span>
               <span class="period">/month</span>
             </div>
-            <p class="price-setup">$700 one-time setup fee</p>
+            <p class="price-setup">$599.99 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 8 pages</li>
               <li>Everything in Basic</li>
@@ -62,10 +62,10 @@ export const body = String.raw`    <section class="page-hero">
             <span class="price-badge">Recommended</span>
             <h3 class="price-tier">Pro</h3>
             <div class="price-amount">
-              <span class="dollar">$300</span>
+              <span class="dollar">$199.99</span>
               <span class="period">/month</span>
             </div>
-            <p class="price-setup">$1,500 one-time setup fee</p>
+            <p class="price-setup">$1,499.99 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 60 pages, mostly dedicated service pages</li>
               <li>Everything in Starter</li>
@@ -81,17 +81,16 @@ export const body = String.raw`    <section class="page-hero">
           <div class="price-card reveal reveal-scale reveal-delay-2">
             <h3 class="price-tier">Expert</h3>
             <div class="price-amount">
-              <span class="dollar">$650</span>
+              <span class="dollar">$649.99</span>
               <span class="period">/month</span>
             </div>
-            <p class="price-setup">$2,800 one-time setup fee</p>
+            <p class="price-setup">$2,799.99 one-time setup fee</p>
             <ul class="price-features">
               <li>Everything in Pro</li>
               <li>Service area pages for every town you cover</li>
               <li>One Google Business Profile, managed (weekly posts, service tree, review responses)</li>
               <li>2 content pieces per month</li>
               <li>Backlink building</li>
-              <li>Quarterly strategy call</li>
             </ul>
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>
