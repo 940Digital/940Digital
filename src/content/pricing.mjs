@@ -18,7 +18,7 @@ export const body = String.raw`    <section class="page-hero">
           <h2>Website plans</h2>
           <p>Flat setup fee, flat monthly. Hosting and maintenance are in every tier, so there is no separate IT bill and no invoice when something needs&nbsp;changing.</p>
         </div>
-        <div class="pricing-grid pricing-grid--2x2" data-family="Websites">
+        <div class="pricing-grid pricing-grid--plans" data-family="Websites">
 
           <!-- BASIC -->
           <div class="price-card reveal reveal-scale reveal-delay-1">
@@ -58,7 +58,7 @@ export const body = String.raw`    <section class="page-hero">
           </div>
 
           <!-- PRO -->
-          <div class="price-card featured reveal reveal-scale reveal-delay-1">
+          <div class="price-card featured reveal reveal-scale reveal-delay-3">
             <span class="price-badge">Recommended</span>
             <h3 class="price-tier">Pro</h3>
             <div class="price-amount">
@@ -79,27 +79,8 @@ export const body = String.raw`    <section class="page-hero">
             <a href="/contact" class="btn btn-primary">Get started</a>
           </div>
 
-          <!-- EXPERT -->
-          <div class="price-card reveal reveal-scale reveal-delay-2">
-            <h3 class="price-tier">Expert</h3>
-            <div class="price-amount">
-              <span class="dollar">$650</span>
-              <span class="period">/month</span>
-            </div>
-            <p class="price-setup">$2,800 one-time setup fee</p>
-            <ul class="price-features">
-              <li>Everything in Pro</li>
-              <li>Service area pages for every town you cover</li>
-              <li>Advanced backlink strategy</li>
-              <li>Google Local Services Ads setup and management (ad spend billed by Google)</li>
-              <li>Review generation system, with automatic review requests</li>
-              <li>Call and conversion tracking</li>
-            </ul>
-            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
-          </div>
-
           <!-- CUSTOM: quoted per project. No base fee and no monthly figure, so no
-               dollar amount appears on this card at all. Spans both columns and
+               dollar amount appears on this card at all. Spans every column and
                lays out side by side on desktop. The inner wrappers must not start
                with "price-card": plans.mjs splits cards on that string. -->
           <div class="price-card price-card--quoted price-card--wide reveal reveal-scale reveal-delay-1" data-quoted="true">
@@ -137,3 +118,28 @@ export const body = String.raw`    <section class="page-hero">
         <a href="/contact" class="btn btn-primary btn-lg reveal">Book a free consult</a>
       </div>
     </section>`;
+
+/**
+ * Expert tier, parked 2026-10-21 until Owen has proof of concept for its
+ * services. Not rendered: plans.mjs only parses `body`. To restore it, paste
+ * this card after Pro in the grid above and switch .pricing-grid--plans back
+ * to two columns in style.css (Basic, Starter / Pro, Expert).
+ */
+export const parkedExpert = String.raw`          <!-- EXPERT -->
+          <div class="price-card reveal reveal-scale reveal-delay-2">
+            <h3 class="price-tier">Expert</h3>
+            <div class="price-amount">
+              <span class="dollar">$650</span>
+              <span class="period">/month</span>
+            </div>
+            <p class="price-setup">$2,800 one-time setup fee</p>
+            <ul class="price-features">
+              <li>Everything in Pro</li>
+              <li>Service area pages for every town you cover</li>
+              <li>Advanced backlink strategy</li>
+              <li>Google Local Services Ads setup and management (ad spend billed by Google)</li>
+              <li>Review generation system, with automatic review requests</li>
+              <li>Call and conversion tracking</li>
+            </ul>
+            <a href="/contact" class="btn btn-ghost--dark">Get started</a>
+          </div>`;

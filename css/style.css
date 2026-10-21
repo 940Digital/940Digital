@@ -2341,23 +2341,24 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
 }
 .price-card--quoted .price-setup { text-transform: none; }
 
-/* --- Four flat-rate plans in a 2x2 grid (Basic, Starter / Pro, Expert) with
-   Custom spanning the full row underneath. One column below 1024px. Rows
-   stretch, so cards in a row share a height and the flex:1 feature list
-   pins every button to the bottom. --- */
-.pricing-grid--2x2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 980px;
-  gap: 1.75rem;
+/* --- Flat-rate plans three across (Basic, Starter, Pro) with Custom spanning
+   the full row underneath. One column below 1024px. Rows stretch, so cards in
+   a row share a height and the flex:1 feature list pins every button to the
+   bottom. When Expert returns (parkedExpert in pricing.mjs), go back to
+   repeat(2, ...) and max-width 980px for a 2x2. --- */
+.pricing-grid--plans {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1100px;
+  gap: 1.5rem;
 }
-/* No scale on the featured card here: scaling makes Pro taller than Expert
-   beside it and knocks the two buttons off the same line. The dark fill,
+/* No scale on the featured card here: scaling makes Pro taller than the
+   cards beside it and knocks the buttons off the same line. The dark fill,
    badge and blue border carry the emphasis instead.
    Starts at the same .92 as .reveal-scale so it still animates in. */
-.pricing-grid--2x2 .price-card.featured { transform: scale(.92); }
-.pricing-grid--2x2 .price-card.featured.in { transform: none; }
-.pricing-grid--2x2 .price-card.featured.in:hover { transform: translateY(-4px); }
-.pricing-grid--2x2 .price-card.featured { border-color: var(--blue-accent); }
+.pricing-grid--plans .price-card.featured { transform: scale(.92); }
+.pricing-grid--plans .price-card.featured.in { transform: none; }
+.pricing-grid--plans .price-card.featured.in:hover { transform: translateY(-4px); }
+.pricing-grid--plans .price-card.featured { border-color: var(--blue-accent); }
 .price-card h3.price-tier { line-height: 1.4; }
 .price-wide-body { display: flex; flex-direction: column; flex: 1; }
 
@@ -2384,5 +2385,5 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
   .price-card--wide .btn { width: auto; align-self: flex-start; }
 }
 @media (max-width: 1023px) {
-  .pricing-grid--2x2 { grid-template-columns: 1fr; max-width: 30rem; gap: 1.5rem; }
+  .pricing-grid--plans { grid-template-columns: 1fr; max-width: 30rem; gap: 1.5rem; }
 }
