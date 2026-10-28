@@ -77,6 +77,8 @@ export function businessEntity() {
     name: SITE.name,
     slogan: SITE.slogan,
     url: `${SITE.origin}/`,
+    logo: { '@type': 'ImageObject', url: `${SITE.origin}${SITE.logo}`, width: 1254, height: 1254 },
+    image: `${SITE.origin}${SITE.ogImage}`,
     description: SITE.description,
     email: SITE.email,
     telephone: SITE.phone,
@@ -100,6 +102,19 @@ export function businessEntity() {
     founder: { '@id': FOUNDER_ID },
     hasOfferCatalog: offerCatalog(),
   });
+}
+
+/** The site itself, so search engines show "940Digital" as the site name. */
+export function websiteEntity() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.origin}/#website`,
+    name: SITE.name,
+    url: `${SITE.origin}/`,
+    inLanguage: 'en-US',
+    publisher: { '@id': BUSINESS_ID },
+  };
 }
 
 /** The founder. Fixes the dangling #owen reference every page used to carry. */

@@ -174,6 +174,12 @@ for (const [f, html] of docs) {
   const p = PAGES.find((x) => x.url === url);
   const expected = url === '/' ? `${SITE.origin}/` : `${SITE.origin}${url}`;
   if (f === 'card.html') continue;
+  if (f === '404.html') {
+    /* Rendered at any unknown address, so a canonical would claim the wrong URL. */
+    if (html.includes('rel="canonical"')) err('canonical', '404.html must not carry a canonical');
+    if (!/name="robots" content="noindex/.test(html)) err('robots', '404.html must be noindex');
+    continue;
+  }
   if (!html.includes(`<link rel="canonical" href="${expected}">`))
     err('canonical', `${f} is missing a self-referencing canonical for ${expected}`);
   if (!/"@type":\s*"BreadcrumbList"/.test(html)) err('schema', `${f} has no BreadcrumbList`);

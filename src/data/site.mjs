@@ -62,6 +62,7 @@ export const SITE = {
   trackerSiteId: '496da1ce-3717-434d-865b-c61ef8f15c4e',
 
   /* Social card. 1200x630, the size every major platform crops to. */
+  logo: '/img/940DigitalLOGO.png',
   ogImage: '/img/og-default.png',
   ogImageWidth: 1200,
   ogImageHeight: 630,

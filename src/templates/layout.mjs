@@ -211,7 +211,7 @@ ${chrome.tracker()}
 function defaultSchema(p, trail) {
   const blocks = [];
   if (p.url === '/') {
-    blocks.push(schema.businessEntity(), schema.founderEntity());
+    blocks.push(schema.websiteEntity(), schema.businessEntity(), schema.founderEntity());
   } else {
     blocks.push(schema.businessReference());
   }

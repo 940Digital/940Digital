@@ -1,0 +1,5 @@
+# Source, tooling, and internal planning notes. The site is the committed
+# HTML; none of these need to be publicly reachable.
+docs
+src
+scripts

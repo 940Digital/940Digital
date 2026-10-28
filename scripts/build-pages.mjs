@@ -179,6 +179,17 @@ const STATIC_PAGES = [
     ogDescription: 'Straight-talk notes on websites, SEO, and getting found online, written for small businesses.',
     h1: 'Blog',
   },
+  {
+    /* Served by Vercel with a 404 status for any unknown path. No canonical
+       or og:url: it renders at whatever address was requested. */
+    url: '/404', mod: 'not-found', out: '404.html', robots: 'noindex, follow',
+    title: 'Page Not Found | 940Digital',
+    meta: 'This page does not exist. Find website design, SEO, local marketing, consulting, and pricing for small businesses from 940Digital.',
+    ogTitle: 'Page Not Found | 940Digital',
+    ogDescription: 'This page does not exist. Head back to 940Digital to find what you were looking for.',
+    h1: 'Page not found',
+    notFound: true,
+  },
 ];
 
 let written = 0;
@@ -211,6 +222,12 @@ for (const spec of [...CONTENT_PAGES, ...STATIC_PAGES]) {
 
   let html = layout.page({ page, body, robots: spec.robots });
 
+  if (spec.notFound) {
+    html = html
+      .replace(/\n\s*<link rel="canonical"[^>]*>/, '')
+      .replace(/\n\s*<meta property="og:url"[^>]*>/, '')
+      .replace(/\n\s*<script type="application\/ld\+json">\{[^\n]*"BreadcrumbList"[^\n]*<\/script>/, '');
+  }
   if (spec.extraHead) html = html.replace('</head>', spec.extraHead + '\n</head>');
   if (spec.extraBodyFrom) {
     const extra = await import(`../src/content/${spec.extraBodyFrom}-scripts.mjs`);

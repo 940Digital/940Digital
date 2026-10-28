@@ -5,7 +5,7 @@
     {
       "source": "/web-design",
       "destination": "/",
-      "permanent": true
+      "statusCode": 301
     }
   ],
   "headers": [
