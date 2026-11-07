@@ -1470,6 +1470,16 @@ p { max-width: 62ch; }
 .form-group {
   margin-bottom: 1.25rem;
 }
+/* Spam honeypot: stays in the DOM for bots to fill, hidden from people. */
+.hp-field {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 .form-group label {
   display: block;
   font-family: var(--font-display);
