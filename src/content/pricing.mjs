@@ -45,7 +45,7 @@ export const body = String.raw`    <section class="page-hero">
               <span class="dollar">$100</span>
               <span class="period">/month</span>
             </div>
-            <p class="price-setup">$600 one-time setup fee</p>
+            <p class="price-setup">$400 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 8 pages</li>
               <li>Everything in Basic</li>
