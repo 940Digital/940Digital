@@ -20,9 +20,9 @@ export const body = String.raw`    <section class="page-hero">
         </div>
         <div class="pricing-grid pricing-grid--plans" data-family="Websites">
 
-          <!-- BASIC -->
+          <!-- ESSENTIAL -->
           <div class="price-card reveal reveal-scale reveal-delay-1">
-            <h3 class="price-tier">Basic</h3>
+            <h3 class="price-tier">Essential</h3>
             <div class="price-amount">
               <span class="dollar">$50</span>
               <span class="period">/month</span>
@@ -38,9 +38,9 @@ export const body = String.raw`    <section class="page-hero">
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>
 
-          <!-- STARTER -->
+          <!-- PRO -->
           <div class="price-card reveal reveal-scale reveal-delay-2">
-            <h3 class="price-tier">Starter</h3>
+            <h3 class="price-tier">Pro</h3>
             <div class="price-amount">
               <span class="dollar">$100</span>
               <span class="period">/month</span>
@@ -48,7 +48,7 @@ export const body = String.raw`    <section class="page-hero">
             <p class="price-setup">$400 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 8 pages</li>
-              <li>Everything in Basic</li>
+              <li>Everything in Essential</li>
               <li>Photo gallery</li>
               <li>On-page SEO basics</li>
               <li>Service-specific landing pages</li>
@@ -57,10 +57,10 @@ export const body = String.raw`    <section class="page-hero">
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
           </div>
 
-          <!-- PRO -->
+          <!-- EXPERT -->
           <div class="price-card featured reveal reveal-scale reveal-delay-3">
             <span class="price-badge">Recommended</span>
-            <h3 class="price-tier">Pro</h3>
+            <h3 class="price-tier">Expert</h3>
             <div class="price-amount">
               <span class="dollar">$200</span>
               <span class="period">/month</span>
@@ -68,7 +68,7 @@ export const body = String.raw`    <section class="page-hero">
             <p class="price-setup">$1,500 one-time setup fee</p>
             <ul class="price-features">
               <li>Up to 60 pages, mostly dedicated service pages</li>
-              <li>Everything in Starter</li>
+              <li>Everything in Pro</li>
               <li>Advanced SEO strategy and consulting</li>
               <li>Google Business Profile setup and management</li>
               <li>Basic backlink strategy</li>
@@ -120,10 +120,11 @@ export const body = String.raw`    <section class="page-hero">
     </section>`;
 
 /**
- * Expert tier, parked 2026-10-21 until Owen has proof of concept for its
+ * Fourth tier (was named Expert), parked 2026-10-21 until Owen has proof of concept for its
  * services. Not rendered: plans.mjs only parses `body`. To restore it, paste
- * this card after Pro in the grid above and switch .pricing-grid--plans back
- * to two columns in style.css (Basic, Starter / Pro, Expert).
+ * this card after Expert in the grid above and switch .pricing-grid--plans back
+ * to two columns in style.css (Essential, Pro / Expert, parked tier). The parked tier still carries the
+ * old name "Expert", which now belongs to the live top plan: rename it before restoring.
  */
 export const parkedExpert = String.raw`          <!-- EXPERT -->
           <div class="price-card reveal reveal-scale reveal-delay-2">
@@ -134,7 +135,7 @@ export const parkedExpert = String.raw`          <!-- EXPERT -->
             </div>
             <p class="price-setup">$2,800 one-time setup fee</p>
             <ul class="price-features">
-              <li>Everything in Pro</li>
+              <li>Everything in Expert</li>
               <li>Service area pages for every town you cover</li>
               <li>Advanced backlink strategy</li>
               <li>Google Local Services Ads setup and management (ad spend billed by Google)</li>

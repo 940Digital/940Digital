@@ -2351,7 +2351,7 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
 }
 .price-card--quoted .price-setup { text-transform: none; }
 
-/* --- Flat-rate plans three across (Basic, Starter, Pro) with Custom spanning
+/* --- Flat-rate plans three across (Essential, Pro, Expert) with Custom spanning
    the full row underneath. One column below 1024px. Rows stretch, so cards in
    a row share a height and the flex:1 feature list pins every button to the
    bottom. When Expert returns (parkedExpert in pricing.mjs), go back to
@@ -2361,7 +2361,7 @@ html:not(.js) .reveal { opacity: 1 !important; transform: none !important; }
   max-width: 1100px;
   gap: 1.5rem;
 }
-/* No scale on the featured card here: scaling makes Pro taller than the
+/* No scale on the featured card here: scaling makes Expert taller than the
    cards beside it and knocks the buttons off the same line. The dark fill,
    badge and blue border carry the emphasis instead.
    Starts at the same .92 as .reveal-scale so it still animates in. */
