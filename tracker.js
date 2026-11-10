@@ -454,6 +454,10 @@
         fireEvent("lead_submit", "phone_click");
         return;
       }
+      if (el.href.indexOf("sms:") === 0) {
+        fireEvent("lead_submit", "sms_click");
+        return;
+      }
       if (el.href.indexOf("mailto:") === 0) {
         fireEvent("lead_submit", "email_click");
         return;
