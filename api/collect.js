@@ -7,8 +7,12 @@ const UPSTREAM_URL = "https://yyfeymmjdlewvdxrzggn.supabase.co/functions/v1/coll
 
 // Server-side UA sniffing, harder to spoof than trusting client JS to
 // self-report, since this reads the header the browser/bot actually sent.
+// The Meta and Google entries after mediapartners-google are fetchers that do
+// not say "bot" (Meta's link preview and AI crawlers, Google's inspection and
+// testing tools). Keep this list in step with EXTRA_BOT_UA in the CRM's
+// lib/siteMetrics.ts, which reclassifies older rows the same way.
 const BOT_UA_REGEX =
-  /bot|crawl|spider|slurp|facebookexternalhit|twitterbot|linkedinbot|slackbot|whatsapp|telegrambot|discordbot|curl|wget|python-requests|python-urllib|go-http-client|okhttp|axios|node-fetch|headlesschrome|phantomjs|selenium|puppeteer|playwright|ahrefsbot|semrushbot|mj12bot|dotbot|blexbot|yandexbot|baiduspider|sogou|duckduckbot|bingpreview|adsbot|apis-google|mediapartners-google/i;
+  /bot|crawl|spider|slurp|facebookexternalhit|twitterbot|linkedinbot|slackbot|whatsapp|telegrambot|discordbot|curl|wget|python-requests|python-urllib|go-http-client|okhttp|axios|node-fetch|headlesschrome|phantomjs|selenium|puppeteer|playwright|ahrefsbot|semrushbot|mj12bot|dotbot|blexbot|yandexbot|baiduspider|sogou|duckduckbot|bingpreview|adsbot|apis-google|mediapartners-google|meta-externalagent|meta-externalfetcher|facebookcatalog|google-inspectiontool|googleother|google-extended|storebot-google|chrome-lighthouse|lighthouse|gtmetrix|pingdom|uptimerobot|vercel-screenshot|headless/i;
 
 // Real browsers haven't shipped a UA with a bare "Edge/<version>" token since
 // legacy EdgeHTML was discontinued (~2020); modern Chromium Edge always

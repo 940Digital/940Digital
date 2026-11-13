@@ -361,16 +361,44 @@
     } catch (e) {}
   }
 
+  // A page opened in a background tab (or prefetched by an app's link
+  // preview) does not paint until someone looks at it, so its paint times
+  // measure how long the tab sat unseen, not how fast the page is. Like
+  // Google's web-vitals library, paints after the page was first hidden are
+  // ignored, and a prerendered page is timed from when it was shown.
+  var firstHiddenTime = document.visibilityState === "hidden" ? 0 : Infinity;
+  try {
+    var vis = performance.getEntriesByType && performance.getEntriesByType("visibility-state");
+    for (var vi = 0; vis && vi < vis.length; vi++) {
+      if (vis[vi].name === "hidden") {
+        firstHiddenTime = Math.min(firstHiddenTime, vis[vi].startTime);
+        break;
+      }
+    }
+  } catch (e) {}
+  document.addEventListener(
+    "visibilitychange",
+    function (e) {
+      if (document.visibilityState === "hidden") firstHiddenTime = Math.min(firstHiddenTime, e.timeStamp);
+    },
+    true
+  );
+  var activationStart = 0;
+  function sinceShown(t) {
+    return Math.max(0, Math.round(t - activationStart));
+  }
+
   try {
     var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
-    if (nav && nav.responseStart > 0) vitals.ttfb = Math.round(nav.responseStart);
+    if (nav && nav.activationStart > 0) activationStart = nav.activationStart;
+    if (nav && nav.responseStart > 0) vitals.ttfb = sinceShown(nav.responseStart);
   } catch (e) {}
 
   observe("paint", function (entry) {
-    if (entry.name === "first-contentful-paint") vitals.fcp = Math.round(entry.startTime);
+    if (entry.name === "first-contentful-paint" && entry.startTime < firstHiddenTime) vitals.fcp = sinceShown(entry.startTime);
   });
   observe("largest-contentful-paint", function (entry) {
-    vitals.lcp = Math.round(entry.startTime);
+    if (entry.startTime < firstHiddenTime) vitals.lcp = sinceShown(entry.startTime);
   });
 
   // CLS as the worst "session window": shifts less than 1s apart, window capped
