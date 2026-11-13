@@ -518,6 +518,10 @@
   // page view, whatever signal arrives first.
   function startForm(form) {
     if (!form || !pv) return;
+    // Nobody can type into a page that is not on screen. Link preview
+    // renderers (Meta's, seen Nov 2026) load pages hidden and still fire
+    // focus and input events, which counted as forms started.
+    if (document.visibilityState !== "visible") return;
     var key = form.id || form.name || "form";
     if (pv.formsStarted[key]) return;
     pv.formsStarted[key] = true;
@@ -528,6 +532,7 @@
     "submit",
     function (e) {
       var form = e.target;
+      if (document.visibilityState !== "visible") return; // same reason as startForm
       var target = (form && (form.id || form.name)) || "form";
       // A form cannot be sent without having been started. Autofill and pasted
       // values never move focus into a field, so count the start here too, or
@@ -538,8 +543,9 @@
     true
   );
 
-  // First time someone touches a field: focus, typing, or autofill (which
-  // fires input and change without focusing anything).
+  // First time someone touches a field: a tap or click on it, typing, or
+  // autofill (which fires input and change without focusing anything). Focus
+  // alone does not count, so an autofocus field cannot start a form on load.
   function fieldStart(e) {
     var t = e.target;
     if (!t || !t.tagName || !/^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName)) return;
@@ -547,7 +553,7 @@
     if (t.tabIndex === -1 && t.closest && t.closest("[aria-hidden='true']")) return;
     startForm(t.form);
   }
-  document.addEventListener("focusin", fieldStart, true);
+  document.addEventListener("pointerdown", fieldStart, true);
   document.addEventListener("input", fieldStart, true);
   document.addEventListener("change", fieldStart, true);
 
