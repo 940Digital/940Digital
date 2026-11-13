@@ -52,6 +52,8 @@ export const body = String.raw`    <section class="page-hero">
               <li>Photo gallery</li>
               <li>On-page SEO basics</li>
               <li>Service-specific landing pages</li>
+              <li>Google Business Profile setup</li>
+              <li>Analytics setup</li>
               <li>Standard support</li>
             </ul>
             <a href="/contact" class="btn btn-ghost--dark">Get started</a>
@@ -70,7 +72,7 @@ export const body = String.raw`    <section class="page-hero">
               <li>Up to 60 pages, mostly dedicated service pages</li>
               <li>Everything in Pro</li>
               <li>Advanced SEO strategy and consulting</li>
-              <li>Google Business Profile setup and management</li>
+              <li>Google Business Profile management</li>
               <li>Basic backlink strategy</li>
               <li>Analytics &amp; monthly reporting</li>
               <li>Priority support &amp; maintenance</li>
