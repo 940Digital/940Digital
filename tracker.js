@@ -599,6 +599,13 @@
     fireEvent("custom", name.slice(0, 100), extra);
   };
 
+  /* The current visit's id, for a site's own server to attach to the form send
+     it records (collect action form_submission), so the lead links to this
+     visit. Random and per visit; it identifies nothing about the person. */
+  window.t940.sessionId = function () {
+    return state && state.id ? state.id : null;
+  };
+
   /* ---------------- Single-page apps ---------------- */
 
   function onRouteChange() {
